@@ -1,0 +1,7 @@
+#! /usr/bin/env nix-shell
+
+# just give it a commit number
+git show -s --format=%ci "$@"
+
+# this one shows the author date:
+# git show -s --format=%ai "$@"
