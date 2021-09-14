@@ -1,5 +1,5 @@
 // add some CSS
-// require("css-baseline/css/2")
+require("css-baseline/css/2")
 require("./static_files/materialize.css")
 // require("materialize-css")
 
