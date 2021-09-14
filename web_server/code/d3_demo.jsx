@@ -5,6 +5,7 @@ const container = <div></div>
 const d3Container = d3.select(container)
 module.exports = container
 
+// i got this demo from here: http://jsfiddle.net/superboggly/QajDa/1/
 let graph = {
     nodes: [
         { name: "Betty", size: 12, company: "X", location: "ChicagoIL" },
