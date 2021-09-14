@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../../../node_modules/quik-client/index.js":[function(require,module,exports) {
+})({"../../../../node_modules/quik-client/index.js":[function(require,module,exports) {
 // get the quik symbol
 let quikUniqueKey = Symbol.for("quik")
 // if the quik-window doesnt exist, then create it
@@ -125,7 +125,7 @@ window[quikUniqueKey] || (window[quikUniqueKey] = {})
 // return the window-quik object
 module.exports = window[quikUniqueKey]
 
-},{}],"../../../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
+},{}],"../../../../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 var define;
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -876,11 +876,239 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"special.js":[function(require,module,exports) {
+},{}],"../../node_modules/good-dom/index.js":[function(require,module,exports) {
+// expand the HTML element ability
+Object.defineProperties(window.HTMLElement.prototype, {
+    // setting styles through a string
+    css: { set: Object.getOwnPropertyDescriptor(window.HTMLElement.prototype, 'style').set },
+    // allow setting of styles through string or object
+    style: {
+        set: function (styles) {
+            if (typeof styles == "string") {
+                this.css = styles
+            } else {
+                Object.assign(this.style, styles)
+            }
+        }
+    },
+    // allow setting of children directly
+    children: {
+        set: function(newChilden) {
+            // remove all children
+            while (this.firstChild) {
+                this.removeChild(this.firstChild)
+            }
+            // add new child nodes
+            for (let each of newChilden) {
+                this.add(each)
+            }
+        },
+        get: function() {
+            return this.childNodes
+        }
+    },
+    class: {
+        set: function(newClass) {
+            this.className = newClass
+        },
+        get: function() {
+            return this.className
+        }
+    }
+})
+// add()
+window.HTMLElement.prototype.add = window.SVGElement.prototype.add = window.HTMLSelectElement.prototype.add = function (...inputs) {
+    for (let each of inputs) {
+        if (typeof each == 'string') {
+            this.appendChild(new window.Text(each))
+        } else if (each instanceof Function) {
+            this.add(each())
+        } else if (each instanceof Array) {
+            this.add(...each)
+        } else {
+            this.appendChild(each)
+        }
+    }
+    return this
+}
+
+// addClass()
+window.HTMLElement.prototype.addClass = function (...inputs) {
+    return this.classList.add(...inputs)
+}
+
+// for (let eachChild of elemCollection)
+window.HTMLCollection.prototype[Symbol.iterator] = function* () {
+    let index = 0
+    let len = this.length
+    while (index < len) {
+        yield this[index++]
+    }
+}
+// for (let eachChild of elem)
+window.HTMLElement.prototype[Symbol.iterator] = function* () {
+    let index = 0
+    let len = this.childNodes.length
+    while (index < len) {
+        yield this.childNodes[index++]
+    }
+}
+// create a setter/getter for <head>
+const originalHead = document.head
+// add a setter to document.head
+Object.defineProperty(document,"head", { 
+    set: (element) => {
+        document.head.add(...element.childNodes)
+    },
+    get: ()=>originalHead
+})
+
+// 
+// add all the dom elements
+// 
+const elements = {}
+const tagNames = ["a", "abbr", "acronym", "address", "applet", "area", "article", "aside", "audio", "b", "base", "basefont", "bdi", "bdo", "big", "blockquote", "body", "br", "button", "canvas", "caption", "center", "cite", "code", "col", "colgroup", "data", "datalist", "dd", "del", "details", "dfn", "dialog", "dir", "div", "dl", "dt", "em", "embed", "fieldset", "figcaption", "figure", "font", "footer", "form", "frame", "frameset", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hr", "html", "i", "iframe", "img", "input", "ins", "kbd", "label", "legend", "li", "link", "main", "map", "mark", "meta", "meter", "nav", "noframes", "noscript", "object", "ol", "optgroup", "option", "output", "p", "param", "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp", "script", "section", "select", "small", "source", "span", "strike", "strong", "style", "sub", "summary", "sup", "table", "tbody", "td", "template", "textarea", "tfoot", "th", "thead", "time", "title", "tr", "track", "tt", "u", "ul", "var", "video", "wbr"]
+for (const each of tagNames) {
+    elements[each.toUpperCase()] = function(properties, ...children) {
+        // if only given children
+        if (properties instanceof window.Node || typeof properties == 'string') {
+            children.unshift(properties)
+            properties = null
+        }
+        // create either an html element or an svg element
+        const element = document.createElement(each)
+        if (properties instanceof Object) {
+            for (const [key, value] of Object.entries(properties)) {
+                try {
+                    element.setAttribute(key, value)
+                } catch (error) {
+                }
+                element[key] = value
+            }
+        }
+        return element.add(...children)
+    }
+}
+// 
+// add all the (exclusively) svg elements (because <a> tags are both SVG and Dom *facepalm*)
+// 
+const exclusivelySvgElements = [ "svg", "animate", "animateMotion", "animateTransform", "circle", "clipPath", "defs", "desc", "discard", "ellipse", "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence", "filter", "foreignObject", "g", "hatch", "hatchpath", "image", "line", "linearGradient", "marker", "mask", "mesh", "meshgradient", "meshpatch", "meshrow", "metadata", "mpath", "path", "pattern", "polygon", "polyline", "radialGradient", "rect", "set", "stop", "switch", "symbol", "text", "textPath", "tspan", "unknown", "use", "view",]
+for (const each of tagNames) {
+    elements[each.toUpperCase()] = function(properties, ...children) {
+        // if only given children
+        if (properties instanceof window.Node || typeof properties == 'string') {
+            children.unshift(properties)
+            properties = null
+        }
+        // create either an html element or an svg element
+        const element = document.createElementNS('http://www.w3.org/2000/svg', each)
+        if (properties instanceof Object) {
+            for (const [key, value] of Object.entries(properties)) {
+                try {
+                    element.setAttribute(key, value)
+                } catch (error) {
+                }
+                element[key] = value
+            }
+        }
+        return element.add(...children)
+    }
+}
+
+function makeGlobal() {
+    Object.assign(window, elements)
+}
+
+// if there is no exporting system
+if(typeof exports == "undefined"){
+    // put everything in the window scope
+    makeGlobal()
+// if there is an export system
+} else {
+    // give the user the choice of local or window
+    module.exports = elements
+    module.exports.global = makeGlobal
+}
+
+},{}],"../../node_modules/good-jsx/index.js":[function(require,module,exports) {
+require("good-dom").global()
+
+const exclusivelySvgElements = new Set(["svg", "animate", "animateMotion", "animateTransform", "circle", "clipPath", "defs", "desc", "discard", "ellipse", "feBlend", "feColorMatrix", "feComponentTransfer", "feComposite", "feConvolveMatrix", "feDiffuseLighting", "feDisplacementMap", "feDistantLight", "feDropShadow", "feFlood", "feFuncA", "feFuncB", "feFuncG", "feFuncR", "feGaussianBlur", "feImage", "feMerge", "feMergeNode", "feMorphology", "feOffset", "fePointLight", "feSpecularLighting", "feSpotLight", "feTile", "feTurbulence", "filter", "foreignObject", "g", "hatch", "hatchpath", "image", "line", "linearGradient", "marker", "mask", "mesh", "meshgradient", "meshpatch", "meshrow", "metadata", "mpath", "path", "pattern", "polygon", "polyline", "radialGradient", "rect", "set", "stop", "switch", "symbol", "text", "textPath", "tspan", "unknown", "use", "view",])
+// create a JSX middleware system if it doesnt exist
+if (!window.jsxChain) {
+    window.jsxChain = []
+}
+
+let isConstructor = (obj) => {
+    return !!obj.prototype && !!obj.prototype.constructor.name;
+}
+
+// add it to JSX
+window.React = {
+    createElement: (key, properties, ...children) => {
+        // run middleware
+        for (let eachMiddleWare of window.jsxChain) {
+            const element = eachMiddleWare(key, properties, ...children)
+            if (element) {
+                return element
+            }
+        }
+        if (key instanceof Function) {
+            const output = isConstructor(key) ? new key({...properties, children}) : key({...properties, children: children})
+            // allow async components
+            if (output instanceof Promise) {
+                const elementPromise = output
+                const placeholder = elementPromise.placeholder || document.createElement("div")
+                setTimeout(async () => {
+                    placeholder.replaceWith(await elementPromise)
+                }, 0)
+                return placeholder
+            } else {
+                return output
+            }
+        }
+        // create either an html element or an svg element
+        const element = exclusivelySvgElements.has(key) ? document.createElementNS('http://www.w3.org/2000/svg', key) : document.createElement(key)
+        if (properties instanceof Object) {
+            for (const [key, value] of Object.entries(properties)) {
+                try {
+                    element.setAttribute(key, value)
+                } catch (error) {
+                }
+                element[key] = value
+            }
+        }
+        return element.add(...children)
+    },
+}
+},{"good-dom":"../../node_modules/good-dom/index.js"}],"special.js":[function(require,module,exports) {
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 var quik = require('quik-client');
 
 require('regenerator-runtime/runtime');
-},{"quik-client":"../../../node_modules/quik-client/index.js","regenerator-runtime/runtime":"../../../node_modules/regenerator-runtime/runtime.js"}],"../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+;
+
+_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+  return regeneratorRuntime.wrap(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          require("good-jsx");
+
+        case 1:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _callee);
+}))();
+
+;
+},{"quik-client":"../../../../node_modules/quik-client/index.js","regenerator-runtime/runtime":"../../../../node_modules/regenerator-runtime/runtime.js","good-jsx":"../../node_modules/good-jsx/index.js"}],"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -908,7 +1136,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59563" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57127" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1084,5 +1312,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","special.js"], null)
+},{}]},{},["../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","special.js"], null)
 //# sourceMappingURL=/special.c2cbe016.js.map

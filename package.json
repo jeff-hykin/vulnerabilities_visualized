@@ -1,0 +1,31 @@
+{
+  "name": "vulerabilities_visualized",
+  "version": "1.0.0",
+  "description": "Everything is detailed in the `documentation/setup.md`!",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeff-hykin/vulerabilities_visualized.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeff-hykin/vulerabilities_visualized/issues"
+  },
+  "homepage": "https://github.com/jeff-hykin/vulerabilities_visualized#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "good-dom": "^4.2.1",
+    "good-jsx": "^1.4.1",
+    "quik-dom": "^1.0.6",
+    "quik-server": "2.3.1",
+    "web-resource-inliner": "^5.0.0"
+  }
+}

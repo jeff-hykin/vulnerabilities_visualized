@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+cd "$FORNIX_FOLDER"
+
+# check if file doesnt exists
+if ! [ -f "./docs/index.html" ]
+then
+    echo "(this is the build commmand)"
+    echo "I don't see a ./docs/index.html file, so I can't build it" 
+    echo "you might need to run your server once to generate the files"
+else
+    # short node script to compile everything into a single html file so that Github Pages is happy
+    read -r -d '' nodejs_code <<'HEREDOC_NAME'
+    const fs = require("fs")
+    const path = require("path")
+    const process = require("process")
+    const inline = require("web-resource-inliner")
+
+    function bundleIntoSingleFile({ existingHtmlFile, outputFilePath }) {
+        if (!outputFilePath) {
+            outputFilePath = existingHtmlFile
+        }
+        const bundle = (resolve, reject)=>{
+            const contents = fs.readFileSync(existingHtmlFile, "utf8")
+            const actualContents = process.platform === "win32" ? contents.replace(/\r\n/g, "\n") : contents
+            inline.html(
+                {
+                    fileContent: actualContents,
+                    relativeTo: path.dirname(existingHtmlFile),
+                },
+                (err, result) => {
+                    if (err) {
+                        reject(err)
+                    }
+                    try {
+                        fs.rmSync(outputFilePath)
+                    } catch (error) {
+                        
+                    }
+                    let fsResult = fs.writeFileSync(outputFilePath, result)
+                    resolve(fsResult)
+                }
+            )
+        }
+        return new Promise(bundle)
+    }
+    bundleIntoSingleFile({existingHtmlFile: "./docs/index.html"})
+HEREDOC_NAME
+
+    # run the script
+    node -e "$nodejs_code"
+fi
