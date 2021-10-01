@@ -9,15 +9,15 @@ const Home = require("./code/pages/Home")
 const ProductView = require("./code/pages/ProductView")
 const PageNotFound = require("./code/pages/PageNotFound")
 
-// first time the page loads
-onRouteChange()
 // every time something tries to change pages
 router.addEventListener("navigate", onRouteChange)
+// first time the page loads
+onRouteChange()
 
 function onRouteChange() {
     const pageInfo = router.pageInfo
 
-    // redirect to home page
+    // silently redirect to home page
     if (pageInfo.name == null) {
         pageInfo.name = "home"
     }
