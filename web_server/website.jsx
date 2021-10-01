@@ -1,23 +1,35 @@
-// add some CSS
-require("css-baseline/css/2")
-require("./static_files/materialize.css")
-// require("materialize-css")
+// add CSS before everything else
+require("css-baseline/css/3")
+require("./global.scss")
+// libraries
+const router = require("quik-router")
 
-// get d3.js
-const Card = require("./code/Card")
-const d3Demo = require("./code/d3_demo")
+// pages
+const Home = require("./code/pages/Home")
+const ProductView = require("./code/pages/ProductView")
+const PageNotFound = require("./code/pages/PageNotFound")
 
-// create the body
-document.body = (
-    <body style={{ display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "sans-serif", flexDirection: "column", background: "whitesmoke" }}>
-        
-        <h1 style={{fontSize: "30pt",}}>
-            Hello World!
-        </h1>
-        
-        <Card title="This is a D3 Demo" style={{width: "50rem"}}>
-            {d3Demo}
-        </Card>
-        
-    </body>
-)
+// first time the page loads
+onRouteChange()
+// every time something tries to change pages
+router.addEventListener("navigate", onRouteChange)
+
+function onRouteChange() {
+    const pageInfo = router.pageInfo
+
+    // redirect to home page
+    if (pageInfo.name == null) {
+        pageInfo.name = "home"
+    }
+    
+    // 
+    // load page
+    // 
+    if (pageInfo.name == "home") {
+        document.body = <Home />
+    } else if (pageInfo.name == "product-view") {
+        document.body = <ProductView />
+    } else {
+        document.body = <PageNotFound />
+    }
+}

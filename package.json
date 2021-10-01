@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/jeff-hykin/vulerabilities_visualized#readme",
   "dependencies": {
+    "@vue-reactivity/watch": "^0.1.6",
+    "@vue/reactivity": "^3.2.19",
+    "@vue/shared": "^3.2.19",
+    "animejs": "^3.2.1",
     "cors": "^2.8.5",
     "css-baseline": "^1.2.11",
     "express": "^4.17.1",
@@ -29,8 +33,13 @@
     "materialize-css": "^1.0.0-rc.2",
     "quik-client": "^1.0.0",
     "quik-dom": "^1.0.6",
+    "quik-router": "^1.0.0",
     "quik-server": "2.3.1",
     "regenerator-runtime": "^0.13.9",
     "web-resource-inliner": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "sass": "^1.42.1"
   }
 }

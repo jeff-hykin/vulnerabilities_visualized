@@ -1,0 +1,43 @@
+// 
+// colors
+// 
+:root {
+    --maroon: #500000;
+    --blue: #42a5f5;
+    --teal: #4db6ac;
+    --green: #81c784;
+    --red: #e57373;
+    --charcoal: hsl(180, 0%, 31%);
+}
+
+
+// 
+// 
+// helper classes
+// 
+// 
+.centered {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.circle {
+    --size: fit-content;
+    border-radius: 200vw;
+    min-height: var(--size);
+    min-width: var(--size);
+}
