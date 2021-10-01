@@ -32,19 +32,13 @@ function getHexagonLocations(numberOfHexagonsNeeded, diameterOfHexagon) {
         
         const numberOfHexagonsInRing = numberOfSidesOfHexagon * ringIndex
         const distanceFromCenter = diameterOfHexagon * ringIndex
-        console.log(`diameterOfHexagon is:`,diameterOfHexagon)
-        console.log(`distanceFromCenter is:`,distanceFromCenter)
         availableSlots += numberOfHexagonsInRing
         
         const radiansBetweenEachHexagon = numberOfRadiansInACircle / numberOfHexagonsInRing
-        console.log(`numberOfHexagonsInRing is:`,numberOfHexagonsInRing)
-        console.log(`radiansBetweenEachHexagon is:`,radiansBetweenEachHexagon)
         let radians = -radiansBetweenEachHexagon
         for (const each in [...Array(numberOfHexagonsInRing)]) {
             // increment by one angle
             radians += radiansBetweenEachHexagon
-            console.log(`Math.cos(radians) is:`,Math.cos(radians))
-            console.log(`Math.sin(radians) is:`,Math.sin(radians))
             const xPosition = distanceFromCenter * Math.cos(radians)
             const yPosition = distanceFromCenter * Math.sin(radians)
             locations.push([xPosition, yPosition])
@@ -57,8 +51,8 @@ function getHexagonLocations(numberOfHexagonsNeeded, diameterOfHexagon) {
 }
 
 
-module.exports = ({ children, sizeOfNodeInPixels, ...properties }) => {
-    const xyCenterLocations = getHexagonLocations(children.length, sizeOfNodeInPixels)
+module.exports = ({ children, sizeOfNodeInPixels, padding, ...properties }) => {
+    const xyCenterLocations = getHexagonLocations(children.length, sizeOfNodeInPixels+padding)
     console.log(`xyCenterLocations is:`,xyCenterLocations)
     const max = Math.max(...xyCenterLocations.map(([x,y]) => x))
     
@@ -89,7 +83,7 @@ module.exports = ({ children, sizeOfNodeInPixels, ...properties }) => {
                     position: absolute;
                     left: ${x}px;
                     top: ${y}px;
-                    transform: translate(50%, -50%) scale(0.7);`
+                    transform: translate(-50%, -50%);`
                 }
                 >
                 {eachChildElement}

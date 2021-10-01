@@ -2728,7 +2728,7 @@ module.exports = {
     },
 }
 },{"@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/skeletons/GraphDisplay.jsx":[function(require,module,exports) {
-var _excluded = ["children", "sizeOfNodeInPixels"];
+var _excluded = ["children", "sizeOfNodeInPixels", "padding"];
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
@@ -2789,19 +2789,13 @@ function getHexagonLocations(numberOfHexagonsNeeded, diameterOfHexagon) {
     ringIndex += 1;
     var numberOfHexagonsInRing = numberOfSidesOfHexagon * ringIndex;
     var distanceFromCenter = diameterOfHexagon * ringIndex;
-    console.log("diameterOfHexagon is:", diameterOfHexagon);
-    console.log("distanceFromCenter is:", distanceFromCenter);
     availableSlots += numberOfHexagonsInRing;
     var radiansBetweenEachHexagon = numberOfRadiansInACircle / numberOfHexagonsInRing;
-    console.log("numberOfHexagonsInRing is:", numberOfHexagonsInRing);
-    console.log("radiansBetweenEachHexagon is:", radiansBetweenEachHexagon);
     var radians = -radiansBetweenEachHexagon;
 
     for (var each in _toConsumableArray(Array(numberOfHexagonsInRing))) {
       // increment by one angle
       radians += radiansBetweenEachHexagon;
-      console.log("Math.cos(radians) is:", Math.cos(radians));
-      console.log("Math.sin(radians) is:", Math.sin(radians));
       var xPosition = distanceFromCenter * Math.cos(radians);
       var yPosition = distanceFromCenter * Math.sin(radians);
       locations.push([xPosition, yPosition]);
@@ -2818,9 +2812,10 @@ function getHexagonLocations(numberOfHexagonsNeeded, diameterOfHexagon) {
 module.exports = function (_ref) {
   var children = _ref.children,
       sizeOfNodeInPixels = _ref.sizeOfNodeInPixels,
+      padding = _ref.padding,
       properties = _objectWithoutProperties(_ref, _excluded);
 
-  var xyCenterLocations = getHexagonLocations(children.length, sizeOfNodeInPixels);
+  var xyCenterLocations = getHexagonLocations(children.length, sizeOfNodeInPixels + padding);
   console.log("xyCenterLocations is:", xyCenterLocations);
   var max = Math.max.apply(Math, _toConsumableArray(xyCenterLocations.map(function (_ref2) {
     var _ref3 = _slicedToArray(_ref2, 2),
@@ -2861,7 +2856,7 @@ module.exports = function (_ref) {
         console.log("`".concat(x, "px` is:"), "".concat(x, "px"));
         var graphNode = /*#__PURE__*/React.createElement("div", {
           class: "circle centered shadow animate",
-          style: "\n                    --size: ".concat(sizeOfNodeInPixels, "px ;\n                    color: white;\n                    background-color: var(--blue);\n                    opacity: 0;\n                    position: absolute;\n                    left: ").concat(x, "px;\n                    top: ").concat(y, "px;\n                    transform: translate(50%, -50%) scale(0.7);")
+          style: "\n                    --size: ".concat(sizeOfNodeInPixels, "px ;\n                    color: white;\n                    background-color: var(--blue);\n                    opacity: 0;\n                    position: absolute;\n                    left: ").concat(x, "px;\n                    top: ").concat(y, "px;\n                    transform: translate(-50%, -50%);")
         }, eachChildElement);
         container.children[0].appendChild(graphNode); // have them fade in one after another
 
@@ -2897,13 +2892,12 @@ module.exports = function (_ref) {
       properties = _objectWithoutProperties(_ref, _excluded);
 
   return /*#__PURE__*/React.createElement("body", {
-    class: "column centered"
-  }, /*#__PURE__*/React.createElement("div", {
-    class: "circle centered shadow",
-    style: "--size: 25rem; color: white; background-color: var(--blue)"
-  }, /*#__PURE__*/React.createElement("h2", null, "Howdy!")), /*#__PURE__*/React.createElement(GraphDisplay, {
-    sizeOfNodeInPixels: 220
-  }, /*#__PURE__*/React.createElement("div", null, "Howdy1"), /*#__PURE__*/React.createElement("div", null, "Howdy2"), /*#__PURE__*/React.createElement("div", null, "Howdy3"), /*#__PURE__*/React.createElement("div", null, "Howdy4")));
+    class: "column centered",
+    style: "height: 100vh"
+  }, /*#__PURE__*/React.createElement(GraphDisplay, {
+    sizeOfNodeInPixels: 320,
+    padding: 220
+  }, /*#__PURE__*/React.createElement("h4", null, "Howdy1"), /*#__PURE__*/React.createElement("h4", null, "Howdy2"), /*#__PURE__*/React.createElement("h4", null, "Howdy3"), /*#__PURE__*/React.createElement("h4", null, "Howdy4"), /*#__PURE__*/React.createElement("h4", null, "Howdy5"), /*#__PURE__*/React.createElement("h4", null, "Howdy6"), /*#__PURE__*/React.createElement("h4", null, "Howdy7"), /*#__PURE__*/React.createElement("h4", null, "Howdy8")));
 };
 },{"../skeletons/GraphDisplay":"../code/skeletons/GraphDisplay.jsx"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
 var _excluded = ["children", "title", "actions"];
@@ -5404,7 +5398,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52831" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56829" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

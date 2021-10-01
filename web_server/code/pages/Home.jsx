@@ -1,19 +1,17 @@
 let GraphDisplay = require("../skeletons/GraphDisplay")
 
 module.exports = ({ children, ...properties }) => {
-    return <body class="column centered">
+    return <body class="column centered" style="height: 100vh">
         
-        <div class="circle centered shadow" style="--size: 25rem; color: white; background-color: var(--blue)">
-            <h2>
-                Howdy!
-            </h2>
-        </div>
-        
-        <GraphDisplay sizeOfNodeInPixels={220}>
-            <div>Howdy1</div>
-            <div>Howdy2</div>
-            <div>Howdy3</div>
-            <div>Howdy4</div>
+        <GraphDisplay sizeOfNodeInPixels={320} padding={220}>
+            <h4>Howdy1</h4>
+            <h4>Howdy2</h4>
+            <h4>Howdy3</h4>
+            <h4>Howdy4</h4>
+            <h4>Howdy5</h4>
+            <h4>Howdy6</h4>
+            <h4>Howdy7</h4>
+            <h4>Howdy8</h4>
         </GraphDisplay>
         
     </body>
