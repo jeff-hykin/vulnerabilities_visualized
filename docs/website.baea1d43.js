@@ -2741,7 +2741,7 @@ module.exports = function (_ref) {
   return /*#__PURE__*/React.createElement("body", {
     class: "column centered"
   }, /*#__PURE__*/React.createElement("div", {
-    class: "circle centered",
+    class: "circle centered shadow",
     style: "--size: 25rem; color: white; background-color: var(--blue)"
   }, /*#__PURE__*/React.createElement("h2", null, "Howdy!")));
 };
@@ -5191,15 +5191,15 @@ var Home = require("./code/pages/Home");
 
 var ProductView = require("./code/pages/ProductView");
 
-var PageNotFound = require("./code/pages/PageNotFound"); // first time the page loads
+var PageNotFound = require("./code/pages/PageNotFound"); // every time something tries to change pages
 
 
-onRouteChange(); // every time something tries to change pages
+router.addEventListener("navigate", onRouteChange); // first time the page loads
 
-router.addEventListener("navigate", onRouteChange);
+onRouteChange();
 
 function onRouteChange() {
-  var pageInfo = router.pageInfo; // redirect to home page
+  var pageInfo = router.pageInfo; // silently redirect to home page
 
   if (pageInfo.name == null) {
     pageInfo.name = "home";
@@ -5244,7 +5244,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52578" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57580" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
