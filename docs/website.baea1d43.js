@@ -2727,12 +2727,170 @@ module.exports = {
         }
     },
 }
-},{"@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/pages/Home.jsx":[function(require,module,exports) {
+},{"@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/skeletons/GraphDisplay.jsx":[function(require,module,exports) {
+var _excluded = ["children", "sizeOfNodeInPixels"];
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var numberOfSidesOfHexagon = 6;
+var numberOfRadiansInACircle = Math.PI * 2;
+
+function degreesToRadians(degrees) {
+  return degrees * (Math.PI / 180);
+} // (google "hexagonal tessellation" to see what this function is doing)
+//    this creates an array of x,y pairs
+//    each pair is a point creating a spiraling-outwards pattern
+//    pattern:
+//        1 center node 
+//        6 surrounding nodes
+//        12 nodes on the outside of the 6
+//        18 nodes on the outside of the 12
+//        ... etc
+//    the x,y pair is at the center of each hexagon
+
+
+function getHexagonLocations(numberOfHexagonsNeeded, diameterOfHexagon) {
+  var locations = [[0, 0]];
+  var ringIndex = 0;
+  var availableSlots = 1; // the availableSlots will increase like this:
+  //      1 (+6*1) -> 7 (+6*2) -> 19 (+6*3) -> 37 (+6*4) -> etc 
+
+  while (true) {
+    // if we fit all the hexagons in the last ring, then break
+    if (numberOfHexagonsNeeded - 1 < availableSlots) {
+      break;
+    } // otherwise make another ring
+
+
+    ringIndex += 1;
+    var numberOfHexagonsInRing = numberOfSidesOfHexagon * ringIndex;
+    var distanceFromCenter = diameterOfHexagon * ringIndex;
+    console.log("diameterOfHexagon is:", diameterOfHexagon);
+    console.log("distanceFromCenter is:", distanceFromCenter);
+    availableSlots += numberOfHexagonsInRing;
+    var radiansBetweenEachHexagon = numberOfRadiansInACircle / numberOfHexagonsInRing;
+    console.log("numberOfHexagonsInRing is:", numberOfHexagonsInRing);
+    console.log("radiansBetweenEachHexagon is:", radiansBetweenEachHexagon);
+    var radians = -radiansBetweenEachHexagon;
+
+    for (var each in _toConsumableArray(Array(numberOfHexagonsInRing))) {
+      // increment by one angle
+      radians += radiansBetweenEachHexagon;
+      console.log("Math.cos(radians) is:", Math.cos(radians));
+      console.log("Math.sin(radians) is:", Math.sin(radians));
+      var xPosition = distanceFromCenter * Math.cos(radians);
+      var yPosition = distanceFromCenter * Math.sin(radians);
+      locations.push([xPosition, yPosition]);
+
+      if (locations.length >= numberOfHexagonsNeeded) {
+        break;
+      }
+    }
+  }
+
+  return locations;
+}
+
+module.exports = function (_ref) {
+  var children = _ref.children,
+      sizeOfNodeInPixels = _ref.sizeOfNodeInPixels,
+      properties = _objectWithoutProperties(_ref, _excluded);
+
+  var xyCenterLocations = getHexagonLocations(children.length, sizeOfNodeInPixels);
+  console.log("xyCenterLocations is:", xyCenterLocations);
+  var max = Math.max.apply(Math, _toConsumableArray(xyCenterLocations.map(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 2),
+        x = _ref3[0],
+        y = _ref3[1];
+
+    return x;
+  }))); // create some wrappers to get everything lined up correctly
+
+  var container = /*#__PURE__*/React.createElement("div", {
+    class: "centered",
+    style: {
+      position: 'relative',
+      minWidth: "".concat(2 * max, "px"),
+      minHeight: "".concat(2 * max, "px")
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: "position: relative; overflow: visible; max-width: 0; min-width: 0; max-height: 0; min-height: 0;"
+  })); // we want to show the container first, then slowly add each node
+
+  function loadLater() {
+    // load all the nodes in order
+    var index = -1;
+
+    var _iterator = _createForOfIteratorHelper(children),
+        _step;
+
+    try {
+      var _loop = function _loop() {
+        var eachChildElement = _step.value;
+        index += 1;
+
+        var _xyCenterLocations$in = _slicedToArray(xyCenterLocations[index], 2),
+            x = _xyCenterLocations$in[0],
+            y = _xyCenterLocations$in[1]; // have them start off invisible, then fade in
+
+
+        console.log("`".concat(x, "px` is:"), "".concat(x, "px"));
+        var graphNode = /*#__PURE__*/React.createElement("div", {
+          class: "circle centered shadow animate",
+          style: "\n                    --size: ".concat(sizeOfNodeInPixels, "px ;\n                    color: white;\n                    background-color: var(--blue);\n                    opacity: 0;\n                    position: absolute;\n                    left: ").concat(x, "px;\n                    top: ").concat(y, "px;\n                    transform: translate(50%, -50%) scale(0.7);")
+        }, eachChildElement);
+        container.children[0].appendChild(graphNode); // have them fade in one after another
+
+        setTimeout(function () {
+          graphNode.style.opacity = 1;
+        }, 500 * index); // half a second per index
+      };
+
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        _loop();
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  }
+
+  setTimeout(loadLater(), 0);
+  return container;
+};
+},{}],"../code/pages/Home.jsx":[function(require,module,exports) {
 var _excluded = ["children"];
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var GraphDisplay = require("../skeletons/GraphDisplay");
 
 module.exports = function (_ref) {
   var children = _ref.children,
@@ -2743,9 +2901,11 @@ module.exports = function (_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     class: "circle centered shadow",
     style: "--size: 25rem; color: white; background-color: var(--blue)"
-  }, /*#__PURE__*/React.createElement("h2", null, "Howdy!")));
+  }, /*#__PURE__*/React.createElement("h2", null, "Howdy!")), /*#__PURE__*/React.createElement(GraphDisplay, {
+    sizeOfNodeInPixels: 220
+  }, /*#__PURE__*/React.createElement("div", null, "Howdy1"), /*#__PURE__*/React.createElement("div", null, "Howdy2"), /*#__PURE__*/React.createElement("div", null, "Howdy3"), /*#__PURE__*/React.createElement("div", null, "Howdy4")));
 };
-},{}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
+},{"../skeletons/GraphDisplay":"../code/skeletons/GraphDisplay.jsx"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
 var _excluded = ["children", "title", "actions"];
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -5244,7 +5404,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57580" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52831" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

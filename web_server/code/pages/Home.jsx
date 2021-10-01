@@ -1,3 +1,5 @@
+let GraphDisplay = require("../skeletons/GraphDisplay")
+
 module.exports = ({ children, ...properties }) => {
     return <body class="column centered">
         
@@ -6,6 +8,13 @@ module.exports = ({ children, ...properties }) => {
                 Howdy!
             </h2>
         </div>
+        
+        <GraphDisplay sizeOfNodeInPixels={220}>
+            <div>Howdy1</div>
+            <div>Howdy2</div>
+            <div>Howdy3</div>
+            <div>Howdy4</div>
+        </GraphDisplay>
         
     </body>
 }
