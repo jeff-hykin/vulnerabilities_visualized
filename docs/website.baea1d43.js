@@ -2816,7 +2816,6 @@ module.exports = function (_ref) {
       properties = _objectWithoutProperties(_ref, _excluded);
 
   var xyCenterLocations = getHexagonLocations(children.length, sizeOfNodeInPixels + padding);
-  console.log("xyCenterLocations is:", xyCenterLocations);
   var max = Math.max.apply(Math, _toConsumableArray(xyCenterLocations.map(function (_ref2) {
     var _ref3 = _slicedToArray(_ref2, 2),
         x = _ref3[0],
@@ -2853,7 +2852,6 @@ module.exports = function (_ref) {
             y = _xyCenterLocations$in[1]; // have them start off invisible, then fade in
 
 
-        console.log("`".concat(x, "px` is:"), "".concat(x, "px"));
         var graphNode = /*#__PURE__*/React.createElement("div", {
           class: "circle centered shadow animate",
           style: "\n                    --size: ".concat(sizeOfNodeInPixels, "px ;\n                    color: white;\n                    background-color: var(--blue);\n                    opacity: 0;\n                    position: absolute;\n                    left: ").concat(x, "px;\n                    top: ").concat(y, "px;\n                    transform: translate(-50%, -50%);")
@@ -2878,7 +2876,494 @@ module.exports = function (_ref) {
   setTimeout(loadLater(), 0);
   return container;
 };
-},{}],"../code/pages/Home.jsx":[function(require,module,exports) {
+},{}],"../../node_modules/tiny-emitter/index.js":[function(require,module,exports) {
+function E () {
+  // Keep this empty so it's easier to inherit from
+  // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
+}
+
+E.prototype = {
+  on: function (name, callback, ctx) {
+    var e = this.e || (this.e = {});
+
+    (e[name] || (e[name] = [])).push({
+      fn: callback,
+      ctx: ctx
+    });
+
+    return this;
+  },
+
+  once: function (name, callback, ctx) {
+    var self = this;
+    function listener () {
+      self.off(name, listener);
+      callback.apply(ctx, arguments);
+    };
+
+    listener._ = callback
+    return this.on(name, listener, ctx);
+  },
+
+  emit: function (name) {
+    var data = [].slice.call(arguments, 1);
+    var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+    var i = 0;
+    var len = evtArr.length;
+
+    for (i; i < len; i++) {
+      evtArr[i].fn.apply(evtArr[i].ctx, data);
+    }
+
+    return this;
+  },
+
+  off: function (name, callback) {
+    var e = this.e || (this.e = {});
+    var evts = e[name];
+    var liveEvents = [];
+
+    if (evts && callback) {
+      for (var i = 0, len = evts.length; i < len; i++) {
+        if (evts[i].fn !== callback && evts[i].fn._ !== callback)
+          liveEvents.push(evts[i]);
+      }
+    }
+
+    // Remove event from queue to prevent memory leak
+    // Suggested by https://github.com/lazd
+    // Ref: https://github.com/scottcorgan/tiny-emitter/commit/c6ebfaa9bc973b33d110a84a307742b7cf94c953#commitcomment-5024910
+
+    (liveEvents.length)
+      ? e[name] = liveEvents
+      : delete e[name];
+
+    return this;
+  }
+};
+
+module.exports = E;
+module.exports.TinyEmitter = E;
+
+},{}],"../../node_modules/virtual-scroll/src/support.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.support = void 0;
+var support = {
+  hasWheelEvent: 'onwheel' in document,
+  hasMouseWheelEvent: 'onmousewheel' in document,
+  hasTouch: 'ontouchstart' in document,
+  hasTouchWin: navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 1,
+  hasPointer: !!window.navigator.msPointerEnabled,
+  hasKeyDown: 'onkeydown' in document,
+  isFirefox: navigator.userAgent.indexOf('Firefox') > -1
+};
+exports.support = support;
+},{}],"../../node_modules/virtual-scroll/src/keycodes.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.keyCodes = void 0;
+var keyCodes = {
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  SPACE: 32
+};
+exports.keyCodes = keyCodes;
+},{}],"../../node_modules/virtual-scroll/src/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _tinyEmitter = _interopRequireDefault(require("tiny-emitter"));
+
+var _support = require("./support");
+
+var _keycodes = require("./keycodes");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
+
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "get"); return _classApplyDescriptorGet(receiver, descriptor); }
+
+function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "set"); _classApplyDescriptorSet(receiver, descriptor, value); return value; }
+
+function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError("attempted to " + action + " private field on non-instance"); } return privateMap.get(receiver); }
+
+function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } }
+
+var EVT_ID = 'virtualscroll';
+
+var _options = /*#__PURE__*/new WeakMap();
+
+var _el = /*#__PURE__*/new WeakMap();
+
+var _emitter = /*#__PURE__*/new WeakMap();
+
+var _event = /*#__PURE__*/new WeakMap();
+
+var _touchStart = /*#__PURE__*/new WeakMap();
+
+var _bodyTouchAction = /*#__PURE__*/new WeakMap();
+
+var VirtualScroll = /*#__PURE__*/function () {
+  function VirtualScroll(options) {
+    _classCallCheck(this, VirtualScroll);
+
+    _classPrivateFieldInitSpec(this, _options, {
+      writable: true,
+      value: void 0
+    });
+
+    _classPrivateFieldInitSpec(this, _el, {
+      writable: true,
+      value: void 0
+    });
+
+    _classPrivateFieldInitSpec(this, _emitter, {
+      writable: true,
+      value: void 0
+    });
+
+    _classPrivateFieldInitSpec(this, _event, {
+      writable: true,
+      value: void 0
+    });
+
+    _classPrivateFieldInitSpec(this, _touchStart, {
+      writable: true,
+      value: void 0
+    });
+
+    _classPrivateFieldInitSpec(this, _bodyTouchAction, {
+      writable: true,
+      value: void 0
+    });
+
+    // Make sure these events listeners have the proper context (for both .addEventListener and .removeEventListener)
+    bindThis(['_onWheel', '_onMouseWheel', '_onTouchStart', '_onTouchMove', '_onKeyDown'], this);
+
+    _classPrivateFieldSet(this, _el, window);
+
+    if (options && options.el) {
+      _classPrivateFieldSet(this, _el, options.el);
+
+      delete options.el;
+    }
+
+    _classPrivateFieldSet(this, _options, Object.assign({
+      mouseMultiplier: 1,
+      touchMultiplier: 2,
+      firefoxMultiplier: 15,
+      keyStep: 120,
+      preventTouch: false,
+      unpreventTouchClass: 'vs-touchmove-allowed',
+      useKeyboard: true,
+      useTouch: true
+    }, options));
+
+    _classPrivateFieldSet(this, _emitter, new _tinyEmitter.default());
+
+    _classPrivateFieldSet(this, _event, {
+      y: 0,
+      x: 0,
+      deltaX: 0,
+      deltaY: 0
+    });
+
+    _classPrivateFieldSet(this, _touchStart, {
+      x: null,
+      y: null
+    });
+
+    _classPrivateFieldSet(this, _bodyTouchAction, null);
+
+    if (_classPrivateFieldGet(this, _options).passive !== undefined) {
+      this.listenerOptions = {
+        passive: _classPrivateFieldGet(this, _options).passive
+      };
+    }
+  }
+
+  _createClass(VirtualScroll, [{
+    key: "_notify",
+    value: function _notify(e) {
+      var evt = _classPrivateFieldGet(this, _event);
+
+      evt.x += evt.deltaX;
+      evt.y += evt.deltaY;
+
+      _classPrivateFieldGet(this, _emitter).emit(EVT_ID, {
+        x: evt.x,
+        y: evt.y,
+        deltaX: evt.deltaX,
+        deltaY: evt.deltaY,
+        originalEvent: e
+      });
+    }
+  }, {
+    key: "_onWheel",
+    value: function _onWheel(e) {
+      var options = _classPrivateFieldGet(this, _options);
+
+      var evt = _classPrivateFieldGet(this, _event); // In Chrome and in Firefox (at least the new one)
+
+
+      evt.deltaX = e.wheelDeltaX || e.deltaX * -1;
+      evt.deltaY = e.wheelDeltaY || e.deltaY * -1; // for our purpose deltamode = 1 means user is on a wheel mouse, not touch pad
+      // real meaning: https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent#Delta_modes
+
+      if (_support.support.isFirefox && e.deltaMode === 1) {
+        evt.deltaX *= options.firefoxMultiplier;
+        evt.deltaY *= options.firefoxMultiplier;
+      }
+
+      evt.deltaX *= options.mouseMultiplier;
+      evt.deltaY *= options.mouseMultiplier;
+
+      this._notify(e);
+    }
+  }, {
+    key: "_onMouseWheel",
+    value: function _onMouseWheel(e) {
+      var evt = _classPrivateFieldGet(this, _event); // In Safari, IE and in Chrome if 'wheel' isn't defined
+
+
+      evt.deltaX = e.wheelDeltaX ? e.wheelDeltaX : 0;
+      evt.deltaY = e.wheelDeltaY ? e.wheelDeltaY : e.wheelDelta;
+
+      this._notify(e);
+    }
+  }, {
+    key: "_onTouchStart",
+    value: function _onTouchStart(e) {
+      var t = e.targetTouches ? e.targetTouches[0] : e;
+      _classPrivateFieldGet(this, _touchStart).x = t.pageX;
+      _classPrivateFieldGet(this, _touchStart).y = t.pageY;
+    }
+  }, {
+    key: "_onTouchMove",
+    value: function _onTouchMove(e) {
+      var options = _classPrivateFieldGet(this, _options);
+
+      if (options.preventTouch && !e.target.classList.contains(options.unpreventTouchClass)) {
+        e.preventDefault();
+      }
+
+      var evt = _classPrivateFieldGet(this, _event);
+
+      var t = e.targetTouches ? e.targetTouches[0] : e;
+      evt.deltaX = (t.pageX - _classPrivateFieldGet(this, _touchStart).x) * options.touchMultiplier;
+      evt.deltaY = (t.pageY - _classPrivateFieldGet(this, _touchStart).y) * options.touchMultiplier;
+      _classPrivateFieldGet(this, _touchStart).x = t.pageX;
+      _classPrivateFieldGet(this, _touchStart).y = t.pageY;
+
+      this._notify(e);
+    }
+  }, {
+    key: "_onKeyDown",
+    value: function _onKeyDown(e) {
+      var evt = _classPrivateFieldGet(this, _event);
+
+      evt.deltaX = evt.deltaY = 0;
+      var windowHeight = window.innerHeight - 40;
+
+      switch (e.keyCode) {
+        case _keycodes.keyCodes.LEFT:
+        case _keycodes.keyCodes.UP:
+          evt.deltaY = _classPrivateFieldGet(this, _options).keyStep;
+          break;
+
+        case _keycodes.keyCodes.RIGHT:
+        case _keycodes.keyCodes.DOWN:
+          evt.deltaY = -_classPrivateFieldGet(this, _options).keyStep;
+          break;
+
+        case _keycodes.keyCodes.SPACE:
+          evt.deltaY = windowHeight * (e.shiftKey ? 1 : -1);
+          break;
+
+        default:
+          return;
+      }
+
+      this._notify(e);
+    }
+  }, {
+    key: "_bind",
+    value: function _bind() {
+      if (_support.support.hasWheelEvent) {
+        _classPrivateFieldGet(this, _el).addEventListener('wheel', this._onWheel, this.listenerOptions);
+      }
+
+      if (_support.support.hasMouseWheelEvent) {
+        _classPrivateFieldGet(this, _el).addEventListener('mousewheel', this._onMouseWheel, this.listenerOptions);
+      }
+
+      if (_support.support.hasTouch && _classPrivateFieldGet(this, _options).useTouch) {
+        _classPrivateFieldGet(this, _el).addEventListener('touchstart', this._onTouchStart, this.listenerOptions);
+
+        _classPrivateFieldGet(this, _el).addEventListener('touchmove', this._onTouchMove, this.listenerOptions);
+      }
+
+      if (_support.support.hasPointer && _support.support.hasTouchWin) {
+        _classPrivateFieldSet(this, _bodyTouchAction, document.body.style.msTouchAction);
+
+        document.body.style.msTouchAction = 'none';
+
+        _classPrivateFieldGet(this, _el).addEventListener('MSPointerDown', this._onTouchStart, true);
+
+        _classPrivateFieldGet(this, _el).addEventListener('MSPointerMove', this._onTouchMove, true);
+      }
+
+      if (_support.support.hasKeyDown && _classPrivateFieldGet(this, _options).useKeyboard) {
+        document.addEventListener('keydown', this._onKeyDown);
+      }
+    }
+  }, {
+    key: "_unbind",
+    value: function _unbind() {
+      if (_support.support.hasWheelEvent) {
+        _classPrivateFieldGet(this, _el).removeEventListener('wheel', this._onWheel);
+      }
+
+      if (_support.support.hasMouseWheelEvent) {
+        _classPrivateFieldGet(this, _el).removeEventListener('mousewheel', this._onMouseWheel);
+      }
+
+      if (_support.support.hasTouch) {
+        _classPrivateFieldGet(this, _el).removeEventListener('touchstart', this._onTouchStart);
+
+        _classPrivateFieldGet(this, _el).removeEventListener('touchmove', this._onTouchMove);
+      }
+
+      if (_support.support.hasPointer && _support.support.hasTouchWin) {
+        document.body.style.msTouchAction = _classPrivateFieldGet(this, _bodyTouchAction);
+
+        _classPrivateFieldGet(this, _el).removeEventListener('MSPointerDown', this._onTouchStart, true);
+
+        _classPrivateFieldGet(this, _el).removeEventListener('MSPointerMove', this._onTouchMove, true);
+      }
+
+      if (_support.support.hasKeyDown && _classPrivateFieldGet(this, _options).useKeyboard) {
+        document.removeEventListener('keydown', this._onKeyDown);
+      }
+    }
+  }, {
+    key: "on",
+    value: function on(cb, ctx) {
+      _classPrivateFieldGet(this, _emitter).on(EVT_ID, cb, ctx);
+
+      var events = _classPrivateFieldGet(this, _emitter).e;
+
+      if (events && events[EVT_ID] && events[EVT_ID].length === 1) this._bind();
+    }
+  }, {
+    key: "off",
+    value: function off(cb, ctx) {
+      _classPrivateFieldGet(this, _emitter).off(EVT_ID, cb, ctx);
+
+      var events = _classPrivateFieldGet(this, _emitter).e;
+
+      if (!events[EVT_ID] || events[EVT_ID].length <= 0) this._unbind();
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      _classPrivateFieldGet(this, _emitter).off();
+
+      this._unbind();
+    }
+  }]);
+
+  return VirtualScroll;
+}();
+
+exports.default = VirtualScroll;
+
+function bindThis(fns, ctx) {
+  fns.forEach(function (fn) {
+    ctx[fn] = ctx[fn].bind(ctx);
+  });
+}
+},{"tiny-emitter":"../../node_modules/tiny-emitter/index.js","./support":"../../node_modules/virtual-scroll/src/support.js","./keycodes":"../../node_modules/virtual-scroll/src/keycodes.js"}],"../code/systems/on_scroll.js":[function(require,module,exports) {
+var VirtualScroll = require('virtual-scroll').default;
+
+var scroller = new VirtualScroll();
+module.exports = {
+  onScroll: function onScroll() {
+    return scroller.on.apply(scroller, arguments);
+  }
+};
+},{"virtual-scroll":"../../node_modules/virtual-scroll/src/index.js"}],"../code/skeletons/InfoGraphic.jsx":[function(require,module,exports) {
+var _excluded = ["children"];
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var _require = require("../systems/on_scroll"),
+    onScroll = _require.onScroll;
+
+module.exports = function (_ref) {
+  var children = _ref.children,
+      properties = _objectWithoutProperties(_ref, _excluded);
+
+  var wrapper;
+  var isHovered = false;
+  onScroll(function (event) {
+    if (wrapper.isHovered) {
+      console.log("event is:", event);
+    }
+  });
+  return wrapper = /*#__PURE__*/React.createElement("div", {
+    name: "info-graphic" // class="animate"
+    ,
+    style: "position: absolute; bottom: 0; transform: translateY(-100%); width: 100%; z-index: 999;",
+    onscroll: function onscroll(e) {
+      return console.log(e);
+    },
+    onmouseover: function onmouseover() {
+      return wrapper.isHovered = true;
+    },
+    onmouseenter: function onmouseenter() {
+      return wrapper.isHovered = true;
+    },
+    onmouseleave: function onmouseleave() {
+      return wrapper.isHovered = false;
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    name: "tab",
+    style: "height: 6rem; width: 100%; overflow: hidden; position: absolute; top: 0; transform: translateY(-100%);"
+  }, /*#__PURE__*/React.createElement("div", {
+    class: "circle",
+    style: "--size: 100vw; background-color: var(--green); transform: scaleX(200%)"
+  })), /*#__PURE__*/React.createElement("div", {
+    style: "width: 100%; height: fit-content;"
+  }, children));
+};
+},{"../systems/on_scroll":"../code/systems/on_scroll.js"}],"../code/pages/Home.jsx":[function(require,module,exports) {
 var _excluded = ["children"];
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -2887,19 +3372,21 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 var GraphDisplay = require("../skeletons/GraphDisplay");
 
+var InfoGraphic = require("../skeletons/InfoGraphic");
+
 module.exports = function (_ref) {
   var children = _ref.children,
       properties = _objectWithoutProperties(_ref, _excluded);
 
   return /*#__PURE__*/React.createElement("body", {
     class: "column centered",
-    style: "height: 100vh"
+    style: "height: 100vh; overflow: hidden;"
   }, /*#__PURE__*/React.createElement(GraphDisplay, {
-    sizeOfNodeInPixels: 320,
-    padding: 220
-  }, /*#__PURE__*/React.createElement("h4", null, "Howdy1"), /*#__PURE__*/React.createElement("h4", null, "Howdy2"), /*#__PURE__*/React.createElement("h4", null, "Howdy3"), /*#__PURE__*/React.createElement("h4", null, "Howdy4"), /*#__PURE__*/React.createElement("h4", null, "Howdy5"), /*#__PURE__*/React.createElement("h4", null, "Howdy6"), /*#__PURE__*/React.createElement("h4", null, "Howdy7"), /*#__PURE__*/React.createElement("h4", null, "Howdy8")));
+    sizeOfNodeInPixels: 300,
+    padding: 200
+  }, /*#__PURE__*/React.createElement("h4", null, "Howdy1"), /*#__PURE__*/React.createElement("h4", null, "Howdy2"), /*#__PURE__*/React.createElement("h4", null, "Howdy3"), /*#__PURE__*/React.createElement("h4", null, "Howdy4"), /*#__PURE__*/React.createElement("h4", null, "Howdy5"), /*#__PURE__*/React.createElement("h4", null, "Howdy6"), /*#__PURE__*/React.createElement("h4", null, "Howdy7"), /*#__PURE__*/React.createElement("h4", null, "Howdy8")), /*#__PURE__*/React.createElement(InfoGraphic, null));
 };
-},{"../skeletons/GraphDisplay":"../code/skeletons/GraphDisplay.jsx"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
+},{"../skeletons/GraphDisplay":"../code/skeletons/GraphDisplay.jsx","../skeletons/InfoGraphic":"../code/skeletons/InfoGraphic.jsx"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
 var _excluded = ["children", "title", "actions"];
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -5398,7 +5885,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56829" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53262" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

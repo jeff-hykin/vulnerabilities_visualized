@@ -36,10 +36,13 @@
     "quik-router": "^1.0.0",
     "quik-server": "2.3.1",
     "regenerator-runtime": "^0.13.9",
+    "tiny-emitter": "^2.1.0",
+    "virtual-scroll": "^2.1.1",
     "web-resource-inliner": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-transform-react-jsx": "^7.14.9",
     "sass": "^1.42.1"
   }
 }

@@ -53,7 +53,6 @@ function getHexagonLocations(numberOfHexagonsNeeded, diameterOfHexagon) {
 
 module.exports = ({ children, sizeOfNodeInPixels, padding, ...properties }) => {
     const xyCenterLocations = getHexagonLocations(children.length, sizeOfNodeInPixels+padding)
-    console.log(`xyCenterLocations is:`,xyCenterLocations)
     const max = Math.max(...xyCenterLocations.map(([x,y]) => x))
     
     // create some wrappers to get everything lined up correctly
@@ -72,7 +71,6 @@ module.exports = ({ children, sizeOfNodeInPixels, padding, ...properties }) => {
             index += 1
             const [ x, y ] = xyCenterLocations[index]
             // have them start off invisible, then fade in
-            console.log(`\`${x}px\` is:`,`${x}px`)
             const graphNode = <div
                 class="circle centered shadow animate"
                 style={`
