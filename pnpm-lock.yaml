@@ -7,11 +7,14 @@ specifiers:
   '@vue/reactivity': ^3.2.19
   '@vue/shared': ^3.2.19
   animejs: ^3.2.1
+  chart.js: ^3.5.1
   cors: ^2.8.5
   css-baseline: ^1.2.11
   express: ^4.17.1
   good-dom: ^4.2.1
   good-jsx: ^1.4.1
+  lodash: ^4.17.21
+  lodash-contrib: ^4.1200.1
   materialize-css: ^1.0.0-rc.2
   quik-client: ^1.0.0
   quik-dom: ^1.0.6
@@ -28,11 +31,14 @@ dependencies:
   '@vue/reactivity': 3.2.19
   '@vue/shared': 3.2.19
   animejs: 3.2.1
+  chart.js: 3.5.1
   cors: 2.8.5
   css-baseline: 1.2.11
   express: 4.17.1
   good-dom: 4.2.1
   good-jsx: 1.4.1
+  lodash: 4.17.21
+  lodash-contrib: 4.1200.1
   materialize-css: 1.0.0-rc.2
   quik-client: 1.0.0
   quik-dom: 1.0.6
@@ -1852,6 +1858,10 @@ packages:
       ansi-styles: 3.2.1
       escape-string-regexp: 1.0.5
       supports-color: 5.5.0
+
+  /chart.js/3.5.1:
+    resolution: {integrity: sha512-m5kzt72I1WQ9LILwQC4syla/LD/N413RYv2Dx2nnTkRS9iv/ey1xLTt0DnPc/eWV4zI+BgEgDYBIzbQhZHc/PQ==}
+    dev: false
 
   /chokidar/2.1.8:
     resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==}
@@ -3678,6 +3688,12 @@ packages:
       type-check: 0.3.2
     dev: false
 
+  /lodash-contrib/4.1200.1:
+    resolution: {integrity: sha1-HPnY2+yXhKsWnrGnsfsZ1goEe7Y=}
+    dependencies:
+      lodash: 4.12.0
+    dev: false
+
   /lodash.clone/4.5.0:
     resolution: {integrity: sha1-GVhwRQ9aExkkeN9Lw9I9LeoZB7Y=}
     dev: false
@@ -3696,6 +3712,10 @@ packages:
 
   /lodash.uniq/4.5.0:
     resolution: {integrity: sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=}
+    dev: false
+
+  /lodash/4.12.0:
+    resolution: {integrity: sha1-K9bcRqBA9Z5obJcu0h2T3FkFMlg=}
     dev: false
 
   /lodash/4.17.21:
