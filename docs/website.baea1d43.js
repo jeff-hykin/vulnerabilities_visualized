@@ -3333,10 +3333,25 @@ module.exports = function (_ref) {
   var wrapper;
   var isHovered = false;
   onScroll(function (event) {
-    if (wrapper && wrapper.isHovered) {
-      console.log("wrapper.style.bottom is:", wrapper.style.bottom);
-      window.wrapper = wrapper;
-      wrapper.style.bottom = -event.deltaY + (wrapper.style.bottom.replace(/px/, "") - 0);
+    if (wrapper) {
+      // check timing
+      wrapper.lastScrollEventTime = wrapper.lastScrollEventTime || 0;
+      var relatedScrollEventThreshold = 200; // 200 miliseconds
+
+      var now = new Date().getTime();
+      var gap = now - wrapper.lastScrollEventTime;
+      var eventIsRelated = gap < relatedScrollEventThreshold;
+
+      if (wrapper.isHovered || eventIsRelated) {
+        wrapper.lastScrollEventTime = now;
+        var newValue = -event.deltaY + (wrapper.style.bottom.replace(/px/, "") - 0);
+
+        if (newValue < 0) {
+          wrapper.style.bottom = 0;
+        } else {
+          wrapper.style.bottom = newValue;
+        }
+      }
     }
   });
   return wrapper = /*#__PURE__*/React.createElement("div", {
@@ -3357,7 +3372,7 @@ module.exports = function (_ref) {
     }
   }, /*#__PURE__*/React.createElement("div", {
     name: "tab",
-    style: "height: 6rem; width: 100%; overflow: hidden; position: absolute; top: 0; transform: translateY(-100%);"
+    style: "height: 6rem; width: 100%; overflow: visible; position: absolute; top: 0; transform: translateY(-100%);"
   }, /*#__PURE__*/React.createElement("div", {
     class: "circle",
     style: "--size: 100vw; background-color: var(--green); transform: scaleX(200%)"
