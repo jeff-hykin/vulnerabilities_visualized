@@ -27,19 +27,19 @@ module.exports = ({ children, ...properties }) => {
             <h4>Howdy8</h4>
         </GraphDisplay>
         
-        {thing = <div style="height: 1rem; overflow: scroll;">
-            hi<br></br>
-            hi<br></br>
-            hi<br></br>
-            hi<br></br>
-            hi<br></br>
-            hi<br></br>
-            hi<br></br>
-            hi<br></br>
-            hi<br></br>
-        </div>}
         
         <InfoGraphic>
+            {thing = <div style="height: 1rem; overflow: scroll;">
+                hi<br></br>
+                hi<br></br>
+                hi<br></br>
+                hi<br></br>
+                hi<br></br>
+                hi<br></br>
+                hi<br></br>
+                hi<br></br>
+                hi<br></br>
+            </div>}
             {/* <div style="min-height: 10rem">
                 <h3>Test Data</h3>
             </div>

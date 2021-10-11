@@ -1,4 +1,5 @@
 const VirtualScroll = require('virtual-scroll').default
+const scrollToggle = require("./scroll_toggle")
 const scroller = new VirtualScroll()
 
 const shouldBubbleSymbol = Symbol("scrollInfo")
@@ -8,25 +9,43 @@ let alreadyActiveElement = null
 let mouseX, mouseY
 window.addEventListener("mouseover", e=>(mouseX=e.clientX,mouseY=e.clientY))
 
-
 // add a listener to keep the time up to date
 scroller.on((scrollData)=>{
     clearTimeout(updateActiveElement)
     alreadyActiveElement = alreadyActiveElement || document.elementFromPoint(mouseX, mouseY)
     const event = scrollData.originalEvent
-    console.debug(`event is:`,event)
+    // prevent other things from seeing the wheel event
+    if (event.type == "wheel") {
+        event.stopPropagation()
+    }
     const customEvent = new CustomEvent("scroll", {
         ...event,
         ...scrollData,
     })
-    window.customEvent = customEvent
-    // Object.assign(event, scrollData)
+    Object.assign(customEvent, scrollData)
+    Object.defineProperties(customEvent, {
+        "target": {
+            get(){
+                return alreadyActiveElement
+            },
+        },
+        // customEvent.srcElement = 
+        // customEvent.target = alreadyActiveElement
+
+    })
     const actualStopPropogation = event.stopPropagation.bind(event)
     customEvent.stopPropagation = ()=>{
         event[shouldBubbleSymbol] = true
         actualStopPropogation()
     }
-    console.debug(`alreadyActiveElement is:`,alreadyActiveElement)
+    customEvent.preventDefault = ()=>{
+        // TODO: even for built-in events prevent default doesn't 
+        // work for scrolling (ex: its part of the spec for it to be non-cancelable)
+        // https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+
+        // However there might be some clever workarounds, ex: always prevent and then add a window level listener that mannually scrolls (scrollTop, scrollLeft) whenever not prevented 
+        console.error("Sadly calling .preventDefault() on a scroll event doesn't work\nsee: https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily")
+    }
     if (alreadyActiveElement) {
         alreadyActiveElement.dispatchEvent(customEvent)
         let parentElement = alreadyActiveElement.parentElement
@@ -36,6 +55,7 @@ scroller.on((scrollData)=>{
             parentElement = parentElement.parentElement
         }
     }
+    // restore scroll encase preventDefault() was called
     updateActiveElement = setTimeout(()=>{
         alreadyActiveElement = document.elementFromPoint(mouseX, mouseY)
     }, relatedScrollEventThreshold)

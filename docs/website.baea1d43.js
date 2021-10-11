@@ -3158,7 +3158,65 @@ function bindThis(fns, ctx) {
     ctx[fn] = ctx[fn].bind(ctx);
   });
 }
-},{"tiny-emitter":"../../node_modules/tiny-emitter/index.js","./support":"../../node_modules/virtual-scroll/src/support.js","./keycodes":"../../node_modules/virtual-scroll/src/keycodes.js"}],"../code/systems/on_scroll.js":[function(require,module,exports) {
+},{"tiny-emitter":"../../node_modules/tiny-emitter/index.js","./support":"../../node_modules/virtual-scroll/src/support.js","./keycodes":"../../node_modules/virtual-scroll/src/keycodes.js"}],"../code/systems/scroll_toggle.js":[function(require,module,exports) {
+// From: https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+var keys = {
+  37: 1,
+  38: 1,
+  39: 1,
+  40: 1
+};
+
+function preventDefault(e) {
+  e.preventDefault();
+}
+
+function preventDefaultForScrollKeys(e) {
+  if (keys[e.keyCode]) {
+    e.preventDefault();
+    return false;
+  }
+} // modern Chrome requires { passive: false } when adding event
+
+
+var supportsPassive = false;
+
+try {
+  window.addEventListener("test", null, Object.defineProperty({}, "passive", {
+    get: function get() {
+      supportsPassive = true;
+    }
+  }));
+} catch (e) {}
+
+var wheelOpt = supportsPassive ? {
+  passive: false
+} : false;
+var wheelEvent = "onwheel" in document.createElement("div") ? "wheel" : "mousewheel"; // call this to Disable
+
+function disableScroll() {
+  window.addEventListener("DOMMouseScroll", preventDefault, false); // older FF
+
+  window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+
+  window.addEventListener("touchmove", preventDefault, wheelOpt); // mobile
+
+  window.addEventListener("keydown", preventDefaultForScrollKeys, false);
+} // call this to Enable
+
+
+function enableScroll() {
+  window.removeEventListener("DOMMouseScroll", preventDefault, false);
+  window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+  window.removeEventListener("touchmove", preventDefault, wheelOpt);
+  window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
+}
+
+module.exports = {
+  disableScroll: disableScroll,
+  enableScroll: enableScroll
+};
+},{}],"../code/systems/on_scroll.js":[function(require,module,exports) {
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3166,6 +3224,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var VirtualScroll = require('virtual-scroll').default;
+
+var scrollToggle = require("./scroll_toggle");
 
 var scroller = new VirtualScroll();
 var shouldBubbleSymbol = Symbol("scrollInfo");
@@ -3180,11 +3240,23 @@ window.addEventListener("mouseover", function (e) {
 scroller.on(function (scrollData) {
   clearTimeout(updateActiveElement);
   alreadyActiveElement = alreadyActiveElement || document.elementFromPoint(mouseX, mouseY);
-  var event = scrollData.originalEvent;
-  console.debug("event is:", event);
-  var customEvent = new CustomEvent("scroll", _objectSpread(_objectSpread({}, event), scrollData));
-  window.customEvent = customEvent; // Object.assign(event, scrollData)
+  var event = scrollData.originalEvent; // prevent other things from seeing the wheel event
 
+  if (event.type == "wheel") {
+    event.stopPropagation();
+  }
+
+  var customEvent = new CustomEvent("scroll", _objectSpread(_objectSpread({}, event), scrollData));
+  Object.assign(customEvent, scrollData);
+  Object.defineProperties(customEvent, {
+    "target": {
+      get: function get() {
+        return alreadyActiveElement;
+      }
+    } // customEvent.srcElement = 
+    // customEvent.target = alreadyActiveElement
+
+  });
   var actualStopPropogation = event.stopPropagation.bind(event);
 
   customEvent.stopPropagation = function () {
@@ -3192,7 +3264,13 @@ scroller.on(function (scrollData) {
     actualStopPropogation();
   };
 
-  console.debug("alreadyActiveElement is:", alreadyActiveElement);
+  customEvent.preventDefault = function () {
+    // TODO: even for built-in events prevent default doesn't 
+    // work for scrolling (ex: its part of the spec for it to be non-cancelable)
+    // https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+    // However there might be some clever workarounds, ex: always prevent and then add a window level listener that mannually scrolls (scrollTop, scrollLeft) whenever not prevented 
+    console.error("Sadly calling .preventDefault() on a scroll event doesn't work\nsee: https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily");
+  };
 
   if (alreadyActiveElement) {
     alreadyActiveElement.dispatchEvent(customEvent);
@@ -3202,7 +3280,8 @@ scroller.on(function (scrollData) {
       parentElement.dispatchEvent(customEvent);
       parentElement = parentElement.parentElement;
     }
-  }
+  } // restore scroll encase preventDefault() was called
+
 
   updateActiveElement = setTimeout(function () {
     alreadyActiveElement = document.elementFromPoint(mouseX, mouseY);
@@ -3245,7 +3324,7 @@ scroller.on(function (scrollData) {
 //         })
 //     },
 // }
-},{"virtual-scroll":"../../node_modules/virtual-scroll/src/index.js"}],"../../node_modules/wheel/index.js":[function(require,module,exports) {
+},{"virtual-scroll":"../../node_modules/virtual-scroll/src/index.js","./scroll_toggle":"../code/systems/scroll_toggle.js"}],"../../node_modules/wheel/index.js":[function(require,module,exports) {
 /**
  * This module used to unify mouse wheel behavior between different browsers in 2014
  * Now it's just a wrapper around addEventListener('wheel');
@@ -5224,15 +5303,27 @@ module.exports = function (_ref) {
   var wrapper;
   var isHovered = false;
   return wrapper = /*#__PURE__*/React.createElement("div", {
-    name: "info-graphic" // class="animate"
-    ,
-    style: "position: absolute; bottom: 0; transform: translateY(-100%); width: 100%; z-index: 999;",
-    onscroll: function onscroll(e) {
-      return console.log(e);
+    name: "info-graphic",
+    class: "animate",
+    style: "--scroll-top: 0; position: absolute; bottom: 0; transform: translateY(calc(-100% - calc(var(--scroll-top) * 1px))); width: 100%; z-index: 999; transition: all 0.1s ease-in-out 0s;",
+    onscroll: function onscroll(event) {
+      var currentValue = wrapper.style.getPropertyValue("--scroll-top") - 0;
+      var nextValue = currentValue - event.deltaY;
+      console.log("currentValue is:", currentValue);
+      console.log("nextValue is:", nextValue);
+      window.wrapper = wrapper; // dont scroll past 0
+
+      if (nextValue < 0) {
+        wrapper.style.setProperty('--scroll-top', '0'); // dont scroll over 100%
+      } else if (nextValue > wrapper.clientHeight) {
+        wrapper.style.setProperty('--scroll-top', "".concat(wrapper.clientHeight));
+      } else {
+        wrapper.style.setProperty('--scroll-top', "".concat(nextValue));
+      }
     }
   }, /*#__PURE__*/React.createElement("div", {
     name: "tab",
-    style: "height: 6rem; width: 100%; overflow: hidden; position: absolute; top: 0; transform: translateY(-100%);"
+    style: "height: 6rem; width: 100%; overflow: visible; position: absolute; top: 0; transform: translateY(-100%); z-index: -1;"
   }, /*#__PURE__*/React.createElement("div", {
     class: "circle",
     style: "--size: 100vw; background-color: var(--green); transform: scaleX(200%)"
@@ -5274,9 +5365,9 @@ module.exports = function (_ref) {
   }, /*#__PURE__*/React.createElement(GraphDisplay, {
     sizeOfNodeInPixels: 300,
     padding: 200
-  }, /*#__PURE__*/React.createElement("h4", null, "Howdy1"), /*#__PURE__*/React.createElement("h4", null, "Howdy2"), /*#__PURE__*/React.createElement("h4", null, "Howdy3"), /*#__PURE__*/React.createElement("h4", null, "Howdy4"), /*#__PURE__*/React.createElement("h4", null, "Howdy5"), /*#__PURE__*/React.createElement("h4", null, "Howdy6"), /*#__PURE__*/React.createElement("h4", null, "Howdy7"), /*#__PURE__*/React.createElement("h4", null, "Howdy8")), thing = /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h4", null, "Howdy1"), /*#__PURE__*/React.createElement("h4", null, "Howdy2"), /*#__PURE__*/React.createElement("h4", null, "Howdy3"), /*#__PURE__*/React.createElement("h4", null, "Howdy4"), /*#__PURE__*/React.createElement("h4", null, "Howdy5"), /*#__PURE__*/React.createElement("h4", null, "Howdy6"), /*#__PURE__*/React.createElement("h4", null, "Howdy7"), /*#__PURE__*/React.createElement("h4", null, "Howdy8")), /*#__PURE__*/React.createElement(InfoGraphic, null, thing = /*#__PURE__*/React.createElement("div", {
     style: "height: 1rem; overflow: scroll;"
-  }, "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null)), /*#__PURE__*/React.createElement(InfoGraphic, null));
+  }, "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null))));
 };
 },{"../systems/on_scroll":"../code/systems/on_scroll.js","../skeletons/GraphDisplay":"../code/skeletons/GraphDisplay.jsx","../skeletons/InfoGraphic":"../code/skeletons/InfoGraphic.jsx"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
 var _excluded = ["children", "title", "actions"];
