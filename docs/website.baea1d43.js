@@ -3240,23 +3240,17 @@ window.addEventListener("mouseover", function (e) {
 scroller.on(function (scrollData) {
   clearTimeout(updateActiveElement);
   alreadyActiveElement = alreadyActiveElement || document.elementFromPoint(mouseX, mouseY);
-  var event = scrollData.originalEvent; // prevent other things from seeing the wheel event
-
-  if (event.type == "wheel") {
-    event.stopPropagation();
-  }
-
-  var customEvent = new CustomEvent("scroll", _objectSpread(_objectSpread({}, event), scrollData));
+  var event = scrollData.originalEvent;
+  console.log("--------------------------------------------------");
+  console.log("--------------------------------------------------");
+  console.log("--------------------------------------------------");
+  console.log("--------------------------------------------------");
+  console.log("--------------------------------------------------");
+  var customEvent = new CustomEvent("scroll", _objectSpread(_objectSpread({}, event), {}, {
+    bubbles: false,
+    cancelable: false
+  }));
   Object.assign(customEvent, scrollData);
-  Object.defineProperties(customEvent, {
-    "target": {
-      get: function get() {
-        return alreadyActiveElement;
-      }
-    } // customEvent.srcElement = 
-    // customEvent.target = alreadyActiveElement
-
-  });
   var actualStopPropogation = event.stopPropagation.bind(event);
 
   customEvent.stopPropagation = function () {
@@ -3272,14 +3266,45 @@ scroller.on(function (scrollData) {
     console.error("Sadly calling .preventDefault() on a scroll event doesn't work\nsee: https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily");
   };
 
-  if (alreadyActiveElement) {
-    alreadyActiveElement.dispatchEvent(customEvent);
-    var parentElement = alreadyActiveElement.parentElement; // manually bubble the event
+  var runningElement = alreadyActiveElement;
 
-    while (parentElement && !event[shouldBubbleSymbol]) {
-      parentElement.dispatchEvent(customEvent);
-      parentElement = parentElement.parentElement;
+  while (runningElement && !event[shouldBubbleSymbol]) {
+    runningElement.dispatchEvent(customEvent);
+    var style = {};
+
+    try {
+      style = getComputedStyle(event.explicitOriginalTarget);
+    } catch (error) {}
+
+    var elementHasScrollProperties = ["auto", "scroll"].includes(style.overflowX) || ["auto", "scroll"].includes(style.overflowY);
+
+    if (elementHasScrollProperties) {
+      var biggerDirectionIsX = Math.abs(customEvent.deltaX) > Math.abs(customEvent.deltaY);
+      console.debug("customEvent.deltaX is:", customEvent.deltaX);
+      console.debug("customEvent.deltaY is:", customEvent.deltaY);
+      console.debug("runningElement.scrollTop is:", runningElement.scrollTop);
+      console.debug("runningElement.scrollLeft is:", runningElement.scrollLeft);
+      console.debug("runningElement.scrollTopMax is:", runningElement.scrollTopMax);
+      console.debug("runningElement.scrollLeftMax is:", runningElement.scrollLeftMax);
+      var hasScrolledAsFarAsPossible = false; // FIXME check if already scrolled to bottom/top leftMost/rightMost
+
+      if (biggerDirectionIsX) {
+        // FIXME: if deltaX getting bigger (check max)
+        // FIXME: if deltaX getting smaller (check 0)
+        hasScrolledAsFarAsPossible = runningElement.scrollTop >= runningElement.scrollTopMax;
+      } else {
+        // FIXME: if deltaY getting bigger (check max)
+        // FIXME: if deltaY getting smaller (check 0)
+        hasScrolledAsFarAsPossible = runningElement.scrollLeft >= runningElement.scrollLeftMax;
+      } // let this element capture it
+
+
+      if (!hasScrolledAsFarAsPossible) {
+        break;
+      }
     }
+
+    runningElement = runningElement.parentElement;
   } // restore scroll encase preventDefault() was called
 
 
@@ -5309,8 +5334,11 @@ module.exports = function (_ref) {
     onscroll: function onscroll(event) {
       var currentValue = wrapper.style.getPropertyValue("--scroll-top") - 0;
       var nextValue = currentValue - event.deltaY;
-      console.log("currentValue is:", currentValue);
-      console.log("nextValue is:", nextValue);
+      console.log("ONSCROLL-start");
+      console.log("event is:", event);
+      console.log("event.target is:", event.target);
+      console.log("event.explicitOriginalTarget is:", event.explicitOriginalTarget);
+      console.log("ONSCROLL-end");
       window.wrapper = wrapper; // dont scroll past 0
 
       if (nextValue < 0) {

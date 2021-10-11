@@ -10,8 +10,11 @@ module.exports = ({ children, ...properties }) => {
         onscroll={event=>{
             const currentValue = wrapper.style.getPropertyValue("--scroll-top")-0
             const nextValue = currentValue - event.deltaY
-            console.log(`currentValue is:`,currentValue)
-            console.log(`nextValue is:`,nextValue)
+            console.log(`ONSCROLL-start`)
+            console.log(`event is:`,event)
+            console.log(`event.target is:`,event.target)
+            console.log(`event.explicitOriginalTarget is:`,event.explicitOriginalTarget)
+            console.log(`ONSCROLL-end`)
             window.wrapper = wrapper
             // dont scroll past 0
             if (nextValue < 0) {
