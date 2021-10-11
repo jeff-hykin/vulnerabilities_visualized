@@ -25,21 +25,27 @@
     "@vue/reactivity": "^3.2.19",
     "@vue/shared": "^3.2.19",
     "animejs": "^3.2.1",
+    "chart.js": "^3.5.1",
     "cors": "^2.8.5",
     "css-baseline": "^1.2.11",
     "express": "^4.17.1",
     "good-dom": "^4.2.1",
     "good-jsx": "^1.4.1",
+    "lodash": "^4.17.21",
+    "lodash-contrib": "^4.1200.1",
     "materialize-css": "^1.0.0-rc.2",
     "quik-client": "^1.0.0",
     "quik-dom": "^1.0.6",
     "quik-router": "^1.0.0",
     "quik-server": "2.3.1",
     "regenerator-runtime": "^0.13.9",
+    "tiny-emitter": "^2.1.0",
+    "virtual-scroll": "^2.1.1",
     "web-resource-inliner": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-transform-react-jsx": "^7.14.9",
     "sass": "^1.42.1"
   }
 }
