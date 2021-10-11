@@ -217,12 +217,21 @@ exports.parseStringStyle = parseStringStyle;
 exports.stringifyStyle = stringifyStyle;
 exports.toTypeString = exports.toRawType = exports.toNumber = exports.toHandlerKey = exports.toDisplayString = exports.slotFlagsText = exports.remove = exports.propsToAttrMap = exports.objectToString = exports.isVoidTag = exports.isSymbol = exports.isString = exports.isSpecialBooleanAttr = exports.isSet = exports.isSVGTag = exports.isReservedProp = exports.isPromise = exports.isPlainObject = exports.isOn = exports.isObject = exports.isNoUnitNumericStyleProp = exports.isModelListener = exports.isMap = exports.isKnownSvgAttr = exports.isKnownHtmlAttr = exports.isIntegerKey = exports.isHTMLTag = exports.isGloballyWhitelisted = exports.isFunction = exports.isDate = exports.isBooleanAttr = exports.isArray = exports.invokeArrayFns = exports.hyphenate = exports.hasOwn = exports.hasChanged = exports.getGlobalThis = exports.extend = exports.def = exports.capitalize = exports.camelize = exports.babelParserDefaultPlugins = exports.PatchFlagNames = exports.NOOP = exports.NO = exports.EMPTY_OBJ = exports.EMPTY_ARR = void 0;
 
+<<<<<<< HEAD
 /**
  * Make a map and return a function for checking if a key
  * is in that map.
  * IMPORTANT: all calls of this function must be prefixed with
  * \/\*#\_\_PURE\_\_\*\/
  * So that rollup can tree-shake them if necessary.
+=======
+/**
+ * Make a map and return a function for checking if a key
+ * is in that map.
+ * IMPORTANT: all calls of this function must be prefixed with
+ * \/\*#\_\_PURE\_\_\*\/
+ * So that rollup can tree-shake them if necessary.
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 function makeMap(str, expectsLowerCase) {
   const map = Object.create(null);
@@ -234,8 +243,13 @@ function makeMap(str, expectsLowerCase) {
 
   return expectsLowerCase ? val => !!map[val.toLowerCase()] : val => !!map[val];
 }
+<<<<<<< HEAD
 /**
  * dev only flag -> name mapping
+=======
+/**
+ * dev only flag -> name mapping
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 
@@ -283,8 +297,13 @@ const PatchFlagNames = {
   /* BAIL */
   ]: `BAIL`
 };
+<<<<<<< HEAD
 /**
  * Dev only
+=======
+/**
+ * Dev only
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 exports.PatchFlagNames = PatchFlagNames;
@@ -349,6 +368,7 @@ function generateCodeFrame(source, start = 0, end = source.length) {
 
   return res.join('\n');
 }
+<<<<<<< HEAD
 /**
  * On the client we only need to offer special cases for boolean attributes that
  * have different names from their corresponding dom properties:
@@ -359,20 +379,43 @@ function generateCodeFrame(source, start = 0, end = source.length) {
  * - nomodule -> noModule
  * - novalidate -> noValidate
  * - readonly -> readOnly
+=======
+/**
+ * On the client we only need to offer special cases for boolean attributes that
+ * have different names from their corresponding dom properties:
+ * - itemscope -> N/A
+ * - allowfullscreen -> allowFullscreen
+ * - formnovalidate -> formNoValidate
+ * - ismap -> isMap
+ * - nomodule -> noModule
+ * - novalidate -> noValidate
+ * - readonly -> readOnly
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 
 const specialBooleanAttrs = `itemscope,allowfullscreen,formnovalidate,ismap,nomodule,novalidate,readonly`;
 const isSpecialBooleanAttr = /*#__PURE__*/makeMap(specialBooleanAttrs);
+<<<<<<< HEAD
 /**
  * The full list is needed during SSR to produce the correct initial markup.
+=======
+/**
+ * The full list is needed during SSR to produce the correct initial markup.
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 exports.isSpecialBooleanAttr = isSpecialBooleanAttr;
 const isBooleanAttr = /*#__PURE__*/makeMap(specialBooleanAttrs + `,async,autofocus,autoplay,controls,default,defer,disabled,hidden,` + `loop,open,required,reversed,scoped,seamless,` + `checked,muted,multiple,selected`);
+<<<<<<< HEAD
 /**
  * Boolean attributes should be included if the value is truthy or ''.
  * e.g. <select multiple> compiles to { multiple: '' }
+=======
+/**
+ * Boolean attributes should be included if the value is truthy or ''.
+ * e.g. <select multiple> compiles to { multiple: '' }
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 exports.isBooleanAttr = isBooleanAttr;
@@ -404,24 +447,42 @@ const propsToAttrMap = {
   htmlFor: 'for',
   httpEquiv: 'http-equiv'
 };
+<<<<<<< HEAD
 /**
  * CSS properties that accept plain numbers
+=======
+/**
+ * CSS properties that accept plain numbers
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 exports.propsToAttrMap = propsToAttrMap;
 const isNoUnitNumericStyleProp = /*#__PURE__*/makeMap(`animation-iteration-count,border-image-outset,border-image-slice,` + `border-image-width,box-flex,box-flex-group,box-ordinal-group,column-count,` + `columns,flex,flex-grow,flex-positive,flex-shrink,flex-negative,flex-order,` + `grid-row,grid-row-end,grid-row-span,grid-row-start,grid-column,` + `grid-column-end,grid-column-span,grid-column-start,font-weight,line-clamp,` + `line-height,opacity,order,orphans,tab-size,widows,z-index,zoom,` + // SVG
 `fill-opacity,flood-opacity,stop-opacity,stroke-dasharray,stroke-dashoffset,` + `stroke-miterlimit,stroke-opacity,stroke-width`);
+<<<<<<< HEAD
 /**
  * Known attributes, this is used for stringification of runtime static nodes
  * so that we don't stringify bindings that cannot be set from HTML.
  * Don't also forget to allow `data-*` and `aria-*`!
  * Generated from https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes
+=======
+/**
+ * Known attributes, this is used for stringification of runtime static nodes
+ * so that we don't stringify bindings that cannot be set from HTML.
+ * Don't also forget to allow `data-*` and `aria-*`!
+ * Generated from https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 exports.isNoUnitNumericStyleProp = isNoUnitNumericStyleProp;
 const isKnownHtmlAttr = /*#__PURE__*/makeMap(`accept,accept-charset,accesskey,action,align,allow,alt,async,` + `autocapitalize,autocomplete,autofocus,autoplay,background,bgcolor,` + `border,buffered,capture,challenge,charset,checked,cite,class,code,` + `codebase,color,cols,colspan,content,contenteditable,contextmenu,controls,` + `coords,crossorigin,csp,data,datetime,decoding,default,defer,dir,dirname,` + `disabled,download,draggable,dropzone,enctype,enterkeyhint,for,form,` + `formaction,formenctype,formmethod,formnovalidate,formtarget,headers,` + `height,hidden,high,href,hreflang,http-equiv,icon,id,importance,integrity,` + `ismap,itemprop,keytype,kind,label,lang,language,loading,list,loop,low,` + `manifest,max,maxlength,minlength,media,min,multiple,muted,name,novalidate,` + `open,optimum,pattern,ping,placeholder,poster,preload,radiogroup,readonly,` + `referrerpolicy,rel,required,reversed,rows,rowspan,sandbox,scope,scoped,` + `selected,shape,size,sizes,slot,span,spellcheck,src,srcdoc,srclang,srcset,` + `start,step,style,summary,tabindex,target,title,translate,type,usemap,` + `value,width,wrap`);
+<<<<<<< HEAD
 /**
  * Generated from https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute
+=======
+/**
+ * Generated from https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 exports.isKnownHtmlAttr = isKnownHtmlAttr;
@@ -662,9 +723,15 @@ function looseEqual(a, b) {
 function looseIndexOf(arr, val) {
   return arr.findIndex(item => looseEqual(item, val));
 }
+<<<<<<< HEAD
 /**
  * For converting {{ interpolation }} values to displayed strings.
  * @private
+=======
+/**
+ * For converting {{ interpolation }} values to displayed strings.
+ * @private
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 
@@ -695,11 +762,19 @@ const replacer = (_key, val) => {
 
   return val;
 };
+<<<<<<< HEAD
 /**
  * List of @babel/parser plugins that are used for template expression
  * transforms and SFC script transforms. By default we enable proposals slated
  * for ES2020. This will need to be updated as the spec moves forward.
  * Full list at https://babeljs.io/docs/en/next/babel-parser#plugins
+=======
+/**
+ * List of @babel/parser plugins that are used for template expression
+ * transforms and SFC script transforms. By default we enable proposals slated
+ * for ES2020. This will need to be updated as the spec moves forward.
+ * Full list at https://babeljs.io/docs/en/next/babel-parser#plugins
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 
@@ -711,8 +786,13 @@ const EMPTY_ARR = undefined !== 'production' ? Object.freeze([]) : [];
 exports.EMPTY_ARR = EMPTY_ARR;
 
 const NOOP = () => {};
+<<<<<<< HEAD
 /**
  * Always return false.
+=======
+/**
+ * Always return false.
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 
@@ -817,8 +897,13 @@ const cacheStringFunction = fn => {
 };
 
 const camelizeRE = /-(\w)/g;
+<<<<<<< HEAD
 /**
  * @private
+=======
+/**
+ * @private
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 const camelize = cacheStringFunction(str => {
@@ -826,6 +911,7 @@ const camelize = cacheStringFunction(str => {
 });
 exports.camelize = camelize;
 const hyphenateRE = /\B([A-Z])/g;
+<<<<<<< HEAD
 /**
  * @private
  */
@@ -833,12 +919,26 @@ const hyphenateRE = /\B([A-Z])/g;
 const hyphenate = cacheStringFunction(str => str.replace(hyphenateRE, '-$1').toLowerCase());
 /**
  * @private
+=======
+/**
+ * @private
+ */
+
+const hyphenate = cacheStringFunction(str => str.replace(hyphenateRE, '-$1').toLowerCase());
+/**
+ * @private
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 exports.hyphenate = hyphenate;
 const capitalize = cacheStringFunction(str => str.charAt(0).toUpperCase() + str.slice(1));
+<<<<<<< HEAD
 /**
  * @private
+=======
+/**
+ * @private
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 exports.capitalize = capitalize;
@@ -1071,10 +1171,17 @@ const targetMap = new WeakMap(); // The number of effects currently being tracke
 
 let effectTrackDepth = 0;
 let trackOpBit = 1;
+<<<<<<< HEAD
 /**
  * The bitwise track markers support at most 30 levels op recursion.
  * This value is chosen to enable modern JS engines to use a SMI on all platforms.
  * When recursion depth is greater, fall back to using a full cleanup.
+=======
+/**
+ * The bitwise track markers support at most 30 levels op recursion.
+ * This value is chosen to enable modern JS engines to use a SMI on all platforms.
+ * When recursion depth is greater, fall back to using a full cleanup.
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 const maxMarkerBits = 30;
@@ -2003,30 +2110,51 @@ function reactive(target) {
 
   return createReactiveObject(target, false, mutableHandlers, mutableCollectionHandlers, reactiveMap);
 }
+<<<<<<< HEAD
 /**
  * Return a shallowly-reactive copy of the original object, where only the root
  * level properties are reactive. It also does not auto-unwrap refs (even at the
  * root level).
+=======
+/**
+ * Return a shallowly-reactive copy of the original object, where only the root
+ * level properties are reactive. It also does not auto-unwrap refs (even at the
+ * root level).
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 
 function shallowReactive(target) {
   return createReactiveObject(target, false, shallowReactiveHandlers, shallowCollectionHandlers, shallowReactiveMap);
 }
+<<<<<<< HEAD
 /**
  * Creates a readonly copy of the original object. Note the returned copy is not
  * made reactive, but `readonly` can be called on an already reactive object.
+=======
+/**
+ * Creates a readonly copy of the original object. Note the returned copy is not
+ * made reactive, but `readonly` can be called on an already reactive object.
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 
 function readonly(target) {
   return createReactiveObject(target, true, readonlyHandlers, readonlyCollectionHandlers, readonlyMap);
 }
+<<<<<<< HEAD
 /**
  * Returns a reactive-copy of the original object, where only the root level
  * properties are readonly, and does NOT unwrap refs nor recursively convert
  * returned properties.
  * This is used for creating the props proxy object for stateful components.
+=======
+/**
+ * Returns a reactive-copy of the original object, where only the root level
+ * properties are readonly, and does NOT unwrap refs nor recursively convert
+ * returned properties.
+ * This is used for creating the props proxy object for stateful components.
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
  */
 
 
@@ -2727,6 +2855,7 @@ module.exports = {
         }
     },
 }
+<<<<<<< HEAD
 },{"@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/skeletons/GraphDisplay.jsx":[function(require,module,exports) {
 var _excluded = ["children", "sizeOfNodeInPixels", "padding"];
 
@@ -2877,6 +3006,9 @@ module.exports = function (_ref) {
   return container;
 };
 },{}],"../../node_modules/tiny-emitter/index.js":[function(require,module,exports) {
+=======
+},{"@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../../node_modules/tiny-emitter/index.js":[function(require,module,exports) {
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
 function E () {
   // Keep this empty so it's easier to inherit from
   // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
@@ -3307,6 +3439,7 @@ function bindThis(fns, ctx) {
     ctx[fn] = ctx[fn].bind(ctx);
   });
 }
+<<<<<<< HEAD
 },{"tiny-emitter":"../../node_modules/tiny-emitter/index.js","./support":"../../node_modules/virtual-scroll/src/support.js","./keycodes":"../../node_modules/virtual-scroll/src/keycodes.js"}],"../code/systems/on_scroll.js":[function(require,module,exports) {
 var VirtualScroll = require('virtual-scroll').default;
 
@@ -3394,6 +3527,2236 @@ var InfoGraphic = require("../skeletons/InfoGraphic");
 module.exports = function (_ref) {
   var children = _ref.children,
       properties = _objectWithoutProperties(_ref, _excluded);
+=======
+},{"tiny-emitter":"../../node_modules/tiny-emitter/index.js","./support":"../../node_modules/virtual-scroll/src/support.js","./keycodes":"../../node_modules/virtual-scroll/src/keycodes.js"}],"../code/systems/scroll_toggle.js":[function(require,module,exports) {
+// From: https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+var keys = {
+  37: 1,
+  38: 1,
+  39: 1,
+  40: 1
+};
+
+function preventDefault(e) {
+  e.preventDefault();
+}
+
+function preventDefaultForScrollKeys(e) {
+  if (keys[e.keyCode]) {
+    e.preventDefault();
+    return false;
+  }
+} // modern Chrome requires { passive: false } when adding event
+
+
+var supportsPassive = false;
+
+try {
+  window.addEventListener("test", null, Object.defineProperty({}, "passive", {
+    get: function get() {
+      supportsPassive = true;
+    }
+  }));
+} catch (e) {}
+
+var wheelOpt = supportsPassive ? {
+  passive: false
+} : false;
+var wheelEvent = "onwheel" in document.createElement("div") ? "wheel" : "mousewheel"; // call this to Disable
+
+function disableScroll() {
+  window.addEventListener("DOMMouseScroll", preventDefault, false); // older FF
+
+  window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+
+  window.addEventListener("touchmove", preventDefault, wheelOpt); // mobile
+
+  window.addEventListener("keydown", preventDefaultForScrollKeys, false);
+} // call this to Enable
+
+
+function enableScroll() {
+  window.removeEventListener("DOMMouseScroll", preventDefault, false);
+  window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+  window.removeEventListener("touchmove", preventDefault, wheelOpt);
+  window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
+}
+
+module.exports = {
+  disableScroll: disableScroll,
+  enableScroll: enableScroll
+};
+},{}],"../code/systems/on_scroll.js":[function(require,module,exports) {
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var VirtualScroll = require('virtual-scroll').default;
+
+var scrollToggle = require("./scroll_toggle");
+
+var scroller = new VirtualScroll();
+var shouldBubbleSymbol = Symbol("scrollInfo");
+var relatedScrollEventThreshold = 200;
+var updateActiveElement = null;
+var alreadyActiveElement = null;
+var mouseX, mouseY;
+window.addEventListener("mouseover", function (e) {
+  return mouseX = e.clientX, mouseY = e.clientY;
+}); // add a listener to keep the time up to date
+
+scroller.on(function (scrollData) {
+  clearTimeout(updateActiveElement);
+  alreadyActiveElement = alreadyActiveElement || document.elementFromPoint(mouseX, mouseY);
+  var event = scrollData.originalEvent;
+  console.log("--------------------------------------------------");
+  console.log("--------------------------------------------------");
+  console.log("--------------------------------------------------");
+  console.log("--------------------------------------------------");
+  console.log("--------------------------------------------------");
+  var customEvent = new CustomEvent("scroll", _objectSpread(_objectSpread({}, event), {}, {
+    bubbles: false,
+    cancelable: false
+  }));
+  Object.assign(customEvent, scrollData);
+  var actualStopPropogation = event.stopPropagation.bind(event);
+
+  customEvent.stopPropagation = function () {
+    event[shouldBubbleSymbol] = true;
+    actualStopPropogation();
+  };
+
+  customEvent.preventDefault = function () {
+    // TODO: even for built-in events prevent default doesn't 
+    // work for scrolling (ex: its part of the spec for it to be non-cancelable)
+    // https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+    // However there might be some clever workarounds, ex: always prevent and then add a window level listener that mannually scrolls (scrollTop, scrollLeft) whenever not prevented 
+    console.error("Sadly calling .preventDefault() on a scroll event doesn't work\nsee: https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily");
+  };
+
+  var runningElement = alreadyActiveElement;
+
+  while (runningElement && !event[shouldBubbleSymbol]) {
+    runningElement.dispatchEvent(customEvent);
+    var style = {};
+
+    try {
+      style = getComputedStyle(event.explicitOriginalTarget);
+    } catch (error) {}
+
+    var elementHasScrollProperties = ["auto", "scroll"].includes(style.overflowX) || ["auto", "scroll"].includes(style.overflowY);
+
+    if (elementHasScrollProperties) {
+      var biggerDirectionIsX = Math.abs(customEvent.deltaX) > Math.abs(customEvent.deltaY);
+      console.debug("customEvent.deltaX is:", customEvent.deltaX);
+      console.debug("customEvent.deltaY is:", customEvent.deltaY);
+      console.debug("runningElement.scrollTop is:", runningElement.scrollTop);
+      console.debug("runningElement.scrollLeft is:", runningElement.scrollLeft);
+      console.debug("runningElement.scrollTopMax is:", runningElement.scrollTopMax);
+      console.debug("runningElement.scrollLeftMax is:", runningElement.scrollLeftMax);
+      var hasScrolledAsFarAsPossible = false; // FIXME check if already scrolled to bottom/top leftMost/rightMost
+
+      if (biggerDirectionIsX) {
+        // FIXME: if deltaX getting bigger (check max)
+        // FIXME: if deltaX getting smaller (check 0)
+        hasScrolledAsFarAsPossible = runningElement.scrollTop >= runningElement.scrollTopMax;
+      } else {
+        // FIXME: if deltaY getting bigger (check max)
+        // FIXME: if deltaY getting smaller (check 0)
+        hasScrolledAsFarAsPossible = runningElement.scrollLeft >= runningElement.scrollLeftMax;
+      } // let this element capture it
+
+
+      if (!hasScrolledAsFarAsPossible) {
+        break;
+      }
+    }
+
+    runningElement = runningElement.parentElement;
+  } // restore scroll encase preventDefault() was called
+
+
+  updateActiveElement = setTimeout(function () {
+    alreadyActiveElement = document.elementFromPoint(mouseX, mouseY);
+  }, relatedScrollEventThreshold);
+}); // TODO: disable all scroll events
+// manually scroll each element using 
+// scrollLeft
+// scrollTop
+// if it doesn't update or is maxed out, then bubble up the event and repeat
+// stop bubbling when executed 
+// stop bubbling if preventDefault is ever called
+// module.exports = {
+//     relatedScrollEventThreshold: 200, // miliseconds
+//     onScroll: (element, callback)=>{
+//         const scrollInfo = {
+//             isHovered: false,
+//             lastScrollTime: NaN,
+//         }
+//         let wasSetup = false
+//         const tryInit = ()=>{
+//             if (!wasSetup && element instanceof Object) {
+//                 element.addEventListener("mouseover" , ()=>scrollInfo.isHovered = true)
+//                 element.addEventListener("mouseenter", ()=>scrollInfo.isHovered = true)
+//                 element.addEventListener("mouseleave", ()=>scrollInfo.isHovered = false)
+//                 wasSetup = true
+//             }
+//         }
+//         tryInit() // sometimes have to wait for object to be created
+//         scroller.on((...args)=>{
+//             tryInit()
+//             if (element instanceof Object) {
+//                 const relatedScrollEvent = (timeOfPrevScrollEvent - scrollInfo.lastScrollTime) < relatedScrollEventThreshold
+//                 // call the callback
+//                 if (scrollInfo.isHovered || relatedScrollEvent) {
+//                     // update the scroll time for next time
+//                     scrollInfo.lastScrollTime = lastScrollTime
+//                     callback(...args)
+//                 }
+//             }
+//         })
+//     },
+// }
+},{"virtual-scroll":"../../node_modules/virtual-scroll/src/index.js","./scroll_toggle":"../code/systems/scroll_toggle.js"}],"../../node_modules/wheel/index.js":[function(require,module,exports) {
+/**
+ * This module used to unify mouse wheel behavior between different browsers in 2014
+ * Now it's just a wrapper around addEventListener('wheel');
+ *
+ * Usage:
+ *  var addWheelListener = require('wheel').addWheelListener;
+ *  var removeWheelListener = require('wheel').removeWheelListener;
+ *  addWheelListener(domElement, function (e) {
+ *    // mouse wheel event
+ *  });
+ *  removeWheelListener(domElement, function);
+ */
+
+module.exports = addWheelListener;
+
+// But also expose "advanced" api with unsubscribe:
+module.exports.addWheelListener = addWheelListener;
+module.exports.removeWheelListener = removeWheelListener;
+
+
+function addWheelListener(element, listener, useCapture) {
+  element.addEventListener('wheel', listener, useCapture);
+}
+
+function removeWheelListener( element, listener, useCapture ) {
+  element.removeEventListener('wheel', listener, useCapture);
+}
+},{}],"../../node_modules/bezier-easing/src/index.js":[function(require,module,exports) {
+/**
+ * https://github.com/gre/bezier-easing
+ * BezierEasing - use bezier curve for transition easing function
+ * by Gaëtan Renaudeau 2014 - 2015 – MIT License
+ */
+
+// These values are established by empiricism with tests (tradeoff: performance VS precision)
+var NEWTON_ITERATIONS = 4;
+var NEWTON_MIN_SLOPE = 0.001;
+var SUBDIVISION_PRECISION = 0.0000001;
+var SUBDIVISION_MAX_ITERATIONS = 10;
+
+var kSplineTableSize = 11;
+var kSampleStepSize = 1.0 / (kSplineTableSize - 1.0);
+
+var float32ArraySupported = typeof Float32Array === 'function';
+
+function A (aA1, aA2) { return 1.0 - 3.0 * aA2 + 3.0 * aA1; }
+function B (aA1, aA2) { return 3.0 * aA2 - 6.0 * aA1; }
+function C (aA1)      { return 3.0 * aA1; }
+
+// Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
+function calcBezier (aT, aA1, aA2) { return ((A(aA1, aA2) * aT + B(aA1, aA2)) * aT + C(aA1)) * aT; }
+
+// Returns dx/dt given t, x1, and x2, or dy/dt given t, y1, and y2.
+function getSlope (aT, aA1, aA2) { return 3.0 * A(aA1, aA2) * aT * aT + 2.0 * B(aA1, aA2) * aT + C(aA1); }
+
+function binarySubdivide (aX, aA, aB, mX1, mX2) {
+  var currentX, currentT, i = 0;
+  do {
+    currentT = aA + (aB - aA) / 2.0;
+    currentX = calcBezier(currentT, mX1, mX2) - aX;
+    if (currentX > 0.0) {
+      aB = currentT;
+    } else {
+      aA = currentT;
+    }
+  } while (Math.abs(currentX) > SUBDIVISION_PRECISION && ++i < SUBDIVISION_MAX_ITERATIONS);
+  return currentT;
+}
+
+function newtonRaphsonIterate (aX, aGuessT, mX1, mX2) {
+ for (var i = 0; i < NEWTON_ITERATIONS; ++i) {
+   var currentSlope = getSlope(aGuessT, mX1, mX2);
+   if (currentSlope === 0.0) {
+     return aGuessT;
+   }
+   var currentX = calcBezier(aGuessT, mX1, mX2) - aX;
+   aGuessT -= currentX / currentSlope;
+ }
+ return aGuessT;
+}
+
+function LinearEasing (x) {
+  return x;
+}
+
+module.exports = function bezier (mX1, mY1, mX2, mY2) {
+  if (!(0 <= mX1 && mX1 <= 1 && 0 <= mX2 && mX2 <= 1)) {
+    throw new Error('bezier x values must be in [0, 1] range');
+  }
+
+  if (mX1 === mY1 && mX2 === mY2) {
+    return LinearEasing;
+  }
+
+  // Precompute samples table
+  var sampleValues = float32ArraySupported ? new Float32Array(kSplineTableSize) : new Array(kSplineTableSize);
+  for (var i = 0; i < kSplineTableSize; ++i) {
+    sampleValues[i] = calcBezier(i * kSampleStepSize, mX1, mX2);
+  }
+
+  function getTForX (aX) {
+    var intervalStart = 0.0;
+    var currentSample = 1;
+    var lastSample = kSplineTableSize - 1;
+
+    for (; currentSample !== lastSample && sampleValues[currentSample] <= aX; ++currentSample) {
+      intervalStart += kSampleStepSize;
+    }
+    --currentSample;
+
+    // Interpolate to provide an initial guess for t
+    var dist = (aX - sampleValues[currentSample]) / (sampleValues[currentSample + 1] - sampleValues[currentSample]);
+    var guessForT = intervalStart + dist * kSampleStepSize;
+
+    var initialSlope = getSlope(guessForT, mX1, mX2);
+    if (initialSlope >= NEWTON_MIN_SLOPE) {
+      return newtonRaphsonIterate(aX, guessForT, mX1, mX2);
+    } else if (initialSlope === 0.0) {
+      return guessForT;
+    } else {
+      return binarySubdivide(aX, intervalStart, intervalStart + kSampleStepSize, mX1, mX2);
+    }
+  }
+
+  return function BezierEasing (x) {
+    // Because JavaScript number are imprecise, we should guarantee the extremes are right.
+    if (x === 0) {
+      return 0;
+    }
+    if (x === 1) {
+      return 1;
+    }
+    return calcBezier(getTForX(x), mY1, mY2);
+  };
+};
+
+},{}],"../../node_modules/amator/index.js":[function(require,module,exports) {
+var BezierEasing = require('bezier-easing')
+
+// Predefined set of animations. Similar to CSS easing functions
+var animations = {
+  ease:  BezierEasing(0.25, 0.1, 0.25, 1),
+  easeIn: BezierEasing(0.42, 0, 1, 1),
+  easeOut: BezierEasing(0, 0, 0.58, 1),
+  easeInOut: BezierEasing(0.42, 0, 0.58, 1),
+  linear: BezierEasing(0, 0, 1, 1)
+}
+
+
+module.exports = animate;
+module.exports.makeAggregateRaf = makeAggregateRaf;
+module.exports.sharedScheduler = makeAggregateRaf();
+
+
+function animate(source, target, options) {
+  var start = Object.create(null)
+  var diff = Object.create(null)
+  options = options || {}
+  // We let clients specify their own easing function
+  var easing = (typeof options.easing === 'function') ? options.easing : animations[options.easing]
+
+  // if nothing is specified, default to ease (similar to CSS animations)
+  if (!easing) {
+    if (options.easing) {
+      console.warn('Unknown easing function in amator: ' + options.easing);
+    }
+    easing = animations.ease
+  }
+
+  var step = typeof options.step === 'function' ? options.step : noop
+  var done = typeof options.done === 'function' ? options.done : noop
+
+  var scheduler = getScheduler(options.scheduler)
+
+  var keys = Object.keys(target)
+  keys.forEach(function(key) {
+    start[key] = source[key]
+    diff[key] = target[key] - source[key]
+  })
+
+  var durationInMs = typeof options.duration === 'number' ? options.duration : 400
+  var durationInFrames = Math.max(1, durationInMs * 0.06) // 0.06 because 60 frames pers 1,000 ms
+  var previousAnimationId
+  var frame = 0
+
+  previousAnimationId = scheduler.next(loop)
+
+  return {
+    cancel: cancel
+  }
+
+  function cancel() {
+    scheduler.cancel(previousAnimationId)
+    previousAnimationId = 0
+  }
+
+  function loop() {
+    var t = easing(frame/durationInFrames)
+    frame += 1
+    setValues(t)
+    if (frame <= durationInFrames) {
+      previousAnimationId = scheduler.next(loop)
+      step(source)
+    } else {
+      previousAnimationId = 0
+      setTimeout(function() { done(source) }, 0)
+    }
+  }
+
+  function setValues(t) {
+    keys.forEach(function(key) {
+      source[key] = diff[key] * t + start[key]
+    })
+  }
+}
+
+function noop() { }
+
+function getScheduler(scheduler) {
+  if (!scheduler) {
+    var canRaf = typeof window !== 'undefined' && window.requestAnimationFrame
+    return canRaf ? rafScheduler() : timeoutScheduler()
+  }
+  if (typeof scheduler.next !== 'function') throw new Error('Scheduler is supposed to have next(cb) function')
+  if (typeof scheduler.cancel !== 'function') throw new Error('Scheduler is supposed to have cancel(handle) function')
+
+  return scheduler
+}
+
+function rafScheduler() {
+  return {
+    next: window.requestAnimationFrame.bind(window),
+    cancel: window.cancelAnimationFrame.bind(window)
+  }
+}
+
+function timeoutScheduler() {
+  return {
+    next: function(cb) {
+      return setTimeout(cb, 1000/60)
+    },
+    cancel: function (id) {
+      return clearTimeout(id)
+    }
+  }
+}
+
+function makeAggregateRaf() {
+  var frontBuffer = new Set();
+  var backBuffer = new Set();
+  var frameToken = 0;
+
+  return {
+    next: next,
+    cancel: next,
+    clearAll: clearAll
+  }
+
+  function clearAll() {
+    frontBuffer.clear();
+    backBuffer.clear();
+    cancelAnimationFrame(frameToken);
+    frameToken = 0;
+  }
+
+  function next(callback) {
+    backBuffer.add(callback);
+    renderNextFrame();
+  }
+
+  function renderNextFrame() {
+    if (!frameToken) frameToken = requestAnimationFrame(renderFrame);
+  }
+
+  function renderFrame() {
+    frameToken = 0;
+
+    var t = backBuffer;
+    backBuffer = frontBuffer;
+    frontBuffer = t;
+
+    frontBuffer.forEach(function(callback) {
+      callback();
+    });
+    frontBuffer.clear();
+  }
+
+  function cancel(callback) {
+    backBuffer.delete(callback);
+  }
+}
+
+},{"bezier-easing":"../../node_modules/bezier-easing/src/index.js"}],"../../node_modules/ngraph.events/index.js":[function(require,module,exports) {
+module.exports = function eventify(subject) {
+  validateSubject(subject);
+
+  var eventsStorage = createEventsStorage(subject);
+  subject.on = eventsStorage.on;
+  subject.off = eventsStorage.off;
+  subject.fire = eventsStorage.fire;
+  return subject;
+};
+
+function createEventsStorage(subject) {
+  // Store all event listeners to this hash. Key is event name, value is array
+  // of callback records.
+  //
+  // A callback record consists of callback function and its optional context:
+  // { 'eventName' => [{callback: function, ctx: object}] }
+  var registeredEvents = Object.create(null);
+
+  return {
+    on: function (eventName, callback, ctx) {
+      if (typeof callback !== 'function') {
+        throw new Error('callback is expected to be a function');
+      }
+      var handlers = registeredEvents[eventName];
+      if (!handlers) {
+        handlers = registeredEvents[eventName] = [];
+      }
+      handlers.push({callback: callback, ctx: ctx});
+
+      return subject;
+    },
+
+    off: function (eventName, callback) {
+      var wantToRemoveAll = (typeof eventName === 'undefined');
+      if (wantToRemoveAll) {
+        // Killing old events storage should be enough in this case:
+        registeredEvents = Object.create(null);
+        return subject;
+      }
+
+      if (registeredEvents[eventName]) {
+        var deleteAllCallbacksForEvent = (typeof callback !== 'function');
+        if (deleteAllCallbacksForEvent) {
+          delete registeredEvents[eventName];
+        } else {
+          var callbacks = registeredEvents[eventName];
+          for (var i = 0; i < callbacks.length; ++i) {
+            if (callbacks[i].callback === callback) {
+              callbacks.splice(i, 1);
+            }
+          }
+        }
+      }
+
+      return subject;
+    },
+
+    fire: function (eventName) {
+      var callbacks = registeredEvents[eventName];
+      if (!callbacks) {
+        return subject;
+      }
+
+      var fireArguments;
+      if (arguments.length > 1) {
+        fireArguments = Array.prototype.splice.call(arguments, 1);
+      }
+      for(var i = 0; i < callbacks.length; ++i) {
+        var callbackInfo = callbacks[i];
+        callbackInfo.callback.apply(callbackInfo.ctx, fireArguments);
+      }
+
+      return subject;
+    }
+  };
+}
+
+function validateSubject(subject) {
+  if (!subject) {
+    throw new Error('Eventify cannot use falsy object as events subject');
+  }
+  var reservedWords = ['on', 'fire', 'off'];
+  for (var i = 0; i < reservedWords.length; ++i) {
+    if (subject.hasOwnProperty(reservedWords[i])) {
+      throw new Error("Subject cannot be eventified, since it already has property '" + reservedWords[i] + "'");
+    }
+  }
+}
+
+},{}],"../../node_modules/panzoom/lib/kinetic.js":[function(require,module,exports) {
+/**
+ * Allows smooth kinetic scrolling of the surface
+ */
+module.exports = kinetic;
+
+function kinetic(getPoint, scroll, settings) {
+  if (typeof settings !== 'object') {
+    // setting could come as boolean, we should ignore it, and use an object.
+    settings = {};
+  }
+
+  var minVelocity = typeof settings.minVelocity === 'number' ? settings.minVelocity : 5;
+  var amplitude = typeof settings.amplitude === 'number' ? settings.amplitude : 0.25;
+  var cancelAnimationFrame = typeof settings.cancelAnimationFrame === 'function' ? settings.cancelAnimationFrame : getCancelAnimationFrame();
+  var requestAnimationFrame = typeof settings.requestAnimationFrame === 'function' ? settings.requestAnimationFrame : getRequestAnimationFrame();
+
+  var lastPoint;
+  var timestamp;
+  var timeConstant = 342;
+
+  var ticker;
+  var vx, targetX, ax;
+  var vy, targetY, ay;
+
+  var raf;
+
+  return {
+    start: start,
+    stop: stop,
+    cancel: dispose
+  };
+
+  function dispose() {
+    cancelAnimationFrame(ticker);
+    cancelAnimationFrame(raf);
+  }
+
+  function start() {
+    lastPoint = getPoint();
+
+    ax = ay = vx = vy = 0;
+    timestamp = new Date();
+
+    cancelAnimationFrame(ticker);
+    cancelAnimationFrame(raf);
+
+    // we start polling the point position to accumulate velocity
+    // Once we stop(), we will use accumulated velocity to keep scrolling
+    // an object.
+    ticker = requestAnimationFrame(track);
+  }
+
+  function track() {
+    var now = Date.now();
+    var elapsed = now - timestamp;
+    timestamp = now;
+
+    var currentPoint = getPoint();
+
+    var dx = currentPoint.x - lastPoint.x;
+    var dy = currentPoint.y - lastPoint.y;
+
+    lastPoint = currentPoint;
+
+    var dt = 1000 / (1 + elapsed);
+
+    // moving average
+    vx = 0.8 * dx * dt + 0.2 * vx;
+    vy = 0.8 * dy * dt + 0.2 * vy;
+
+    ticker = requestAnimationFrame(track);
+  }
+
+  function stop() {
+    cancelAnimationFrame(ticker);
+    cancelAnimationFrame(raf);
+
+    var currentPoint = getPoint();
+
+    targetX = currentPoint.x;
+    targetY = currentPoint.y;
+    timestamp = Date.now();
+
+    if (vx < -minVelocity || vx > minVelocity) {
+      ax = amplitude * vx;
+      targetX += ax;
+    }
+
+    if (vy < -minVelocity || vy > minVelocity) {
+      ay = amplitude * vy;
+      targetY += ay;
+    }
+
+    raf = requestAnimationFrame(autoScroll);
+  }
+
+  function autoScroll() {
+    var elapsed = Date.now() - timestamp;
+
+    var moving = false;
+    var dx = 0;
+    var dy = 0;
+
+    if (ax) {
+      dx = -ax * Math.exp(-elapsed / timeConstant);
+
+      if (dx > 0.5 || dx < -0.5) moving = true;
+      else dx = ax = 0;
+    }
+
+    if (ay) {
+      dy = -ay * Math.exp(-elapsed / timeConstant);
+
+      if (dy > 0.5 || dy < -0.5) moving = true;
+      else dy = ay = 0;
+    }
+
+    if (moving) {
+      scroll(targetX + dx, targetY + dy);
+      raf = requestAnimationFrame(autoScroll);
+    }
+  }
+}
+
+function getCancelAnimationFrame() {
+  if (typeof cancelAnimationFrame === 'function') return cancelAnimationFrame;
+  return clearTimeout;
+}
+
+function getRequestAnimationFrame() {
+  if (typeof requestAnimationFrame === 'function') return requestAnimationFrame;
+
+  return function (handler) {
+    return setTimeout(handler, 16);
+  };
+}
+},{}],"../../node_modules/panzoom/lib/createTextSelectionInterceptor.js":[function(require,module,exports) {
+/**
+ * Disallows selecting text.
+ */
+module.exports = createTextSelectionInterceptor;
+
+function createTextSelectionInterceptor(useFake) {
+  if (useFake) {
+    return {
+      capture: noop,
+      release: noop
+    };
+  }
+
+  var dragObject;
+  var prevSelectStart;
+  var prevDragStart;
+  var wasCaptured = false;
+
+  return {
+    capture: capture,
+    release: release
+  };
+
+  function capture(domObject) {
+    wasCaptured = true;
+    prevSelectStart = window.document.onselectstart;
+    prevDragStart = window.document.ondragstart;
+
+    window.document.onselectstart = disabled;
+
+    dragObject = domObject;
+    dragObject.ondragstart = disabled;
+  }
+
+  function release() {
+    if (!wasCaptured) return;
+    
+    wasCaptured = false;
+    window.document.onselectstart = prevSelectStart;
+    if (dragObject) dragObject.ondragstart = prevDragStart;
+  }
+}
+
+function disabled(e) {
+  e.stopPropagation();
+  return false;
+}
+
+function noop() {}
+
+},{}],"../../node_modules/panzoom/lib/transform.js":[function(require,module,exports) {
+module.exports = Transform;
+
+function Transform() {
+  this.x = 0;
+  this.y = 0;
+  this.scale = 1;
+}
+
+},{}],"../../node_modules/panzoom/lib/svgController.js":[function(require,module,exports) {
+module.exports = makeSvgController;
+module.exports.canAttach = isSVGElement;
+
+function makeSvgController(svgElement, options) {
+  if (!isSVGElement(svgElement)) {
+    throw new Error('svg element is required for svg.panzoom to work');
+  }
+
+  var owner = svgElement.ownerSVGElement;
+  if (!owner) {
+    throw new Error(
+      'Do not apply panzoom to the root <svg> element. ' +
+      'Use its child instead (e.g. <g></g>). ' +
+      'As of March 2016 only FireFox supported transform on the root element');
+  }
+
+  if (!options.disableKeyboardInteraction) {
+    owner.setAttribute('tabindex', 0);
+  }
+
+  var api = {
+    getBBox: getBBox,
+    getScreenCTM: getScreenCTM,
+    getOwner: getOwner,
+    applyTransform: applyTransform,
+    initTransform: initTransform
+  };
+  
+  return api;
+
+  function getOwner() {
+    return owner;
+  }
+
+  function getBBox() {
+    var bbox =  svgElement.getBBox();
+    return {
+      left: bbox.x,
+      top: bbox.y,
+      width: bbox.width,
+      height: bbox.height,
+    };
+  }
+
+  function getScreenCTM() {
+    var ctm = owner.getCTM();
+    if (!ctm) {
+      // This is likely firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=873106
+      // The code below is not entirely correct, but still better than nothing
+      return owner.getScreenCTM();
+    }
+    return ctm;
+  }
+
+  function initTransform(transform) {
+    var screenCTM = svgElement.getCTM();
+
+    // The above line returns null on Firefox
+    if (screenCTM === null) {
+      screenCTM = document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGMatrix();
+    }
+
+    transform.x = screenCTM.e;
+    transform.y = screenCTM.f;
+    transform.scale = screenCTM.a;
+    owner.removeAttributeNS(null, 'viewBox');
+  }
+
+  function applyTransform(transform) {
+    svgElement.setAttribute('transform', 'matrix(' +
+      transform.scale + ' 0 0 ' +
+      transform.scale + ' ' +
+      transform.x + ' ' + transform.y + ')');
+  }
+}
+
+function isSVGElement(element) {
+  return element && element.ownerSVGElement && element.getCTM;
+}
+},{}],"../../node_modules/panzoom/lib/domController.js":[function(require,module,exports) {
+module.exports = makeDomController;
+
+module.exports.canAttach = isDomElement;
+
+function makeDomController(domElement, options) {
+  var elementValid = isDomElement(domElement); 
+  if (!elementValid) {
+    throw new Error('panzoom requires DOM element to be attached to the DOM tree');
+  }
+
+  var owner = domElement.parentElement;
+  domElement.scrollTop = 0;
+  
+  if (!options.disableKeyboardInteraction) {
+    owner.setAttribute('tabindex', 0);
+  }
+
+  var api = {
+    getBBox: getBBox,
+    getOwner: getOwner,
+    applyTransform: applyTransform,
+  };
+  
+  return api;
+
+  function getOwner() {
+    return owner;
+  }
+
+  function getBBox() {
+    // TODO: We should probably cache this?
+    return  {
+      left: 0,
+      top: 0,
+      width: domElement.clientWidth,
+      height: domElement.clientHeight
+    };
+  }
+
+  function applyTransform(transform) {
+    // TODO: Should we cache this?
+    domElement.style.transformOrigin = '0 0 0';
+    domElement.style.transform = 'matrix(' +
+      transform.scale + ', 0, 0, ' +
+      transform.scale + ', ' +
+      transform.x + ', ' + transform.y + ')';
+  }
+}
+
+function isDomElement(element) {
+  return element && element.parentElement && element.style;
+}
+
+},{}],"../../node_modules/panzoom/index.js":[function(require,module,exports) {
+'use strict';
+/**
+ * Allows to drag and zoom svg elements
+ */
+var wheel = require('wheel');
+var animate = require('amator');
+var eventify = require('ngraph.events');
+var kinetic = require('./lib/kinetic.js');
+var createTextSelectionInterceptor = require('./lib/createTextSelectionInterceptor.js');
+var domTextSelectionInterceptor = createTextSelectionInterceptor();
+var fakeTextSelectorInterceptor = createTextSelectionInterceptor(true);
+var Transform = require('./lib/transform.js');
+var makeSvgController = require('./lib/svgController.js');
+var makeDomController = require('./lib/domController.js');
+
+var defaultZoomSpeed = 1;
+var defaultDoubleTapZoomSpeed = 1.75;
+var doubleTapSpeedInMS = 300;
+
+module.exports = createPanZoom;
+
+/**
+ * Creates a new instance of panzoom, so that an object can be panned and zoomed
+ *
+ * @param {DOMElement} domElement where panzoom should be attached.
+ * @param {Object} options that configure behavior.
+ */
+function createPanZoom(domElement, options) {
+  options = options || {};
+
+  var panController = options.controller;
+
+  if (!panController) {
+    if (makeSvgController.canAttach(domElement)) {
+      panController = makeSvgController(domElement, options);
+    } else if (makeDomController.canAttach(domElement)) {
+      panController = makeDomController(domElement, options);
+    }
+  }
+
+  if (!panController) {
+    throw new Error(
+      'Cannot create panzoom for the current type of dom element'
+    );
+  }
+  var owner = panController.getOwner();
+  // just to avoid GC pressure, every time we do intermediate transform
+  // we return this object. For internal use only. Never give it back to the consumer of this library
+  var storedCTMResult = { x: 0, y: 0 };
+
+  var isDirty = false;
+  var transform = new Transform();
+
+  if (panController.initTransform) {
+    panController.initTransform(transform);
+  }
+
+  var filterKey = typeof options.filterKey === 'function' ? options.filterKey : noop;
+  // TODO: likely need to unite pinchSpeed with zoomSpeed
+  var pinchSpeed = typeof options.pinchSpeed === 'number' ? options.pinchSpeed : 1;
+  var bounds = options.bounds;
+  var maxZoom = typeof options.maxZoom === 'number' ? options.maxZoom : Number.POSITIVE_INFINITY;
+  var minZoom = typeof options.minZoom === 'number' ? options.minZoom : 0;
+
+  var boundsPadding = typeof options.boundsPadding === 'number' ? options.boundsPadding : 0.05;
+  var zoomDoubleClickSpeed = typeof options.zoomDoubleClickSpeed === 'number' ? options.zoomDoubleClickSpeed : defaultDoubleTapZoomSpeed;
+  var beforeWheel = options.beforeWheel || noop;
+  var beforeMouseDown = options.beforeMouseDown || noop;
+  var speed = typeof options.zoomSpeed === 'number' ? options.zoomSpeed : defaultZoomSpeed;
+  var transformOrigin = parseTransformOrigin(options.transformOrigin);
+  var textSelection = options.enableTextSelection ? fakeTextSelectorInterceptor : domTextSelectionInterceptor;
+
+  validateBounds(bounds);
+
+  if (options.autocenter) {
+    autocenter();
+  }
+
+  var frameAnimation;
+  var lastTouchEndTime = 0;
+  var lastSingleFingerOffset;
+  var touchInProgress = false;
+
+  // We only need to fire panstart when actual move happens
+  var panstartFired = false;
+
+  // cache mouse coordinates here
+  var mouseX;
+  var mouseY;
+
+  var pinchZoomLength;
+
+  var smoothScroll;
+  if ('smoothScroll' in options && !options.smoothScroll) {
+    // If user explicitly asked us not to use smooth scrolling, we obey
+    smoothScroll = rigidScroll();
+  } else {
+    // otherwise we use forward smoothScroll settings to kinetic API
+    // which makes scroll smoothing.
+    smoothScroll = kinetic(getPoint, scroll, options.smoothScroll);
+  }
+
+  var moveByAnimation;
+  var zoomToAnimation;
+
+  var multiTouch;
+  var paused = false;
+
+  listenForEvents();
+
+  var api = {
+    dispose: dispose,
+    moveBy: internalMoveBy,
+    moveTo: moveTo,
+    smoothMoveTo: smoothMoveTo, 
+    centerOn: centerOn,
+    zoomTo: publicZoomTo,
+    zoomAbs: zoomAbs,
+    smoothZoom: smoothZoom,
+    smoothZoomAbs: smoothZoomAbs,
+    showRectangle: showRectangle,
+
+    pause: pause,
+    resume: resume,
+    isPaused: isPaused,
+
+    getTransform: getTransformModel,
+
+    getMinZoom: getMinZoom,
+    setMinZoom: setMinZoom,
+
+    getMaxZoom: getMaxZoom,
+    setMaxZoom: setMaxZoom,
+
+    getTransformOrigin: getTransformOrigin,
+    setTransformOrigin: setTransformOrigin,
+
+    getZoomSpeed: getZoomSpeed,
+    setZoomSpeed: setZoomSpeed
+  };
+
+  eventify(api);
+  
+  var initialX = typeof options.initialX === 'number' ? options.initialX : transform.x;
+  var initialY = typeof options.initialY === 'number' ? options.initialY : transform.y;
+  var initialZoom = typeof options.initialZoom === 'number' ? options.initialZoom : transform.scale;
+
+  if(initialX != transform.x || initialY != transform.y || initialZoom != transform.scale){
+    zoomAbs(initialX, initialY, initialZoom);
+  }
+
+  return api;
+
+  function pause() {
+    releaseEvents();
+    paused = true;
+  }
+
+  function resume() {
+    if (paused) {
+      listenForEvents();
+      paused = false;
+    }
+  }
+
+  function isPaused() {
+    return paused;
+  }
+
+  function showRectangle(rect) {
+    // TODO: this duplicates autocenter. I think autocenter should go.
+    var clientRect = owner.getBoundingClientRect();
+    var size = transformToScreen(clientRect.width, clientRect.height);
+
+    var rectWidth = rect.right - rect.left;
+    var rectHeight = rect.bottom - rect.top;
+    if (!Number.isFinite(rectWidth) || !Number.isFinite(rectHeight)) {
+      throw new Error('Invalid rectangle');
+    }
+
+    var dw = size.x / rectWidth;
+    var dh = size.y / rectHeight;
+    var scale = Math.min(dw, dh);
+    transform.x = -(rect.left + rectWidth / 2) * scale + size.x / 2;
+    transform.y = -(rect.top + rectHeight / 2) * scale + size.y / 2;
+    transform.scale = scale;
+  }
+
+  function transformToScreen(x, y) {
+    if (panController.getScreenCTM) {
+      var parentCTM = panController.getScreenCTM();
+      var parentScaleX = parentCTM.a;
+      var parentScaleY = parentCTM.d;
+      var parentOffsetX = parentCTM.e;
+      var parentOffsetY = parentCTM.f;
+      storedCTMResult.x = x * parentScaleX - parentOffsetX;
+      storedCTMResult.y = y * parentScaleY - parentOffsetY;
+    } else {
+      storedCTMResult.x = x;
+      storedCTMResult.y = y;
+    }
+
+    return storedCTMResult;
+  }
+
+  function autocenter() {
+    var w; // width of the parent
+    var h; // height of the parent
+    var left = 0;
+    var top = 0;
+    var sceneBoundingBox = getBoundingBox();
+    if (sceneBoundingBox) {
+      // If we have bounding box - use it.
+      left = sceneBoundingBox.left;
+      top = sceneBoundingBox.top;
+      w = sceneBoundingBox.right - sceneBoundingBox.left;
+      h = sceneBoundingBox.bottom - sceneBoundingBox.top;
+    } else {
+      // otherwise just use whatever space we have
+      var ownerRect = owner.getBoundingClientRect();
+      w = ownerRect.width;
+      h = ownerRect.height;
+    }
+    var bbox = panController.getBBox();
+    if (bbox.width === 0 || bbox.height === 0) {
+      // we probably do not have any elements in the SVG
+      // just bail out;
+      return;
+    }
+    var dh = h / bbox.height;
+    var dw = w / bbox.width;
+    var scale = Math.min(dw, dh);
+    transform.x = -(bbox.left + bbox.width / 2) * scale + w / 2 + left;
+    transform.y = -(bbox.top + bbox.height / 2) * scale + h / 2 + top;
+    transform.scale = scale;
+  }
+
+  function getTransformModel() {
+    // TODO: should this be read only?
+    return transform;
+  }
+
+  function getMinZoom() {
+    return minZoom;
+  }
+
+  function setMinZoom(newMinZoom) {
+    minZoom = newMinZoom;
+  }
+
+  function getMaxZoom() {
+    return maxZoom;
+  }
+
+  function setMaxZoom(newMaxZoom) {
+    maxZoom = newMaxZoom;
+  }
+
+  function getTransformOrigin() {
+    return transformOrigin;
+  }
+
+  function setTransformOrigin(newTransformOrigin) {
+    transformOrigin = parseTransformOrigin(newTransformOrigin);
+  }
+
+  function getZoomSpeed() {
+    return speed;
+  }
+
+  function setZoomSpeed(newSpeed) {
+    if (!Number.isFinite(newSpeed)) {
+      throw new Error('Zoom speed should be a number');
+    }
+    speed = newSpeed;
+  }
+
+  function getPoint() {
+    return {
+      x: transform.x,
+      y: transform.y
+    };
+  }
+
+  function moveTo(x, y) {
+    transform.x = x;
+    transform.y = y;
+
+    keepTransformInsideBounds();
+
+    triggerEvent('pan');
+    makeDirty();
+  }
+
+  function moveBy(dx, dy) {
+    moveTo(transform.x + dx, transform.y + dy);
+  }
+
+  function keepTransformInsideBounds() {
+    var boundingBox = getBoundingBox();
+    if (!boundingBox) return;
+
+    var adjusted = false;
+    var clientRect = getClientRect();
+
+    var diff = boundingBox.left - clientRect.right;
+    if (diff > 0) {
+      transform.x += diff;
+      adjusted = true;
+    }
+    // check the other side:
+    diff = boundingBox.right - clientRect.left;
+    if (diff < 0) {
+      transform.x += diff;
+      adjusted = true;
+    }
+
+    // y axis:
+    diff = boundingBox.top - clientRect.bottom;
+    if (diff > 0) {
+      // we adjust transform, so that it matches exactly our bounding box:
+      // transform.y = boundingBox.top - (boundingBox.height + boundingBox.y) * transform.scale =>
+      // transform.y = boundingBox.top - (clientRect.bottom - transform.y) =>
+      // transform.y = diff + transform.y =>
+      transform.y += diff;
+      adjusted = true;
+    }
+
+    diff = boundingBox.bottom - clientRect.top;
+    if (diff < 0) {
+      transform.y += diff;
+      adjusted = true;
+    }
+    return adjusted;
+  }
+
+  /**
+   * Returns bounding box that should be used to restrict scene movement.
+   */
+  function getBoundingBox() {
+    if (!bounds) return; // client does not want to restrict movement
+
+    if (typeof bounds === 'boolean') {
+      // for boolean type we use parent container bounds
+      var ownerRect = owner.getBoundingClientRect();
+      var sceneWidth = ownerRect.width;
+      var sceneHeight = ownerRect.height;
+
+      return {
+        left: sceneWidth * boundsPadding,
+        top: sceneHeight * boundsPadding,
+        right: sceneWidth * (1 - boundsPadding),
+        bottom: sceneHeight * (1 - boundsPadding)
+      };
+    }
+
+    return bounds;
+  }
+
+  function getClientRect() {
+    var bbox = panController.getBBox();
+    var leftTop = client(bbox.left, bbox.top);
+
+    return {
+      left: leftTop.x,
+      top: leftTop.y,
+      right: bbox.width * transform.scale + leftTop.x,
+      bottom: bbox.height * transform.scale + leftTop.y
+    };
+  }
+
+  function client(x, y) {
+    return {
+      x: x * transform.scale + transform.x,
+      y: y * transform.scale + transform.y
+    };
+  }
+
+  function makeDirty() {
+    isDirty = true;
+    frameAnimation = window.requestAnimationFrame(frame);
+  }
+
+  function zoomByRatio(clientX, clientY, ratio) {
+    if (isNaN(clientX) || isNaN(clientY) || isNaN(ratio)) {
+      throw new Error('zoom requires valid numbers');
+    }
+
+    var newScale = transform.scale * ratio;
+
+    if (newScale < minZoom) {
+      if (transform.scale === minZoom) return;
+
+      ratio = minZoom / transform.scale;
+    }
+    if (newScale > maxZoom) {
+      if (transform.scale === maxZoom) return;
+
+      ratio = maxZoom / transform.scale;
+    }
+
+    var size = transformToScreen(clientX, clientY);
+
+    transform.x = size.x - ratio * (size.x - transform.x);
+    transform.y = size.y - ratio * (size.y - transform.y);
+
+    // TODO: https://github.com/anvaka/panzoom/issues/112
+    if (bounds && boundsPadding === 1 && minZoom === 1) {
+      transform.scale *= ratio;
+      keepTransformInsideBounds();
+    } else {
+      var transformAdjusted = keepTransformInsideBounds();
+      if (!transformAdjusted) transform.scale *= ratio;
+    }
+
+    triggerEvent('zoom');
+
+    makeDirty();
+  }
+
+  function zoomAbs(clientX, clientY, zoomLevel) {
+    var ratio = zoomLevel / transform.scale;
+    zoomByRatio(clientX, clientY, ratio);
+  }
+
+  function centerOn(ui) {
+    var parent = ui.ownerSVGElement;
+    if (!parent)
+      throw new Error('ui element is required to be within the scene');
+
+    // TODO: should i use controller's screen CTM?
+    var clientRect = ui.getBoundingClientRect();
+    var cx = clientRect.left + clientRect.width / 2;
+    var cy = clientRect.top + clientRect.height / 2;
+
+    var container = parent.getBoundingClientRect();
+    var dx = container.width / 2 - cx;
+    var dy = container.height / 2 - cy;
+
+    internalMoveBy(dx, dy, true);
+  }
+
+  function smoothMoveTo(x, y){
+    internalMoveBy(x - transform.x, y - transform.y, true);
+  }
+
+  function internalMoveBy(dx, dy, smooth) {
+    if (!smooth) {
+      return moveBy(dx, dy);
+    }
+
+    if (moveByAnimation) moveByAnimation.cancel();
+
+    var from = { x: 0, y: 0 };
+    var to = { x: dx, y: dy };
+    var lastX = 0;
+    var lastY = 0;
+
+    moveByAnimation = animate(from, to, {
+      step: function (v) {
+        moveBy(v.x - lastX, v.y - lastY);
+
+        lastX = v.x;
+        lastY = v.y;
+      }
+    });
+  }
+
+  function scroll(x, y) {
+    cancelZoomAnimation();
+    moveTo(x, y);
+  }
+
+  function dispose() {
+    releaseEvents();
+  }
+
+  function listenForEvents() {
+    owner.addEventListener('mousedown', onMouseDown, { passive: false });
+    owner.addEventListener('dblclick', onDoubleClick, { passive: false });
+    owner.addEventListener('touchstart', onTouch, { passive: false });
+    owner.addEventListener('keydown', onKeyDown, { passive: false });
+
+    // Need to listen on the owner container, so that we are not limited
+    // by the size of the scrollable domElement
+    wheel.addWheelListener(owner, onMouseWheel, { passive: false });
+
+    makeDirty();
+  }
+
+  function releaseEvents() {
+    wheel.removeWheelListener(owner, onMouseWheel);
+    owner.removeEventListener('mousedown', onMouseDown);
+    owner.removeEventListener('keydown', onKeyDown);
+    owner.removeEventListener('dblclick', onDoubleClick);
+    owner.removeEventListener('touchstart', onTouch);
+
+    if (frameAnimation) {
+      window.cancelAnimationFrame(frameAnimation);
+      frameAnimation = 0;
+    }
+
+    smoothScroll.cancel();
+
+    releaseDocumentMouse();
+    releaseTouches();
+    textSelection.release();
+
+    triggerPanEnd();
+  }
+
+  function frame() {
+    if (isDirty) applyTransform();
+  }
+
+  function applyTransform() {
+    isDirty = false;
+
+    // TODO: Should I allow to cancel this?
+    panController.applyTransform(transform);
+
+    triggerEvent('transform');
+    frameAnimation = 0;
+  }
+
+  function onKeyDown(e) {
+    var x = 0,
+      y = 0,
+      z = 0;
+    if (e.keyCode === 38) {
+      y = 1; // up
+    } else if (e.keyCode === 40) {
+      y = -1; // down
+    } else if (e.keyCode === 37) {
+      x = 1; // left
+    } else if (e.keyCode === 39) {
+      x = -1; // right
+    } else if (e.keyCode === 189 || e.keyCode === 109) {
+      // DASH or SUBTRACT
+      z = 1; // `-` -  zoom out
+    } else if (e.keyCode === 187 || e.keyCode === 107) {
+      // EQUAL SIGN or ADD
+      z = -1; // `=` - zoom in (equal sign on US layout is under `+`)
+    }
+
+    if (filterKey(e, x, y, z)) {
+      // They don't want us to handle the key: https://github.com/anvaka/panzoom/issues/45
+      return;
+    }
+
+    if (x || y) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var clientRect = owner.getBoundingClientRect();
+      // movement speed should be the same in both X and Y direction:
+      var offset = Math.min(clientRect.width, clientRect.height);
+      var moveSpeedRatio = 0.05;
+      var dx = offset * moveSpeedRatio * x;
+      var dy = offset * moveSpeedRatio * y;
+
+      // TODO: currently we do not animate this. It could be better to have animation
+      internalMoveBy(dx, dy);
+    }
+
+    if (z) {
+      var scaleMultiplier = getScaleMultiplier(z * 100);
+      var offset = transformOrigin ? getTransformOriginOffset() : midPoint();
+      publicZoomTo(offset.x, offset.y, scaleMultiplier);
+    }
+  }
+
+  function midPoint() {
+    var ownerRect = owner.getBoundingClientRect();
+    return {
+      x: ownerRect.width / 2,
+      y: ownerRect.height / 2
+    };
+  }
+
+  function onTouch(e) {
+    // let the override the touch behavior
+    beforeTouch(e);
+
+    if (e.touches.length === 1) {
+      return handleSingleFingerTouch(e, e.touches[0]);
+    } else if (e.touches.length === 2) {
+      // handleTouchMove() will care about pinch zoom.
+      pinchZoomLength = getPinchZoomLength(e.touches[0], e.touches[1]);
+      multiTouch = true;
+      startTouchListenerIfNeeded();
+    }
+  }
+
+  function beforeTouch(e) {
+    // TODO: Need to unify this filtering names. E.g. use `beforeTouch`
+    if (options.onTouch && !options.onTouch(e)) {
+      // if they return `false` from onTouch, we don't want to stop
+      // events propagation. Fixes https://github.com/anvaka/panzoom/issues/12
+      return;
+    }
+
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  function beforeDoubleClick(e) {
+    // TODO: Need to unify this filtering names. E.g. use `beforeDoubleClick``
+    if (options.onDoubleClick && !options.onDoubleClick(e)) {
+      // if they return `false` from onTouch, we don't want to stop
+      // events propagation. Fixes https://github.com/anvaka/panzoom/issues/46
+      return;
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  function handleSingleFingerTouch(e) {
+    var touch = e.touches[0];
+    var offset = getOffsetXY(touch);
+    lastSingleFingerOffset = offset;
+    var point = transformToScreen(offset.x, offset.y);
+    mouseX = point.x;
+    mouseY = point.y;
+
+    smoothScroll.cancel();
+    startTouchListenerIfNeeded();
+  }
+
+  function startTouchListenerIfNeeded() {
+    if (touchInProgress) {
+      // no need to do anything, as we already listen to events;
+      return;
+    }
+
+    touchInProgress = true;
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('touchcancel', handleTouchEnd);
+  }
+
+  function handleTouchMove(e) {
+    if (e.touches.length === 1) {
+      e.stopPropagation();
+      var touch = e.touches[0];
+
+      var offset = getOffsetXY(touch);
+      var point = transformToScreen(offset.x, offset.y);
+
+      var dx = point.x - mouseX;
+      var dy = point.y - mouseY;
+
+      if (dx !== 0 && dy !== 0) {
+        triggerPanStart();
+      }
+      mouseX = point.x;
+      mouseY = point.y;
+      internalMoveBy(dx, dy);
+    } else if (e.touches.length === 2) {
+      // it's a zoom, let's find direction
+      multiTouch = true;
+      var t1 = e.touches[0];
+      var t2 = e.touches[1];
+      var currentPinchLength = getPinchZoomLength(t1, t2);
+
+      // since the zoom speed is always based on distance from 1, we need to apply
+      // pinch speed only on that distance from 1:
+      var scaleMultiplier =
+        1 + (currentPinchLength / pinchZoomLength - 1) * pinchSpeed;
+
+      var firstTouchPoint = getOffsetXY(t1);
+      var secondTouchPoint = getOffsetXY(t2);
+      mouseX = (firstTouchPoint.x + secondTouchPoint.x) / 2;
+      mouseY = (firstTouchPoint.y + secondTouchPoint.y) / 2;
+      if (transformOrigin) {
+        var offset = getTransformOriginOffset();
+        mouseX = offset.x;
+        mouseY = offset.y;
+      }
+
+      publicZoomTo(mouseX, mouseY, scaleMultiplier);
+
+      pinchZoomLength = currentPinchLength;
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  }
+
+  function handleTouchEnd(e) {
+    if (e.touches.length > 0) {
+      var offset = getOffsetXY(e.touches[0]);
+      var point = transformToScreen(offset.x, offset.y);
+      mouseX = point.x;
+      mouseY = point.y;
+    } else {
+      var now = new Date();
+      if (now - lastTouchEndTime < doubleTapSpeedInMS) {
+        if (transformOrigin) {
+          var offset = getTransformOriginOffset();
+          smoothZoom(offset.x, offset.y, zoomDoubleClickSpeed);
+        } else {
+          // We want untransformed x/y here.
+          smoothZoom(lastSingleFingerOffset.x, lastSingleFingerOffset.y, zoomDoubleClickSpeed);
+        }
+      }
+
+      lastTouchEndTime = now;
+
+      triggerPanEnd();
+      releaseTouches();
+    }
+  }
+
+  function getPinchZoomLength(finger1, finger2) {
+    var dx = finger1.clientX - finger2.clientX;
+    var dy = finger1.clientY - finger2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  function onDoubleClick(e) {
+    beforeDoubleClick(e);
+    var offset = getOffsetXY(e);
+    if (transformOrigin) {
+      // TODO: looks like this is duplicated in the file.
+      // Need to refactor
+      offset = getTransformOriginOffset();
+    }
+    smoothZoom(offset.x, offset.y, zoomDoubleClickSpeed);
+  }
+
+  function onMouseDown(e) {
+    // if client does not want to handle this event - just ignore the call
+    if (beforeMouseDown(e)) return;
+
+    if (touchInProgress) {
+      // modern browsers will fire mousedown for touch events too
+      // we do not want this: touch is handled separately.
+      e.stopPropagation();
+      return false;
+    }
+    // for IE, left click == 1
+    // for Firefox, left click == 0
+    var isLeftButton =
+      (e.button === 1 && window.event !== null) || e.button === 0;
+    if (!isLeftButton) return;
+
+    smoothScroll.cancel();
+
+    var offset = getOffsetXY(e);
+    var point = transformToScreen(offset.x, offset.y);
+    mouseX = point.x;
+    mouseY = point.y;
+
+    // We need to listen on document itself, since mouse can go outside of the
+    // window, and we will loose it
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+    textSelection.capture(e.target || e.srcElement);
+
+    return false;
+  }
+
+  function onMouseMove(e) {
+    // no need to worry about mouse events when touch is happening
+    if (touchInProgress) return;
+
+    triggerPanStart();
+
+    var offset = getOffsetXY(e);
+    var point = transformToScreen(offset.x, offset.y);
+    var dx = point.x - mouseX;
+    var dy = point.y - mouseY;
+
+    mouseX = point.x;
+    mouseY = point.y;
+
+    internalMoveBy(dx, dy);
+  }
+
+  function onMouseUp() {
+    textSelection.release();
+    triggerPanEnd();
+    releaseDocumentMouse();
+  }
+
+  function releaseDocumentMouse() {
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+    panstartFired = false;
+  }
+
+  function releaseTouches() {
+    document.removeEventListener('touchmove', handleTouchMove);
+    document.removeEventListener('touchend', handleTouchEnd);
+    document.removeEventListener('touchcancel', handleTouchEnd);
+    panstartFired = false;
+    multiTouch = false;
+    touchInProgress = false;
+  }
+
+  function onMouseWheel(e) {
+    // if client does not want to handle this event - just ignore the call
+    if (beforeWheel(e)) return;
+
+    smoothScroll.cancel();
+
+    var delta = e.deltaY;
+    if (e.deltaMode > 0) delta *= 100;
+
+    var scaleMultiplier = getScaleMultiplier(delta);
+
+    if (scaleMultiplier !== 1) {
+      var offset = transformOrigin
+        ? getTransformOriginOffset()
+        : getOffsetXY(e);
+      publicZoomTo(offset.x, offset.y, scaleMultiplier);
+      e.preventDefault();
+    }
+  }
+
+  function getOffsetXY(e) {
+    var offsetX, offsetY;
+    // I tried using e.offsetX, but that gives wrong results for svg, when user clicks on a path.
+    var ownerRect = owner.getBoundingClientRect();
+    offsetX = e.clientX - ownerRect.left;
+    offsetY = e.clientY - ownerRect.top;
+
+    return { x: offsetX, y: offsetY };
+  }
+
+  function smoothZoom(clientX, clientY, scaleMultiplier) {
+    var fromValue = transform.scale;
+    var from = { scale: fromValue };
+    var to = { scale: scaleMultiplier * fromValue };
+
+    smoothScroll.cancel();
+    cancelZoomAnimation();
+
+    zoomToAnimation = animate(from, to, {
+      step: function (v) {
+        zoomAbs(clientX, clientY, v.scale);
+      },
+      done: triggerZoomEnd
+    });
+  }
+
+  function smoothZoomAbs(clientX, clientY, toScaleValue) {
+    var fromValue = transform.scale;
+    var from = { scale: fromValue };
+    var to = { scale: toScaleValue };
+
+    smoothScroll.cancel();
+    cancelZoomAnimation();
+
+    zoomToAnimation = animate(from, to, {
+      step: function (v) {
+        zoomAbs(clientX, clientY, v.scale);
+      }
+    });
+  }
+
+  function getTransformOriginOffset() {
+    var ownerRect = owner.getBoundingClientRect();
+    return {
+      x: ownerRect.width * transformOrigin.x,
+      y: ownerRect.height * transformOrigin.y
+    };
+  }
+
+  function publicZoomTo(clientX, clientY, scaleMultiplier) {
+    smoothScroll.cancel();
+    cancelZoomAnimation();
+    return zoomByRatio(clientX, clientY, scaleMultiplier);
+  }
+
+  function cancelZoomAnimation() {
+    if (zoomToAnimation) {
+      zoomToAnimation.cancel();
+      zoomToAnimation = null;
+    }
+  }
+
+  function getScaleMultiplier(delta) {
+    var sign = Math.sign(delta);
+    var deltaAdjustedSpeed = Math.min(0.25, Math.abs(speed * delta / 128));
+    return 1 - sign * deltaAdjustedSpeed;
+  }
+
+  function triggerPanStart() {
+    if (!panstartFired) {
+      triggerEvent('panstart');
+      panstartFired = true;
+      smoothScroll.start();
+    }
+  }
+
+  function triggerPanEnd() {
+    if (panstartFired) {
+      // we should never run smooth scrolling if it was multiTouch (pinch zoom animation):
+      if (!multiTouch) smoothScroll.stop();
+      triggerEvent('panend');
+    }
+  }
+
+  function triggerZoomEnd() {
+    triggerEvent('zoomend');
+  }
+
+  function triggerEvent(name) {
+    api.fire(name, api);
+  }
+}
+
+function parseTransformOrigin(options) {
+  if (!options) return;
+  if (typeof options === 'object') {
+    if (!isNumber(options.x) || !isNumber(options.y))
+      failTransformOrigin(options);
+    return options;
+  }
+
+  failTransformOrigin();
+}
+
+function failTransformOrigin(options) {
+  console.error(options);
+  throw new Error(
+    [
+      'Cannot parse transform origin.',
+      'Some good examples:',
+      '  "center center" can be achieved with {x: 0.5, y: 0.5}',
+      '  "top center" can be achieved with {x: 0.5, y: 0}',
+      '  "bottom right" can be achieved with {x: 1, y: 1}'
+    ].join('\n')
+  );
+}
+
+function noop() { }
+
+function validateBounds(bounds) {
+  var boundsType = typeof bounds;
+  if (boundsType === 'undefined' || boundsType === 'boolean') return; // this is okay
+  // otherwise need to be more thorough:
+  var validBounds =
+    isNumber(bounds.left) &&
+    isNumber(bounds.top) &&
+    isNumber(bounds.bottom) &&
+    isNumber(bounds.right);
+
+  if (!validBounds)
+    throw new Error(
+      'Bounds object is not valid. It can be: ' +
+      'undefined, boolean (true|false) or an object {left, top, right, bottom}'
+    );
+}
+
+function isNumber(x) {
+  return Number.isFinite(x);
+}
+
+// IE 11 does not support isNaN:
+function isNaN(value) {
+  if (Number.isNaN) {
+    return Number.isNaN(value);
+  }
+
+  return value !== value;
+}
+
+function rigidScroll() {
+  return {
+    start: noop,
+    stop: noop,
+    cancel: noop
+  };
+}
+
+function autoRun() {
+  if (typeof document === 'undefined') return;
+
+  var scripts = document.getElementsByTagName('script');
+  if (!scripts) return;
+  var panzoomScript;
+
+  for (var i = 0; i < scripts.length; ++i) {
+    var x = scripts[i];
+    if (x.src && x.src.match(/\bpanzoom(\.min)?\.js/)) {
+      panzoomScript = x;
+      break;
+    }
+  }
+
+  if (!panzoomScript) return;
+
+  var query = panzoomScript.getAttribute('query');
+  if (!query) return;
+
+  var globalName = panzoomScript.getAttribute('name') || 'pz';
+  var started = Date.now();
+
+  tryAttach();
+
+  function tryAttach() {
+    var el = document.querySelector(query);
+    if (!el) {
+      var now = Date.now();
+      var elapsed = now - started;
+      if (elapsed < 2000) {
+        // Let's wait a bit
+        setTimeout(tryAttach, 100);
+        return;
+      }
+      // If we don't attach within 2 seconds to the target element, consider it a failure
+      console.error('Cannot find the panzoom element', globalName);
+      return;
+    }
+    var options = collectOptions(panzoomScript);
+    console.log(options);
+    window[globalName] = createPanZoom(el, options);
+  }
+
+  function collectOptions(script) {
+    var attrs = script.attributes;
+    var options = {};
+    for (var j = 0; j < attrs.length; ++j) {
+      var attr = attrs[j];
+      var nameValue = getPanzoomAttributeNameValue(attr);
+      if (nameValue) {
+        options[nameValue.name] = nameValue.value;
+      }
+    }
+
+    return options;
+  }
+
+  function getPanzoomAttributeNameValue(attr) {
+    if (!attr.name) return;
+    var isPanZoomAttribute =
+      attr.name[0] === 'p' && attr.name[1] === 'z' && attr.name[2] === '-';
+
+    if (!isPanZoomAttribute) return;
+
+    var name = attr.name.substr(3);
+    var value = JSON.parse(attr.value);
+    return { name: name, value: value };
+  }
+}
+
+autoRun();
+	
+},{"wheel":"../../node_modules/wheel/index.js","amator":"../../node_modules/amator/index.js","ngraph.events":"../../node_modules/ngraph.events/index.js","./lib/kinetic.js":"../../node_modules/panzoom/lib/kinetic.js","./lib/createTextSelectionInterceptor.js":"../../node_modules/panzoom/lib/createTextSelectionInterceptor.js","./lib/transform.js":"../../node_modules/panzoom/lib/transform.js","./lib/svgController.js":"../../node_modules/panzoom/lib/svgController.js","./lib/domController.js":"../../node_modules/panzoom/lib/domController.js"}],"../code/systems/zoom_controls.js":[function(require,module,exports) {
+var panzoom = require('panzoom');
+
+module.exports = {
+  addControls: function addControls(element) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    var connect = function connect() {
+      panzoom(element, Object.assign({
+        // now all zoom operations will happen based on the center of the screen
+        transformOrigin: {
+          x: 0,
+          y: 0
+        }
+      }, options));
+    }; // if its on the dom just attach it
+
+
+    if (element.parentElement) {
+      connect(); // otherwise wait for it to get attached
+    } else {
+      var observer = new MutationObserver(function (mutationList, observer) {
+        mutationList.forEach(function (mutation) {
+          switch (mutation.type) {
+            case 'childList':
+              if (element.parentElement) {
+                connect();
+              }
+
+              break;
+          }
+        });
+      });
+      observer.observe(element, {
+        childList: true,
+        attributes: true,
+        subtree: true
+      });
+    }
+  }
+};
+},{"panzoom":"../../node_modules/panzoom/index.js"}],"../code/skeletons/GraphDisplay.jsx":[function(require,module,exports) {
+var _excluded = ["children", "sizeOfNodeInPixels", "padding"];
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var _require = require("../systems/zoom_controls"),
+    addControls = _require.addControls;
+
+var numberOfSidesOfHexagon = 6;
+var numberOfRadiansInACircle = Math.PI * 2;
+
+function degreesToRadians(degrees) {
+  return degrees * (Math.PI / 180);
+} // (google "hexagonal tessellation" to see what this function is doing)
+//    this creates an array of x,y pairs
+//    each pair is a point creating a spiraling-outwards pattern
+//    pattern:
+//        1 center node 
+//        6 surrounding nodes
+//        12 nodes on the outside of the 6
+//        18 nodes on the outside of the 12
+//        ... etc
+//    the x,y pair is at the center of each hexagon
+
+
+function getHexagonLocations(numberOfHexagonsNeeded, diameterOfHexagon) {
+  var locations = [[0, 0]];
+  var ringIndex = 0;
+  var availableSlots = 1; // the availableSlots will increase like this:
+  //      1 (+6*1) -> 7 (+6*2) -> 19 (+6*3) -> 37 (+6*4) -> etc 
+
+  while (true) {
+    // if we fit all the hexagons in the last ring, then break
+    if (numberOfHexagonsNeeded - 1 < availableSlots) {
+      break;
+    } // otherwise make another ring
+
+
+    ringIndex += 1;
+    var numberOfHexagonsInRing = numberOfSidesOfHexagon * ringIndex;
+    var distanceFromCenter = diameterOfHexagon * ringIndex;
+    availableSlots += numberOfHexagonsInRing;
+    var radiansBetweenEachHexagon = numberOfRadiansInACircle / numberOfHexagonsInRing;
+    var radians = -radiansBetweenEachHexagon;
+
+    for (var each in _toConsumableArray(Array(numberOfHexagonsInRing))) {
+      // increment by one angle
+      radians += radiansBetweenEachHexagon;
+      var xPosition = distanceFromCenter * Math.cos(radians);
+      var yPosition = distanceFromCenter * Math.sin(radians);
+      locations.push([xPosition, yPosition]);
+
+      if (locations.length >= numberOfHexagonsNeeded) {
+        break;
+      }
+    }
+  }
+
+  return locations;
+}
+
+module.exports = function (_ref) {
+  var children = _ref.children,
+      sizeOfNodeInPixels = _ref.sizeOfNodeInPixels,
+      padding = _ref.padding,
+      properties = _objectWithoutProperties(_ref, _excluded);
+
+  var xyCenterLocations = getHexagonLocations(children.length, sizeOfNodeInPixels + padding);
+  var max = Math.max.apply(Math, _toConsumableArray(xyCenterLocations.map(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 2),
+        x = _ref3[0],
+        y = _ref3[1];
+
+    return x;
+  }))); // create some wrappers to get everything lined up correctly
+
+  var container = /*#__PURE__*/React.createElement("div", {
+    class: "centered",
+    style: {
+      position: 'relative',
+      minWidth: "".concat(2 * max, "px"),
+      minHeight: "".concat(2 * max, "px")
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: "position: relative; overflow: visible; max-width: 0; min-width: 0; max-height: 0; min-height: 0;"
+  })); // we want to show the container first, then slowly add each node
+
+  function loadLater() {
+    console.log("container is:", container.children[0]);
+    console.log("container.parentElement is:", container.children[0].parentElement); // add the controls after too
+
+    addControls(container.children[0]); // load all the nodes in order
+
+    var index = -1;
+
+    var _iterator = _createForOfIteratorHelper(children),
+        _step;
+
+    try {
+      var _loop = function _loop() {
+        var eachChildElement = _step.value;
+        index += 1;
+
+        var _xyCenterLocations$in = _slicedToArray(xyCenterLocations[index], 2),
+            x = _xyCenterLocations$in[0],
+            y = _xyCenterLocations$in[1]; // have them start off invisible, then fade in
+
+
+        var graphNode = /*#__PURE__*/React.createElement("div", {
+          class: "circle centered shadow animate",
+          style: "\n                    --size: ".concat(sizeOfNodeInPixels, "px ;\n                    color: white;\n                    background-color: var(--blue);\n                    opacity: 0;\n                    position: absolute;\n                    left: ").concat(x, "px;\n                    top: ").concat(y, "px;\n                    transform: translate(-50%, -50%);\n                ")
+        }, eachChildElement);
+        container.children[0].appendChild(graphNode); // have them fade in one after another
+
+        setTimeout(function () {
+          graphNode.style.opacity = 1;
+        }, 500 * index); // half a second per index
+      };
+
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        _loop();
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  }
+
+  setTimeout(loadLater(), 0);
+  return container;
+};
+},{"../systems/zoom_controls":"../code/systems/zoom_controls.js"}],"../code/skeletons/InfoGraphic.jsx":[function(require,module,exports) {
+var _excluded = ["children"];
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+require("../systems/on_scroll");
+
+module.exports = function (_ref) {
+  var children = _ref.children,
+      properties = _objectWithoutProperties(_ref, _excluded);
+
+  var wrapper;
+  var isHovered = false;
+  return wrapper = /*#__PURE__*/React.createElement("div", {
+    name: "info-graphic",
+    class: "animate",
+    style: "--scroll-top: 0; position: absolute; bottom: 0; transform: translateY(calc(-100% - calc(var(--scroll-top) * 1px))); width: 100%; z-index: 999; transition: all 0.1s ease-in-out 0s;",
+    onscroll: function onscroll(event) {
+      var currentValue = wrapper.style.getPropertyValue("--scroll-top") - 0;
+      var nextValue = currentValue - event.deltaY;
+      console.log("ONSCROLL-start");
+      console.log("event is:", event);
+      console.log("event.target is:", event.target);
+      console.log("event.explicitOriginalTarget is:", event.explicitOriginalTarget);
+      console.log("ONSCROLL-end");
+      window.wrapper = wrapper; // dont scroll past 0
+
+      if (nextValue < 0) {
+        wrapper.style.setProperty('--scroll-top', '0'); // dont scroll over 100%
+      } else if (nextValue > wrapper.clientHeight) {
+        wrapper.style.setProperty('--scroll-top', "".concat(wrapper.clientHeight));
+      } else {
+        wrapper.style.setProperty('--scroll-top', "".concat(nextValue));
+      }
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    name: "tab",
+    style: "height: 6rem; width: 100%; overflow: visible; position: absolute; top: 0; transform: translateY(-100%); z-index: -1;"
+  }, /*#__PURE__*/React.createElement("div", {
+    class: "circle",
+    style: "--size: 100vw; background-color: var(--green); transform: scaleX(200%)"
+  })), /*#__PURE__*/React.createElement("div", {
+    style: "width: 100%; height: fit-content;"
+  }, children));
+};
+},{"../systems/on_scroll":"../code/systems/on_scroll.js"}],"../code/pages/Home.jsx":[function(require,module,exports) {
+var _excluded = ["children"];
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+require("../systems/on_scroll");
+
+var GraphDisplay = require("../skeletons/GraphDisplay");
+
+var InfoGraphic = require("../skeletons/InfoGraphic");
+
+module.exports = function (_ref) {
+  var children = _ref.children,
+      properties = _objectWithoutProperties(_ref, _excluded);
+
+  var thing; // setTimeout(() => {
+  //     let listener = e=>(e.preventDefault(),console.log(e))
+  //     console.log(`thing is:`,thing)
+  //     thing.addEventListener("scroll", listener)
+  //     // thing.addEventListener("wheel", listener)
+  //     // thing.addEventListener("onscroll", listener)
+  //     // thing.addEventListener("onScroll", listener)
+  //     // thing.addEventListener("onsscroll", listener)
+  //     // thing.addEventListener("sscroll", listener)
+  // }, 2000)
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
 
   return /*#__PURE__*/React.createElement("body", {
     class: "column centered",
@@ -3401,9 +5764,17 @@ module.exports = function (_ref) {
   }, /*#__PURE__*/React.createElement(GraphDisplay, {
     sizeOfNodeInPixels: 300,
     padding: 200
+<<<<<<< HEAD
   }, /*#__PURE__*/React.createElement("h4", null, "Howdy1"), /*#__PURE__*/React.createElement("h4", null, "Howdy2"), /*#__PURE__*/React.createElement("h4", null, "Howdy3"), /*#__PURE__*/React.createElement("h4", null, "Howdy4"), /*#__PURE__*/React.createElement("h4", null, "Howdy5"), /*#__PURE__*/React.createElement("h4", null, "Howdy6"), /*#__PURE__*/React.createElement("h4", null, "Howdy7"), /*#__PURE__*/React.createElement("h4", null, "Howdy8")), /*#__PURE__*/React.createElement(InfoGraphic, null));
 };
 },{"../skeletons/GraphDisplay":"../code/skeletons/GraphDisplay.jsx","../skeletons/InfoGraphic":"../code/skeletons/InfoGraphic.jsx"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
+=======
+  }, /*#__PURE__*/React.createElement("h4", null, "Howdy1"), /*#__PURE__*/React.createElement("h4", null, "Howdy2"), /*#__PURE__*/React.createElement("h4", null, "Howdy3"), /*#__PURE__*/React.createElement("h4", null, "Howdy4"), /*#__PURE__*/React.createElement("h4", null, "Howdy5"), /*#__PURE__*/React.createElement("h4", null, "Howdy6"), /*#__PURE__*/React.createElement("h4", null, "Howdy7"), /*#__PURE__*/React.createElement("h4", null, "Howdy8")), /*#__PURE__*/React.createElement(InfoGraphic, null, thing = /*#__PURE__*/React.createElement("div", {
+    style: "height: 1rem; overflow: scroll;"
+  }, "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null), "hi", /*#__PURE__*/React.createElement("br", null))));
+};
+},{"../systems/on_scroll":"../code/systems/on_scroll.js","../skeletons/GraphDisplay":"../code/skeletons/GraphDisplay.jsx","../skeletons/InfoGraphic":"../code/skeletons/InfoGraphic.jsx"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
 var _excluded = ["children", "title", "actions"];
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -5902,7 +8273,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "51500" + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63788" + '/');
+>>>>>>> b9e4307f9b10ff855171291ccb4971a15f89649f
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -24,7 +24,9 @@
     "@vue-reactivity/watch": "^0.1.6",
     "@vue/reactivity": "^3.2.19",
     "@vue/shared": "^3.2.19",
+    "amator": "^1.1.0",
     "animejs": "^3.2.1",
+    "bezier-easing": "^2.1.0",
     "chart.js": "^3.5.1",
     "cors": "^2.8.5",
     "css-baseline": "^1.2.11",
@@ -34,6 +36,8 @@
     "lodash": "^4.17.21",
     "lodash-contrib": "^4.1200.1",
     "materialize-css": "^1.0.0-rc.2",
+    "ngraph.events": "^1.2.1",
+    "panzoom": "^9.4.2",
     "quik-client": "^1.0.0",
     "quik-dom": "^1.0.6",
     "quik-router": "^1.0.0",
@@ -41,7 +45,8 @@
     "regenerator-runtime": "^0.13.9",
     "tiny-emitter": "^2.1.0",
     "virtual-scroll": "^2.1.1",
-    "web-resource-inliner": "^5.0.0"
+    "web-resource-inliner": "^5.0.0",
+    "wheel": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",

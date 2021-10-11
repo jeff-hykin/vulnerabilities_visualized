@@ -1,38 +1,34 @@
-const { onScroll } = require("../systems/on_scroll")
+require("../systems/on_scroll")
 
 module.exports = ({ children, ...properties }) => {
     let wrapper
     let isHovered = false
-    onScroll((event)=>{
-        if (wrapper) {
-            // check timing
-            wrapper.lastScrollEventTime = wrapper.lastScrollEventTime || 0
-            const relatedScrollEventThreshold = 200 // 200 miliseconds
-            const now = new Date().getTime()
-            const gap = (now - wrapper.lastScrollEventTime)
-            const eventIsRelated = gap < relatedScrollEventThreshold
-            if (wrapper.isHovered || eventIsRelated) {
-                wrapper.lastScrollEventTime = now
-                const newValue = -(event.deltaY) + (wrapper.style.bottom.replace(/px/,"")-0)
-                if (newValue < 0) {
-                    wrapper.style.bottom = 0
-                } else {
-                    wrapper.style.bottom = newValue
-                }
-            }
-        }
-    })
     return wrapper = <div
         name="info-graphic"
-        // class="animate"
-        style="position: absolute; bottom: 0; transform: translateY(-100%); width: 100%; z-index: 999; transition: all 0.01s ease-in-out 0s;"
-        onscroll={(e=>console.log(e))}
-        onmouseover={()=>wrapper.isHovered=true}
-        onmouseenter={()=>wrapper.isHovered=true}
-        onmouseleave={()=>wrapper.isHovered=false}
+        class="animate"
+        style="--scroll-top: 0; position: absolute; bottom: 0; transform: translateY(calc(-100% - calc(var(--scroll-top) * 1px))); width: 100%; z-index: 999; transition: all 0.1s ease-in-out 0s;"
+        onscroll={event=>{
+            const currentValue = wrapper.style.getPropertyValue("--scroll-top")-0
+            const nextValue = currentValue - event.deltaY
+            console.log(`ONSCROLL-start`)
+            console.log(`event is:`,event)
+            console.log(`event.target is:`,event.target)
+            console.log(`event.explicitOriginalTarget is:`,event.explicitOriginalTarget)
+            console.log(`ONSCROLL-end`)
+            window.wrapper = wrapper
+            // dont scroll past 0
+            if (nextValue < 0) {
+                wrapper.style.setProperty('--scroll-top', '0')
+            // dont scroll over 100%
+            } else if (nextValue > wrapper.clientHeight) {
+                wrapper.style.setProperty('--scroll-top', `${wrapper.clientHeight}`)
+            } else {
+                wrapper.style.setProperty('--scroll-top', `${nextValue}`)
+            }
+        }}
         >
         {/* Create the curved part */}
-        <div name="tab" style="height: 6rem; width: 100%; overflow: visible; position: absolute; top: 0; transform: translateY(-100%);">
+        <div name="tab" style="height: 6rem; width: 100%; overflow: visible; position: absolute; top: 0; transform: translateY(-100%); z-index: -1;">
             <div class="circle"  style="--size: 100vw; background-color: var(--green); transform: scaleX(200%)" />
         </div>
         {/* Create the content */}
