@@ -1,10 +1,11 @@
+const { addControls } = require("../systems/zoom_controls")
+
 const numberOfSidesOfHexagon = 6
 const numberOfRadiansInACircle = Math.PI * 2
 
 function degreesToRadians(degrees){
   return degrees * (Math.PI/180)
 }
-
 
 // (google "hexagonal tessellation" to see what this function is doing)
 //    this creates an array of x,y pairs
@@ -65,6 +66,10 @@ module.exports = ({ children, sizeOfNodeInPixels, padding, ...properties }) => {
     
     // we want to show the container first, then slowly add each node
     function loadLater() {
+        console.log(`container is:`,container.children[0])
+        console.log(`container.parentElement is:`,container.children[0].parentElement)
+        // add the controls after too
+        addControls(container.children[0])
         // load all the nodes in order
         let index = -1
         for (const eachChildElement of children) {
@@ -81,8 +86,8 @@ module.exports = ({ children, sizeOfNodeInPixels, padding, ...properties }) => {
                     position: absolute;
                     left: ${x}px;
                     top: ${y}px;
-                    transform: translate(-50%, -50%);`
-                }
+                    transform: translate(-50%, -50%);
+                `}
                 >
                 {eachChildElement}
             </div>

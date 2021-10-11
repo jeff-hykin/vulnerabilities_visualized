@@ -6,7 +6,9 @@ specifiers:
   '@vue-reactivity/watch': ^0.1.6
   '@vue/reactivity': ^3.2.19
   '@vue/shared': ^3.2.19
+  amator: ^1.1.0
   animejs: ^3.2.1
+  bezier-easing: ^2.1.0
   chart.js: ^3.5.1
   cors: ^2.8.5
   css-baseline: ^1.2.11
@@ -16,6 +18,8 @@ specifiers:
   lodash: ^4.17.21
   lodash-contrib: ^4.1200.1
   materialize-css: ^1.0.0-rc.2
+  ngraph.events: ^1.2.1
+  panzoom: ^9.4.2
   quik-client: ^1.0.0
   quik-dom: ^1.0.6
   quik-router: ^1.0.0
@@ -25,12 +29,15 @@ specifiers:
   tiny-emitter: ^2.1.0
   virtual-scroll: ^2.1.1
   web-resource-inliner: ^5.0.0
+  wheel: ^1.0.0
 
 dependencies:
   '@vue-reactivity/watch': 0.1.6_e12bd40890938bd287f438db6ddcccb5
   '@vue/reactivity': 3.2.19
   '@vue/shared': 3.2.19
+  amator: 1.1.0
   animejs: 3.2.1
+  bezier-easing: 2.1.0
   chart.js: 3.5.1
   cors: 2.8.5
   css-baseline: 1.2.11
@@ -40,6 +47,8 @@ dependencies:
   lodash: 4.17.21
   lodash-contrib: 4.1200.1
   materialize-css: 1.0.0-rc.2
+  ngraph.events: 1.2.1
+  panzoom: 9.4.2
   quik-client: 1.0.0
   quik-dom: 1.0.6
   quik-router: 1.0.0
@@ -48,6 +57,7 @@ dependencies:
   tiny-emitter: 2.1.0
   virtual-scroll: 2.1.1
   web-resource-inliner: 5.0.0
+  wheel: 1.0.0
 
 devDependencies:
   '@babel/core': 7.15.5
@@ -1337,6 +1347,12 @@ packages:
     resolution: {integrity: sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=}
     dev: false
 
+  /amator/1.1.0:
+    resolution: {integrity: sha1-CMa2C8k67Cthu/wMTWd9MDI8wPE=}
+    dependencies:
+      bezier-easing: 2.1.0
+    dev: false
+
   /animejs/3.2.1:
     resolution: {integrity: sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==}
     dev: false
@@ -1573,6 +1589,10 @@ packages:
     resolution: {integrity: sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=}
     dependencies:
       tweetnacl: 0.14.5
+    dev: false
+
+  /bezier-easing/2.1.0:
+    resolution: {integrity: sha1-wE3+i5JtbsrKGBPWn/F5t8ICXYY=}
     dev: false
 
   /binary-extensions/1.13.1:
@@ -3921,6 +3941,10 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
+  /ngraph.events/1.2.1:
+    resolution: {integrity: sha512-D4C+nXH/RFxioGXQdHu8ELDtC6EaCiNsZtih0IvyGN81OZSUby4jXoJ5+RNWasfsd0FnKxxpAROyUMzw64QNsw==}
+    dev: false
+
   /nice-try/1.0.5:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
     dev: false
@@ -4134,6 +4158,14 @@ packages:
 
   /pako/1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
+    dev: false
+
+  /panzoom/9.4.2:
+    resolution: {integrity: sha512-sQLr0t6EmNFXpZHag0HQVtOKqF9xjF7iZdgWg3Ss1o7uh2QZLvcrz7S0Cl8M0d2TkPZ69JfPJdknXN3I0e/2aQ==}
+    dependencies:
+      amator: 1.1.0
+      ngraph.events: 1.2.1
+      wheel: 1.0.0
     dev: false
 
   /parcel-bundler/1.12.5:
@@ -5835,6 +5867,10 @@ packages:
       lodash.sortby: 4.7.0
       tr46: 1.0.1
       webidl-conversions: 4.0.2
+    dev: false
+
+  /wheel/1.0.0:
+    resolution: {integrity: sha512-XiCMHibOiqalCQ+BaNSwRoZ9FDTAvOsXxGHXChBugewDj7HC8VBIER71dEOiRH1fSdLbRCQzngKTSiZ06ZQzeA==}
     dev: false
 
   /which-boxed-primitive/1.0.2:
