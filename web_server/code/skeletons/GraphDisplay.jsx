@@ -66,8 +66,6 @@ module.exports = ({ children, sizeOfNodeInPixels, padding, ...properties }) => {
     
     // we want to show the container first, then slowly add each node
     function loadLater() {
-        console.log(`container is:`,container.children[0])
-        console.log(`container.parentElement is:`,container.children[0].parentElement)
         // add the controls after too
         addControls(container.children[0])
         // load all the nodes in order

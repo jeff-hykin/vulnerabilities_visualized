@@ -29,20 +29,20 @@ module.exports = ({ children, ...properties }) => {
         
         
         <InfoGraphic>
-            {thing = <div style="height: 1rem; overflow: scroll;">
-                hi<br></br>
-                hi<br></br>
-                hi<br></br>
-                hi<br></br>
-                hi<br></br>
-                hi<br></br>
-                hi<br></br>
-                hi<br></br>
-                hi<br></br>
-            </div>}
-            {/* <div style="min-height: 10rem">
-                <h3>Test Data</h3>
+            <div class="centered" style="width: 100%; transform: scale(4)" >
+                {thing = <div style="height: 1rem; width: 2rem; overflow: scroll; background-color: red;">
+                    hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii<br></br>
+                    hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii<br></br>
+                    hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii<br></br>
+                    hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii<br></br>
+                    hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii<br></br>
+                    hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii<br></br>
+                    hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii<br></br>
+                    hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii<br></br>
+                    hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii<br></br>
+                </div>}
             </div>
+            
             <div style="min-height: 10rem">
                 <h3>Test Data</h3>
             </div>
@@ -51,7 +51,10 @@ module.exports = ({ children, ...properties }) => {
             </div>
             <div style="min-height: 10rem">
                 <h3>Test Data</h3>
-            </div> */}
+            </div>
+            <div style="min-height: 10rem">
+                <h3>Test Data</h3>
+            </div>
         </InfoGraphic>
     </body>
 }

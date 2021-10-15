@@ -3,7 +3,7 @@ const scrollToggle = require("./scroll_toggle")
 const scroller = new VirtualScroll()
 
 const shouldBubbleSymbol = Symbol("scrollInfo")
-let relatedScrollEventThreshold = 200
+let relatedScrollEventThreshold = 50
 let updateActiveElement = null
 let alreadyActiveElement = null
 let mouseX, mouseY
@@ -14,18 +14,11 @@ scroller.on((scrollData)=>{
     clearTimeout(updateActiveElement)
     alreadyActiveElement = alreadyActiveElement || document.elementFromPoint(mouseX, mouseY)
     const event = scrollData.originalEvent
-    console.log(`--------------------------------------------------`)
-    console.log(`--------------------------------------------------`)
-    console.log(`--------------------------------------------------`)
-    console.log(`--------------------------------------------------`)
-    console.log(`--------------------------------------------------`)
+    event.stopPropagation()
     const customEvent = new CustomEvent("scroll", {...event, bubbles: false, cancelable: false, })
     Object.assign(customEvent, scrollData)
     const actualStopPropogation = event.stopPropagation.bind(event)
-    customEvent.stopPropagation = ()=>{
-        event[shouldBubbleSymbol] = true
-        actualStopPropogation()
-    }
+    customEvent.stopPropagation = ()=>event[shouldBubbleSymbol] = true
     customEvent.preventDefault = ()=>{
         // TODO: even for built-in events prevent default doesn't 
         // work for scrolling (ex: its part of the spec for it to be non-cancelable)
@@ -39,29 +32,46 @@ scroller.on((scrollData)=>{
         runningElement.dispatchEvent(customEvent)
         let style = {}
         try {
-            style = getComputedStyle(event.explicitOriginalTarget)
+            style = getComputedStyle(runningElement)
         } catch (error) {}
         const elementHasScrollProperties = ["auto", "scroll"].includes(style.overflowX) || ["auto", "scroll"].includes(style.overflowY)
+        // console.debug(`elementHasScrollProperties is:`,  elementHasScrollProperties, "overflowX", style.overflowX, "overflowY", style.overflowY,  `runningElement is:`,runningElement)
+        // check if child should capture scroll event
         if (elementHasScrollProperties) {
-            const biggerDirectionIsX = Math.abs(customEvent.deltaX) > Math.abs(customEvent.deltaY)
-            console.debug(`customEvent.deltaX is:`,customEvent.deltaX)
-            console.debug(`customEvent.deltaY is:`,customEvent.deltaY)
-            console.debug(`runningElement.scrollTop is:`,runningElement.scrollTop)
-            console.debug(`runningElement.scrollLeft is:`,runningElement.scrollLeft)
-            console.debug(`runningElement.scrollTopMax is:`,runningElement.scrollTopMax)
-            console.debug(`runningElement.scrollLeftMax is:`,runningElement.scrollLeftMax)
+            const { deltaX, deltaY } = customEvent
+            const { scrollTop, scrollTopMax, scrollLeft, scrollLeftMax } = runningElement
+            const biggerDirectionIsY = Math.abs(deltaY) >= Math.abs(deltaX)
+            // TODO: confirm that deltaX is behaving correctly
+            // console.debug(`customEvent.deltaX is:`,customEvent.deltaX)
+            // console.debug(`customEvent.deltaY is:`,customEvent.deltaY)
+            // console.debug(`runningElement.scrollTop is:`,runningElement.scrollTop)
+            // console.debug(`runningElement.scrollLeft is:`,runningElement.scrollLeft)
+            // console.debug(`runningElement.scrollTopMax is:`,runningElement.scrollTopMax)
+            // console.debug(`runningElement.scrollLeftMax is:`,runningElement.scrollLeftMax)
             let hasScrolledAsFarAsPossible = false // FIXME check if already scrolled to bottom/top leftMost/rightMost
-            if (biggerDirectionIsX) {
-                // FIXME: if deltaX getting bigger (check max)
-                // FIXME: if deltaX getting smaller (check 0)
-                hasScrolledAsFarAsPossible = runningElement.scrollTop >= runningElement.scrollTopMax
+            if (biggerDirectionIsY) {
+                // if scrolling down
+                if (deltaY < 0) {
+                    // has scrolled to the bottom
+                    hasScrolledAsFarAsPossible = scrollTop >= scrollTopMax
+                // if scrolling up
+                } else {
+                    // has scrolled to the top
+                    hasScrolledAsFarAsPossible = scrollTop <= 0
+                }
             } else {
-                // FIXME: if deltaY getting bigger (check max)
-                // FIXME: if deltaY getting smaller (check 0)
-                hasScrolledAsFarAsPossible = runningElement.scrollLeft >= runningElement.scrollLeftMax
+                // if scrolling left
+                if (customEvent.delta < 0) {
+                    // has scrolled all the way left
+                    hasScrolledAsFarAsPossible = scrollLeft >= scrollLeftMax
+                // if scrolling right
+                } else {
+                    // has scrolled all the way right
+                    hasScrolledAsFarAsPossible = scrollLeft <= 0
+                }
             }
-            // let this element capture it
             if (!hasScrolledAsFarAsPossible) {
+                // let this element capture it (don't bubble)
                 break
             }
         }

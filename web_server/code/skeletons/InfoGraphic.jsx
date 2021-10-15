@@ -5,17 +5,11 @@ module.exports = ({ children, ...properties }) => {
     let isHovered = false
     return wrapper = <div
         name="info-graphic"
-        class="animate"
-        style="--scroll-top: 0; position: absolute; bottom: 0; transform: translateY(calc(-100% - calc(var(--scroll-top) * 1px))); width: 100%; z-index: 999; transition: all 0.1s ease-in-out 0s;"
+        style="--scroll-top: 0; position: absolute; bottom: 0; transform: translateY(calc(100% - calc(var(--scroll-top) * 1px))); width: 100%; z-index: 999;"
         onscroll={event=>{
+            // TODO: change this to a wrapped function/helper
             const currentValue = wrapper.style.getPropertyValue("--scroll-top")-0
             const nextValue = currentValue - event.deltaY
-            console.log(`ONSCROLL-start`)
-            console.log(`event is:`,event)
-            console.log(`event.target is:`,event.target)
-            console.log(`event.explicitOriginalTarget is:`,event.explicitOriginalTarget)
-            console.log(`ONSCROLL-end`)
-            window.wrapper = wrapper
             // dont scroll past 0
             if (nextValue < 0) {
                 wrapper.style.setProperty('--scroll-top', '0')
@@ -25,6 +19,7 @@ module.exports = ({ children, ...properties }) => {
             } else {
                 wrapper.style.setProperty('--scroll-top', `${nextValue}`)
             }
+            event.stopPropagation() // helps be a bit more efficient
         }}
         >
         {/* Create the curved part */}
