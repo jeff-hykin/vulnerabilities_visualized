@@ -1,6 +1,6 @@
 const d3 = require('../../static_files/d3.js');
 
-module.exports = ({ treeData, onNodeClick }) => {
+module.exports = ({ treeData, onNodeClick = () => {} }) => {
   const container = <div></div>;
   const mainAccentColor = 'red';
 
