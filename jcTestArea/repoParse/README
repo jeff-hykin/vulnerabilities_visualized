@@ -1,0 +1,7 @@
+Input : repos.txt (List of repositories of user/repo.git)
+Output : outoutFiles contains repos' commit list
+
+Downloads the repositories, gets the git log, delete the repositories.
+
+TODO : grep/search repo for files that follow executable format -> scan -> take output
+Hella messy
