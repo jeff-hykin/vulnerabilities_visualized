@@ -1,6 +1,15 @@
+const Panel = require("Panel")
+const storageObject = require("storage-object")
 
-module.exports = ({ width=20, color="white", style="", children, ...properties }) => {
-    return <div class={properties.class} style={`width: ${width}rem; max-width: 100vw; height: fit-content; background-color: ${color}; padding: 2rem 1rem; border-radius: 1.4rem; display: flex; flex-direction: column; ${style};`} >
-        {children}
-    </div>
+
+module.exports = ({ children, ...properties }) => {
+    
+    let panel = <Panel class="shadow" style="position: fixed; right: 2rem; top: 2rem; z-index: 10;">
+        <h4>Howdy1</h4>
+        <h4>Howdy2</h4>
+        <h4>Howdy3</h4>
+        testing
+    </Panel>
+    
+    return 
 }
