@@ -3,3 +3,10 @@ jeff-hykin/vulnerabilities_visualized.git
 c-mai/walmart-movie-theater.git
 jeff-hykin/experimental-tree-sitter.git
 jeff-hykin/Resh.git
+torvalds/linux.git
+Homebrew/brew.git
+rails/rails.git
+git/git.git
+symfony/symfony.git
+django/django.git
+facebook/react.git
