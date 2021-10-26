@@ -43,6 +43,7 @@
     "quik-router": "^1.0.0",
     "quik-server": "2.3.1",
     "regenerator-runtime": "^0.13.9",
+    "snake-case": "^3.0.4",
     "storage-object": "^0.0.1",
     "tiny-emitter": "^2.1.0",
     "virtual-scroll": "^2.1.1",

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+
+if [ -z "$1" ]
+then
+    echo "give the path to the commit_log.txt file"
+    echo "example:"
+    echo "    project generate_json_for_commit_log ./jcTestArea/repoParse/outputFiles/atom.txt"
+else
+    node "$FORNIX_FOLDER/data_processing/commits_to_yaml.js" "$1"
+fi
