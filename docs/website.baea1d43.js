@@ -14618,6 +14618,11 @@ var InfoGraphic = require("../skeletons/InfoGraphic");
 
 var OrgBubble = require("../components/OrgBubble");
 
+window.data = {};
+window.data.repos = {}; // the content below would load the data... if it were big enough to fit in a javascript string
+// window.data.vulerabilities = require("../../../data/vulnerabilities_array.json")
+// window.data.repos.atom = require("../../../data/commit_logs/atom.json")
+
 var repoData = {
   name: "topLevel",
   parent: "null",
@@ -17186,7 +17191,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64404" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63255" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

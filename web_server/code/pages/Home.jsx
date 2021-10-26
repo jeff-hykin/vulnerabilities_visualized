@@ -4,6 +4,12 @@ const BaseTree = require("../skeletons/BaseTree")
 const InfoGraphic = require("../skeletons/InfoGraphic")
 const OrgBubble = require("../components/OrgBubble")
 
+window.data = {}
+window.data.repos = {}
+// the content below would load the data... if it were big enough to fit in a javascript string
+// window.data.vulerabilities = require("../../../data/vulnerabilities_array.json")
+// window.data.repos.atom = require("../../../data/commit_logs/atom.json")
+
 const repoData = {
     name: "topLevel",
     parent: "null",

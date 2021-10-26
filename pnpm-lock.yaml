@@ -12,6 +12,7 @@ specifiers:
   chart.js: ^3.5.1
   cors: ^2.8.5
   css-baseline: ^1.2.11
+  csv-parse: ^4.16.3
   express: ^4.17.1
   good-dom: ^4.2.1
   good-jsx: ^1.4.1
@@ -43,6 +44,7 @@ dependencies:
   chart.js: 3.5.1
   cors: 2.8.5
   css-baseline: 1.2.11
+  csv-parse: 4.16.3
   express: 4.17.1
   good-dom: 4.2.1
   good-jsx: 1.4.1
@@ -2355,6 +2357,10 @@ packages:
     resolution: {integrity: sha512-GBrLZYZ4X4x6/QEoBnIrqb8B/f5l4+8me2dkom/j1Gtbxy0kBv6OGzKuAsGM75bkGwGAFkt56Iwg28S3XTZgSA==}
     dependencies:
       cssom: 0.3.8
+    dev: false
+
+  /csv-parse/4.16.3:
+    resolution: {integrity: sha512-cO1I/zmz4w2dcKHVvpCr7JVRu8/FymG5OEpmvsZYlccYolPBLoVGKUHgNoc4ZGkFeFlWGEDmMyBM+TTqRdW/wg==}
     dev: false
 
   /dashdash/1.14.1:

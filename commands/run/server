@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 cd "$FORNIX_FOLDER"
-node ./web_server/server.js
+node --max-old-space-size=8192 ./web_server/server.js
