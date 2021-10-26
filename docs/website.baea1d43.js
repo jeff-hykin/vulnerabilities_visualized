@@ -14399,14 +14399,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }), "function" == typeof define && define.amd ? (this.d3 = ao, define(ao)) : "object" == (typeof module === "undefined" ? "undefined" : _typeof(module)) && module.exports ? module.exports = ao : this.d3 = ao;
 }();
 },{}],"../code/skeletons/BaseTree.jsx":[function(require,module,exports) {
-var d3 = require('../../static_files/d3.js');
+var d3 = require("../../static_files/d3.js");
 
 module.exports = function (_ref) {
   var treeData = _ref.treeData,
       _ref$onNodeClick = _ref.onNodeClick,
       onNodeClick = _ref$onNodeClick === void 0 ? function () {} : _ref$onNodeClick;
   var container = /*#__PURE__*/React.createElement("div", null);
-  var mainAccentColor = 'red';
+  var mainAccentColor = "red";
   var margin = {
     top: 30,
     right: 60,
@@ -14422,7 +14422,7 @@ module.exports = function (_ref) {
   var diagonal = d3.svg.diagonal().projection(function (d) {
     return [d.x, d.y];
   });
-  var svg = d3.select(container).append('svg').attr('width', width + margin.right + margin.left).attr('height', height + margin.top + margin.bottom).append('g').attr('transform', 'translate(' + (width / 2 + margin.left) + ',' + margin.top + ')');
+  var svg = d3.select(container).append("svg").attr("width", width + margin.right + margin.left).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + (width / 2 + margin.left) + "," + margin.top + ")");
   root = treeData;
   update(root);
 
@@ -14435,37 +14435,37 @@ module.exports = function (_ref) {
       d.y = height - d.depth * 80;
     }); // Declare the nodes…
 
-    var node = svg.selectAll('g.node').data(nodes, function (d) {
+    var node = svg.selectAll("g.node").data(nodes, function (d) {
       return d.id || (d.id = ++i);
     }); // Enter the nodes.
 
-    var nodeEnter = node.enter().append('g').attr('class', 'node').attr('transform', function (d) {
-      return 'translate(' + d.x + ',' + d.y + ')';
+    var nodeEnter = node.enter().append("g").attr("class", "node").attr("transform", function (d) {
+      return "translate(" + d.x + "," + d.y + ")";
     }); // Red outlines on hover on nodes
 
     nodeEnter.filter(function (d) {
-      return d.level === 'red';
-    }).insert('circle', ':first-child').classed('circleSelect', true).attr('r', 8).style('stroke', '#000').style('fill', 'none').style('pointer-events', 'none'); // Construction of basic nodes of tree
+      return d.level === "red";
+    }).insert("circle", ":first-child").classed("circleSelect", true).attr("r", 8).style("stroke", "#000").style("fill", "none").style("pointer-events", "none"); // Construction of basic nodes of tree
 
-    nodeEnter.append('circle').attr('r', function (d) {
-      if (d.level == 'none') {
+    nodeEnter.append("circle").attr("r", function (d) {
+      if (d.level == "none") {
         return 0;
       } else {
         return 4;
       }
-    }).attr('r', function (d) {
-      if (d.level == 'none') {
+    }).attr("r", function (d) {
+      if (d.level == "none") {
         return 0;
       } else {
         return 4;
       }
-    }).classed('basicNode', function (d) {
-      return d.level == 'red';
-    }).on('click', function (d) {
-      if (d.level === 'red') {
+    }).classed("basicNode", function (d) {
+      return d.level == "red";
+    }).on("click", function (d) {
+      if (d.level === "red") {
         // makes all other nodes execpt for focus become grey
-        svg.selectAll('g.node circle.basicNode').classed('highlightCircle', true);
-        d3.select(this).classed('highlightCircle', false);
+        svg.selectAll("g.node circle.basicNode").classed("highlightCircle", true);
+        d3.select(this).classed("highlightCircle", false);
         onNodeClick(d);
 
         if (d3.event.metaKey) {
@@ -14479,19 +14479,19 @@ module.exports = function (_ref) {
       }
     }); // Declare the edges
 
-    var link = svg.selectAll('path.link').data(links, function (d) {
+    var link = svg.selectAll("path.link").data(links, function (d) {
       return d.target.id;
     }); // Enter the edges.
 
-    link.enter().insert('path', 'g').attr('class', 'link').attr('d', diagonal).attr('class', function (d) {
-      return 'link source-' + d.source.name + ' target-' + d.target.name;
+    link.enter().insert("path", "g").attr("class", "link").attr("d", diagonal).attr("class", function (d) {
+      return "link source-" + d.source.name + " target-" + d.target.name;
     }); // Big circle on root node
 
     nodeEnter.filter(function (d) {
-      return d.level === 'black';
-    }).append('circle').attr('r', 30).attr('fill', mainAccentColor).attr('opacity', 0.5).on('click', function (d) {
+      return d.level === "black";
+    }).append("circle").attr("r", 30).attr("fill", mainAccentColor).attr("opacity", 0.5).on("click", function (d) {
       // removed all highlighting
-      svg.selectAll('g.node circle.basicNode').classed('highlightCircle', false);
+      svg.selectAll("g.node circle.basicNode").classed("highlightCircle", false);
       highlightOff(d);
       update(d);
     });
@@ -14499,7 +14499,7 @@ module.exports = function (_ref) {
 
 
   highlightOn = function highlightOn(d) {
-    svg.selectAll('path.link').classed('highlight', true);
+    svg.selectAll("path.link").classed("highlight", true);
 
     var _parentLine;
 
@@ -14507,7 +14507,7 @@ module.exports = function (_ref) {
       if (d.parent) {
         _parentLine(d.parent);
 
-        svg.selectAll('path.link.source-' + d.parent.name + '.target-' + d.name).classed('highlight', false);
+        svg.selectAll("path.link.source-" + d.parent.name + ".target-" + d.name).classed("highlight", false);
       }
     };
 
@@ -14517,7 +14517,7 @@ module.exports = function (_ref) {
   };
 
   highlightOff = function highlightOff(d) {
-    svg.selectAll('path.link').classed('highlight', false);
+    svg.selectAll("path.link").classed("highlight", false);
     return update(d);
   };
 
@@ -14578,20 +14578,23 @@ module.exports = function (_ref) {
     return /*#__PURE__*/React.createElement(BaseTree, {
       treeData: treeData
     });
-  } else if (orgSelected) {
-    return /*#__PURE__*/React.createElement("div", null, org.map(function (tree, i) {
-      return /*#__PURE__*/React.createElement("div", {
-        style: "position: absolute; transform: translate(".concat(i * 100 / org.length, "%,").concat(i % 2 * -50, "px)")
-      }, /*#__PURE__*/React.createElement(BaseTree, {
-        treeData: tree
-      }));
-    }));
   } else {
-    return /*#__PURE__*/React.createElement("div", {
-      class: "orgBubble"
-    }, org.map(function (tree, i) {
+    var maybeDisablePointer;
+    var maybeAddBubbleClass;
+
+    if (orgSelected) {
+      maybeDisablePointer = "";
+      maybeAddBubbleClass = {};
+    } else {
+      maybeDisablePointer = "pointer-events: none;";
+      maybeAddBubbleClass = {
+        "class": "orgBubble"
+      };
+    }
+
+    return /*#__PURE__*/React.createElement("div", maybeAddBubbleClass, org.map(function (tree, i) {
       return /*#__PURE__*/React.createElement("div", {
-        style: "position: absolute; transform: translate(".concat(i * 100 / org.length, "%,").concat(i % 2 * -50, "px); pointer-events: none;")
+        style: "\n                            position: absolute;\n                            transform: translate(".concat(i * 100 / org.length, "%,").concat(i % 2 * -50, "px);\n                            ").concat(maybeDisablePointer, "\n                        ")
       }, /*#__PURE__*/React.createElement(BaseTree, {
         treeData: tree
       }));
