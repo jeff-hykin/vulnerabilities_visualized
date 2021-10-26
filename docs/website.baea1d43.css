@@ -317,4 +317,54 @@ body {
   transition: all 0.5s ease-in-out 0s;
 }
 
+.node circle.basicNode {
+  fill: black;
+}
+
+.node:hover {
+  cursor: pointer;
+}
+
+.circleSelect {
+  display: none;
+}
+
+.node:hover .circleSelect {
+  display: block;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1px;
+}
+
+.highlight {
+  stroke: #a8a8a8;
+}
+
+.highlightCircle {
+  fill: #a8a8a8 !important;
+}
+
+.treeRoot {
+  opacity: 0.5;
+  transition: all 0.2s ease;
+}
+
+.treeRoot:hover {
+  opacity: 0.8;
+}
+
+.orgBubble {
+  position: relative;
+  display: block;
+  width: 80%;
+  height: 300px;
+  background-color: #4db6ac46;
+  border-radius: 50px;
+  padding: 20px;
+  z-index: 10;
+}
+
 /*# sourceMappingURL=/website.baea1d43.css.map */
