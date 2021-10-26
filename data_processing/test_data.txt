@@ -1,0 +1,54 @@
+commit fd5577910528774b549e94407b555da89f55db79
+Merge: f5a1adc71 7c1124f1e
+Author: Sadick <sadickjunior@gmail.com>
+Date:   Fri Oct 22 19:44:19 2021 +0300
+
+    Merge pull request #23096 from atom/remove-remote-calls-and-use-invoke
+    
+    Replace remote module with invoke calls.
+
+commit f5a1adc71b7ac51e9e0129d5d1f4c8479319c97f
+Merge: b9c265c70 e98767ece
+Author: Sadick <sadickjunior@gmail.com>
+Date:   Tue Oct 12 10:29:22 2021 +0300
+
+    Merge pull request #23097 from atom/remove-dependancy-status
+    
+    Remove dependancy status badge.
+
+commit e98767ecee543048d448f1476673eee5840510e8
+Author: sadick254 <sadickjunior@gmail.com>
+Date:   Tue Oct 12 10:26:12 2021 +0300
+
+    Remove dependancy status badge.
+    
+    Atom now has a script that checks for dependancy updates every time nighlty is pipeline is run.
+    The script mainly handles atom packages since the packages are not
+    deployed to npm
+    On top of this we also have dependabot setup to check and open prs
+    incase of updates.
+
+commit 7c1124f1e5218367d5fdac683d4fe00ffa12e899
+Author: sadick254 <sadickjunior@gmail.com>
+Date:   Tue Oct 12 09:13:18 2021 +0300
+
+    Replace remote module with invoke calls.
+    
+    The remote module has been deprecated and is set to be removed on electron version 11.
+    We have two options to replace the remote module
+    
+    1. use @electron/remote module
+    2. Send messages using send/invoke.
+    
+    I am using invoke since it is the
+    [recommended](https://www.npmjs.com/package/@electron/remote) option to use.
+
+commit b9c265c702b2aba5bb3e387dc97a56bbd61433d7
+Merge: 38f403a5e eb60e44ca
+Author: Musa Ibrahim <small_musa@hotmail.com>
+Date:   Mon Oct 4 07:17:08 2021 +0100
+
+    Merge pull request #23031 from atom/ignore-spec-window
+    
+    Remember last opened state
+
