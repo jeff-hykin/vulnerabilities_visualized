@@ -195,7 +195,15 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../node_modules/@vue/shared/dist/shared.esm-bundler.js":[function(require,module,exports) {
+},{"_css_loader":"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../node_modules/quik-client/index.js":[function(require,module,exports) {
+// get the quik symbol
+let quikUniqueKey = Symbol.for("quik")
+// if the quik-window doesnt exist, then create it
+window[quikUniqueKey] || (window[quikUniqueKey] = {})
+// return the window-quik object
+module.exports = window[quikUniqueKey]
+
+},{}],"../../node_modules/@vue/shared/dist/shared.esm-bundler.js":[function(require,module,exports) {
 var global = arguments[3];
 "use strict";
 
@@ -14569,59 +14577,88 @@ module.exports = function (_ref) {
 },{"../systems/on_scroll":"../code/systems/on_scroll.js"}],"../code/components/OrgBubble.jsx":[function(require,module,exports) {
 var BaseTree = require("../skeletons/BaseTree");
 
+var _require = require("@vue-reactivity/watch"),
+    watch = _require.watch;
+
 module.exports = function (_ref) {
   var org = _ref.org,
-      orgSelected = _ref.orgSelected,
-      treeSelected = _ref.treeSelected;
-
-  if (orgSelected && treeSelected) {
-    return /*#__PURE__*/React.createElement(BaseTree, {
-      treeData: treeData
-    });
-  } else {
-    var maybeDisablePointer;
-    var maybeAddBubbleClass;
-
-    if (orgSelected) {
-      maybeDisablePointer = "";
-      maybeAddBubbleClass = {};
-    } else {
-      maybeDisablePointer = "pointer-events: none;";
-      maybeAddBubbleClass = {
-        "class": "orgBubble"
-      };
+      selector = _ref.selector,
+      orgIndex = _ref.orgIndex;
+  // 
+  // create elements
+  // 
+  var thisComponent = /*#__PURE__*/React.createElement("div", {
+    class: "orgBubble",
+    onclick: function onclick() {
+      return selector.selectedOrgIndex = orgIndex, selector.selectedRepoIndex = null;
     }
+  });
+  var repoElements = org.map(function (tree, index) {
+    return /*#__PURE__*/React.createElement("div", {
+      onclick: function onclick(eventObject) {
+        // don't let it activate the outer onclick
+        eventObject.stopPropagation(); // update the data
 
-    return /*#__PURE__*/React.createElement("div", maybeAddBubbleClass, org.map(function (tree, i) {
-      return /*#__PURE__*/React.createElement("div", {
-        style: "\n                            position: absolute;\n                            transform: translate(".concat(i * 100 / org.length, "%,").concat(i % 2 * -50, "px);\n                            ").concat(maybeDisablePointer, "\n                        ")
-      }, /*#__PURE__*/React.createElement(BaseTree, {
-        treeData: tree
-      }));
+        Object.assign(selector, {
+          selectedOrgIndex: orgIndex,
+          selectedRepoIndex: index
+        });
+      },
+      style: {
+        position: "absolute",
+        transform: "translate(".concat(index * 100 / org.length, "%,").concat(index % 2 * -50, "px)")
+      }
+    }, /*#__PURE__*/React.createElement(BaseTree, {
+      treeData: tree
     }));
-  }
+  });
+  thisComponent.children = repoElements; // 
+  // make them reactive
+  // 
+
+  watch(selector, function () {
+    // 
+    // when unselected do:
+    // 
+    if (selector.selectedOrgIndex != orgIndex) {
+      thisComponent.class = "orgBubble";
+      thisComponent.children = repoElements; // reset/enable the pointer events
+
+      delete thisComponent.style.pointerEvents; // 
+      // when selected do:
+      // 
+    } else {
+      // if repo selected
+      if (selector.selectedRepoIndex) {
+        // remove all of them except the selected repo
+        thisComponent.children = [repoElements[selector.selectedRepoIndex]]; // remove the bubble's class to focus on the repo
+
+        thisComponent.class = "orgBubbleRepoFocus"; // if whole bubble selected
+      } else {
+        // (not sure what the desired behavor is)
+        thisComponent.class = "orgBubbleFocused";
+        thisComponent.children = repoElements;
+      }
+    }
+  });
+  return thisComponent;
 };
-},{"../skeletons/BaseTree":"../code/skeletons/BaseTree.jsx"}],"../code/pages/Home.jsx":[function(require,module,exports) {
-var _excluded = ["children"];
+},{"../skeletons/BaseTree":"../code/skeletons/BaseTree.jsx","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/components/BubbleManager.jsx":[function(require,module,exports) {
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-require("../systems/on_scroll");
-
-var GraphDisplay = require("../skeletons/GraphDisplay");
-
-var BaseTree = require("../skeletons/BaseTree");
-
-var InfoGraphic = require("../skeletons/InfoGraphic");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var OrgBubble = require("../components/OrgBubble");
 
-window.data = {};
-window.data.repos = {}; // the content below would load the data... if it were big enough to fit in a javascript string
-// window.data.vulerabilities = require("../../../data/vulnerabilities_array.json")
-// window.data.repos.atom = require("../../../data/commit_logs/atom.json")
+var _require = require("@vue/reactivity"),
+    reactive = _require.reactive;
+
+var _require2 = require("@vue-reactivity/watch"),
+    watch = _require2.watch;
+
+var router = require("quik-router");
 
 var repoData = {
   name: "topLevel",
@@ -14669,7 +14706,72 @@ var repoData = {
     }]
   }]
 };
-var org = [repoData, repoData];
+var orgs = [// org1
+[repoData, repoData], [repoData, repoData]];
+
+module.exports = function () {
+  // create state for children
+  var state = reactive({
+    selectedOrgIndex: null,
+    selectedRepoIndex: null
+  }); // 
+  // when the state changes update the route so that the back button works
+  // 
+
+  watch(state, function () {
+    console.log("JSON.stringify(router.pageInfo.bubbleInfo) is:", JSON.stringify(router.pageInfo.bubbleInfo));
+    console.log("JSON.stringify(state) is:", JSON.stringify(state)); // if there was a real change
+
+    if (JSON.stringify(router.pageInfo.bubbleInfo) != JSON.stringify(state)) {
+      // add it to the page history
+      router.goTo(_objectSpread(_objectSpread({}, router.pageInfo), {}, {
+        bubbleInfo: state
+      }));
+    }
+  }); // 
+  // route changes update the state
+  // 
+
+  router.addEventListener("go", function () {
+    console.log("GO: JSON.stringify(router.pageInfo.bubbleInfo) is:", JSON.stringify(router.pageInfo.bubbleInfo));
+    console.log("GO: JSON.stringify(state) is:", JSON.stringify(state)); // update if something actually changed
+
+    if (JSON.stringify(router.pageInfo.bubbleInfo) != JSON.stringify(state)) {
+      Object.assign(state, router.pageInfo.bubbleInfo);
+    }
+  });
+  window.router = router; // give children the ability to 
+
+  return orgs.map(function (eachOrgData, index) {
+    return /*#__PURE__*/React.createElement(OrgBubble, {
+      org: eachOrgData,
+      selector: state,
+      orgIndex: index
+    });
+  });
+};
+},{"../components/OrgBubble":"../code/components/OrgBubble.jsx","@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js"}],"../code/pages/Home.jsx":[function(require,module,exports) {
+var _excluded = ["children"];
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+require("../systems/on_scroll");
+
+var GraphDisplay = require("../skeletons/GraphDisplay");
+
+var BaseTree = require("../skeletons/BaseTree");
+
+var InfoGraphic = require("../skeletons/InfoGraphic");
+
+var BubbleManager = require("../components/BubbleManager");
+
+var _require = require("quik-client"),
+    backend = _require.backend; // the content below would load the data... if it were big enough to fit in a javascript string
+// window.data.vulerabilities = require("../../../data/vulnerabilities_array.json")
+// window.data.repos.atom = require("../../../data/commit_logs/atom.json")
+
 
 module.exports = function (_ref) {
   var children = _ref.children,
@@ -14678,11 +14780,7 @@ module.exports = function (_ref) {
   return /*#__PURE__*/React.createElement("body", {
     class: "column centered",
     style: "height: 100vh; overflow: hidden;"
-  }, /*#__PURE__*/React.createElement(OrgBubble, {
-    org: org,
-    orgSelected: false,
-    treeSelected: false
-  }), /*#__PURE__*/React.createElement(InfoGraphic, null, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(BubbleManager, null), /*#__PURE__*/React.createElement(InfoGraphic, null, /*#__PURE__*/React.createElement("div", {
     style: "min-height: 10rem"
   }, /*#__PURE__*/React.createElement("h3", null, "Test Data")), /*#__PURE__*/React.createElement("div", {
     style: "min-height: 10rem"
@@ -14692,7 +14790,7 @@ module.exports = function (_ref) {
     style: "min-height: 10rem"
   }, /*#__PURE__*/React.createElement("h3", null, "Test Data"))));
 };
-},{"../systems/on_scroll":"../code/systems/on_scroll.js","../skeletons/GraphDisplay":"../code/skeletons/GraphDisplay.jsx","../skeletons/BaseTree":"../code/skeletons/BaseTree.jsx","../skeletons/InfoGraphic":"../code/skeletons/InfoGraphic.jsx","../components/OrgBubble":"../code/components/OrgBubble.jsx"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
+},{"../systems/on_scroll":"../code/systems/on_scroll.js","../skeletons/GraphDisplay":"../code/skeletons/GraphDisplay.jsx","../skeletons/BaseTree":"../code/skeletons/BaseTree.jsx","../skeletons/InfoGraphic":"../code/skeletons/InfoGraphic.jsx","../components/BubbleManager":"../code/components/BubbleManager.jsx","quik-client":"../../node_modules/quik-client/index.js"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
 var _excluded = ["children", "title", "actions"];
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -17128,8 +17226,9 @@ module.exports = function (_ref) {
 // add CSS before everything else
 require("css-baseline/css/3");
 
-require("./global.scss"); // libraries
+require("./global.scss");
 
+window.quik = require("quik-client"); // libraries
 
 var router = require("quik-router"); // pages
 
@@ -17139,9 +17238,9 @@ var Home = require("./code/pages/Home");
 var ProductView = require("./code/pages/ProductView");
 
 var PageNotFound = require("./code/pages/PageNotFound"); // every time something tries to change pages
+// router.addEventListener("go", onRouteChange)
+// first time the page loads
 
-
-router.addEventListener("navigate", onRouteChange); // first time the page loads
 
 onRouteChange();
 
@@ -17163,7 +17262,7 @@ function onRouteChange() {
     document.body = /*#__PURE__*/React.createElement(PageNotFound, null);
   }
 }
-},{"css-baseline/css/3":"../../node_modules/css-baseline/css/3.css","./global.scss":"../global.scss","quik-router":"../../node_modules/quik-router/main/main.js","./code/pages/Home":"../code/pages/Home.jsx","./code/pages/ProductView":"../code/pages/ProductView.jsx","./code/pages/PageNotFound":"../code/pages/PageNotFound.jsx"}],"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"css-baseline/css/3":"../../node_modules/css-baseline/css/3.css","./global.scss":"../global.scss","quik-client":"../../node_modules/quik-client/index.js","quik-router":"../../node_modules/quik-router/main/main.js","./code/pages/Home":"../code/pages/Home.jsx","./code/pages/ProductView":"../code/pages/ProductView.jsx","./code/pages/PageNotFound":"../code/pages/PageNotFound.jsx"}],"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -17191,7 +17290,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63255" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56136" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
