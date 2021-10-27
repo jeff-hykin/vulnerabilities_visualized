@@ -4,6 +4,7 @@ const express = require("express")
 
 app.use(cors())
 app.quikAdd("quik-dom")
+app.quikAdd("quik-backend")
 app.use(express.static('./static_files'))
 
 const port = 3000
