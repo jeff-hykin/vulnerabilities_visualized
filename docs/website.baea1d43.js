@@ -14719,9 +14719,7 @@ module.exports = function () {
   // 
 
   watch(state, function () {
-    console.log("JSON.stringify(router.pageInfo.bubbleInfo) is:", JSON.stringify(router.pageInfo.bubbleInfo));
-    console.log("JSON.stringify(state) is:", JSON.stringify(state)); // if there was a real change
-
+    // if there was a real change
     if (JSON.stringify(router.pageInfo.bubbleInfo) != JSON.stringify(state)) {
       // add it to the page history
       router.goTo(_objectSpread(_objectSpread({}, router.pageInfo), {}, {
@@ -14733,10 +14731,12 @@ module.exports = function () {
   // 
 
   router.addEventListener("go", function () {
-    console.log("GO: JSON.stringify(router.pageInfo.bubbleInfo) is:", JSON.stringify(router.pageInfo.bubbleInfo));
-    console.log("GO: JSON.stringify(state) is:", JSON.stringify(state)); // update if something actually changed
-
+    // update if something actually changed
     if (JSON.stringify(router.pageInfo.bubbleInfo) != JSON.stringify(state)) {
+      Object.assign(state, {
+        selectedOrgIndex: null,
+        selectedRepoIndex: null
+      });
       Object.assign(state, router.pageInfo.bubbleInfo);
     }
   });
@@ -17290,7 +17290,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56136" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56617" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
