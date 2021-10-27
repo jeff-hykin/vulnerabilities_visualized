@@ -2,7 +2,7 @@ require("../systems/on_scroll")
 const GraphDisplay = require("../skeletons/GraphDisplay")
 const BaseTree = require("../skeletons/BaseTree")
 const InfoGraphic = require("../skeletons/InfoGraphic")
-const OrgBubble = require("../components/OrgBubble")
+const BubbleManager = require("../components/BubbleManager")
 
 window.data = {}
 window.data.repos = {}
@@ -71,7 +71,8 @@ const org = [repoData, repoData]
 module.exports = ({ children, ...properties }) => {
     return (
         <body class="column centered" style="height: 100vh; overflow: hidden;">
-            <OrgBubble org={org} orgSelected={false} treeSelected={false} />
+            
+            <BubbleManager />
 
             <InfoGraphic>
                 <div style="min-height: 10rem">

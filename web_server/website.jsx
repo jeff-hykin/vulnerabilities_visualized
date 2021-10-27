@@ -1,6 +1,7 @@
 // add CSS before everything else
 require("css-baseline/css/3")
 require("./global.scss")
+window.quik = require("quik-client")
 // libraries
 const router = require("quik-router")
 
@@ -10,7 +11,7 @@ const ProductView = require("./code/pages/ProductView")
 const PageNotFound = require("./code/pages/PageNotFound")
 
 // every time something tries to change pages
-router.addEventListener("navigate", onRouteChange)
+// router.addEventListener("go", onRouteChange)
 // first time the page loads
 onRouteChange()
 
