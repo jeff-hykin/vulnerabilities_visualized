@@ -96,7 +96,7 @@ module.exports = ()=>{
         }
     })
     
-    // give children the ability to 
+    // give children the ability to change state 
     return orgs.map(
         (eachOrgData, index) => <OrgBubble org={eachOrgData} selector={state} orgIndex={index} />
     )
