@@ -76,8 +76,6 @@ module.exports = ()=>{
     // when the state changes update the route so that the back button works
     // 
     watch(state, ()=>{
-        console.log(`JSON.stringify(router.pageInfo.bubbleInfo) is:`,JSON.stringify(router.pageInfo.bubbleInfo))
-        console.log(`JSON.stringify(state) is:`,JSON.stringify(state))
         // if there was a real change
         if (JSON.stringify(router.pageInfo.bubbleInfo) != JSON.stringify(state)) {
             // add it to the page history
@@ -91,10 +89,9 @@ module.exports = ()=>{
     // route changes update the state
     // 
     router.addEventListener("go", ()=>{
-        console.log(`GO: JSON.stringify(router.pageInfo.bubbleInfo) is:`,JSON.stringify(router.pageInfo.bubbleInfo))
-        console.log(`GO: JSON.stringify(state) is:`,JSON.stringify(state))
         // update if something actually changed
         if (JSON.stringify(router.pageInfo.bubbleInfo) != JSON.stringify(state)) {
+            Object.assign(state, { selectedOrgIndex: null, selectedRepoIndex: null, })
             Object.assign(state, router.pageInfo.bubbleInfo)
         }
     })
