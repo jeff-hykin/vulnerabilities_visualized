@@ -96,8 +96,6 @@ module.exports = ()=>{
         }
     })
     
-    window.router = router
-    
     // give children the ability to 
     return orgs.map(
         (eachOrgData, index) => <OrgBubble org={eachOrgData} selector={state} orgIndex={index} />
