@@ -195,15 +195,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../node_modules/quik-client/index.js":[function(require,module,exports) {
-// get the quik symbol
-let quikUniqueKey = Symbol.for("quik")
-// if the quik-window doesnt exist, then create it
-window[quikUniqueKey] || (window[quikUniqueKey] = {})
-// return the window-quik object
-module.exports = window[quikUniqueKey]
-
-},{}],"../../node_modules/@vue/shared/dist/shared.esm-bundler.js":[function(require,module,exports) {
+},{"_css_loader":"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../node_modules/@vue/shared/dist/shared.esm-bundler.js":[function(require,module,exports) {
 var global = arguments[3];
 "use strict";
 
@@ -7491,7 +7483,15 @@ var Gun = require('gun/gun');
 
 globalThis.console = realConsole;
 module.exports = Gun;
-},{"./silent_require":"../code/tools/silent_require.js","gun/gun":"../../node_modules/gun/gun.js"}],"../../node_modules/tiny-emitter/index.js":[function(require,module,exports) {
+},{"./silent_require":"../code/tools/silent_require.js","gun/gun":"../../node_modules/gun/gun.js"}],"../../node_modules/quik-client/index.js":[function(require,module,exports) {
+// get the quik symbol
+let quikUniqueKey = Symbol.for("quik")
+// if the quik-window doesnt exist, then create it
+window[quikUniqueKey] || (window[quikUniqueKey] = {})
+// return the window-quik object
+module.exports = window[quikUniqueKey]
+
+},{}],"../../node_modules/tiny-emitter/index.js":[function(require,module,exports) {
 function E () {
   // Keep this empty so it's easier to inherit from
   // (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
@@ -21981,48 +21981,57 @@ module.exports = function (_ref) {
 // add CSS before everything else
 require("css-baseline/css/3");
 
-require("./global.scss");
+require("./global.scss"); // libraries
 
-window.quik = require("quik-client"); // libraries
 
 var router = require("quik-router");
 
-var Gun = require("./code/tools/gun");
+var Gun = require("./code/tools/gun"); // globals
 
+
+window.quik = require("quik-client");
 window.gun = Gun({
   peers: ['http://localhost:8765/gun']
-}); // pages
+}); // 
+// pages
+// 
 
 var Home = require("./code/pages/Home");
 
 var ProductView = require("./code/pages/ProductView");
 
-var PageNotFound = require("./code/pages/PageNotFound"); // every time something tries to change pages
-// router.addEventListener("go", onRouteChange)
-// first time the page loads
+var PageNotFound = require("./code/pages/PageNotFound"); // 
+// every time something tries to change pages
+// 
 
 
-onRouteChange();
+var previousPage = NaN; // NaN is just for init (makes comparision always not-equal)
 
 function onRouteChange() {
-  var pageInfo = router.pageInfo; // silently redirect to home page
+  // if the page changes
+  if (previousPage != router.pageInfo.page) {
+    previousPage = router.pageInfo.page; // silently redirect to home page
 
-  if (pageInfo.name == null) {
-    pageInfo.name = "home";
-  } // 
-  // load page
-  // 
+    if (previousPage == null) {
+      previousPage = "home";
+    } // 
+    // load page
+    // 
 
 
-  if (pageInfo.name == "home") {
-    document.body = /*#__PURE__*/React.createElement(Home, null);
-  } else if (pageInfo.name == "product-view") {
-    document.body = /*#__PURE__*/React.createElement(ProductView, null);
-  } else {
-    document.body = /*#__PURE__*/React.createElement(PageNotFound, null);
+    if (previousPage == "home") {
+      document.body = /*#__PURE__*/React.createElement(Home, null);
+    } else if (previousPage == "product-view") {
+      document.body = /*#__PURE__*/React.createElement(ProductView, null);
+    } else {
+      document.body = /*#__PURE__*/React.createElement(PageNotFound, null);
+    }
   }
 }
-},{"css-baseline/css/3":"../../node_modules/css-baseline/css/3.css","./global.scss":"../global.scss","quik-client":"../../node_modules/quik-client/index.js","quik-router":"../../node_modules/quik-router/main/main.js","./code/tools/gun":"../code/tools/gun.js","./code/pages/Home":"../code/pages/Home.jsx","./code/pages/ProductView":"../code/pages/ProductView.jsx","./code/pages/PageNotFound":"../code/pages/PageNotFound.jsx"}],"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+router.addEventListener("go", onRouteChange);
+onRouteChange(); // first time the page loads
+},{"css-baseline/css/3":"../../node_modules/css-baseline/css/3.css","./global.scss":"../global.scss","quik-router":"../../node_modules/quik-router/main/main.js","./code/tools/gun":"../code/tools/gun.js","quik-client":"../../node_modules/quik-client/index.js","./code/pages/Home":"../code/pages/Home.jsx","./code/pages/ProductView":"../code/pages/ProductView.jsx","./code/pages/PageNotFound":"../code/pages/PageNotFound.jsx"}],"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -22050,7 +22059,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61809" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56155" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
