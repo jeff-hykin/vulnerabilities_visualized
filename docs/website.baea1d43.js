@@ -2762,7 +2762,7 @@ var proxyObject = new Proxy(originalThing, {
 });
 
 var silentRequire = function silentRequire() {
-  globalThis.console = silentRequire.console;
+  globalThis.console = silentRequire.silentConsole;
 
   var output = require.apply(void 0, arguments);
 
@@ -21987,8 +21987,11 @@ window.quik = require("quik-client"); // libraries
 
 var router = require("quik-router");
 
-var Gun = require("./code/tools/gun"); // pages
+var Gun = require("./code/tools/gun");
 
+window.gun = Gun({
+  peers: ['http://localhost:8765/gun']
+}); // pages
 
 var Home = require("./code/pages/Home");
 
@@ -22047,7 +22050,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55783" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61809" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

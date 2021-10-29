@@ -20,7 +20,7 @@ const proxyObject = new Proxy(originalThing, {
 })
 
 const silentRequire = (...args) => {
-    globalThis.console = silentRequire.console
+    globalThis.console = silentRequire.silentConsole
     const output = require(...args)
     globalThis.console = realConsole
     return output

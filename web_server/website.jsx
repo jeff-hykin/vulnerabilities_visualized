@@ -6,6 +6,10 @@ window.quik = require("quik-client")
 const router = require("quik-router")
 const Gun = require("./code/tools/gun")
 
+window.gun = Gun({peers: [
+    'http://localhost:8765/gun',
+]})
+
 // pages
 const Home = require("./code/pages/Home")
 const ProductView = require("./code/pages/ProductView")
