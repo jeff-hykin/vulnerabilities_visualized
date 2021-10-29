@@ -1,6 +1,8 @@
 const app = require("quik-server")
 const cors = require('cors')
 const express = require("express")
+const silentRequire = require("./code/tools/silent_require")
+const Gun = silentRequire('gun')
 
 app.use(cors())
 app.quikAdd("quik-dom")
@@ -21,6 +23,7 @@ app.settings = {
         outDir: "./docs",
     }, // see https://parceljs.org/api.html for options
     afterServerStarted: () => {
+        const gun = Gun({web: app.settings.server})
         console.log(`Server running on http://localhost:${port}`)
     },
 }

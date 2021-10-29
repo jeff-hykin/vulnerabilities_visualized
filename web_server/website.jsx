@@ -4,6 +4,7 @@ require("./global.scss")
 window.quik = require("quik-client")
 // libraries
 const router = require("quik-router")
+const Gun = require("./code/tools/gun")
 
 // pages
 const Home = require("./code/pages/Home")

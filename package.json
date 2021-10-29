@@ -39,6 +39,7 @@
     "express": "^4.17.1",
     "good-dom": "^4.2.1",
     "good-jsx": "^1.4.1",
+    "gun": "^0.2020.1235",
     "has-cors": "^1.1.0",
     "lodash": "^4.17.21",
     "lodash-contrib": "^4.1200.1",
