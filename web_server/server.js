@@ -2,8 +2,7 @@ const app = require("quik-server")
 const cors = require('cors')
 const express = require("express")
 const http = require('http')
-const silentRequire = require("./code/tools/silent_require")
-const Gun = silentRequire('gun')
+const Gun = require("./code/tools/gun_case")
 const path = require("path")
 
 // 

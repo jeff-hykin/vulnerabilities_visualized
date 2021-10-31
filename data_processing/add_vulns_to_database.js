@@ -1,7 +1,7 @@
 const fs = require("fs")
 const path = require("path")
 const http = require("http")
-const Gun = require('gun')
+const Gun = require('../web_server/code/tools/gun_case')
 const { string } = require("good-js")
 const vulnsByProduct = require("../data/vulnerabilities_by_product.json")
 const doneRepos = require("./done_repos.do_not_sync.json")
@@ -9,10 +9,7 @@ const doneRepos = require("./done_repos.do_not_sync.json")
 // 
 // database server
 // 
-const databasePort = 8765
-const databasePath = path.join(process.env.FORNIX_FOLDER, "data", "database")
 const gun = Gun({ peers: ['http://localhost:8765/gun'], })
-const Db = require("./gun_case")(gun)
 
 setTimeout(async () => {
     // for each repo

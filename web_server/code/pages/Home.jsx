@@ -5,6 +5,10 @@ const InfoGraphic = require("../skeletons/InfoGraphic")
 const BubbleManager = require("../components/BubbleManager")
 const { backend } = require("quik-client")
 
+
+window.db = require("../systems/db")
+
+// db.get(["vulns", "ios"])
 // get all products: gun.get("vulns").map((v,key)=>console.log("v:",key)).once(_=>console.log("DONE!"))
 
 module.exports = ({ children, ...properties }) => {

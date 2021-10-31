@@ -4,13 +4,6 @@ require("./global.scss")
 
 // libraries
 const router = require("quik-router")
-const Gun = require("./code/tools/gun")
-
-// globals
-window.quik = require("quik-client")
-window.gun = Gun({peers: [
-    'http://localhost:8765/gun',
-]})
 
 // 
 // pages
