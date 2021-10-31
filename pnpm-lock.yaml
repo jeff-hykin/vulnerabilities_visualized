@@ -20,6 +20,7 @@ specifiers:
   engine.io-parser: ^5.0.1
   express: ^4.17.1
   good-dom: ^4.2.1
+  good-js: 3.1.1
   good-jsx: ^1.4.1
   gun: ^0.2020.1235
   has-cors: ^1.1.0
@@ -65,6 +66,7 @@ dependencies:
   engine.io-parser: 5.0.1
   express: 4.17.1
   good-dom: 4.2.1
+  good-js: 3.1.1
   good-jsx: 1.4.1
   gun: 0.2020.1235
   has-cors: 1.1.0
@@ -3278,6 +3280,12 @@ packages:
     resolution: {integrity: sha512-Rd62XSTGuxIOPfiLp/h8JaLD/zrmHqsM/7nsTvtZjJa/E6dMgD/u9H/O5jzeb0xtGQ5TLdRcD+QG7UDMJ1TE4g==}
     dev: false
 
+  /good-js/3.1.1:
+    resolution: {integrity: sha512-1+ip1A02wP5WwiV93M4pjZ+mZVm2yqsOynhkCq0ChEb6xwlVSPjda8jMVYxsLb0tgAAVVmEA58herVf5gjwhfg==}
+    dependencies:
+      node-fetch: 2.6.5
+    dev: false
+
   /good-jsx/1.4.1:
     resolution: {integrity: sha512-i7awL4l+7W2Cn5TG0/f+6DzUYe5ImRZkYwvwQElo8UgW1jq4/F0c202LnTBZ3DagbVfTIA9lItByHUwAPNQaVQ==}
     dependencies:
@@ -4282,6 +4290,13 @@ packages:
   /node-fetch/2.6.2:
     resolution: {integrity: sha512-aLoxToI6RfZ+0NOjmWAgn9+LEd30YCkJKFSyWacNZdEKTit/ZMcKjGkTRo8uWEsnIb/hfKecNPEbln02PdWbcA==}
     engines: {node: 4.x || >=6.0.0}
+    dev: false
+
+  /node-fetch/2.6.5:
+    resolution: {integrity: sha512-mmlIVHJEu5rnIxgEgez6b9GgWXbkZj5YZ7fx+2r94a2E+Uirsp6HsPTPlomfdHtpt/B0cdKviwkoaM6pyvUOpQ==}
+    engines: {node: 4.x || >=6.0.0}
+    dependencies:
+      whatwg-url: 5.0.0
     dev: false
 
   /node-forge/0.10.0:
@@ -6051,6 +6066,10 @@ packages:
       punycode: 2.1.1
     dev: false
 
+  /tr46/0.0.3:
+    resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=}
+    dev: false
+
   /tr46/1.0.1:
     resolution: {integrity: sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=}
     dependencies:
@@ -6338,6 +6357,10 @@ packages:
     dev: false
     optional: true
 
+  /webidl-conversions/3.0.1:
+    resolution: {integrity: sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE=}
+    dev: false
+
   /webidl-conversions/4.0.2:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
     dev: false
@@ -6350,6 +6373,13 @@ packages:
 
   /whatwg-mimetype/2.3.0:
     resolution: {integrity: sha512-M4yMwr6mAnQz76TbJm914+gPpB/nCwvZbJU28cUD6dR004SAxDLOOSUaB1JDRqLtaOV/vi0IC5lEAGFgrjGv/g==}
+    dev: false
+
+  /whatwg-url/5.0.0:
+    resolution: {integrity: sha1-lmRU6HZUYuN2RNNib2dCzotwll0=}
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
     dev: false
 
   /whatwg-url/7.1.0:

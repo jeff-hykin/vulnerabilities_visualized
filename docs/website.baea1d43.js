@@ -19523,9 +19523,7 @@ var InfoGraphic = require("../skeletons/InfoGraphic");
 var BubbleManager = require("../components/BubbleManager");
 
 var _require = require("quik-client"),
-    backend = _require.backend; // the content below would load the data... if it were big enough to fit in a javascript string
-// window.data.vulerabilities = require("../../../data/vulnerabilities_array.json")
-// window.data.repos.atom = require("../../../data/commit_logs/atom.json")
+    backend = _require.backend; // get all products: gun.get("vulns").map((v,key)=>console.log("v:",key)).once(_=>console.log("DONE!"))
 
 
 module.exports = function (_ref) {
@@ -22059,7 +22057,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56155" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53577" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -38,6 +38,7 @@
     "engine.io-parser": "^5.0.1",
     "express": "^4.17.1",
     "good-dom": "^4.2.1",
+    "good-js": "3.1.1",
     "good-jsx": "^1.4.1",
     "gun": "^0.2020.1235",
     "has-cors": "^1.1.0",

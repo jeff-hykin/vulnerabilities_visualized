@@ -10,7 +10,7 @@ const path = require("path")
 // database server
 // 
 const databasePort = 8765
-const databasePath = path.join(__dirname, "data", "database")
+const databasePath = path.join(process.env.FORNIX_FOLDER, "data", "database")
 const gun = Gun({
     web: http.createServer(Gun.serve(path.dirname(databasePath))).listen(databasePort),
     // "file" is a misnomer, its actually a folder
