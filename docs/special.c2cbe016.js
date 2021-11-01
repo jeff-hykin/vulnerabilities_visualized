@@ -9609,8 +9609,8 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
           // setup of the "backend" object
           quik.backend = {
             "data": {
-              "productNamesWithVulnData": "data/productNamesWithVulnData",
-              "vulnerabilitesForProduct": "data/vulnerabilitesForProduct"
+              "productNames": "data/productNames",
+              "vulnerabilitiesFor": "data/vulnerabilitiesFor"
             }
           };
           window.io = require("socket.io-client");
@@ -9787,7 +9787,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54693" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55813" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -14769,6 +14769,10 @@ var BubbleManager = require("../components/BubbleManager");
 var _require = require("quik-client"),
     backend = _require.backend;
 
+window.backend = backend; // example of using backend data
+//    const names = await backend.data.productNames()
+//    const dataForFirst = await backend.data.vulnerabilitiesFor({product: names[0]})
+
 module.exports = function (_ref) {
   var children = _ref.children,
       properties = _objectWithoutProperties(_ref, _excluded);
@@ -17293,7 +17297,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54693" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55813" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

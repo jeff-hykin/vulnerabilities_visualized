@@ -5,6 +5,10 @@ const InfoGraphic = require("../skeletons/InfoGraphic")
 const BubbleManager = require("../components/BubbleManager")
 const { backend } = require("quik-client")
 
+window.backend = backend
+// example of using backend data
+//    const names = await backend.data.productNames()
+//    const dataForFirst = await backend.data.vulnerabilitiesFor({product: names[0]})
 
 module.exports = ({ children, ...properties }) => {
     return (
