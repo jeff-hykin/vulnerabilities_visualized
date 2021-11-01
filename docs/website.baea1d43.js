@@ -14575,67 +14575,133 @@ var _require = require("@vue-reactivity/watch"),
 module.exports = function (_ref) {
   var org = _ref.org,
       selector = _ref.selector,
-      orgIndex = _ref.orgIndex;
+      indexOfThisOrg = _ref.indexOfThisOrg;
   // 
   // create elements
   // 
-  var thisComponent = /*#__PURE__*/React.createElement("div", {
+  var bubble = /*#__PURE__*/React.createElement("div", {
     class: "orgBubble",
     onclick: function onclick() {
-      return selector.selectedOrgIndex = orgIndex, selector.selectedRepoIndex = null;
+      // update the data
+      console.log("setting indexOfThisOrg ", indexOfThisOrg);
+      Object.assign(selector, {
+        // this org is selected
+        selectedOrgIndex: indexOfThisOrg,
+        // no repo is selected
+        selectedRepoIndex: null
+      });
     }
   });
   var repoElements = org.map(function (tree, index) {
-    return /*#__PURE__*/React.createElement("div", {
+    var repoElement = /*#__PURE__*/React.createElement("div", {
+      class: "repo",
       onclick: function onclick(eventObject) {
         // don't let it activate the outer onclick
         eventObject.stopPropagation(); // update the data
 
         Object.assign(selector, {
-          selectedOrgIndex: orgIndex,
+          selectedOrgIndex: indexOfThisOrg,
           selectedRepoIndex: index
         });
-      },
-      style: {
-        position: "absolute",
-        transform: "translate(".concat(index * 100 / org.length, "%,").concat(index % 2 * -50, "px)")
       }
     }, /*#__PURE__*/React.createElement(BaseTree, {
       treeData: tree
     }));
+    return repoElement;
   });
-  thisComponent.children = repoElements; // 
+  bubble.children = repoElements; // 
   // make them reactive
   // 
 
-  watch(selector, function () {
-    // 
-    // when unselected do:
-    // 
-    if (selector.selectedOrgIndex != orgIndex) {
-      thisComponent.class = "orgBubble";
-      thisComponent.children = repoElements; // reset/enable the pointer events
-
-      delete thisComponent.style.pointerEvents; // 
-      // when selected do:
-      // 
+  var updateCssClass;
+  watch(selector, updateCssClass = function updateCssClass() {
+    // if no org selected, show self
+    if (selector.selectedOrgIndex == null) {
+      bubble.class = "orgBubble overview"; // if not-this-org selected
+    } else if (selector.selectedOrgIndex != indexOfThisOrg) {
+      // hides self
+      bubble.class = "orgBubble"; // if this-org IS selected
     } else {
-      // if repo selected
-      if (selector.selectedRepoIndex) {
-        // remove all of them except the selected repo
-        thisComponent.children = [repoElements[selector.selectedRepoIndex]]; // remove the bubble's class to focus on the repo
-
-        thisComponent.class = "orgBubbleRepoFocus"; // if whole bubble selected
+      // check if its focused on a repo or not
+      if (selector.selectedRepoIndex == null) {
+        // focus on the bubble itself
+        setTimeout(function () {
+          bubble.class = "orgBubble focused";
+        }, 500);
       } else {
-        // (not sure what the desired behavor is)
-        thisComponent.class = "orgBubbleFocused";
-        thisComponent.children = repoElements;
+        // fade away and focus on the repo
+        bubble.class = "orgBubble focused repoFocus";
+        setTimeout(function () {
+          repoElements[selector.selectedRepoIndex].class = "repo selected";
+        }, 500);
       }
     }
   });
-  return thisComponent;
+  updateCssClass();
+  return bubble;
 };
-},{"../skeletons/BaseTree":"../code/skeletons/BaseTree.jsx","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/components/BubbleManager.jsx":[function(require,module,exports) {
+},{"../skeletons/BaseTree":"../code/skeletons/BaseTree.jsx","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../../node_modules/fast-json-stable-stringify/index.js":[function(require,module,exports) {
+'use strict';
+
+module.exports = function (data, opts) {
+    if (!opts) opts = {};
+    if (typeof opts === 'function') opts = { cmp: opts };
+    var cycles = (typeof opts.cycles === 'boolean') ? opts.cycles : false;
+
+    var cmp = opts.cmp && (function (f) {
+        return function (node) {
+            return function (a, b) {
+                var aobj = { key: a, value: node[a] };
+                var bobj = { key: b, value: node[b] };
+                return f(aobj, bobj);
+            };
+        };
+    })(opts.cmp);
+
+    var seen = [];
+    return (function stringify (node) {
+        if (node && node.toJSON && typeof node.toJSON === 'function') {
+            node = node.toJSON();
+        }
+
+        if (node === undefined) return;
+        if (typeof node == 'number') return isFinite(node) ? '' + node : 'null';
+        if (typeof node !== 'object') return JSON.stringify(node);
+
+        var i, out;
+        if (Array.isArray(node)) {
+            out = '[';
+            for (i = 0; i < node.length; i++) {
+                if (i) out += ',';
+                out += stringify(node[i]) || 'null';
+            }
+            return out + ']';
+        }
+
+        if (node === null) return 'null';
+
+        if (seen.indexOf(node) !== -1) {
+            if (cycles) return JSON.stringify('__cycle__');
+            throw new TypeError('Converting circular structure to JSON');
+        }
+
+        var seenIndex = seen.push(node) - 1;
+        var keys = Object.keys(node).sort(cmp && cmp(node));
+        out = '';
+        for (i = 0; i < keys.length; i++) {
+            var key = keys[i];
+            var value = stringify(node[key]);
+
+            if (!value) continue;
+            if (out) out += ',';
+            out += JSON.stringify(key) + ':' + value;
+        }
+        seen.splice(seenIndex, 1);
+        return '{' + out + '}';
+    })(data);
+};
+
+},{}],"../code/components/BubbleManager.jsx":[function(require,module,exports) {
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -14651,6 +14717,8 @@ var _require2 = require("@vue-reactivity/watch"),
     watch = _require2.watch;
 
 var router = require("quik-router");
+
+var stringify = require('fast-json-stable-stringify');
 
 var repoData = {
   name: "topLevel",
@@ -14702,46 +14770,30 @@ var orgs = [// org1
 [repoData, repoData], [repoData, repoData]];
 
 module.exports = function () {
-  // create state for children
-  var state = reactive({
-    selectedOrgIndex: null,
-    selectedRepoIndex: null
-  }); // 
-  // when the state changes update the route so that the back button works
+  var _router$pageInfo;
+
+  // init router info
+  router.pageInfo.bubbleInfo = _objectSpread(_defineProperty({
+    selectedOrgIndex: null
+  }, "selectedOrgIndex", null), (_router$pageInfo = router.pageInfo) === null || _router$pageInfo === void 0 ? void 0 : _router$pageInfo.bubbleInfo); // 
+  // create elements
   // 
 
-  watch(state, function () {
-    // if there was a real change
-    if (JSON.stringify(router.pageInfo.bubbleInfo) != JSON.stringify(state)) {
-      // add it to the page history
-      router.goTo(_objectSpread(_objectSpread({}, router.pageInfo), {}, {
-        bubbleInfo: state
-      }));
+  return /*#__PURE__*/React.createElement("div", {
+    class: "column centered",
+    style: {
+      width: "100%"
     }
-  }); // 
-  // route changes update the state
-  // 
-
-  router.addEventListener("go", function () {
-    // update if something actually changed
-    if (JSON.stringify(router.pageInfo.bubbleInfo) != JSON.stringify(state)) {
-      Object.assign(state, {
-        selectedOrgIndex: null,
-        selectedRepoIndex: null
-      });
-      Object.assign(state, router.pageInfo.bubbleInfo);
-    }
-  }); // give children the ability to change state 
-
-  return orgs.map(function (eachOrgData, index) {
+  }, orgs.map( // give children the ability to change state 
+  function (eachOrgData, index) {
     return /*#__PURE__*/React.createElement(OrgBubble, {
       org: eachOrgData,
-      selector: state,
-      orgIndex: index
+      selector: router.pageInfo.bubbleInfo,
+      indexOfThisOrg: index
     });
-  });
+  }));
 };
-},{"../components/OrgBubble":"../code/components/OrgBubble.jsx","@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js"}],"../../node_modules/quik-client/index.js":[function(require,module,exports) {
+},{"../components/OrgBubble":"../code/components/OrgBubble.jsx","@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","fast-json-stable-stringify":"../../node_modules/fast-json-stable-stringify/index.js"}],"../../node_modules/quik-client/index.js":[function(require,module,exports) {
 // get the quik symbol
 let quikUniqueKey = Symbol.for("quik")
 // if the quik-window doesnt exist, then create it
@@ -17297,7 +17349,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58184" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60628" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
