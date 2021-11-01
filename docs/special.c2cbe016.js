@@ -9609,6 +9609,7 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
           // setup of the "backend" object
           quik.backend = {
             "data": {
+              "commitLogFor": "data/commitLogFor",
               "productNames": "data/productNames",
               "vulnerabilitiesFor": "data/vulnerabilitiesFor"
             }
@@ -9787,7 +9788,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55813" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58184" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
