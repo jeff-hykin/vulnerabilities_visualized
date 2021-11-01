@@ -33,6 +33,8 @@ globalThis.console = realConsole
 // it uses global vars :(
 require('gun/lib/load.js')
 
+Gun.log.once = ()=>0
+
 // 
 // helpers
 // 
@@ -54,36 +56,44 @@ const wrapper = (...args)=>{
             const node = nodeFromKeylist(db, keyList)
             if (shallow) {
                 return new Promise((resolve, reject)=>node.once(resolve))
+            } else if (true) {
+                return new Promise((resolve, reject)=>node.load(resolve))
             } else {
                 const valueObject = new Map()
                 // recursive method that bottoms-out based on the valueObject
                 const getSubgraph = (node)=>new Promise((resolve, reject)=>node.once(async (value)=>{
-                        const id = Gun.node.soul(node)
+                        const id = node._.id
                         // make it known that this id is already set
                         valueObject.set(id, value)
                         if (value instanceof Object) {
                             const promises = []
-                            for (const [key, subValue] of Object.entries(value)) {
+                            for (const [key, _] of Object.entries(value)) {
                                 // if node, be recursive
-                                if (Gun.node.is(subValue)) {
-                                    const subValueId = Gun.node.is(subValue)
-                                    // if the value has already been explored
-                                    if (valueObject.has(subValueId)) {
-                                        value[key] = valueObject.get(subValueId)
-                                    } else {
-                                        promises.push(
-                                            getSubgraph(subValue).then(
-                                                // connect the sub value once its finished
-                                                refinedSubValue=>(value[key]=refinedSubValue)
+                                if (key != "_" ) {
+                                    const subValue = node.get(key)
+                                    if (subValue instanceof Object && subValue._ instanceof Object && subValue._.id) {
+                                        const subValueId = subValue._.id
+                                        // if the value has already been explored
+                                        if (valueObject.has(subValueId)) {
+                                            value[key] = valueObject.get(subValueId)
+                                        } else {
+                                            promises.push(
+                                                getSubgraph(subValue).then(
+                                                    // connect the sub value once its finished
+                                                    refinedSubValue=>(value[key]=refinedSubValue)
+                                                )
                                             )
-                                        )
+                                        }
                                     }
                                 }
                             }
+                            let index = 0
                             for (const each of promises) {
+                                console.debug(node._.$._.link, ` is on:`,++index)
                                 await each
                             }
                         }
+                        console.debug(`finished: `,value)
                         resolve(value)
                     }))
                 

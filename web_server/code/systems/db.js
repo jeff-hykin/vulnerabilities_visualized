@@ -4,6 +4,7 @@ const db = Gun({ peers: ["http://localhost:8765/gun"] })
 
 // spreading it out for autocomplete detection
 module.exports = {
+    ...db,
     get: db.get,
     set: db.set,
     delete: db.delete,

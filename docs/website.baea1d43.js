@@ -19602,7 +19602,11 @@ if (insideOfBrowser) {
 
 globalThis.console = realConsole; // it uses global vars :(
 
-require('gun/lib/load.js'); // 
+require('gun/lib/load.js');
+
+Gun.log.once = function () {
+  return 0;
+}; // 
 // helpers
 // 
 
@@ -19646,6 +19650,10 @@ var wrapper = function wrapper() {
         return new Promise(function (resolve, reject) {
           return node.once(resolve);
         });
+      } else if (true) {
+        return new Promise(function (resolve, reject) {
+          return node.load(resolve);
+        });
       } else {
         var valueObject = new Map(); // recursive method that bottoms-out based on the valueObject
 
@@ -19653,18 +19661,18 @@ var wrapper = function wrapper() {
           return new Promise(function (resolve, reject) {
             return node.once( /*#__PURE__*/function () {
               var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
-                var id, promises, _loop, _i, _Object$entries, _i2, _promises, each;
+                var id, promises, _loop, _i, _Object$entries, index, _i2, _promises, each;
 
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
                       case 0:
-                        id = Gun.node.soul(node); // make it known that this id is already set
+                        id = node._.id; // make it known that this id is already set
 
                         valueObject.set(id, value);
 
                         if (!(value instanceof Object)) {
-                          _context.next = 14;
+                          _context.next = 16;
                           break;
                         }
 
@@ -19673,19 +19681,23 @@ var wrapper = function wrapper() {
                         _loop = function _loop() {
                           var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
                               key = _Object$entries$_i[0],
-                              subValue = _Object$entries$_i[1];
+                              _ = _Object$entries$_i[1];
 
                           // if node, be recursive
-                          if (Gun.node.is(subValue)) {
-                            var subValueId = Gun.node.is(subValue); // if the value has already been explored
+                          if (key != "_") {
+                            var subValue = node.get(key);
 
-                            if (valueObject.has(subValueId)) {
-                              value[key] = valueObject.get(subValueId);
-                            } else {
-                              promises.push(getSubgraph(subValue).then( // connect the sub value once its finished
-                              function (refinedSubValue) {
-                                return value[key] = refinedSubValue;
-                              }));
+                            if (subValue instanceof Object && subValue._ instanceof Object && subValue._.id) {
+                              var subValueId = subValue._.id; // if the value has already been explored
+
+                              if (valueObject.has(subValueId)) {
+                                value[key] = valueObject.get(subValueId);
+                              } else {
+                                promises.push(getSubgraph(subValue).then( // connect the sub value once its finished
+                                function (refinedSubValue) {
+                                  return value[key] = refinedSubValue;
+                                }));
+                              }
                             }
                           }
                         };
@@ -19694,27 +19706,30 @@ var wrapper = function wrapper() {
                           _loop();
                         }
 
+                        index = 0;
                         _i2 = 0, _promises = promises;
 
-                      case 7:
+                      case 8:
                         if (!(_i2 < _promises.length)) {
-                          _context.next = 14;
+                          _context.next = 16;
                           break;
                         }
 
                         each = _promises[_i2];
-                        _context.next = 11;
+                        console.debug(node._.$._.link, " is on:", ++index);
+                        _context.next = 13;
                         return each;
 
-                      case 11:
+                      case 13:
                         _i2++;
-                        _context.next = 7;
+                        _context.next = 8;
                         break;
 
-                      case 14:
+                      case 16:
+                        console.debug("finished: ", value);
                         resolve(value);
 
-                      case 15:
+                      case 18:
                       case "end":
                         return _context.stop();
                     }
@@ -19846,20 +19861,26 @@ module.exports = new Proxy(wrapper, {
   }
 });
 },{"gun/gun":"../../node_modules/gun/gun.js","gun":"../../node_modules/gun/browser.js","gun/lib/load.js":"../../node_modules/gun/lib/load.js"}],"../code/systems/db.js":[function(require,module,exports) {
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var Gun = require("../tools/gun_case");
 
 var db = Gun({
   peers: ["http://localhost:8765/gun"]
 }); // spreading it out for autocomplete detection
 
-module.exports = {
+module.exports = _objectSpread(_objectSpread({}, db), {}, {
   get: db.get,
   set: db.set,
   delete: db.delete,
   merge: db.merge,
   keys: db.keys,
   connect: db.connect
-};
+});
 },{"../tools/gun_case":"../code/tools/gun_case.js"}],"../code/pages/Home.jsx":[function(require,module,exports) {
 var _excluded = ["children"];
 
@@ -19880,7 +19901,8 @@ var BubbleManager = require("../components/BubbleManager");
 var _require = require("quik-client"),
     backend = _require.backend;
 
-window.db = require("../systems/db"); // db.get(["vulns", "ios"])
+window.db = require("../systems/db");
+window.quik = require("quik-client"); // db.get(["vulns", "ios"])
 // get all products: gun.get("vulns").map((v,key)=>console.log("v:",key)).once(_=>console.log("DONE!"))
 
 module.exports = function (_ref) {
@@ -22407,7 +22429,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63355" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52859" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

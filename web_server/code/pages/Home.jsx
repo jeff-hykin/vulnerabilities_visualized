@@ -7,6 +7,7 @@ const { backend } = require("quik-client")
 
 
 window.db = require("../systems/db")
+window.quik = require("quik-client")
 
 // db.get(["vulns", "ios"])
 // get all products: gun.get("vulns").map((v,key)=>console.log("v:",key)).once(_=>console.log("DONE!"))
