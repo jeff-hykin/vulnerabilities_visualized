@@ -9614,7 +9614,9 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
             }
           };
           window.io = require("socket.io-client");
-          window.socket = new io.connect(); // a helper for setting nested values 
+          window.socket = new io.connect("/", {
+            'reconnection': false
+          }); // a helper for setting nested values 
 
           // a helper for getting nested values 
           get = function get(obj, keyList) {
@@ -9785,7 +9787,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52859" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54693" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -2,19 +2,8 @@ const app = require("quik-server")
 const cors = require('cors')
 const express = require("express")
 const http = require('http')
-const Gun = require("./code/tools/gun_case")
 const path = require("path")
 
-// 
-// database server
-// 
-const databasePort = 8765
-const databasePath = path.join(process.env.FORNIX_FOLDER, "data", "database")
-const gun = Gun({
-    web: http.createServer(Gun.serve(path.dirname(databasePath))).listen(databasePort),
-    // "file" is a misnomer, its actually a folder
-    file: path.basename(databasePath),
-})
 
 // 
 // webserver
