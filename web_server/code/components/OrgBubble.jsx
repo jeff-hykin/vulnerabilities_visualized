@@ -9,7 +9,6 @@ module.exports = ({ org, selector, indexOfThisOrg })=>{
         class="orgBubble"
         onclick={()=>{
             // update the data
-            console.log(`setting indexOfThisOrg `, indexOfThisOrg)
             Object.assign(selector, {
                 // this org is selected
                 selectedOrgIndex: indexOfThisOrg,
@@ -24,8 +23,19 @@ module.exports = ({ org, selector, indexOfThisOrg })=>{
             onclick={(eventObject)=>{
                 // don't let it activate the outer onclick
                 eventObject.stopPropagation()
-                // update the data
-                Object.assign(selector, {selectedOrgIndex: indexOfThisOrg, selectedRepoIndex: index})
+                
+                if (selector.selectedOrgIndex != indexOfThisOrg) {
+                    // select the org before the repo
+                    Object.assign(selector, {
+                        // this org is selected
+                        selectedOrgIndex: indexOfThisOrg,
+                        // no repo is selected
+                        selectedRepoIndex: null,
+                    })
+                } else {
+                    // select this specific repo
+                    Object.assign(selector, {selectedOrgIndex: indexOfThisOrg, selectedRepoIndex: index})
+                }
             }}
             >
             <BaseTree treeData={tree}/>

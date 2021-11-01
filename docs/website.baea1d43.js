@@ -14583,7 +14583,6 @@ module.exports = function (_ref) {
     class: "orgBubble",
     onclick: function onclick() {
       // update the data
-      console.log("setting indexOfThisOrg ", indexOfThisOrg);
       Object.assign(selector, {
         // this org is selected
         selectedOrgIndex: indexOfThisOrg,
@@ -14597,12 +14596,23 @@ module.exports = function (_ref) {
       class: "repo",
       onclick: function onclick(eventObject) {
         // don't let it activate the outer onclick
-        eventObject.stopPropagation(); // update the data
+        eventObject.stopPropagation();
 
-        Object.assign(selector, {
-          selectedOrgIndex: indexOfThisOrg,
-          selectedRepoIndex: index
-        });
+        if (selector.selectedOrgIndex != indexOfThisOrg) {
+          // select the org before the repo
+          Object.assign(selector, {
+            // this org is selected
+            selectedOrgIndex: indexOfThisOrg,
+            // no repo is selected
+            selectedRepoIndex: null
+          });
+        } else {
+          // select this specific repo
+          Object.assign(selector, {
+            selectedOrgIndex: indexOfThisOrg,
+            selectedRepoIndex: index
+          });
+        }
       }
     }, /*#__PURE__*/React.createElement(BaseTree, {
       treeData: tree
@@ -17349,7 +17359,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60628" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65178" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
