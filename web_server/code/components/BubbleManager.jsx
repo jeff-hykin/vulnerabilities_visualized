@@ -64,6 +64,8 @@ const orgs = [
     // org1
     [repoData, repoData],
     [repoData, repoData],
+    [repoData, repoData],
+    [repoData, repoData],
 ]
 
 module.exports = ()=>{
@@ -73,14 +75,28 @@ module.exports = ()=>{
         selectedOrgIndex: null,
         ...router.pageInfo?.bubbleInfo
     }
+
+    const dashboard = <div class="column centered mainDiv dashboardView" style={{width:"100%"}}>
+    {orgs.map(
+        // give children the ability to change state 
+        (eachOrgData, index) => <OrgBubble org={eachOrgData} selector={router.pageInfo.bubbleInfo} indexOfThisOrg={index} />
+    )}
+</div>
+
+    let updateCssClass
+    watch(router.pageInfo.bubbleInfo, updateCssClass=()=>{
+        // if no org selected, show self
+        if (router.pageInfo.bubbleInfo.selectedOrgIndex == null) {
+            dashboard.class = "column centered mainDiv dashboardView"
+        // if not-this-org selected
+        } else {
+            dashboard.class = "column centered mainDiv"
+        }
+    })
+    updateCssClass()
     
     // 
     // create elements
     // 
-    return <div class="column centered" style={{width:"100%"}}>
-        {orgs.map(
-            // give children the ability to change state 
-            (eachOrgData, index) => <OrgBubble org={eachOrgData} selector={router.pageInfo.bubbleInfo} indexOfThisOrg={index} />
-        )}
-    </div>
+    return dashboard
 }
