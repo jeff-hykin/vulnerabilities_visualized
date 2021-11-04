@@ -5,8 +5,8 @@ module.exports = ({ treeData, onNodeClick = () => {} }) => {
     const mainAccentColor = "red"
 
     let margin = { top: 30, right: 60, bottom: 30, left: 60 },
-        width = 400 - margin.right - margin.left,
-        height = 300 - margin.top - margin.bottom,
+        width = 300 - margin.right - margin.left,
+        height = 280 - margin.top - margin.bottom,
         nodeWidth = 16,
         nodeHeight = 16
 
@@ -130,13 +130,13 @@ module.exports = ({ treeData, onNodeClick = () => {} }) => {
 
     // Grey out other edges when focused on one node
     highlightOn = function (d) {
-        svg.selectAll("path.link").classed("highlight", true)
+        d3.selectAll("path.link").classed("highlight", true)
 
         let parentLine
         parentLine = function (d) {
             if (d.parent) {
                 parentLine(d.parent)
-                svg.selectAll("path.link.source-" + d.parent.name + ".target-" + d.name).classed("highlight", false)
+                d3.selectAll("path.link.source-" + d.parent.name + ".target-" + d.name).classed("highlight", false)
             }
         }
         parentLine(d)
@@ -144,7 +144,7 @@ module.exports = ({ treeData, onNodeClick = () => {} }) => {
     }
 
     highlightOff = function (d) {
-        svg.selectAll("path.link").classed("highlight", false)
+        d3.selectAll("path.link").classed("highlight", false)
         return update(d)
     }
 

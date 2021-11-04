@@ -1,64 +1,102 @@
 const BaseTree = require("../skeletons/BaseTree")
 const { watch } = require("@vue-reactivity/watch")
+const {backend} = require("quik-client")
 
-module.exports = ({ org, selector, orgIndex })=>{
+backend.data.vulnerabilitiesFor({product: "Atom"}).then(atomData =>{
+    console.log(`atomData.length is:`,atomData.length)
+    // for (const eachVulnerability of atomData) {
+    //     console.log(eachVulnerability)
+    // }
+})
+
+module.exports = ({ org, selector, indexOfThisOrg })=>{
     // 
     // create elements
     // 
-    const thisComponent = <div
-        class="orgBubble"
-        onclick={
-            ()=>(selector.selectedOrgIndex=orgIndex, selector.selectedRepoIndex=null)
+    const backButton = <div class="backButton" onclick={() => {
+        if (selector.selectedRepoIndex != null) {
+            Object.assign(selector, {
+                selectedOrgIndex: selector.selectedOrgIndex,
+                selectedRepoIndex: null,
+            })
+        } else {
+            Object.assign(selector, {
+                selectedOrgIndex: null,
+                selectedRepoIndex: null,
+            })
         }
-        />
-    const repoElements = org.map( (tree, index) =>
-        <div
-            onclick={
-                (eventObject)=>{
-                    // don't let it activate the outer onclick
-                    eventObject.stopPropagation()
-                    // update the data
-                    Object.assign(selector, {selectedOrgIndex: orgIndex, selectedRepoIndex: index})
+    }}>BACK</div>
+    const bubble = <div
+        class="orgBubble"
+        ></div>
+    const repoContainer = <div class="repoContainer" onclick={()=>{
+        // update the data
+        Object.assign(selector, {
+            // this org is selected
+            selectedOrgIndex: indexOfThisOrg,
+            // no repo is selected
+            selectedRepoIndex: null,
+        })
+    }}/>
+    const repoElements = org.map( (tree, index) =>{
+        const repoElement = <div
+            class="repo"
+            onclick={(eventObject)=>{
+                // don't let it activate the outer onclick
+                eventObject.stopPropagation()
+                
+                if (selector.selectedOrgIndex != indexOfThisOrg) {
+                    // select the org before the repo
+                    Object.assign(selector, {
+                        // this org is selected
+                        selectedOrgIndex: indexOfThisOrg,
+                        // no repo is selected
+                        selectedRepoIndex: null,
+                    })
+                } else {
+                    // select this specific repo
+                    Object.assign(selector, {selectedOrgIndex: indexOfThisOrg, selectedRepoIndex: index})
                 }
-            }
-            style={{
-                position: "absolute",
-                transform: `translate(${index * 100 / org.length}%,${index % 2 * -50}px)`,
             }}
             >
             <BaseTree treeData={tree}/>
         </div>
-    )
-    thisComponent.children = repoElements
+        return repoElement
+    })
+    repoContainer.children = repoElements
+    bubble.children = [backButton, repoContainer]
     // 
     // make them reactive
     // 
-    watch(selector, ()=>{
-        // 
-        // when unselected do:
-        // 
-        if (selector.selectedOrgIndex != orgIndex) {
-            thisComponent.class = "orgBubble"
-            thisComponent.children = repoElements
-            // reset/enable the pointer events
-            delete thisComponent.style.pointerEvents
-        // 
-        // when selected do:
-        // 
+    let updateCssClass
+    watch(selector, updateCssClass=()=>{
+        // if no org selected, show self
+        if (selector.selectedOrgIndex == null) {
+            bubble.class = "orgBubble overview"
+            backButton.class = "backButton hideItem"
+        // if not-this-org selected
+        } else if (selector.selectedOrgIndex != indexOfThisOrg) {
+            // hides self
+            bubble.class = "orgBubble"
+        // if this-org IS selected
         } else {
-            // if repo selected
-            if (selector.selectedRepoIndex) {
-                // remove all of them except the selected repo
-                thisComponent.children = [ repoElements[selector.selectedRepoIndex] ]
-                // remove the bubble's class to focus on the repo
-                thisComponent.class = "orgBubbleRepoFocus"
-            // if whole bubble selected
+            // check if its focused on a repo or not
+            if (selector.selectedRepoIndex == null) {
+                backButton.class = "backButton"
+                // focus on the bubble itself
+                setTimeout(() => {
+                    bubble.class = "orgBubble focused"
+                }, 500)
             } else {
-                // (not sure what the desired behavor is)
-                thisComponent.class = "orgBubbleFocused"
-                thisComponent.children = repoElements
+                // fade away and focus on the repo
+                bubble.class = "orgBubble focused repoFocus"
+                setTimeout(() => {
+                    repoElements[selector.selectedRepoIndex].class = "repo selected"
+                }, 500)
             }
         }
     })
-    return thisComponent
+    updateCssClass()
+    
+    return bubble
 }

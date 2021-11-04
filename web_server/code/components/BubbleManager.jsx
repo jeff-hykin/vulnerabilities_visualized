@@ -2,6 +2,7 @@ const OrgBubble = require("../components/OrgBubble")
 const { reactive } = require("@vue/reactivity")
 const { watch } = require("@vue-reactivity/watch")
 const router = require("quik-router")
+const stringify = require('fast-json-stable-stringify');
 
 const repoData = {
     name: "topLevel",
@@ -63,41 +64,39 @@ const orgs = [
     // org1
     [repoData, repoData],
     [repoData, repoData],
+    [repoData, repoData],
+    [repoData, repoData],
 ]
 
 module.exports = ()=>{
-    // create state for children
-    const state = reactive({
+    // init router info
+    router.pageInfo.bubbleInfo = {
         selectedOrgIndex: null,
-        selectedRepoIndex: null,
-    })
-    
-    // 
-    // when the state changes update the route so that the back button works
-    // 
-    watch(state, ()=>{
-        // if there was a real change
-        if (JSON.stringify(router.pageInfo.bubbleInfo) != JSON.stringify(state)) {
-            // add it to the page history
-            router.goTo({
-                ...router.pageInfo,
-                bubbleInfo: state,
-            })
+        selectedOrgIndex: null,
+        ...router.pageInfo?.bubbleInfo
+    }
+
+    const dashboard = <div class="column centered mainDiv dashboardView" style={{width:"100%"}}>
+    {orgs.map(
+        // give children the ability to change state 
+        (eachOrgData, index) => <OrgBubble org={eachOrgData} selector={router.pageInfo.bubbleInfo} indexOfThisOrg={index} />
+    )}
+</div>
+
+    let updateCssClass
+    watch(router.pageInfo.bubbleInfo, updateCssClass=()=>{
+        // if no org selected, show self
+        if (router.pageInfo.bubbleInfo.selectedOrgIndex == null) {
+            dashboard.class = "column centered mainDiv dashboardView"
+        // if not-this-org selected
+        } else {
+            dashboard.class = "column centered mainDiv"
         }
     })
-    // 
-    // route changes update the state
-    // 
-    router.addEventListener("go", ()=>{
-        // update if something actually changed
-        if (JSON.stringify(router.pageInfo.bubbleInfo) != JSON.stringify(state)) {
-            Object.assign(state, { selectedOrgIndex: null, selectedRepoIndex: null, })
-            Object.assign(state, router.pageInfo.bubbleInfo)
-        }
-    })
+    updateCssClass()
     
-    // give children the ability to change state 
-    return orgs.map(
-        (eachOrgData, index) => <OrgBubble org={eachOrgData} selector={state} orgIndex={index} />
-    )
+    // 
+    // create elements
+    // 
+    return dashboard
 }

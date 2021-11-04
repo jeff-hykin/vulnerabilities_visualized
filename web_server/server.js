@@ -2,20 +2,8 @@ const app = require("quik-server")
 const cors = require('cors')
 const express = require("express")
 const http = require('http')
-const silentRequire = require("./code/tools/silent_require")
-const Gun = silentRequire('gun')
 const path = require("path")
 
-// 
-// database server
-// 
-const databasePort = 8765
-const databasePath = path.join(__dirname, "data", "database")
-const gun = Gun({
-    web: http.createServer(Gun.serve(path.dirname(databasePath))).listen(databasePort),
-    // "file" is a misnomer, its actually a folder
-    file: path.basename(databasePath),
-})
 
 // 
 // webserver
