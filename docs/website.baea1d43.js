@@ -14413,8 +14413,8 @@ module.exports = function (_ref) {
     bottom: 30,
     left: 60
   },
-      width = 400 - margin.right - margin.left,
-      height = 300 - margin.top - margin.bottom,
+      width = 300 - margin.right - margin.left,
+      height = 280 - margin.top - margin.bottom,
       nodeWidth = 16,
       nodeHeight = 16;
   var i = 0;
@@ -14499,7 +14499,7 @@ module.exports = function (_ref) {
 
 
   highlightOn = function highlightOn(d) {
-    svg.selectAll("path.link").classed("highlight", true);
+    d3.selectAll("path.link").classed("highlight", true);
 
     var _parentLine;
 
@@ -14507,7 +14507,7 @@ module.exports = function (_ref) {
       if (d.parent) {
         _parentLine(d.parent);
 
-        svg.selectAll("path.link.source-" + d.parent.name + ".target-" + d.name).classed("highlight", false);
+        d3.selectAll("path.link.source-" + d.parent.name + ".target-" + d.name).classed("highlight", false);
       }
     };
 
@@ -14517,7 +14517,7 @@ module.exports = function (_ref) {
   };
 
   highlightOff = function highlightOff(d) {
-    svg.selectAll("path.link").classed("highlight", false);
+    d3.selectAll("path.link").classed("highlight", false);
     return update(d);
   };
 
@@ -14566,11 +14566,32 @@ module.exports = function (_ref) {
     style: "width: 100%; height: fit-content;"
   }, children));
 };
-},{"../systems/on_scroll":"../code/systems/on_scroll.js"}],"../code/components/OrgBubble.jsx":[function(require,module,exports) {
+},{"../systems/on_scroll":"../code/systems/on_scroll.js"}],"../../node_modules/quik-client/index.js":[function(require,module,exports) {
+// get the quik symbol
+let quikUniqueKey = Symbol.for("quik")
+// if the quik-window doesnt exist, then create it
+window[quikUniqueKey] || (window[quikUniqueKey] = {})
+// return the window-quik object
+module.exports = window[quikUniqueKey]
+
+},{}],"../code/components/OrgBubble.jsx":[function(require,module,exports) {
 var BaseTree = require("../skeletons/BaseTree");
 
 var _require = require("@vue-reactivity/watch"),
     watch = _require.watch;
+
+var _require2 = require("quik-client"),
+    backend = _require2.backend;
+
+console.log("here");
+backend.data.vulnerabilitiesFor({
+  product: "Atom"
+}).then(function (atomData) {
+  console.log("atomData.length is:", atomData.length); // console.log("what ever you want do to")
+  // for (const eachVulnerability of atomData) {
+  //     console.log(eachVulnerability)
+  // }
+});
 
 module.exports = function (_ref) {
   var org = _ref.org,
@@ -14579,8 +14600,27 @@ module.exports = function (_ref) {
   // 
   // create elements
   // 
+  var backButton = /*#__PURE__*/React.createElement("div", {
+    class: "backButton",
+    onclick: function onclick() {
+      if (selector.selectedRepoIndex != null) {
+        Object.assign(selector, {
+          selectedOrgIndex: selector.selectedOrgIndex,
+          selectedRepoIndex: null
+        });
+      } else {
+        Object.assign(selector, {
+          selectedOrgIndex: null,
+          selectedRepoIndex: null
+        });
+      }
+    }
+  }, "BACK");
   var bubble = /*#__PURE__*/React.createElement("div", {
-    class: "orgBubble",
+    class: "orgBubble"
+  });
+  var repoContainer = /*#__PURE__*/React.createElement("div", {
+    class: "repoContainer",
     onclick: function onclick() {
       // update the data
       Object.assign(selector, {
@@ -14619,7 +14659,8 @@ module.exports = function (_ref) {
     }));
     return repoElement;
   });
-  bubble.children = repoElements; // 
+  repoContainer.children = repoElements;
+  bubble.children = [backButton, repoContainer]; // 
   // make them reactive
   // 
 
@@ -14627,14 +14668,16 @@ module.exports = function (_ref) {
   watch(selector, updateCssClass = function updateCssClass() {
     // if no org selected, show self
     if (selector.selectedOrgIndex == null) {
-      bubble.class = "orgBubble overview"; // if not-this-org selected
+      bubble.class = "orgBubble overview";
+      backButton.class = "backButton hideItem"; // if not-this-org selected
     } else if (selector.selectedOrgIndex != indexOfThisOrg) {
       // hides self
       bubble.class = "orgBubble"; // if this-org IS selected
     } else {
       // check if its focused on a repo or not
       if (selector.selectedRepoIndex == null) {
-        // focus on the bubble itself
+        backButton.class = "backButton"; // focus on the bubble itself
+
         setTimeout(function () {
           bubble.class = "orgBubble focused";
         }, 500);
@@ -14650,7 +14693,7 @@ module.exports = function (_ref) {
   updateCssClass();
   return bubble;
 };
-},{"../skeletons/BaseTree":"../code/skeletons/BaseTree.jsx","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../../node_modules/fast-json-stable-stringify/index.js":[function(require,module,exports) {
+},{"../skeletons/BaseTree":"../code/skeletons/BaseTree.jsx","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-client":"../../node_modules/quik-client/index.js"}],"../../node_modules/fast-json-stable-stringify/index.js":[function(require,module,exports) {
 'use strict';
 
 module.exports = function (data, opts) {
@@ -14777,7 +14820,7 @@ var repoData = {
   }]
 };
 var orgs = [// org1
-[repoData, repoData], [repoData, repoData]];
+[repoData, repoData], [repoData, repoData], [repoData, repoData], [repoData, repoData]];
 
 module.exports = function () {
   var _router$pageInfo;
@@ -14785,12 +14828,9 @@ module.exports = function () {
   // init router info
   router.pageInfo.bubbleInfo = _objectSpread(_defineProperty({
     selectedOrgIndex: null
-  }, "selectedOrgIndex", null), (_router$pageInfo = router.pageInfo) === null || _router$pageInfo === void 0 ? void 0 : _router$pageInfo.bubbleInfo); // 
-  // create elements
-  // 
-
-  return /*#__PURE__*/React.createElement("div", {
-    class: "column centered",
+  }, "selectedOrgIndex", null), (_router$pageInfo = router.pageInfo) === null || _router$pageInfo === void 0 ? void 0 : _router$pageInfo.bubbleInfo);
+  var dashboard = /*#__PURE__*/React.createElement("div", {
+    class: "column centered mainDiv dashboardView",
     style: {
       width: "100%"
     }
@@ -14802,16 +14842,22 @@ module.exports = function () {
       indexOfThisOrg: index
     });
   }));
-};
-},{"../components/OrgBubble":"../code/components/OrgBubble.jsx","@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","fast-json-stable-stringify":"../../node_modules/fast-json-stable-stringify/index.js"}],"../../node_modules/quik-client/index.js":[function(require,module,exports) {
-// get the quik symbol
-let quikUniqueKey = Symbol.for("quik")
-// if the quik-window doesnt exist, then create it
-window[quikUniqueKey] || (window[quikUniqueKey] = {})
-// return the window-quik object
-module.exports = window[quikUniqueKey]
+  var updateCssClass;
+  watch(router.pageInfo.bubbleInfo, updateCssClass = function updateCssClass() {
+    // if no org selected, show self
+    if (router.pageInfo.bubbleInfo.selectedOrgIndex == null) {
+      dashboard.class = "column centered mainDiv dashboardView"; // if not-this-org selected
+    } else {
+      dashboard.class = "column centered mainDiv";
+    }
+  });
+  updateCssClass(); // 
+  // create elements
+  // 
 
-},{}],"../code/pages/Home.jsx":[function(require,module,exports) {
+  return dashboard;
+};
+},{"../components/OrgBubble":"../code/components/OrgBubble.jsx","@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","fast-json-stable-stringify":"../../node_modules/fast-json-stable-stringify/index.js"}],"../code/pages/Home.jsx":[function(require,module,exports) {
 var _excluded = ["children"];
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -14832,8 +14878,8 @@ var _require = require("quik-client"),
     backend = _require.backend;
 
 window.backend = backend; // example of using backend data
-//    const names = await backend.data.productNames()
-//    const dataForFirst = await backend.data.vulnerabilitiesFor({product: names[0]})
+// const names = await backend.data.productNames()
+// const dataForFirst = await backend.data.vulnerabilitiesFor({product: names[0]})
 
 module.exports = function (_ref) {
   var children = _ref.children,
@@ -14842,15 +14888,7 @@ module.exports = function (_ref) {
   return /*#__PURE__*/React.createElement("body", {
     class: "column centered",
     style: "height: 100vh; overflow: hidden;"
-  }, /*#__PURE__*/React.createElement(BubbleManager, null), /*#__PURE__*/React.createElement(InfoGraphic, null, /*#__PURE__*/React.createElement("div", {
-    style: "min-height: 10rem"
-  }, /*#__PURE__*/React.createElement("h3", null, "Test Data")), /*#__PURE__*/React.createElement("div", {
-    style: "min-height: 10rem"
-  }, /*#__PURE__*/React.createElement("h3", null, "Test Data")), /*#__PURE__*/React.createElement("div", {
-    style: "min-height: 10rem"
-  }, /*#__PURE__*/React.createElement("h3", null, "Test Data")), /*#__PURE__*/React.createElement("div", {
-    style: "min-height: 10rem"
-  }, /*#__PURE__*/React.createElement("h3", null, "Test Data"))));
+  }, /*#__PURE__*/React.createElement(BubbleManager, null));
 };
 },{"../systems/on_scroll":"../code/systems/on_scroll.js","../skeletons/GraphDisplay":"../code/skeletons/GraphDisplay.jsx","../skeletons/BaseTree":"../code/skeletons/BaseTree.jsx","../skeletons/InfoGraphic":"../code/skeletons/InfoGraphic.jsx","../components/BubbleManager":"../code/components/BubbleManager.jsx","quik-client":"../../node_modules/quik-client/index.js"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
 var _excluded = ["children", "title", "actions"];
@@ -17359,7 +17397,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65178" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56024" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

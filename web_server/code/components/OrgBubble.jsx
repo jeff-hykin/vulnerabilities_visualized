@@ -1,5 +1,13 @@
 const BaseTree = require("../skeletons/BaseTree")
 const { watch } = require("@vue-reactivity/watch")
+const {backend} = require("quik-client")
+
+backend.data.vulnerabilitiesFor({product: "Atom"}).then(atomData =>{
+    console.log(`atomData.length is:`,atomData.length)
+    // for (const eachVulnerability of atomData) {
+    //     console.log(eachVulnerability)
+    // }
+})
 
 module.exports = ({ org, selector, indexOfThisOrg })=>{
     // 

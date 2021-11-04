@@ -340,7 +340,7 @@ body {
 }
 
 .highlight {
-  stroke: #a8a8a8;
+  stroke: #a8a8a8 !important;
 }
 
 .highlightCircle {
@@ -356,9 +356,27 @@ body {
   opacity: 0.8;
 }
 
+.mainDiv {
+  overflow: auto;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.dashboardView {
+  display: block;
+}
+
+.repoContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  transition: all 0.5s ease-in-out 0s;
+  box-sizing: content-box;
+}
+
 .orgBubble {
   visibility: hidden;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
   opacity: 0;
@@ -398,17 +416,16 @@ body {
 }
 .orgBubble.focused.repoFocus {
   background-color: transparent;
-  min-width: 100vw;
   max-width: 100vw;
-  min-height: 100vh;
   max-height: 100vh;
+  padding: 20px 10px;
 }
-.orgBubble.focused.repoFocus > :not(.repo.selected) {
+.orgBubble.focused.repoFocus > .repoContainer > :not(.repo.selected) {
   opacity: 0;
 }
-.orgBubble.focused.repoFocus > .repo.selected {
+.orgBubble.focused.repoFocus > .repoContainer > .repo.selected {
   position: fixed;
-  bottom: 0;
+  top: -15%;
   left: 0;
   width: 50vw;
   min-width: 50vw;
@@ -427,6 +444,19 @@ body {
 .orgBubble .repo {
   transition: all 0.5s ease-in-out 0s;
   opacity: 1;
+}
+
+.hideItem {
+  display: none;
+}
+
+.backButton {
+  text-transform: uppercase;
+  font-size: small;
+  font-weight: bold;
+  margin: 4px 8px;
+  cursor: pointer;
+  z-index: 10;
 }
 
 /*# sourceMappingURL=/website.baea1d43.css.map */
