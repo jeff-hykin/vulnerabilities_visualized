@@ -11,6 +11,7 @@ const router = require("quik-router")
 const Home = require("./code/pages/Home")
 const ProductView = require("./code/pages/ProductView")
 const PageNotFound = require("./code/pages/PageNotFound")
+const { navbarState, NavBarComponent } = require("./code/systems/navbar")
 
 // 
 // every time something tries to change pages
@@ -25,6 +26,7 @@ function onRouteChange() {
         if (previousPage == null) {
             previousPage = "home"
         }
+        
         
         // 
         // load page

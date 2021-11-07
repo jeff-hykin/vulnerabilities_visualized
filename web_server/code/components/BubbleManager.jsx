@@ -82,7 +82,7 @@ module.exports = ()=>{
         (eachOrgData, index) => <OrgBubble org={eachOrgData} selector={router.pageInfo.bubbleInfo} indexOfThisOrg={index} />
     )}
 </div>
-
+    onclick ={()=>router.pageInfo.bubbleInfo.selectedOrgIndex = }
     let updateCssClass
     watch(router.pageInfo.bubbleInfo, updateCssClass=()=>{
         // if no org selected, show self

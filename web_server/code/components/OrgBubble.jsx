@@ -1,6 +1,7 @@
 const BaseTree = require("../skeletons/BaseTree")
 const { watch } = require("@vue-reactivity/watch")
 const {backend} = require("quik-client")
+const { reactive } = require("@vue/reactivity")
 
 backend.data.vulnerabilitiesFor({product: "Atom"}).then(atomData =>{
     console.log(`atomData.length is:`,atomData.length)
@@ -60,6 +61,7 @@ module.exports = ({ org, selector, indexOfThisOrg })=>{
             }}
             >
             <BaseTree treeData={tree}/>
+            {/* under tree data */}
         </div>
         return repoElement
     })
@@ -92,6 +94,8 @@ module.exports = ({ org, selector, indexOfThisOrg })=>{
                 bubble.class = "orgBubble focused repoFocus"
                 setTimeout(() => {
                     repoElements[selector.selectedRepoIndex].class = "repo selected"
+                    const repoData = org[selector.selectedRepoIndex]
+                    wrapper.children[1] = <RepoOverview repoData={repoData} ></RepoOverview>
                 }, 500)
             }
         }

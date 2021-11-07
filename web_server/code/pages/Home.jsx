@@ -4,6 +4,7 @@ const BaseTree = require("../skeletons/BaseTree")
 const InfoGraphic = require("../skeletons/InfoGraphic")
 const BubbleManager = require("../components/BubbleManager")
 const { backend } = require("quik-client")
+const { navbarState, NavBarComponent } = require("./code/systems/navbar")
 
 window.backend = backend
 // example of using backend data
@@ -12,7 +13,7 @@ window.backend = backend
 
 module.exports = ({ children, ...properties }) => {
     return (
-        <body class="column centered" style="height: 100vh; overflow: hidden;">
+        <body class="column centered" style="height: 100vh; overflow: hidden;" onClick={()=>{navbarState.options= ["option1", "option2"]}}>
             <BubbleManager />
         </body>
     )
