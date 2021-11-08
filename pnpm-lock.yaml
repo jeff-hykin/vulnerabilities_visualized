@@ -28,12 +28,14 @@ specifiers:
   engine.io-parser: ~2.1.1
   express: ^4.17.1
   fast-json-stable-stringify: ^2.1.0
+  good-date: ^1.3.16
   good-dom: ^4.2.1
   good-js: 3.1.1
   good-jsx: ^1.4.1
   has-binary2: ~1.0.2
   has-cors: 1.1.0
   indexof: 0.0.1
+  isarray: ^2.0.5
   json3: ^3.3.3
   lodash: ^4.17.21
   lodash-contrib: ^4.1200.1
@@ -90,12 +92,14 @@ dependencies:
   engine.io-parser: 2.1.3
   express: 4.17.1
   fast-json-stable-stringify: 2.1.0
+  good-date: 1.3.16
   good-dom: 4.2.1
   good-js: 3.1.1
   good-jsx: 1.4.1
   has-binary2: 1.0.3
   has-cors: 1.1.0
   indexof: 0.0.1
+  isarray: 2.0.5
   json3: 3.3.3
   lodash: 4.17.21
   lodash-contrib: 4.1200.1
@@ -3210,6 +3214,10 @@ packages:
   /globals/11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
     engines: {node: '>=4'}
+
+  /good-date/1.3.16:
+    resolution: {integrity: sha512-ZPGGnSDqFcMPtmkz/emdi9v07SPmvAq91j/+8HOdFCnnq/tWB3qrldJ6rly4Fku757g03jFCCByWR8DGk4kP3Q==}
+    dev: false
 
   /good-dom/4.2.1:
     resolution: {integrity: sha512-Rd62XSTGuxIOPfiLp/h8JaLD/zrmHqsM/7nsTvtZjJa/E6dMgD/u9H/O5jzeb0xtGQ5TLdRcD+QG7UDMJ1TE4g==}
