@@ -1,4 +1,4 @@
-const vulnData = require("../../../data/vulnerabilities_by_product.json")
-module.exports = ({product})=>{
-    return vulnData[product]
+const vulnData = require("../../../data/vulnerabilities_org_tree.json")
+module.exports = ()=>{
+    return vulnData
 }
