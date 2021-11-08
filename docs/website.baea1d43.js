@@ -14583,12 +14583,10 @@ var _require = require("@vue-reactivity/watch"),
 var _require2 = require("quik-client"),
     backend = _require2.backend;
 
-console.log("here");
 backend.data.vulnerabilitiesFor({
   product: "Atom"
 }).then(function (atomData) {
-  console.log("atomData.length is:", atomData.length); // console.log("what ever you want do to")
-  // for (const eachVulnerability of atomData) {
+  console.log("atomData.length is:", atomData.length); // for (const eachVulnerability of atomData) {
   //     console.log(eachVulnerability)
   // }
 });
@@ -14771,8 +14769,15 @@ var _require2 = require("@vue-reactivity/watch"),
 
 var router = require("quik-router");
 
-var stringify = require('fast-json-stable-stringify');
+var _require3 = require("quik-client"),
+    backend = _require3.backend;
 
+var stringify = require('fast-json-stable-stringify'); // get the tree data from backend
+
+
+var orgTreePromise = backend.data.getOrgTree().then(function (orgTree) {
+  return console.log("orgTree data loaded", orgTree);
+});
 var repoData = {
   name: "topLevel",
   parent: "null",
@@ -14857,7 +14862,7 @@ module.exports = function () {
 
   return dashboard;
 };
-},{"../components/OrgBubble":"../code/components/OrgBubble.jsx","@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","fast-json-stable-stringify":"../../node_modules/fast-json-stable-stringify/index.js"}],"../code/pages/Home.jsx":[function(require,module,exports) {
+},{"../components/OrgBubble":"../code/components/OrgBubble.jsx","@vue/reactivity":"../../node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","quik-client":"../../node_modules/quik-client/index.js","fast-json-stable-stringify":"../../node_modules/fast-json-stable-stringify/index.js"}],"../code/pages/Home.jsx":[function(require,module,exports) {
 var _excluded = ["children"];
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -17397,7 +17402,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56024" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49499" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

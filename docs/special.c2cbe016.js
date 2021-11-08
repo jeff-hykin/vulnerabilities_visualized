@@ -1128,7 +1128,7 @@ module.exports = function parseuri(str) {
     return uri;
 };
 
-},{}],"../../../../node_modules/ms/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/ms/index.js":[function(require,module,exports) {
 /**
  * Helpers.
  */
@@ -1154,7 +1154,7 @@ var y = d * 365.25;
  * @api public
  */
 
-module.exports = function(val, options) {
+module.exports = function (val, options) {
   options = options || {};
   var type = typeof val;
   if (type === 'string' && val.length > 0) {
@@ -1519,7 +1519,7 @@ function coerce(val) {
   return val;
 }
 
-},{"ms":"../../../../node_modules/ms/index.js"}],"../../node_modules/.pnpm/process@0.11.10/node_modules/process/browser.js":[function(require,module,exports) {
+},{"ms":"../../node_modules/ms/index.js"}],"../../node_modules/.pnpm/process@0.11.10/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -2130,7 +2130,7 @@ Emitter.prototype.hasListeners = function(event){
   return !! this.listeners(event).length;
 };
 
-},{}],"../../../../node_modules/isarray/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/isarray/index.js":[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
@@ -4342,7 +4342,7 @@ exports.removeBlobs = function(data, callback) {
   }
 };
 
-},{"isarray":"../../../../node_modules/isarray/index.js","./is-buffer":"../../node_modules/socket.io-parser/is-buffer.js"}],"../../node_modules/socket.io-parser/index.js":[function(require,module,exports) {
+},{"isarray":"../../node_modules/isarray/index.js","./is-buffer":"../../node_modules/socket.io-parser/is-buffer.js"}],"../../node_modules/socket.io-parser/index.js":[function(require,module,exports) {
 
 /**
  * Module dependencies.
@@ -4756,7 +4756,7 @@ function error(msg) {
   };
 }
 
-},{"debug":"../../node_modules/debug/src/browser.js","component-emitter":"../../node_modules/component-emitter/index.js","./binary":"../../node_modules/socket.io-parser/binary.js","isarray":"../../../../node_modules/isarray/index.js","./is-buffer":"../../node_modules/socket.io-parser/is-buffer.js"}],"../../node_modules/has-cors/index.js":[function(require,module,exports) {
+},{"debug":"../../node_modules/debug/src/browser.js","component-emitter":"../../node_modules/component-emitter/index.js","./binary":"../../node_modules/socket.io-parser/binary.js","isarray":"../../node_modules/isarray/index.js","./is-buffer":"../../node_modules/socket.io-parser/is-buffer.js"}],"../../node_modules/has-cors/index.js":[function(require,module,exports) {
 
 /**
  * Module exports.
@@ -4902,7 +4902,7 @@ function hasBinary (obj) {
   return false;
 }
 
-},{"isarray":"../../../../node_modules/isarray/index.js","buffer":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/buffer/index.js"}],"../../node_modules/arraybuffer.slice/index.js":[function(require,module,exports) {
+},{"isarray":"../../node_modules/isarray/index.js","buffer":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/buffer/index.js"}],"../../node_modules/arraybuffer.slice/index.js":[function(require,module,exports) {
 /**
  * An abstraction for slicing an arraybuffer even when
  * ArrayBuffer.prototype.slice is not supported
@@ -9610,6 +9610,7 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
           quik.backend = {
             "data": {
               "commitLogFor": "data/commitLogFor",
+              "getOrgTree": "data/getOrgTree",
               "productNames": "data/productNames",
               "vulnerabilitiesFor": "data/vulnerabilitiesFor"
             }
@@ -9788,7 +9789,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56024" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49499" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
