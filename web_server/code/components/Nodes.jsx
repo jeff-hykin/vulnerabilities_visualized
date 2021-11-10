@@ -1,5 +1,6 @@
 const G6 = require('@antv/g6').default
 
+// how data comes from backend
 const orgTree = {
     "Tiny-http Project": {
         "orgSummary": {
@@ -37,6 +38,7 @@ const orgTree = {
     },
 }
 
+// how data needs to be for the graph
 const data = {
     "nodes": [
         //   
@@ -440,7 +442,7 @@ module.exports = () => {
                             }
                         },
                         {
-                            duration: 300,
+                            duration: 600,
                         }
                     )
                 },
@@ -455,12 +457,15 @@ module.exports = () => {
                                 }
                             },
                             {
-                                duration: 200,
+                                duration: 2000,
                             }
                         )
                     } else if (name === "dark") {
-                        if (value) shape.attr("opacity", 0.2)
-                        else shape.attr("opacity", 1)
+                        if (value) {
+                            shape.attr("opacity", 0.2)
+                        } else {
+                            shape.attr("opacity", 1)
+                        }
                     }
                 },
             },
@@ -650,7 +655,7 @@ module.exports = () => {
                 
                 const layoutController = graph.get("layoutController")
                 const forceLayout = layoutController.layoutMethods[0]
-                forceLayout.forceSimulation.stop()
+                // forceLayout.forceSimulation.stop()
                 // light the level 0 nodes
                 showNodes.forEach((snode) => {
                     const item = graph.findById(snode.id)
@@ -865,7 +870,7 @@ module.exports = () => {
             if (!element.scrollWidth || !element.scrollHeight) {
                 return
             }
-            graph.changeSize(container.scrollWidth, container.scrollHeight)
+            graph.changeSize(element.scrollWidth, element.scrollHeight)
         })
         
         const loadData = (data) => {
@@ -907,7 +912,8 @@ module.exports = () => {
                 }
                 nodeMap.set(node.id, node)
             })
-
+            
+            // FIXME: what are these 120 180 numbers?
             mapNodeSize(showNodes, "childrenNum", [120, 180])
 
             // map the color to F nodes, same to its parent
