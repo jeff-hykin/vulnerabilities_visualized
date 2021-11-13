@@ -14,7 +14,6 @@ window.backend = backend
 module.exports = ({ children, ...properties }) => {
     return (
         <body class="column centered" style="height: 100vh; overflow: hidden;">
-            <BubbleManager />
             <Nodes />
         </body>
     )
