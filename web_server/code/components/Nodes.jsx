@@ -111,8 +111,8 @@ module.exports = () => {
         let curShowNodesMap = new Map()
         let highlighting = false
         let currentFocus
-        const width = element.scrollWidth || 500
-        const height = element.scrollHeight || 500
+        const width = window.innerWidth || 500
+        const height = window.innerHeight || 500
 
         const LIMIT_OVERFLOW_WIDTH = width
         const LIMIT_OVERFLOW_HEIGHT = height
@@ -877,16 +877,15 @@ module.exports = () => {
             }
         })
 
-        // TODO: Update resize function based on client data
-        window.addEventListener("resize", () => {
+        window.onresize = function() {
             if (!graph || graph.get("destroyed")) {
                 return
             }
-            if (!element.scrollWidth || !element.scrollHeight) {
+            if (!window.innerWidth || !window.innerHeight) {
                 return
             }
-            graph.changeSize(element.scrollWidth, element.scrollHeight)
-        })
+            graph.changeSize(window.innerWidth, window.innerHeight)
+        }
 
         const loadData = (data) => {
             const layoutController = graph.get("layoutController")
