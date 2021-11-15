@@ -6,3 +6,8 @@ Coding Work:
     - create data in a tree form
     - create graphs/charts data for repos
     - create splash page
+
+Alan:
+    - create initial overlay to provide some context (splash page)
+    - navbar
+    - redirect selected child nodes to tree view
