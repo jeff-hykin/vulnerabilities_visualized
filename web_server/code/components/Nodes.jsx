@@ -14,7 +14,7 @@ function elementReady(selector) {
             // Query for elements matching the specified selector
             Array.from(document.querySelectorAll(selector)).forEach((element) => {
                 resolve(element);
-                //Once we have resolved we don't need the observer anymore.
+                // Once we have resolved we don't need the observer anymore.
                 observer.disconnect();
             });
         })
@@ -76,6 +76,13 @@ const data = {
             "level": 0,
             "childrenNum": 1,
         },
+        {
+            "id": "_2",
+            "name": "Mozwire Project",
+            "tag": "Mozwire Project",
+            "level": 0,
+            "childrenNum": 1,
+        },
         // 
         // children
         // 
@@ -86,20 +93,31 @@ const data = {
             "isLeaf": true,
             "tags": ["Tiny-http Project"]
         },
+        {
+            "id": "_2_1",
+            "name": "Mozwire Project",
+            "level": 1,
+            "isLeaf": true,
+            "tags": ["Mozwire Project"]
+        },
     ],
     "edges": [
         {
             "source": "_1",
             "target": "_1_1"
         },
+        {
+            "source": "_2",
+            "target": "_2_1"
+        },
     ]
 }
 
 module.exports = () => {
-    const element = <div id="node"></div>
+    const element = <div id="canvas"></div>
 
     // Call code below after element has been mounted to the dom
-    elementReady("#node").then((node) => {
+    elementReady("#canvas").then(() => {
         let showNodes = []
         let showEdges = []
         let curShowNodes = []
@@ -527,12 +545,12 @@ module.exports = () => {
             let moveX = x
             let moveY = y
 
-            /* 获得当前偏移量*/
+            /* Get the current offset */
             const group = graph.get("group")
             const bbox = group.getBBox()
             const leftTopPoint = graph.getCanvasByPoint(bbox.minX, bbox.minY)
             const rightBottomPoint = graph.getCanvasByPoint(bbox.maxX, bbox.maxY)
-            /* 如果 x 轴在区域内，不允许左右超过100 */
+            /* If the x-axis is in the region, no more than 100 left and right are allowed */
             if (x < 0 && leftTopPoint.x - x > LIMIT_OVERFLOW_WIDTH) {
                 moveX = 0
             }
@@ -649,8 +667,6 @@ module.exports = () => {
         // node onClick
         // 
         graph.on("node:click", (eventObject) => {
-            curShowNodes = []
-            curShowEdges = []
             const item = eventObject.item
             const nodeThatGotClicked = item.getModel()
 
@@ -659,16 +675,11 @@ module.exports = () => {
             // 
             if (nodeThatGotClicked.level !== 0) {
                 console.log("child node is: ", nodeThatGotClicked)
-                // 
-                // if clicked a root
-                // 
+                // TODO: Redirect and load child node to tree view
             } else {
                 // hide unrelated items and show the related items
-
-
                 const layoutController = graph.get("layoutController")
-                const forceLayout = layoutController.layoutMethods[0]
-                // forceLayout.forceSimulation.stop()
+
                 // light the level 0 nodes
                 showNodes.forEach((snode) => {
                     const item = graph.findById(snode.id)
@@ -685,27 +696,15 @@ module.exports = () => {
                 // 
                 // hide unrelated items
                 // 
-                // FIXME: curShowNodes was set to empty above, so this loop probably never runs
-                if (curShowEdges.length) {
-                    curShowEdges.forEach((csedge) => {
-                        const item = graph.findById(csedge.id)
-                        item && graph.setItemState(item, "disappearing", true)
-                    })
-                }
-                // FIXME: curShowNodes was set to empty above, so this loop probably never runs
-                curShowNodes.forEach((csnode) => {
-                    const item = graph.findById(csnode.id)
-                    item && graph.setItemState(item, "disappearing", true)
-                })
                 graph.positionsAnimate()
 
                 // reset curShowNodes nad curShowEdges
                 curShowNodes = []
                 curShowEdges = []
 
-                // 
+                //
                 // if clicking the already-focused-on node
-                // 
+                //
                 if (currentFocus && currentFocus.id === nodeThatGotClicked.id) {
                     // then hide the children of the already-focused node
                     // and change the layout parameters to roots view
@@ -713,15 +712,15 @@ module.exports = () => {
                     layoutController.layoutCfg.nodeStrength = 2500
                     layoutController.layoutCfg.collideStrength = 0.8
                     layoutController.layoutCfg.alphaDecay = 0.01
-                    // 
+                    //
                     // if clicking a not-already-focused-on node
-                    // 
+                    //
                 } else {
                     // click other focus node, hide the current small nodes and show the related nodes
                     currentFocus = nodeThatGotClicked
-                    // 
+                    //
                     // not sure what this part is doing
-                    // 
+                    //
                     const layoutController = graph.get("layoutController")
                     layoutController.layoutCfg.nodeStrength = () => {
                         return -80
@@ -737,7 +736,7 @@ module.exports = () => {
                     }
 
                     const parentTag = nodeThatGotClicked.tag
-                    const findTags = []
+
                     curShowNodesMap = new Map()
 
                     // 
@@ -877,7 +876,7 @@ module.exports = () => {
             }
         })
 
-        window.onresize = function() {
+        window.onresize = function () {
             if (!graph || graph.get("destroyed")) {
                 return
             }
@@ -927,7 +926,7 @@ module.exports = () => {
                 nodeMap.set(node.id, node)
             })
 
-            // FIXME: what are these 120 180 numbers?
+            // [120, 180] represents magnification scale between nodes
             mapNodeSize(showNodes, "childrenNum", [120, 180])
 
             // map the color to F nodes, same to its parent
