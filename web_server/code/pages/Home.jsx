@@ -12,9 +12,8 @@ window.backend = backend
 module.exports = ({ children, ...properties }) => {
     return (
         <body>
-            <Overlay />
             <Header />
-            <div class="column centered" style="height: 100%; overflow: hidden;">
+            <div class="column centered">
                 <Nodes />
             </div>
         </body>

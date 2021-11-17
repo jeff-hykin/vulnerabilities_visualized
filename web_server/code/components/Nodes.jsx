@@ -1,5 +1,6 @@
 import { nodeTheme } from '../systems/theme'
 const G6 = require('@antv/g6').default
+const { backend } = require("quik-client")
 
 // Waits for an element satisfying selector to exist, then resolves promise with the element.
 // FIXME: Probably needs a better place to create function?
@@ -25,99 +26,55 @@ function elementReady(selector) {
     });
 }
 
-// how data comes from backend
-const orgTree = {
-    "Tiny-http Project": {
-        "orgSummary": {
-            "numberOfRepos": 1,
-            "numberOfVulnerabilies": 367,
-            "magnitudeOfVulnerabilites": 2715.8000000000184,
-            "oldestVulnerabilityTime": "2020-12-31",
-            "newestVulnerabilityTime": "2020-12-31"
-        },
-        "repoSummaries": {
-            "Tiny-http": {
-                "numberOfVulnerabilies": 367,
-                "magnitudeOfVulnerabilites": 2715.8000000000184,
-                "oldestVulnerabilityTime": "2020-12-31",
-                "newestVulnerabilityTime": "2020-12-31"
-            }
-        }
-    },
-    "Mozwire Project": {
-        "orgSummary": {
-            "numberOfRepos": 1,
-            "numberOfVulnerabilies": 367,
-            "magnitudeOfVulnerabilites": 2715.8000000000184,
-            "oldestVulnerabilityTime": "2020-12-31",
-            "newestVulnerabilityTime": "2020-12-31"
-        },
-        "repoSummaries": {
-            "Mozwire": {
-                "numberOfVulnerabilies": 367,
-                "magnitudeOfVulnerabilites": 2715.8000000000184,
-                "oldestVulnerabilityTime": "2020-12-31",
-                "newestVulnerabilityTime": "2020-12-31"
-            }
-        }
-    },
-}
+let data = {}
 
-// how data needs to be for the graph
-const data = {
-    "nodes": [
-        //   
-        // parents
-        //   
-        {
-            "id": "_1",
-            "name": "Tiny-http Project",
-            "tag": "Tiny-http Project",
+// Get the org data from backend
+backend.data.getOrgTree().then(orgTree => {
+    let parents = []
+    let children = []
+    let edges = []
+    let parentId = 1
+    let childrenId = 1
+    for (const [key, value] of Object.entries(orgTree)) {
+        parents.push({
+            "id": "_" + parentId,
+            "name": key,
+            "tag": key,
             "level": 0,
-            "childrenNum": 1,
-        },
-        {
-            "id": "_2",
-            "name": "Mozwire Project",
-            "tag": "Mozwire Project",
-            "level": 0,
-            "childrenNum": 1,
-        },
-        // 
-        // children
-        // 
-        {
-            "id": "_1_1",
-            "name": "Tiny-http",
-            "level": 1,
-            "isLeaf": true,
-            "tags": ["Tiny-http Project"]
-        },
-        {
-            "id": "_2_1",
-            "name": "Mozwire Project",
-            "level": 1,
-            "isLeaf": true,
-            "tags": ["Mozwire Project"]
-        },
-    ],
-    "edges": [
-        {
-            "source": "_1",
-            "target": "_1_1"
-        },
-        {
-            "source": "_2",
-            "target": "_2_1"
-        },
-    ]
-}
+            "childrenNum": value.orgSummary.numberOfRepos,
+        })
+        for (const [repo_key, repo_value] of Object.entries(value.repoSummaries)) {
+            children.push({
+                "id": "_" + parentId + "_" + childrenId,
+                "name": repo_key,
+                "level": 1,
+                "isLeaf": true,
+                "tags": [key]
+            })
+            edges.push({
+                "source": "_" + parentId,
+                "target": "_" + parentId + "_" + childrenId
+            })
+            childrenId += 1
+        }
+
+        parentId += 1
+        childrenId = 1
+    }
+
+    data = {
+        "nodes": [...parents, ...children],
+        "edges": [...edges]
+    }
+})
 
 module.exports = () => {
     const element = <div id="canvas"></div>
 
     // Call code below after element has been mounted to the dom
     elementReady("#canvas").then(() => {
+        // FIXME: Wait for backend data and formatting it to finish
+
         let showNodes = []
         let showEdges = []
         let curShowNodes = []
@@ -130,7 +87,7 @@ module.exports = () => {
         let highlighting = false
         let currentFocus
         const width = window.innerWidth || 500
-        const height = window.innerHeight || 500 // FIXME: Set height to take in header height as well
+        const height = window.innerHeight - document.getElementById("header").offsetHeight || 500
 
         const LIMIT_OVERFLOW_WIDTH = width
         const LIMIT_OVERFLOW_HEIGHT = height
@@ -196,9 +153,9 @@ module.exports = () => {
             },
         }
 
-        // 
+        //
         // setup graph object
-        // 
+        //
         G6.registerBehavior("double-finger-drag-canvas", {
             getEvents: () => ({ wheel: "onWheel", }),
             onWheel: (ev) => {
@@ -880,10 +837,10 @@ module.exports = () => {
             if (!graph || graph.get("destroyed")) {
                 return
             }
-            if (!window.innerWidth || !window.innerHeight) {
+            if (!window.innerWidth || !window.innerHeight - document.getElementById("header").offsetHeight) {
                 return
             }
-            graph.changeSize(window.innerWidth, window.innerHeight)
+            graph.changeSize(window.innerWidth, window.innerHeight - document.getElementById("header").offsetHeight)
         }
 
         const loadData = (data) => {
