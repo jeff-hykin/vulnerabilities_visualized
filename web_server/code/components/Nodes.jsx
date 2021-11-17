@@ -130,7 +130,7 @@ module.exports = () => {
         let highlighting = false
         let currentFocus
         const width = window.innerWidth || 500
-        const height = window.innerHeight || 500
+        const height = window.innerHeight || 500 // FIXME: Set height to take in header height as well
 
         const LIMIT_OVERFLOW_WIDTH = width
         const LIMIT_OVERFLOW_HEIGHT = height
