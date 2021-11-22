@@ -13,7 +13,7 @@ module.exports = ({ children, ...properties }) => {
     return (
         <body>
             <Header />
-            <div class="column centered">
+            <div style="height: 100%" class="column centered">
                 <Nodes />
             </div>
         </body>

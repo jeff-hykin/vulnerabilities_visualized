@@ -1,35 +1,60 @@
-import { nodeTheme } from '../systems/theme'
-const G6 = require('@antv/g6').default
+const G6 = require("@antv/g6").default
 const { backend } = require("quik-client")
+const { nodeTheme } = require("../systems/theme")
+const { mountedToDom } = require('../systems/utilies')
 
-// Waits for an element satisfying selector to exist, then resolves promise with the element.
-// FIXME: Probably needs a better place to create function?
-function elementReady(selector) {
-    return new Promise((resolve, reject) => {
-        let el = document.querySelector(selector);
-        if (el) {
-            resolve(el);
-            return
-        }
-        new MutationObserver((mutationRecords, observer) => {
-            // Query for elements matching the specified selector
-            Array.from(document.querySelectorAll(selector)).forEach((element) => {
-                resolve(element);
-                // Once we have resolved we don't need the observer anymore.
-                observer.disconnect();
-            });
-        })
-            .observe(document.documentElement, {
-                childList: true,
-                subtree: true
-            });
-    });
+// how data needs to be for the graph
+const exampleData = {
+    "nodes": [
+        //   
+        // parents
+        //   
+        {
+            "id": "_1",
+            "name": "Tiny-http Project",
+            "tag": "Tiny-http Project",
+            "level": 0,
+            "childrenNum": 1,
+        },
+        {
+            "id": "_2",
+            "name": "Mozwire Project",
+            "tag": "Mozwire Project",
+            "level": 0,
+            "childrenNum": 1,
+        },
+        // 
+        // children
+        // 
+        {
+            "id": "_1_1",
+            "name": "Tiny-http",
+            "level": 1,
+            "isLeaf": true,
+            "tags": ["Tiny-http Project"]
+        },
+        {
+            "id": "_2_1",
+            "name": "Mozwire Project",
+            "level": 1,
+            "isLeaf": true,
+            "tags": ["Mozwire Project"]
+        },
+    ],
+    "edges": [
+        {
+            "source": "_1",
+            "target": "_1_1"
+        },
+        {
+            "source": "_2",
+            "target": "_2_1"
+        },
+    ]
 }
 
-let data = {}
-
 // Get the org data from backend
-backend.data.getOrgTree().then(orgTree => {
+const orgTreeData =backend.data.getOrgTree().then((orgTree) => {
     let parents = []
     let children = []
     let edges = []
@@ -37,23 +62,23 @@ backend.data.getOrgTree().then(orgTree => {
     let childrenId = 1
     for (const [key, value] of Object.entries(orgTree)) {
         parents.push({
-            "id": "_" + parentId,
-            "name": key,
-            "tag": key,
-            "level": 0,
-            "childrenNum": value.orgSummary.numberOfRepos,
+            id: "_" + parentId,
+            name: key,
+            tag: key,
+            level: 0,
+            childrenNum: value.orgSummary.numberOfRepos,
         })
         for (const [repo_key, repo_value] of Object.entries(value.repoSummaries)) {
             children.push({
-                "id": "_" + parentId + "_" + childrenId,
-                "name": repo_key,
-                "level": 1,
-                "isLeaf": true,
-                "tags": [key]
+                id: "_" + parentId + "_" + childrenId,
+                name: repo_key,
+                level: 1,
+                isLeaf: true,
+                tags: [key],
             })
             edges.push({
-                "source": "_" + parentId,
-                "target": "_" + parentId + "_" + childrenId
+                source: "_" + parentId,
+                target: "_" + parentId + "_" + childrenId,
             })
             childrenId += 1
         }
@@ -62,64 +87,186 @@ backend.data.getOrgTree().then(orgTree => {
         childrenId = 1
     }
 
-    data = {
-        "nodes": [...parents, ...children],
-        "edges": [...edges]
+    return {
+        nodes: [...parents, ...children],
+        edges: [...edges],
     }
 })
 
 module.exports = () => {
-    const element = <div id="canvas"></div>
+    const element = <div style={`width: 100%; height: 100%;`}>
+        <div style={`width: 100%; font-size: 15pt;`} class="centered">Loading...</div>
+    </div>
+    const managerData = {
+        width: 500,
+        height: 500,
+    }
+    let graph
+    let showNodes = []
+    let showEdges = []
+    let curShowNodes = []
+    let curShowEdges = []
+    let nodes = []
+    let edges = []
+    let nodeMap = new Map()
+    let edgesMap = new Map()
+    let curShowNodesMap = new Map()
+    let highlighting = false
+    let currentFocus
+    const gColors = []
+    const unlightColorMap = new Map()
+    
+    // 
+    // 
+    // helpers
+    // 
+    // 
+    const onClickLeafNode = (node) => {
+        // TODO: Redirect and load child node to tree view
+        console.log("clicked leaf node is: ", node)
+    }
+    
+    // 
+    // graph sizing
+    // 
+    const updateDimensions = ()=>{
+        window.element = element
+        if (element instanceof Object) {
+            managerData.width = element.scrollWidth
+            managerData.height = element.scrollHeight
+        }
+        console.debug(`managerData.height is:`,managerData.height)
+        console.debug(`managerData.width is:`,managerData.width)
+        if (!graph || graph.get("destroyed")) {
+            return
+        } 
+        graph.changeSize(managerData.width, managerData.height)
+    }
+    
+    // 
+    // node sizing
+    // 
+    const mapNodeSize = (nodes, propertyName, visualRange) => {
+        let minp = 9999999999
+        let maxp = -9999999999
+        nodes.forEach((node) => {
+            minp = node[propertyName] < minp ? node[propertyName] : minp
+            maxp = node[propertyName] > maxp ? node[propertyName] : maxp
+        })
+        const rangepLength = maxp - minp
+        const rangevLength = visualRange[1] - visualRange[0]
+        nodes.forEach((node) => {
+            node.size = ((node[propertyName] - minp) / rangepLength) * rangevLength + visualRange[0]
+        })
+    }
+        
+    // 
+    // loading data
+    // 
+    const loadData = (data) => {
+        data = exampleData // FIXME: DEBUGGING ONLY
+        const layoutController = graph.get("layoutController")
+        layoutController.layoutCfg.nodeStrength = 2500
+        layoutController.layoutCfg.collideStrength = 0.8
+        layoutController.layoutCfg.alphaDecay = 0.01
+        nodes = data.nodes
+        edges = data.edges
 
-    // Call code below after element has been mounted to the dom
-    elementReady("#canvas").then(() => {
-        // FIXME: Wait for backend data and formatting it to finish
-
-        let showNodes = []
-        let showEdges = []
-        let curShowNodes = []
-        let curShowEdges = []
-        let nodes = []
-        let edges = []
-        let nodeMap = new Map()
-        let edgesMap = new Map()
-        let curShowNodesMap = new Map()
-        let highlighting = false
-        let currentFocus
-        const width = window.innerWidth || 500
-        const height = window.innerHeight - document.getElementById("header").offsetHeight || 500
-
-        const LIMIT_OVERFLOW_WIDTH = width
-        const LIMIT_OVERFLOW_HEIGHT = height
-
-        const mapNodeSize = (nodes, propertyName, visualRange) => {
-            let minp = 9999999999
-            let maxp = -9999999999
-            nodes.forEach((node) => {
-                minp = node[propertyName] < minp ? node[propertyName] : minp
-                maxp = node[propertyName] > maxp ? node[propertyName] : maxp
-            })
-            const rangepLength = maxp - minp
-            const rangevLength = visualRange[1] - visualRange[0]
-            nodes.forEach((node) => {
-                node.size = ((node[propertyName] - minp) / rangepLength) * rangevLength + visualRange[0]
-            })
+        //
+        // sanity check
+        //
+        if (!(data.nodes instanceof Array)) {
+            console.error("called loadData(), but there were no nodes")
+            return
         }
 
-        // 
+        showNodes = []
+        showEdges = []
+        nodeMap = new Map()
+        edgesMap = new Map()
+        // find the roots
+        nodes.forEach((node) => {
+            if (node.level === 0) {
+                node.color = gColors[showNodes.length % gColors.length]
+                node.style = {
+                    fill: gColors[showNodes.length % gColors.length],
+                    lineWidth: 0,
+                }
+                node.labelCfg = {
+                    style: {
+                        fontSize: 25,
+                        fill: "#fff",
+                        fontWeight: 300,
+                    },
+                }
+                node.x = Math.random() * 800
+                node.y = Math.random() * 800
+                showNodes.push(node)
+            }
+            if (!node.isLeaf) {
+                const num = node.childrenNum ? `\n(${node.childrenNum})` : ""
+                node.label = `${node.name}${num}`
+            } else {
+                node.label = node.name
+            }
+            nodeMap.set(node.id, node)
+        })
+
+        // [120, 180] represents magnification scale between nodes
+        mapNodeSize(showNodes, "childrenNum", [120, 180])
+
+        // map the color to F nodes, same to its parent
+        nodes.forEach((node) => {
+            if (node.level !== 0 && !node.isLeaf) {
+                const parent = nodeMap.get(node.tags[0])
+                node.color = parent.color
+                node.style = {
+                    fill: parent.color,
+                }
+            }
+        })
+        edges.forEach((edge) => {
+            // map the id
+            edge.id = `${edge.source}-${edge.target}`
+            edge.style = {
+                lineWidth: 0.5,
+                opacity: 1,
+                strokeOpacity: 1,
+            }
+            edgesMap.set(edge.id, edge)
+        })
+        graph.data({
+            nodes: showNodes,
+            edges: showEdges,
+        })
+        graph.render()
+    }
+    
+    // 
+    // Call code below after element has been mounted to the dom
+    // 
+    mountedToDom(element).then(() => {
+        // remove the loader text
+        element.innerHTML = ""
+        // update dimension data soon as mounted
+        console.log(`updating dims`)
+        updateDimensions()
+        // attach resize listener
+        window.addEventListener("resize", updateDimensions)
+        // load data as soon as it is ready
+        orgTreeData.then(loadData)
+
+        //
         // setup colors
-        // 
-        const gColors = []
-        const unlightColorMap = new Map()
+        //
         nodeTheme.lightColors.forEach((lightColor, i) => {
             gColors.push("l(0) 0:" + lightColor + " 1:" + nodeTheme.darkColors[i])
             unlightColorMap.set(gColors[i], "l(0) 0:" + nodeTheme.uLightColors[i] + " 1:" + nodeTheme.uDarkColors[i])
         })
 
-        // 
+        //
         // setup layout
-        // 
-        let graph
+        //
         const layoutCfg = {
             type: "force",
             nodeSize: (d) => {
@@ -157,7 +304,7 @@ module.exports = () => {
         // setup graph object
         //
         G6.registerBehavior("double-finger-drag-canvas", {
-            getEvents: () => ({ wheel: "onWheel", }),
+            getEvents: () => ({ wheel: "onWheel" }),
             onWheel: (ev) => {
                 if (ev.ctrlKey) {
                     const canvas = graph.get("canvas")
@@ -468,8 +615,8 @@ module.exports = () => {
 
         graph = new G6.Graph({
             container: element,
-            width,
-            height,
+            width: managerData.width,
+            height: managerData.height,
             linkCenter: true,
             layout: layoutCfg,
             modes: {
@@ -493,11 +640,11 @@ module.exports = () => {
         })
         graph.get("canvas").set("localRefresh", false)
 
-        // 
-        // 
+        //
+        //
         // setup graph events
-        // 
-        // 
+        //
+        //
         function translate(x, y) {
             let moveX = x
             let moveY = y
@@ -508,17 +655,17 @@ module.exports = () => {
             const leftTopPoint = graph.getCanvasByPoint(bbox.minX, bbox.minY)
             const rightBottomPoint = graph.getCanvasByPoint(bbox.maxX, bbox.maxY)
             /* If the x-axis is in the region, no more than 100 left and right are allowed */
-            if (x < 0 && leftTopPoint.x - x > LIMIT_OVERFLOW_WIDTH) {
+            if (x < 0 && leftTopPoint.x - x > managerData.width) {
                 moveX = 0
             }
-            if (x > 0 && rightBottomPoint.x - x < width - LIMIT_OVERFLOW_WIDTH) {
+            if (x > 0 && rightBottomPoint.x - x < 0) {
                 moveX = 0
             }
 
-            if (y < 0 && leftTopPoint.y - y > LIMIT_OVERFLOW_HEIGHT) {
+            if (y < 0 && leftTopPoint.y - y > managerData.height) {
                 moveY = 0
             }
-            if (y > 0 && rightBottomPoint.y - y < height - LIMIT_OVERFLOW_HEIGHT) {
+            if (y > 0 && rightBottomPoint.y - y < 0) {
                 moveY = 0
             }
             graph.translate(-moveX, -moveY)
@@ -620,19 +767,18 @@ module.exports = () => {
                 })
             }
         })
-        // 
+        //
         // node onClick
-        // 
+        //
         graph.on("node:click", (eventObject) => {
             const item = eventObject.item
             const nodeThatGotClicked = item.getModel()
 
-            // 
+            //
             // if clicked a child node
-            // 
+            //
             if (nodeThatGotClicked.level !== 0) {
-                console.log("child node is: ", nodeThatGotClicked)
-                // TODO: Redirect and load child node to tree view
+                onClickLeafNode(nodeThatGotClicked)
             } else {
                 // hide unrelated items and show the related items
                 const layoutController = graph.get("layoutController")
@@ -641,18 +787,18 @@ module.exports = () => {
                 showNodes.forEach((snode) => {
                     const item = graph.findById(snode.id)
                     graph.setItemState(item, "dark", false)
-                    if (snode.x < 0.5 * width) {
+                    if (snode.x < 0.5 * managerData.width) {
                         snode.x = 300
                     } else {
-                        snode.x = width - 300
+                        snode.x = managerData.width - 300
                     }
                 })
-                nodeThatGotClicked.x = width / 2
-                nodeThatGotClicked.y = height / 2
+                nodeThatGotClicked.x = managerData.width / 2
+                nodeThatGotClicked.y = managerData.height / 2
 
-                // 
+                //
                 // hide unrelated items
-                // 
+                //
                 graph.positionsAnimate()
 
                 // reset curShowNodes nad curShowEdges
@@ -696,18 +842,18 @@ module.exports = () => {
 
                     curShowNodesMap = new Map()
 
-                    // 
+                    //
                     // find children of nodeThatGotClicked
-                    // 
+                    //
                     nodes.forEach((node) => {
                         const isChild = node.tags instanceof Array && node.tags.includes(parentTag)
                         if (isChild) {
                             const randomAngle = Math.random() * 2 * Math.PI
                             const color = nodeThatGotClicked.color.split(" ")[1].substr(2)
 
-                            // 
+                            //
                             // setup the node
-                            // 
+                            //
                             node.x = nodeThatGotClicked.x + (Math.cos(randomAngle) * nodeThatGotClicked.size) / 2 + 10
                             node.y = nodeThatGotClicked.y + (Math.sin(randomAngle) * nodeThatGotClicked.size) / 2 + 10
                             node.size = 60
@@ -730,9 +876,9 @@ module.exports = () => {
                             curShowNodes.push(node)
                             curShowNodesMap.set(node.id, node)
 
-                            // 
+                            //
                             // setup the edges
-                            // 
+                            //
                             const edgeId = `${nodeThatGotClicked.id}-${node.id}`
                             const edge = edgesMap.get(edgeId)
                             if (edge) {
@@ -832,89 +978,7 @@ module.exports = () => {
                 }, 400)
             }
         })
-
-        window.onresize = function () {
-            if (!graph || graph.get("destroyed")) {
-                return
-            }
-            if (!window.innerWidth || !window.innerHeight - document.getElementById("header").offsetHeight) {
-                return
-            }
-            graph.changeSize(window.innerWidth, window.innerHeight - document.getElementById("header").offsetHeight)
-        }
-
-        const loadData = (data) => {
-            const layoutController = graph.get("layoutController")
-            layoutController.layoutCfg.nodeStrength = 2500
-            layoutController.layoutCfg.collideStrength = 0.8
-            layoutController.layoutCfg.alphaDecay = 0.01
-            nodes = data.nodes
-            edges = data.edges
-
-            showNodes = []
-            showEdges = []
-            nodeMap = new Map()
-            edgesMap = new Map()
-            // find the roots
-            nodes.forEach((node) => {
-                if (node.level === 0) {
-                    node.color = gColors[showNodes.length % gColors.length]
-                    node.style = {
-                        fill: gColors[showNodes.length % gColors.length],
-                        lineWidth: 0,
-                    }
-                    node.labelCfg = {
-                        style: {
-                            fontSize: 25,
-                            fill: "#fff",
-                            fontWeight: 300,
-                        },
-                    }
-                    node.x = Math.random() * 800
-                    node.y = Math.random() * 800
-                    showNodes.push(node)
-                }
-                if (!node.isLeaf) {
-                    const num = node.childrenNum ? `\n(${node.childrenNum})` : ""
-                    node.label = `${node.name}${num}`
-                } else {
-                    node.label = node.name
-                }
-                nodeMap.set(node.id, node)
-            })
-
-            // [120, 180] represents magnification scale between nodes
-            mapNodeSize(showNodes, "childrenNum", [120, 180])
-
-            // map the color to F nodes, same to its parent
-            nodes.forEach((node) => {
-                if (node.level !== 0 && !node.isLeaf) {
-                    const parent = nodeMap.get(node.tags[0])
-                    node.color = parent.color
-                    node.style = {
-                        fill: parent.color,
-                    }
-                }
-            })
-            edges.forEach((edge) => {
-                // map the id
-                edge.id = `${edge.source}-${edge.target}`
-                edge.style = {
-                    lineWidth: 0.5,
-                    opacity: 1,
-                    strokeOpacity: 1,
-                }
-                edgesMap.set(edge.id, edge)
-            })
-            graph.data({
-                nodes: showNodes,
-                edges: showEdges,
-            })
-            graph.render()
-        }
-        // this works if put inside a callback too (e.g. thing.then(()=>loadData(data)))
-        loadData(data)
-    });
+    })
 
     return element
 }
