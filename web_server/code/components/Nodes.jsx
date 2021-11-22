@@ -66,7 +66,7 @@ const exampleData = {
 
 // Get the org data from backend
 const orgTreeData =backend.data.getOrgTree().then((orgTree) => {
-    let maxNumber = 3
+    let maxNumber = 8
     let parents = []
     let children = []
     let edges = []
