@@ -111,9 +111,12 @@ module.exports = () => {
     const managerData = {
         width: 500, // will be changed upon load
         height: 500, // will be changed upon load
+        growingEdgeLength: 1,
     }
     const config = {
+        randomAssignmentPercentBounds: 0.95,
         nodeSizeRange: [120, 180],
+        maxNumberOfRepos: 2,
         leafNode: {
             defaultLinkDistance: 120,
             defaultAnimationTime: 1700,
@@ -149,6 +152,8 @@ module.exports = () => {
             }
         },
         edge: {
+            growAnimationTime: 2000,
+            animationRate: 100,
             style: {
                 lineWidth: 0.5,
                 opacity: 1,
@@ -162,24 +167,22 @@ module.exports = () => {
                 nodeSize: (d) => {
                     return d.size / 2 + 5
                 },
+                // damping: 0.19,
+                maxSpeed: 1,
+                coulombDisScale: 0.005,
                 nodeStrength: 0,
-                collideStrength: ()=> 0.5,
-                alphaDecay: 0,
+                collideStrength: ()=> 0.15,
+                alphaDecay: 0.01,
                 preventOverlap: true,
-                nodeSpacing: 20,
+                // nodeSpacing: 20,
+                linkDistance: (node) => {
+                    return config.leafNode.defaultLinkDistance
+                },
             },
             showChildNodes: {
-                collideStrength: 2.0,
+                collideStrength: 0.15,
                 nodeStrength: () => config.layout.default.nodeStrength,
                 edgeStrength: () => 1,
-                linkDistance: (node) => {
-                    const isNotRootNode = node.source.level !== 0
-                    if (isNotRootNode) {
-                        return config.rootNode.defaultLinkDistance
-                    } else {
-                        return config.leafNode.defaultLinkDistance
-                    }
-                },
             }
         },
     }
@@ -265,6 +268,15 @@ module.exports = () => {
     // loading data
     // 
     const loadData = (data) => {
+        //
+        // sanity check
+        //
+        if (!(data.nodes instanceof Array)) {
+            console.error("called loadData(), but there were no nodes")
+            return
+        }
+        
+        // data.nodes = data.nodes.slice(0, config.maxNumberOfRepos)
         data = exampleData // FIXME: DEBUGGING ONLY
         
         // setup the layout
@@ -273,13 +285,6 @@ module.exports = () => {
         nodes = data.nodes
         edges = data.edges
 
-        //
-        // sanity check
-        //
-        if (!(data.nodes instanceof Array)) {
-            console.error("called loadData(), but there were no nodes")
-            return
-        }
         
         // 
         // create nodes
@@ -300,8 +305,8 @@ module.exports = () => {
                 // assign color
                 node.style.fill = node.color = getColor(nodeIndex)
                 // assign location
-                node.x = Math.random() * managerData.width
-                node.y = Math.random() * managerData.height
+                node.x = Math.random() * (managerData.width * config.randomAssignmentPercentBounds)
+                node.y = Math.random() * (managerData.height * config.randomAssignmentPercentBounds)
                 // assign label
                 node.label = node.childrenNum != null ? `${node.name}\n(${node.childrenNum})` : node.name
                 // make visible
@@ -331,7 +336,6 @@ module.exports = () => {
         // remove the loader text
         element.innerHTML = ""
         // update dimension data soon as mounted
-        console.log(`updating dims`)
         updateDimensions()
         // attach resize listener
         window.addEventListener("resize", updateDimensions)
@@ -526,8 +530,24 @@ module.exports = () => {
         G6.registerNode(
             "animate-circle",
             {
-                setState(name, value, item) {
-                    
+                setState(whatState, value, item) {
+                    if (value) {
+                        const shape = item.get("keyShape")
+                        const label = shape.get("parent").get("children")[1]
+                        if (whatState == "dissapearing") {
+                            shape.animate(
+                                (ratio) => {
+                                    
+                                },
+                                {
+                                    repeat: true,
+                                    duration: 2500,
+                                }
+                            )
+                        }
+                    }
+                    console.debug(`nodeState: ${name}, value is:`, value)
+
                 },
             },
             "circle"
@@ -765,19 +785,7 @@ module.exports = () => {
             // if clicked root node
             //
             } else {
-                // light the level 0 nodes
-                showNodes.forEach((snode) => {
-                    const item = graph.findById(snode.id)
-                    graph.setItemState(item, "dark", false)
-                    if (snode.x < 0.5 * managerData.width) {
-                        snode.x = 300
-                    } else {
-                        snode.x = managerData.width - 300
-                    }
-                })
-                nodeThatGotClicked.x = managerData.width / 2
-                nodeThatGotClicked.y = managerData.height / 2
-
+                console.log(`clicked root node`)
                 // reset curShowNodes nad curShowEdges
                 curShowNodes = []
                 curShowEdges = []
@@ -817,8 +825,8 @@ module.exports = () => {
                             // set color (probably does nothing)
                             node.color = color
                             // set position
-                            node.x = nodeThatGotClicked.x
-                            node.y = nodeThatGotClicked.y
+                            node.x = nodeThatGotClicked.x + 10
+                            node.y = nodeThatGotClicked.y + 10
                             // node.x = nodeThatGotClicked.x + (Math.cos(randomAngle) * nodeThatGotClicked.size) / 2 + 10
                             // node.y = nodeThatGotClicked.y + (Math.sin(randomAngle) * nodeThatGotClicked.size) / 2 + 10
                             curShowNodes.push(node)
@@ -869,21 +877,10 @@ module.exports = () => {
                     })
                 }
                 graph.positionsAnimate()
-                setTimeout(() => {
-                    graph.changeData({
-                        nodes: showNodes.concat(curShowNodes),
-                        edges: showEdges.concat(curShowEdges),
-                    })
-                    const nodeItems = graph.getNodes()
-                    const edgeItems = graph.getEdges()
-                    edgeItems.forEach((item) => {
-                        graph.clearItemStates(item)
-                    })
-                    nodeItems.forEach((item) => {
-                        graph.clearItemStates(item)
-                        graph.setItemState(item, "appearing", true)
-                    })
-                }, config.layout.timeoutWait)
+                graph.changeData({
+                    nodes: showNodes.concat(curShowNodes),
+                    edges: showEdges.concat(curShowEdges),
+                })
             }
         })
         graph.on("canvas:click", () => {
