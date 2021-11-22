@@ -66,12 +66,16 @@ const exampleData = {
 
 // Get the org data from backend
 const orgTreeData =backend.data.getOrgTree().then((orgTree) => {
+    let maxNumber = 3
     let parents = []
     let children = []
     let edges = []
     let parentId = 1
     let childrenId = 1
     for (const [key, value] of Object.entries(orgTree)) {
+        if (maxNumber-- <= 0) {
+            break
+        }
         parents.push({
             id: "_" + parentId,
             name: key,
@@ -116,7 +120,6 @@ module.exports = () => {
     const config = {
         randomAssignmentPercentBounds: 0.95,
         nodeSizeRange: [120, 180],
-        maxNumberOfRepos: 2,
         leafNode: {
             defaultLinkDistance: 120,
             defaultAnimationTime: 1700,
@@ -144,11 +147,12 @@ module.exports = () => {
                 lineFill: 0,
             },
             labelCfg: {
-               style: {
-                    fontSize: 25,
+                style: {
+                    fontSize: 16,
+                    lineHeight: 19,
                     fill: "#fff",
-                    fontWeight: 300,
-                }, 
+                },
+                position: "center",
             }
         },
         edge: {
@@ -276,9 +280,6 @@ module.exports = () => {
             return
         }
         
-        // data.nodes = data.nodes.slice(0, config.maxNumberOfRepos)
-        data = exampleData // FIXME: DEBUGGING ONLY
-        
         // setup the layout
         setLayout(config.layout.default)
         
@@ -301,7 +302,8 @@ module.exports = () => {
             } else {
                 // get config data
                 node.style    = {...node.style,    ...config.rootNode.style}
-                node.labelCfg = {...node.labelCfg, ...config.rootNode.labelCfg}
+                node.labelCfg = config.rootNode.labelCfg
+                
                 // assign color
                 node.style.fill = node.color = getColor(nodeIndex)
                 // assign location
@@ -536,18 +538,15 @@ module.exports = () => {
                         const label = shape.get("parent").get("children")[1]
                         if (whatState == "dissapearing") {
                             shape.animate(
-                                (ratio) => {
-                                    
-                                },
+                                (progress) => ({
+                                    opacity: (1-progress)
+                                }),
                                 {
-                                    repeat: true,
                                     duration: 2500,
                                 }
                             )
                         }
                     }
-                    console.debug(`nodeState: ${name}, value is:`, value)
-
                 },
             },
             "circle"
@@ -627,6 +626,7 @@ module.exports = () => {
                     style: {
                         fill: "white",
                         fontStyle: "bold",
+                        fontSize: config.rootNode.labelCfg.fontSize,
                     },
                 },
             },
@@ -824,9 +824,9 @@ module.exports = () => {
                             Object.assign(node, config.leafNode.defaultOptions)
                             // set color (probably does nothing)
                             node.color = color
-                            // set position
-                            node.x = nodeThatGotClicked.x + 10
-                            node.y = nodeThatGotClicked.y + 10
+                            // set position (make it a little bit offset)
+                            node.x = nodeThatGotClicked.x + 1
+                            node.y = nodeThatGotClicked.y + 1
                             // node.x = nodeThatGotClicked.x + (Math.cos(randomAngle) * nodeThatGotClicked.size) / 2 + 10
                             // node.y = nodeThatGotClicked.y + (Math.sin(randomAngle) * nodeThatGotClicked.size) / 2 + 10
                             curShowNodes.push(node)
