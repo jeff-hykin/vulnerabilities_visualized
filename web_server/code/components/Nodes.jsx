@@ -649,12 +649,12 @@ module.exports = () => {
             let moveX = x
             let moveY = y
 
-            /* Get the current offset */
+            // Get the current offset 
             const group = graph.get("group")
             const bbox = group.getBBox()
             const leftTopPoint = graph.getCanvasByPoint(bbox.minX, bbox.minY)
             const rightBottomPoint = graph.getCanvasByPoint(bbox.maxX, bbox.maxY)
-            /* If the x-axis is in the region, no more than 100 left and right are allowed */
+            // If the x-axis is in the region, no more than 100 left and right are allowed
             if (x < 0 && leftTopPoint.x - x > managerData.width) {
                 moveX = 0
             }
@@ -773,12 +773,20 @@ module.exports = () => {
         graph.on("node:click", (eventObject) => {
             const item = eventObject.item
             const nodeThatGotClicked = item.getModel()
-
+            
+            // TODO: check to see if this is needed
+            if (!nodeThatGotClicked.isLeaf && nodeThatGotClicked.level !== 0) {
+                return
+            }
+            
             //
             // if clicked a child node
             //
             if (nodeThatGotClicked.level !== 0) {
                 onClickLeafNode(nodeThatGotClicked)
+            //
+            // if clicked root node
+            //
             } else {
                 // hide unrelated items and show the related items
                 const layoutController = graph.get("layoutController")
@@ -797,8 +805,18 @@ module.exports = () => {
                 nodeThatGotClicked.y = managerData.height / 2
 
                 //
-                // hide unrelated items
+                // animatedly hide unrelated items
                 //
+                if (curShowEdges.length) {
+                    curShowEdges.forEach((csedge) => {
+                        const item = graph.findById(csedge.id)
+                        item && graph.setItemState(item, "disappearing", true)
+                    })
+                }
+                curShowNodes.forEach((csnode) => {
+                    const item = graph.findById(csnode.id)
+                    item && graph.setItemState(item, "disappearing", true)
+                })
                 graph.positionsAnimate()
 
                 // reset curShowNodes nad curShowEdges
@@ -815,9 +833,9 @@ module.exports = () => {
                     layoutController.layoutCfg.nodeStrength = 2500
                     layoutController.layoutCfg.collideStrength = 0.8
                     layoutController.layoutCfg.alphaDecay = 0.01
-                    //
-                    // if clicking a not-already-focused-on node
-                    //
+                //
+                // if clicking a not-already-focused-on node
+                //
                 } else {
                     // click other focus node, hide the current small nodes and show the related nodes
                     currentFocus = nodeThatGotClicked
