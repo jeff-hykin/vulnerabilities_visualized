@@ -101,6 +101,39 @@ module.exports = () => {
         width: 500,
         height: 500,
     }
+    const config = {
+        nodeSizeRange: [120, 180],
+        leafNode: {
+            defaultLinkDistance: 120,
+        },
+        rootNode: {
+            defaultLinkDistance: 250,
+            style: {
+                lineFill: 0,
+            },
+            labelCfg: {
+               style: {
+                    fontSize: 25,
+                    fill: "#fff",
+                    fontWeight: 300,
+                }, 
+            }
+        },
+        edge: {
+            style: {
+                lineWidth: 0.5,
+                opacity: 1,
+                strokeOpacity: 1,
+            }
+        },
+        defaultLayoutConfig: {
+            nodeStrength: 1500,
+        },
+        loadDataConfig: {
+            
+        },
+        nodeStrengthOnChange: 0,
+    }
     let graph
     let showNodes = []
     let showEdges = []
@@ -121,9 +154,20 @@ module.exports = () => {
     // helpers
     // 
     // 
+    
+    // 
+    // on click
+    // 
     const onClickLeafNode = (node) => {
         // TODO: Redirect and load child node to tree view
         console.log("clicked leaf node is: ", node)
+    }
+
+    //
+    // get node color
+    //
+    const getColor = (nodeIndex) => {
+        return gColors[nodeIndex % gColors.length]
     }
     
     // 
@@ -135,8 +179,6 @@ module.exports = () => {
             managerData.width = element.scrollWidth
             managerData.height = element.scrollHeight
         }
-        console.debug(`managerData.height is:`,managerData.height)
-        console.debug(`managerData.width is:`,managerData.width)
         if (!graph || graph.get("destroyed")) {
             return
         } 
@@ -159,14 +201,14 @@ module.exports = () => {
             node.size = ((node[propertyName] - minp) / rangepLength) * rangevLength + visualRange[0]
         })
     }
-        
+
     // 
     // loading data
     // 
     const loadData = (data) => {
         data = exampleData // FIXME: DEBUGGING ONLY
         const layoutController = graph.get("layoutController")
-        layoutController.layoutCfg.nodeStrength = 2500
+        layoutController.layoutCfg.nodeStrength = config.defaultLayoutConfig.nodeStrength
         layoutController.layoutCfg.collideStrength = 0.8
         layoutController.layoutCfg.alphaDecay = 0.01
         nodes = data.nodes
@@ -179,62 +221,44 @@ module.exports = () => {
             console.error("called loadData(), but there were no nodes")
             return
         }
-
+        
+        // 
+        // create nodes
+        // 
         showNodes = []
         showEdges = []
         nodeMap = new Map()
         edgesMap = new Map()
-        // find the roots
-        nodes.forEach((node) => {
-            if (node.level === 0) {
-                node.color = gColors[showNodes.length % gColors.length]
-                node.style = {
-                    fill: gColors[showNodes.length % gColors.length],
-                    lineWidth: 0,
-                }
-                node.labelCfg = {
-                    style: {
-                        fontSize: 25,
-                        fill: "#fff",
-                        fontWeight: 300,
-                    },
-                }
-                node.x = Math.random() * 800
-                node.y = Math.random() * 800
+        for (const [nodeIndex, node] of Object.entries(nodes)) {
+            nodeMap.set(node.id, node)
+            const isNotRootNode = node.level !== 0
+            if (isNotRootNode) {
+                node.label = node.name
+            } else {
+                // get config data
+                node.style    = {...node.style,    ...config.rootNode.style}
+                node.labelCfg = {...node.labelCfg, ...config.rootNode.labelCfg}
+                // assign color
+                node.style.fill = node.color = getColor(nodeIndex)
+                // assign location
+                node.x = Math.random() * managerData.width
+                node.y = Math.random() * managerData.height
+                // assign label
+                node.label = node.childrenNum != null ? `${node.name}\n(${node.childrenNum})` : node.name
+                // make visible
                 showNodes.push(node)
             }
-            if (!node.isLeaf) {
-                const num = node.childrenNum ? `\n(${node.childrenNum})` : ""
-                node.label = `${node.name}${num}`
-            } else {
-                node.label = node.name
-            }
-            nodeMap.set(node.id, node)
-        })
+        }
 
         // [120, 180] represents magnification scale between nodes
-        mapNodeSize(showNodes, "childrenNum", [120, 180])
+        mapNodeSize(showNodes, "childrenNum", config.nodeSizeRange)
 
-        // map the color to F nodes, same to its parent
-        nodes.forEach((node) => {
-            if (node.level !== 0 && !node.isLeaf) {
-                const parent = nodeMap.get(node.tags[0])
-                node.color = parent.color
-                node.style = {
-                    fill: parent.color,
-                }
-            }
-        })
-        edges.forEach((edge) => {
+        for (const edge of edges) {
             // map the id
             edge.id = `${edge.source}-${edge.target}`
-            edge.style = {
-                lineWidth: 0.5,
-                opacity: 1,
-                strokeOpacity: 1,
-            }
+            edge.style = config.edge.style
             edgesMap.set(edge.id, edge)
-        })
+        }
         graph.data({
             nodes: showNodes,
             edges: showEdges,
@@ -272,7 +296,7 @@ module.exports = () => {
             nodeSize: (d) => {
                 return d.size / 2 + 5
             },
-            nodeStrength: 2500,
+            nodeStrength: config.defaultLayoutConfig.nodeStrength,
             collideStrength: 0.8,
             alphaDecay: 0.01,
             preventOverlap: true,
@@ -830,7 +854,7 @@ module.exports = () => {
                     // then hide the children of the already-focused node
                     // and change the layout parameters to roots view
                     currentFocus = undefined
-                    layoutController.layoutCfg.nodeStrength = 2500
+                    layoutController.layoutCfg.nodeStrength = config.defaultLayoutConfig.nodeStrength
                     layoutController.layoutCfg.collideStrength = 0.8
                     layoutController.layoutCfg.alphaDecay = 0.01
                 //
@@ -843,26 +867,26 @@ module.exports = () => {
                     // not sure what this part is doing
                     //
                     const layoutController = graph.get("layoutController")
-                    layoutController.layoutCfg.nodeStrength = () => {
-                        return -80
-                    }
-                    layoutController.layoutCfg.collideStrength = 0.2
-                    layoutController.layoutCfg.linkDistance = (d) => {
-                        if (d.source.level !== 0) return 120
-                        const length = 250
-                        return length
-                    }
-                    layoutController.layoutCfg.edgeStrength = () => {
-                        return 2
-                    }
-
-                    const parentTag = nodeThatGotClicked.tag
+                    Object.assign(layoutController.layoutCfg, {
+                        collideStrength: 2.0,
+                        nodeStrength: () => config.nodeStrengthOnChange,
+                        edgeStrength: () => 2,
+                        linkDistance: (node) => {
+                            const isNotRootNode = node.source.level !== 0
+                            if (isNotRootNode) {
+                                return config.rootNode.defaultLinkDistance
+                            } else {
+                                return config.leafNode.defaultLinkDistance
+                            }
+                        },
+                    })
 
                     curShowNodesMap = new Map()
 
                     //
                     // find children of nodeThatGotClicked
                     //
+                    const parentTag = nodeThatGotClicked.tag
                     nodes.forEach((node) => {
                         const isChild = node.tags instanceof Array && node.tags.includes(parentTag)
                         if (isChild) {
@@ -985,7 +1009,7 @@ module.exports = () => {
                 curShowEdges = []
                 setTimeout(() => {
                     const layoutController = graph.get("layoutController")
-                    layoutController.layoutCfg.nodeStrength = 2500
+                    layoutController.layoutCfg.nodeStrength = style.defaultLayoutConfig.nodeStrength
                     layoutController.layoutCfg.collideStrength = 0.8
                     layoutController.layoutCfg.alphaDecay = 0.01
 
