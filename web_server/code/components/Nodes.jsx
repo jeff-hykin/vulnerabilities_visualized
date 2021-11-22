@@ -109,8 +109,10 @@ const orgTreeData =backend.data.getOrgTree().then((orgTree) => {
 })
 
 module.exports = () => {
-    const element = <div style={`width: 100%; height: 100%;`}>
-        <div style={`width: 100%; font-size: 15pt;`} class="centered">Loading...</div>
+    const canvas = <div style={`opacity: 0; width: 100%; height: 100%; transition: all 0.5s ease-in-out 0s;`}></div>
+    const element = <div style={`width: 100%; height: 100%; position: relative; transition: all 0.5s ease-in-out 0s;`}>
+        <div style={`width: 100%; font-size: 15pt; position: absolute; top: 3rem;`} class="centered">Loading...</div>
+        {canvas}
     </div>
     const managerData = {
         width: 500, // will be changed upon load
@@ -118,7 +120,7 @@ module.exports = () => {
         growingEdgeLength: 1,
     }
     const config = {
-        randomAssignmentPercentBounds: 0.95,
+        randomAssignmentPercentBounds: 0.75,
         nodeSizeRange: [120, 180],
         leafNode: {
             defaultLinkDistance: 120,
@@ -172,11 +174,12 @@ module.exports = () => {
                     return d.size / 2 + 5
                 },
                 // damping: 0.19,
-                maxSpeed: 1,
+                // maxSpeed: 1,
+                gravity: 0.5,
                 coulombDisScale: 0.005,
                 nodeStrength: 0,
                 collideStrength: ()=> 0.15,
-                alphaDecay: 0.01,
+                alphaDecay: 0.05,
                 preventOverlap: true,
                 // nodeSpacing: 20,
                 linkDistance: (node) => {
@@ -240,10 +243,9 @@ module.exports = () => {
     // graph sizing
     // 
     const updateDimensions = ()=>{
-        window.element = element
-        if (element instanceof Object) {
-            managerData.width = element.scrollWidth
-            managerData.height = element.scrollHeight
+        if (canvas instanceof Object) {
+            managerData.width = canvas.scrollWidth
+            managerData.height = canvas.scrollHeight
         }
         if (!graph || graph.get("destroyed")) {
             return
@@ -294,6 +296,13 @@ module.exports = () => {
         showEdges = []
         nodeMap = new Map()
         edgesMap = new Map()
+        for (const edge of edges) {
+            // map the id
+            edge.id = `${edge.source}-${edge.target}`
+            edge.style = config.edge.style
+            edgesMap.set(edge.id, edge)
+        }
+        canvas.style.opacity = 0.3
         for (const [nodeIndex, node] of Object.entries(nodes)) {
             nodeMap.set(node.id, node)
             const isNotRootNode = node.level !== 0
@@ -314,29 +323,37 @@ module.exports = () => {
                 // make visible
                 showNodes.push(node)
             }
-        }
-
-        mapNodeSize(showNodes, "childrenNum", config.nodeSizeRange)
-
-        for (const edge of edges) {
-            // map the id
-            edge.id = `${edge.source}-${edge.target}`
-            edge.style = config.edge.style
-            edgesMap.set(edge.id, edge)
+            
+            mapNodeSize(showNodes, "childrenNum", config.nodeSizeRange)
+            
+            try {
+                const forceLayout = graph.get("layoutController").layoutMethods[0]
+                forceLayout.forceSimulation.stop()
+            } catch (error) {
+                
+            }
         }
         graph.data({
             nodes: showNodes,
             edges: showEdges,
         })
-        graph.render()
+        graph.positionsAnimate()
+        
+        setTimeout(() => {
+            graph.layout()
+            graph.render()
+            // remove the loading
+            element.removeChild(element.childNodes[0])
+            // fade into view
+            canvas.style.opacity = 1
+        }, nodes.length * 25)
+        
     }
     
     // 
     // Call code below after element has been mounted to the dom
     // 
     mountedToDom(element).then(() => {
-        // remove the loader text
-        element.innerHTML = ""
         // update dimension data soon as mounted
         updateDimensions()
         // attach resize listener
@@ -579,42 +596,11 @@ module.exports = () => {
         )
 
         graph = new G6.Graph({
-            container: element,
+            container: canvas,
             width: managerData.width,
             height: managerData.height,
-            linkCenter: true,
-            layout: {
-                type: "force",
-                nodeSize: (d) => {
-                    return d.size / 2 + 5
-                },
-                collideStrength: 0.8,
-                alphaDecay: 0.01,
-                preventOverlap: true,
-                onTick: () => {
-                    const nodeItems = graph.getNodes()
-                    const height = graph.get("height")
-                    const width = graph.get("width")
-                    const padding = 10
-                    nodeItems.forEach((item) => {
-                        const model = item.getModel()
-                        // keep within width bounds
-                        if (model.x > width - padding) {
-                            model.x = width - padding
-                        } else if (model.x < padding) {
-                            model.x = padding
-                        }
-
-                        // keep within height bounds
-                        if (model.y > height - padding) {
-                            model.y = height - padding
-                        } else if (model.y < padding) {
-                            model.y = padding
-                        }
-                    })
-                },
-                ...config.layout.default,
-            },
+            // linkCenter: true,
+            layout: config.layout.default,
             modes: {
                 default: ["drag-canvas"],
             },
@@ -771,11 +757,6 @@ module.exports = () => {
             const item = eventObject.item
             const nodeThatGotClicked = item.getModel()
             
-            // TODO: check to see if this is needed
-            if (!nodeThatGotClicked.isLeaf && nodeThatGotClicked.level !== 0) {
-                return
-            }
-            
             //
             // if clicked a child node
             //
@@ -825,10 +806,8 @@ module.exports = () => {
                             // set color (probably does nothing)
                             node.color = color
                             // set position (make it a little bit offset)
-                            node.x = nodeThatGotClicked.x + 1
-                            node.y = nodeThatGotClicked.y + 1
-                            // node.x = nodeThatGotClicked.x + (Math.cos(randomAngle) * nodeThatGotClicked.size) / 2 + 10
-                            // node.y = nodeThatGotClicked.y + (Math.sin(randomAngle) * nodeThatGotClicked.size) / 2 + 10
+                            node.x = nodeThatGotClicked.x + (Math.cos(randomAngle) * nodeThatGotClicked.size) / 2 + 10
+                            node.y = nodeThatGotClicked.y + (Math.sin(randomAngle) * nodeThatGotClicked.size) / 2 + 10
                             curShowNodes.push(node)
                             curShowNodesMap.set(node.id, node)
 
@@ -876,17 +855,22 @@ module.exports = () => {
                         })
                     })
                 }
-                graph.positionsAnimate()
                 graph.changeData({
                     nodes: showNodes.concat(curShowNodes),
                     edges: showEdges.concat(curShowEdges),
                 })
+                setTimeout(() => {
+                    graph.positionsAnimate()
+                }, 0)
             }
         })
         graph.on("canvas:click", () => {
             currentFocus = undefined
             const forceLayout = graph.get("layoutController").layoutMethods[0]
             forceLayout.forceSimulation.stop()
+            setTimeout(() => {
+                graph.positionsAnimate()
+            }, 0)
             const nodeItems = graph.getNodes()
             const edgeItems = graph.getEdges()
             if (highlighting) {
