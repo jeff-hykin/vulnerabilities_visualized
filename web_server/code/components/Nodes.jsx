@@ -98,13 +98,31 @@ module.exports = () => {
         <div style={`width: 100%; font-size: 15pt;`} class="centered">Loading...</div>
     </div>
     const managerData = {
-        width: 500,
-        height: 500,
+        width: 500, // will be changed upon load
+        height: 500, // will be changed upon load
     }
     const config = {
         nodeSizeRange: [120, 180],
         leafNode: {
             defaultLinkDistance: 120,
+            defaultAnimationTime: 1700,
+            defaultOptions: {
+                size: 60,
+                type: "animate-circle",
+                style: {
+                    lineWidth: 1,
+                    opacity: 1,
+                    fill: "#fff",
+                },
+                labelCfg: {
+                    style: {
+                        fontSize: 11,
+                        lineHeight: 19,
+                        fill: "#697B8C",
+                    },
+                    position: "center",
+                }
+            }
         },
         rootNode: {
             defaultLinkDistance: 250,
@@ -126,13 +144,37 @@ module.exports = () => {
                 strokeOpacity: 1,
             }
         },
-        defaultLayoutConfig: {
-            nodeStrength: 1500,
+        layout: {
+            timeoutWait: 400,
+            default: {
+                type: "force",
+                nodeSize: (d) => {
+                    return d.size / 2 + 5
+                },
+                nodeStrength: 1500,
+                collideStrength: 0.8,
+                alphaDecay: 0.01,
+                preventOverlap: true,
+            },
+            onLoadData: {
+                nodeStrength: 1500,
+                collideStrength: 0.8,
+                alphaDecay: 0.01,
+            },
+            showChildNodes: {
+                collideStrength: 2.0,
+                nodeStrength: () => config.layout.default.nodeStrength,
+                edgeStrength: () => 2,
+                linkDistance: (node) => {
+                    const isNotRootNode = node.source.level !== 0
+                    if (isNotRootNode) {
+                        return config.rootNode.defaultLinkDistance
+                    } else {
+                        return config.leafNode.defaultLinkDistance
+                    }
+                },
+            }
         },
-        loadDataConfig: {
-            
-        },
-        nodeStrengthOnChange: 0,
     }
     let graph
     let showNodes = []
@@ -161,6 +203,16 @@ module.exports = () => {
     const onClickLeafNode = (node) => {
         // TODO: Redirect and load child node to tree view
         console.log("clicked leaf node is: ", node)
+    }
+
+    // 
+    // set layout
+    // 
+    const setLayout = (layoutConfig) => {
+        Object.assign(
+            graph.get("layoutController").layoutCfg,
+            layoutConfig
+        )
     }
 
     //
@@ -207,10 +259,10 @@ module.exports = () => {
     // 
     const loadData = (data) => {
         data = exampleData // FIXME: DEBUGGING ONLY
-        const layoutController = graph.get("layoutController")
-        layoutController.layoutCfg.nodeStrength = config.defaultLayoutConfig.nodeStrength
-        layoutController.layoutCfg.collideStrength = 0.8
-        layoutController.layoutCfg.alphaDecay = 0.01
+        
+        // setup the layout
+        setLayout(config.layout.onLoadData)
+        
         nodes = data.nodes
         edges = data.edges
 
@@ -250,7 +302,6 @@ module.exports = () => {
             }
         }
 
-        // [120, 180] represents magnification scale between nodes
         mapNodeSize(showNodes, "childrenNum", config.nodeSizeRange)
 
         for (const edge of edges) {
@@ -296,7 +347,7 @@ module.exports = () => {
             nodeSize: (d) => {
                 return d.size / 2 + 5
             },
-            nodeStrength: config.defaultLayoutConfig.nodeStrength,
+            nodeStrength: config.layout.default.nodeStrength,
             collideStrength: 0.8,
             alphaDecay: 0.01,
             preventOverlap: true,
@@ -509,22 +560,18 @@ module.exports = () => {
                     const label = shape.get("parent").get("children")[1]
                     if (name === "disappearing" && value) {
                         shape.animate(
-                            (ratio) => {
-                                return {
-                                    opacity: 1 - ratio,
-                                    r: shape.attr("r") * (1 - ratio),
-                                }
-                            },
+                            (ratio) => ({
+                                opacity: 1 - ratio,
+                                r: shape.attr("r") * (1 - ratio),
+                            }),
                             {
-                                duration: 200,
+                                duration: 1711,
                             }
                         )
                         label.animate(
-                            (ratio) => {
-                                return {
-                                    opacity: 1 - ratio,
-                                }
-                            },
+                            (ratio) => ({
+                                opacity: 1 - ratio,
+                            }),
                             {
                                 duration: 500,
                             }
@@ -532,24 +579,20 @@ module.exports = () => {
                     } else if (name === "appearing" && value) {
                         const r = item.getModel().size / 2
                         shape.animate(
-                            (ratio) => {
-                                return {
-                                    opacity: ratio,
-                                    r: r * ratio,
-                                    fill: shape.attr("fill"),
-                                }
-                            },
+                            (ratio) => ({
+                                opacity: ratio,
+                                r: r * ratio,
+                                fill: shape.attr("fill"),
+                            }),
                             {
-                                duration: 300,
+                                duration: 711,
                             }
                         )
                         label.animate(
                             {
-                                onFrame(ratio) {
-                                    return {
-                                        opacity: ratio,
-                                    }
-                                },
+                                onFrame:(ratio) => ({
+                                    opacity: ratio,
+                                }),
                             },
                             {
                                 duration: 300,
@@ -812,9 +855,6 @@ module.exports = () => {
             // if clicked root node
             //
             } else {
-                // hide unrelated items and show the related items
-                const layoutController = graph.get("layoutController")
-
                 // light the level 0 nodes
                 showNodes.forEach((snode) => {
                     const item = graph.findById(snode.id)
@@ -854,33 +894,15 @@ module.exports = () => {
                     // then hide the children of the already-focused node
                     // and change the layout parameters to roots view
                     currentFocus = undefined
-                    layoutController.layoutCfg.nodeStrength = config.defaultLayoutConfig.nodeStrength
-                    layoutController.layoutCfg.collideStrength = 0.8
-                    layoutController.layoutCfg.alphaDecay = 0.01
+                    setLayout(config.layout.default)
                 //
                 // if clicking a not-already-focused-on node
                 //
                 } else {
                     // click other focus node, hide the current small nodes and show the related nodes
                     currentFocus = nodeThatGotClicked
-                    //
-                    // not sure what this part is doing
-                    //
-                    const layoutController = graph.get("layoutController")
-                    Object.assign(layoutController.layoutCfg, {
-                        collideStrength: 2.0,
-                        nodeStrength: () => config.nodeStrengthOnChange,
-                        edgeStrength: () => 2,
-                        linkDistance: (node) => {
-                            const isNotRootNode = node.source.level !== 0
-                            if (isNotRootNode) {
-                                return config.rootNode.defaultLinkDistance
-                            } else {
-                                return config.leafNode.defaultLinkDistance
-                            }
-                        },
-                    })
-
+                    // change layout config when showing child nodes
+                    setLayout(config.layout.showChildNodes)
                     curShowNodesMap = new Map()
 
                     //
@@ -891,30 +913,15 @@ module.exports = () => {
                         const isChild = node.tags instanceof Array && node.tags.includes(parentTag)
                         if (isChild) {
                             const randomAngle = Math.random() * 2 * Math.PI
-                            const color = nodeThatGotClicked.color.split(" ")[1].substr(2)
+                            const color = nodeThatGotClicked.color.split(" ")[1].substr(2) // no idea what this is doing 
 
                             //
                             // setup the node
                             //
+                            Object.assign(node, config.leafNode.defaultOptions)
                             node.x = nodeThatGotClicked.x + (Math.cos(randomAngle) * nodeThatGotClicked.size) / 2 + 10
                             node.y = nodeThatGotClicked.y + (Math.sin(randomAngle) * nodeThatGotClicked.size) / 2 + 10
-                            node.size = 60
-                            node.type = "animate-circle"
                             node.color = color
-                            node.style = {
-                                ...node.style,
-                                lineWidth: 1,
-                                opacity: 1,
-                                fill: "#fff",
-                            }
-                            node.labelCfg = {
-                                style: {
-                                    fontSize: 11,
-                                    lineHeight: 19,
-                                    fill: "#697B8C",
-                                },
-                                position: "center",
-                            }
                             curShowNodes.push(node)
                             curShowNodesMap.set(node.id, node)
 
@@ -976,7 +983,7 @@ module.exports = () => {
                         graph.clearItemStates(item)
                         graph.setItemState(item, "appearing", true)
                     })
-                }, 400)
+                }, config.layout.timeoutWait)
             }
         })
         graph.on("canvas:click", () => {
@@ -1008,16 +1015,12 @@ module.exports = () => {
                 curShowNodes = []
                 curShowEdges = []
                 setTimeout(() => {
-                    const layoutController = graph.get("layoutController")
-                    layoutController.layoutCfg.nodeStrength = style.defaultLayoutConfig.nodeStrength
-                    layoutController.layoutCfg.collideStrength = 0.8
-                    layoutController.layoutCfg.alphaDecay = 0.01
-
+                    setLayout(config.layout.default)
                     graph.changeData({
                         nodes: showNodes,
                         edges: showEdges,
                     })
-                }, 400)
+                }, config.layout.timeoutWait)
             }
         })
     })
