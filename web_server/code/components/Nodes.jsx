@@ -40,6 +40,13 @@ const exampleData = {
             "isLeaf": true,
             "tags": ["Mozwire Project"]
         },
+        {
+            "id": "_2_2",
+            "name": "Mozwire Project",
+            "level": 1,
+            "isLeaf": true,
+            "tags": ["Mozwire Project"]
+        },
     ],
     "edges": [
         {
@@ -49,6 +56,10 @@ const exampleData = {
         {
             "source": "_2",
             "target": "_2_1"
+        },
+        {
+            "source": "_2",
+            "target": "_2_2"
         },
     ]
 }
@@ -151,20 +162,16 @@ module.exports = () => {
                 nodeSize: (d) => {
                     return d.size / 2 + 5
                 },
-                nodeStrength: 1500,
-                collideStrength: 0.8,
-                alphaDecay: 0.01,
+                nodeStrength: 0,
+                collideStrength: ()=> 0.5,
+                alphaDecay: 0,
                 preventOverlap: true,
-            },
-            onLoadData: {
-                nodeStrength: 1500,
-                collideStrength: 0.8,
-                alphaDecay: 0.01,
+                nodeSpacing: 20,
             },
             showChildNodes: {
                 collideStrength: 2.0,
                 nodeStrength: () => config.layout.default.nodeStrength,
-                edgeStrength: () => 2,
+                edgeStrength: () => 1,
                 linkDistance: (node) => {
                     const isNotRootNode = node.source.level !== 0
                     if (isNotRootNode) {
@@ -261,7 +268,7 @@ module.exports = () => {
         data = exampleData // FIXME: DEBUGGING ONLY
         
         // setup the layout
-        setLayout(config.layout.onLoadData)
+        setLayout(config.layout.default)
         
         nodes = data.nodes
         edges = data.edges
@@ -338,42 +345,6 @@ module.exports = () => {
             gColors.push("l(0) 0:" + lightColor + " 1:" + nodeTheme.darkColors[i])
             unlightColorMap.set(gColors[i], "l(0) 0:" + nodeTheme.uLightColors[i] + " 1:" + nodeTheme.uDarkColors[i])
         })
-
-        //
-        // setup layout
-        //
-        const layoutCfg = {
-            type: "force",
-            nodeSize: (d) => {
-                return d.size / 2 + 5
-            },
-            nodeStrength: config.layout.default.nodeStrength,
-            collideStrength: 0.8,
-            alphaDecay: 0.01,
-            preventOverlap: true,
-            onTick: () => {
-                const nodeItems = graph.getNodes()
-                const height = graph.get("height")
-                const width = graph.get("width")
-                const padding = 10
-                nodeItems.forEach((item) => {
-                    const model = item.getModel()
-                    // keep within width bounds
-                    if (model.x > width - padding) {
-                        model.x = width - padding
-                    } else if (model.x < padding) {
-                        model.x = padding
-                    }
-
-                    // keep within height bounds
-                    if (model.y > height - padding) {
-                        model.y = height - padding
-                    } else if (model.y < padding) {
-                        model.y = padding
-                    }
-                })
-            },
-        }
 
         //
         // setup graph object
@@ -556,67 +527,7 @@ module.exports = () => {
             "animate-circle",
             {
                 setState(name, value, item) {
-                    const shape = item.get("keyShape")
-                    const label = shape.get("parent").get("children")[1]
-                    if (name === "disappearing" && value) {
-                        shape.animate(
-                            (ratio) => ({
-                                opacity: 1 - ratio,
-                                r: shape.attr("r") * (1 - ratio),
-                            }),
-                            {
-                                duration: 1711,
-                            }
-                        )
-                        label.animate(
-                            (ratio) => ({
-                                opacity: 1 - ratio,
-                            }),
-                            {
-                                duration: 500,
-                            }
-                        )
-                    } else if (name === "appearing" && value) {
-                        const r = item.getModel().size / 2
-                        shape.animate(
-                            (ratio) => ({
-                                opacity: ratio,
-                                r: r * ratio,
-                                fill: shape.attr("fill"),
-                            }),
-                            {
-                                duration: 711,
-                            }
-                        )
-                        label.animate(
-                            {
-                                onFrame:(ratio) => ({
-                                    opacity: ratio,
-                                }),
-                            },
-                            {
-                                duration: 300,
-                            }
-                        )
-                    } else if (name === "dark") {
-                        if (value) {
-                            if (shape.attr("fill") !== "#fff") {
-                                shape.oriFill = shape.attr("fill")
-                                const uColor = unlightColorMap.get(shape.attr("fill"))
-                                shape.attr("fill", uColor)
-                            } else {
-                                shape.attr("opacity", 0.2)
-                                label.attr("fill", "#A3B1BF")
-                            }
-                        } else {
-                            if (shape.attr("fill") !== "#fff") {
-                                shape.attr("fill", shape.oriFill || shape.attr("fill"))
-                            } else {
-                                shape.attr("opacity", 1)
-                                label.attr("fill", "#697B8C")
-                            }
-                        }
-                    }
+                    
                 },
             },
             "circle"
@@ -639,42 +550,10 @@ module.exports = () => {
                     return keyShape
                 },
                 afterDraw(cfg, group) {
-                    const shape = group.get("children")[0]
-                    shape.animate(
-                        (ratio) => {
-                            const opacity = ratio * cfg.style.opacity
-                            const strokeOpacity = ratio * cfg.style.strokeOpacity
-                            return {
-                                opacity: ratio || opacity,
-                                strokeOpacity: ratio || strokeOpacity,
-                            }
-                        },
-                        {
-                            duration: 600,
-                        }
-                    )
+                    
                 },
                 setState(name, value, item) {
-                    const shape = item.get("keyShape")
-                    if (name === "disappearing" && value) {
-                        shape.animate(
-                            (ratio) => {
-                                return {
-                                    opacity: 1 - ratio,
-                                    strokeOpacity: 1 - ratio,
-                                }
-                            },
-                            {
-                                duration: 2000,
-                            }
-                        )
-                    } else if (name === "dark") {
-                        if (value) {
-                            shape.attr("opacity", 0.2)
-                        } else {
-                            shape.attr("opacity", 1)
-                        }
-                    }
+                   
                 },
             },
             "line"
@@ -685,7 +564,38 @@ module.exports = () => {
             width: managerData.width,
             height: managerData.height,
             linkCenter: true,
-            layout: layoutCfg,
+            layout: {
+                type: "force",
+                nodeSize: (d) => {
+                    return d.size / 2 + 5
+                },
+                collideStrength: 0.8,
+                alphaDecay: 0.01,
+                preventOverlap: true,
+                onTick: () => {
+                    const nodeItems = graph.getNodes()
+                    const height = graph.get("height")
+                    const width = graph.get("width")
+                    const padding = 10
+                    nodeItems.forEach((item) => {
+                        const model = item.getModel()
+                        // keep within width bounds
+                        if (model.x > width - padding) {
+                            model.x = width - padding
+                        } else if (model.x < padding) {
+                            model.x = padding
+                        }
+
+                        // keep within height bounds
+                        if (model.y > height - padding) {
+                            model.y = height - padding
+                        } else if (model.y < padding) {
+                            model.y = padding
+                        }
+                    })
+                },
+                ...config.layout.default,
+            },
             modes: {
                 default: ["drag-canvas"],
             },
@@ -868,21 +778,6 @@ module.exports = () => {
                 nodeThatGotClicked.x = managerData.width / 2
                 nodeThatGotClicked.y = managerData.height / 2
 
-                //
-                // animatedly hide unrelated items
-                //
-                if (curShowEdges.length) {
-                    curShowEdges.forEach((csedge) => {
-                        const item = graph.findById(csedge.id)
-                        item && graph.setItemState(item, "disappearing", true)
-                    })
-                }
-                curShowNodes.forEach((csnode) => {
-                    const item = graph.findById(csnode.id)
-                    item && graph.setItemState(item, "disappearing", true)
-                })
-                graph.positionsAnimate()
-
                 // reset curShowNodes nad curShowEdges
                 curShowNodes = []
                 curShowEdges = []
@@ -909,7 +804,7 @@ module.exports = () => {
                     // find children of nodeThatGotClicked
                     //
                     const parentTag = nodeThatGotClicked.tag
-                    nodes.forEach((node) => {
+                    for (const node of nodes) {
                         const isChild = node.tags instanceof Array && node.tags.includes(parentTag)
                         if (isChild) {
                             const randomAngle = Math.random() * 2 * Math.PI
@@ -919,9 +814,13 @@ module.exports = () => {
                             // setup the node
                             //
                             Object.assign(node, config.leafNode.defaultOptions)
-                            node.x = nodeThatGotClicked.x + (Math.cos(randomAngle) * nodeThatGotClicked.size) / 2 + 10
-                            node.y = nodeThatGotClicked.y + (Math.sin(randomAngle) * nodeThatGotClicked.size) / 2 + 10
+                            // set color (probably does nothing)
                             node.color = color
+                            // set position
+                            node.x = nodeThatGotClicked.x
+                            node.y = nodeThatGotClicked.y
+                            // node.x = nodeThatGotClicked.x + (Math.cos(randomAngle) * nodeThatGotClicked.size) / 2 + 10
+                            // node.y = nodeThatGotClicked.y + (Math.sin(randomAngle) * nodeThatGotClicked.size) / 2 + 10
                             curShowNodes.push(node)
                             curShowNodesMap.set(node.id, node)
 
@@ -935,7 +834,7 @@ module.exports = () => {
                                 curShowEdges.push(edge)
                             }
                         }
-                    })
+                    }
 
                     // find the edges whose target end source are in the curShowNodes
                     curShowNodes.forEach((nu, i) => {
@@ -969,6 +868,7 @@ module.exports = () => {
                         })
                     })
                 }
+                graph.positionsAnimate()
                 setTimeout(() => {
                     graph.changeData({
                         nodes: showNodes.concat(curShowNodes),
