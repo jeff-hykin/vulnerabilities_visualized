@@ -11,7 +11,7 @@ const router = require("quik-router")
 
 // Get the org data from backend
 const orgTreeData = backend.data.getOrgTree().then((orgTree) => {
-    let maxNumberOfRepos = 10
+    let maxNumberOfRepos = 100
     const keyToUseForSize = "numberOfRepos"
     // exampleKeys:
     //     magnitudeOfVulnerabilites: 3828
@@ -85,18 +85,23 @@ RepoList.animationTime = 300 // miliseconds
 // 
 // Org
 // 
+let index = 0
 const OrbBubble = ({ eachOrg })=> {
     let circle, repoListElement
     // grab an id
     const hashNumber = hash(eachOrg.name)
     // set the colors 
-    let color1 = wrapAroundGet(hashNumber, nodeTheme.darkColors)
-    let color2 = wrapAroundGet(hashNumber, nodeTheme.lightColors)
+    index++
+    let color1 = wrapAroundGet(index, nodeTheme.darkColors)
+    let color2 = wrapAroundGet(index, nodeTheme.lightColors)
     // randomly swap light and dark
-    if (Math.random() > 0.5) {
+    if (Math.random() > 0.7) {
+        console.log("swapping")
         let swap = color1
         color1 = color2
         color2 = swap
+    } else {
+        console.log("not swapping")
     }
     
     // 
@@ -160,15 +165,16 @@ const OrbBubble = ({ eachOrg })=> {
     repoListElement.style.pointerEvents = "none"
     
     // create a whole bunch of wrappers
-    return <SquareGridSizer numberOfCells={Math.log(eachOrg.size)} >
+    return <SquareGridSizer numberOfCells={Math.log(eachOrg.size+1)} >
         {circle = <FancyBubble
             color1={color1}
             color2={color2}
+            rotationOffset={`${Math.random()*360}deg`}
             onmouseover={onHover}
             onmouseout={offHover}
-            padding="5%"
+            padding={`${Math.random() * (12 - 1) + 1}%`}
             >
-                <div class="centered column" style="color: white; max-width: 100%; overflow:visible;">
+                <div class="centered column" style="color: white; height: 100%; max-width: 100%; overflow:visible;">
                     {/* Name */}
                     <span
                         name="repo-name"
@@ -226,8 +232,8 @@ module.exports = async ({ orgData })=>{
     ]
     orgData = await orgTreeData
     // TODO: scale bubble text based on font-size / width%
-    const element = <div name="waterfall-outermost" style="width: 100%; height: 100%; display: flex; align-content: center; justify-content: center; justify-content: center; background: var(--soft-gray-gradient);">
-        <SquareGrid style="width: 80rem; max-width: 100%; padding: 2rem; box-sizing: border-box; overflow: auto; position: relative; padding-right: 8rem; right: -6rem; ">
+    const element = <div name="waterfall-outermost" style="width: 100%; min-height: 100%; overflow: auto; display: flex; align-content: center; justify-content: center; justify-content: center; background: var(--soft-gray-gradient);">
+        <SquareGrid numberOfSquares="6" style="width: 80rem; max-width: 100%; height: 100%; min-height: fit-content; padding: 2rem; box-sizing: border-box;">
             {orgData.map(eachOrg=>OrbBubble({ eachOrg }))}
         </SquareGrid>
     </div>

@@ -1,4 +1,4 @@
-module.exports = ({ color1, color2, children, padding, ...props }) => {
+module.exports = ({ color1, color2, rotationOffset, children, padding, ...props }) => {
     // main content
     const bubbleInnerPart = <div
         name="bubble-inner-part"
@@ -59,6 +59,7 @@ module.exports = ({ color1, color2, children, padding, ...props }) => {
             transition: all 0.2s ease-in-out 0s;
             aspect-ratio: 1;
             border-radius: 200vw;
+            --rotation-offset: ${rotationOffset};
         `}
         >
             {rotatingCircle}
