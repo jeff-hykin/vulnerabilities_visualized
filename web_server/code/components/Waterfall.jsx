@@ -6,11 +6,16 @@ const SquareGrid = require("../skeletons/SquareGrid")
 const SquareGridSizer = require("../skeletons/SquareGridSizer")
 const FancyBubble = require("../skeletons/FancyBubble")
 
-const {backend} = require("quik-client")
+const smartBackend = require("../systems/smart_backend")
 const router = require("quik-router")
 
+// TODO:
+    // decide Repo summary format
+    // decide Org summary format
+
+
 // Get the org data from backend
-const orgTreeData = backend.data.getOrgTree().then((orgTree) => {
+const orgTreeData = smartBackend.getOrgTree().then((orgTree) => {
     let maxNumberOfRepos = 100
     const keyToUseForSize = "numberOfRepos"
     // exampleKeys:
@@ -31,10 +36,6 @@ const orgTreeData = backend.data.getOrgTree().then((orgTree) => {
     console.log(`output is:`,output.slice(0,5))
     return output
 })
-
-// TODO:
-    // decide Repo summary format
-    // decide Org summary format
 
 // 
 // Repo

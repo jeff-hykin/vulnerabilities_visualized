@@ -1,6 +1,6 @@
 require("../systems/on_scroll")
-const Overlay = require("../skeletons/Overlay")
-const Nodes = require("../components/Nodes")
+// const Overlay = require("../skeletons/Overlay")
+// const Nodes = require("../components/Nodes")
 const Waterfall = require("../components/Waterfall")
 const { backend } = require("quik-client")
 

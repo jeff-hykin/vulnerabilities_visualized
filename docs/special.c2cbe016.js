@@ -9743,7 +9743,7 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
 ;
 
 _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-  var set, get, recursivelyAllAttributesOf, callBackend, createBackendCaller, _iterator4, _step4, each, value;
+  var set, get, recursivelyAllAttributesOf, callCounter, callBackend, createBackendCaller, _iterator4, _step4, each, value;
 
   return regeneratorRuntime.wrap(function _callee2$(_context2) {
     while (1) {
@@ -9855,16 +9855,22 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
             return output;
           };
 
+          callCounter = BigInt(0);
+
           callBackend = function callBackend(functionPath, args) {
+            // increment the counter
+            callCounter += BigInt(1);
+            var callCounterAsString = "".concat(callCounter);
             socket.emit("backend", {
               functionPath: functionPath,
+              callCounter: callCounterAsString,
               args: args
             });
             return new Promise(function (resolve, reject) {
-              socket.on("backendResponse", function (response) {
+              socket.on("backendResponse:" + callCounterAsString, function (response) {
                 return resolve(response);
               });
-              socket.on("backendError", function (response) {
+              socket.on("backendError:" + callCounterAsString, function (response) {
                 return reject(response);
               });
             });
@@ -9881,13 +9887,13 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
           };
 
           _iterator4 = _createForOfIteratorHelper(recursivelyAllAttributesOf(quik.backend));
-          _context2.prev = 9;
+          _context2.prev = 10;
 
           _iterator4.s();
 
-        case 11:
+        case 12:
           if ((_step4 = _iterator4.n()).done) {
-            _context2.next = 19;
+            _context2.next = 20;
             break;
           }
 
@@ -9895,43 +9901,43 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
           value = get(quik.backend, each);
 
           if (!(value instanceof Object)) {
-            _context2.next = 16;
+            _context2.next = 17;
             break;
           }
 
-          return _context2.abrupt("continue", 17);
+          return _context2.abrupt("continue", 18);
 
-        case 16:
+        case 17:
           // convert it from a string into a function
           set(quik.backend, each, createBackendCaller(value));
 
-        case 17:
-          _context2.next = 11;
+        case 18:
+          _context2.next = 12;
           break;
 
-        case 19:
-          _context2.next = 24;
+        case 20:
+          _context2.next = 25;
           break;
 
-        case 21:
-          _context2.prev = 21;
-          _context2.t0 = _context2["catch"](9);
+        case 22:
+          _context2.prev = 22;
+          _context2.t0 = _context2["catch"](10);
 
           _iterator4.e(_context2.t0);
 
-        case 24:
-          _context2.prev = 24;
+        case 25:
+          _context2.prev = 25;
 
           _iterator4.f();
 
-          return _context2.finish(24);
+          return _context2.finish(25);
 
-        case 27:
+        case 28:
         case "end":
           return _context2.stop();
       }
     }
-  }, _callee2, null, [[9, 21, 24, 27]]);
+  }, _callee2, null, [[10, 22, 25, 28]]);
 }))();
 
 ;
@@ -9963,7 +9969,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53343" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55066" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

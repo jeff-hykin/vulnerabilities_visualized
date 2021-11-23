@@ -1,9 +1,6 @@
 const { watch } = require("@vue-reactivity/watch")
 const router = require("quik-router")
-
-// TODO:
-    // retreive repo data from backend
-
+const smartBackend = require("../systems/smart_backend")
 
 // 
 // 
@@ -17,7 +14,10 @@ const Title = ({ main, secondary }) => {
     </h4>
 }
 
-const SummaryTag = ({ orgName, repoName })=>{
+const SummaryTag = async ({ orgName, repoName })=>{
+    // TODO: use this data for something
+    const summaryData = await smartBackend.getRepoSummaryDataFor(orgName, repoName)
+    console.debug(`summaryData is:`,summaryData)
     return <div
         style={`
             position: absolute;
@@ -41,7 +41,14 @@ const ChartCard = ({ children, ...props }) => {
     </div>
 }
 
-const ChartList = ({ allRepoData }) => {
+const ChartList = async ({ orgName, repoName }) => {
+    // get data from the backend
+    const commitData = await smartBackend.getCommitDataFor(repoName)
+    const vulnData   = await smartBackend.getVulnDataFor(repoName)
+    
+    console.debug(`vulnData is:`,vulnData)
+    console.debug(`commitData is:`,commitData)
+
     return <div style="height: 100%; width: 100%; max-width: 50rem; padding: 2rem; box-sizing: border-box;">
         
         <ChartCard name="card-1:dummy-card">
@@ -95,6 +102,7 @@ const RightSide = ({ children })=>{
 // 
 module.exports = async ({ ...properties }) => {
     const { repoName, orgName } = router.pageInfo
+    
     return <main
         name="main-product-view"
         class="centered row"
@@ -111,7 +119,7 @@ module.exports = async ({ ...properties }) => {
             </LeftSide>
             
             <RightSide>
-                <ChartList />
+                <ChartList orgName={orgName} repoName={repoName} />
             </RightSide>
     </main>
 }
