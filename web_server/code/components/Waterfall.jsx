@@ -149,7 +149,6 @@ const OrgBubble = ({ eachOrg })=> {
     // setup repo list
     // 
     repoListElement = <RepoList
-        // FIXME: add real repos
         repos={eachOrg.repoSummaries}
         orgData={eachOrg}
         onmouseover={(eventObject)=>{ console.log("repoListMouseOver") ;onHover(eventObject)}}
