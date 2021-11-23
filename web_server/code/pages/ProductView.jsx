@@ -42,7 +42,7 @@ const ChartCard = ({ children, ...props }) => {
 }
 
 const ChartList = ({ allRepoData }) => {
-    return <div style="height: 100%; width: 100%; max-width: 55rem; padding: 2rem; box-sizing: border-box;">
+    return <div style="height: 100%; width: 100%; max-width: 50rem; padding: 2rem; box-sizing: border-box;">
         
         <ChartCard name="card-1:dummy-card">
             {/* FIXME */}
@@ -56,6 +56,35 @@ const ChartList = ({ allRepoData }) => {
             {/* FIXME */}
         </ChartCard>
         
+    </div>
+}
+
+const LeftSide = ({ children })=>{
+    return <div
+        name="left-side"
+        class="centered"
+        style={`
+            width: 50%;
+            height: 100%;
+            position: relative;
+        `}
+        >
+            {children}
+    </div>
+}
+
+const RightSide = ({ children })=>{
+    return <div 
+        name="right-side"
+        class="centered"
+        style={`
+            width: 50%;
+            height: 100%;
+            position: relative;
+            background: rgba(0, 0, 0, 0) radial-gradient(circle, rgb(243, 243, 243) 0%, rgba(236, 236, 236, 0.9) 100%) repeat scroll 0% 0%;
+        `}
+        >
+            {children}
     </div>
 }
 
@@ -74,29 +103,15 @@ module.exports = async ({ ...properties }) => {
             height: 100%;
         `}
         >
-        <div
-            name="left-side"
-            class="centered"
-            style={`
-                width: 50%;
-                height: 100%;
-                position: relative;
-            `}
-            >
+            <LeftSide>
                 Left Side
+                <br />
+                TODO: Put Anythony's Tree Component Here
                 <SummaryTag orgName={orgName} repoName={repoName} />
-        </div>
-        <div 
-            name="right-side"
-            class="centered"
-            style={`
-                width: 50%;
-                height: 100%;
-                position: relative;
-                background: rgba(0, 0, 0, 0) radial-gradient(circle, rgb(243, 243, 243) 0%, rgba(236, 236, 236, 0.9) 100%) repeat scroll 0% 0%;
-            `}
-            >
+            </LeftSide>
+            
+            <RightSide>
                 <ChartList />
-        </div>
+            </RightSide>
     </main>
 }
