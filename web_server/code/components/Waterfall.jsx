@@ -74,6 +74,7 @@ const RepoList = ({ repos={}, orgData, ...props }) =>{
             border-radius: 1rem;
             overflow: auto;
             padding: 0.5rem;
+            margin-top: -25px;
             transition: all ${RepoList.animationTime/1000}s ease-in-out 0s;
         `}
         {...props}
