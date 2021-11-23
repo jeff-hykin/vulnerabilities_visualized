@@ -51,7 +51,7 @@ module.exports = ({ color1, color2, children, ...props }) => {
     // wrapper #4
     const circleWithShadow = <div
         name="bubble-outer-part"
-        class="shadow-2 centered"
+        class="our-shadow centered"
         style={`
             max-width: 99%;
             width: 99%;

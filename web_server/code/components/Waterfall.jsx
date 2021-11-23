@@ -14,13 +14,9 @@ const OrbBubble = ({ eachOrg })=> {
     const color2 = wrapAroundGet(hashNumber, nodeTheme.lightColors)
     // hover
     const onHover = ()=>{
-        circle.classList.remove("shadow-2")
-        circle.classList.add("shadow-4")
         setTimeout(()=>(circle.style.zIndex=9999), 100)
     }
     const offHover = ()=>{
-        circle.classList.add("shadow-2")
-        circle.classList.remove("shadow-4")
         setTimeout(()=>(delete circle.style.zIndex), 100)
     }
     
