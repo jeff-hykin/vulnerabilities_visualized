@@ -27,7 +27,7 @@ const RepoList = ({ repos=[], ...props }) =>{
         style={`
             z-index: 999999;
             height: 16vh;
-            width: 12rem;
+            width: 18rem;
             align-self: center;
             flex-shrink: 0;
             background: white;
@@ -41,7 +41,7 @@ const RepoList = ({ repos=[], ...props }) =>{
         {repos.map(each=>RepoSummaryElement({ repoData: each }))}
     </div>
 }
-RepoList.animationTime = 500 // miliseconds
+RepoList.animationTime = 300 // miliseconds
 
 const OrbBubble = ({ eachOrg })=> {
     let circle, repoListElement
@@ -115,10 +115,12 @@ const OrbBubble = ({ eachOrg })=> {
             onmouseout={offHover}
             padding="5%"
             >
-                {eachOrg.name}
+                <span name="repo-name" style="border-radius: 0.6rem; padding: 0.3rem 0.5rem; background: var(--translucent-charcoal); color: white;" >
+                    {eachOrg.name}
+                </span>
                 {/* TODO: put other summary info here */}
         </FancyBubble>}
-            {repoListElement}
+        {repoListElement}
     </SquareGridSizer>
 }
 
@@ -151,7 +153,7 @@ module.exports = ({ orgData })=>{
         },
     ]
     // TODO: scale bubble text based on font-size / width%
-    const element = <div style="width: 100%; display: flex; align-items: center; align-content: center; justify-content: center; justify-content: center; background: var(--soft-gray-gradient);">
+    const element = <div name="waterfall-outermost" style="width: 100%; height: 100%; display: flex; align-content: center; justify-content: center; justify-content: center; background: var(--soft-gray-gradient);">
         <SquareGrid style="width: 80rem; max-width: 100%; padding: 2rem; box-sizing: border-box; overflow: auto; position: relative; padding-right: 8rem; right: -6rem; ">
             {orgData.map(eachOrg=>OrbBubble({ eachOrg }))}
         </SquareGrid>
