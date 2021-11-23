@@ -28,7 +28,7 @@ const orgTreeData = backend.data.getOrgTree().then((orgTree) => {
             ...value,
         })
     }
-    console.log(`output is:`,output)
+    console.log(`output is:`,output.slice(0,5))
     return output
 })
 
@@ -40,7 +40,7 @@ const orgTreeData = backend.data.getOrgTree().then((orgTree) => {
 // 
 // Repo
 // 
-const RepoSummaryElement = ({ repoData }) => {
+const RepoSummaryElement = ({ repoData, orgData }) => {
     return <div
         class="our-weak-shadow"
         style={`
@@ -53,14 +53,15 @@ const RepoSummaryElement = ({ repoData }) => {
             cursor: pointer;
         `}
         onclick={()=>{
-            router.goTo({ page: "product-view", repoName: repoData.name })
+            // TODO: record the scroll position, then do a goto, also add scrolling logic to main waterfall element
+            router.goTo({ page: "product-view", orgName: orgData.name, repoName: repoData.name })
         }}
         >
             {repoData.name}
     </div>
 }
 
-const RepoList = ({ repos=[], ...props }) =>{
+const RepoList = ({ repos=[], orgData, ...props }) =>{
     return <div
         class="our-weak-shadow"
         style={`
@@ -77,7 +78,7 @@ const RepoList = ({ repos=[], ...props }) =>{
         `}
         {...props}
         >
-        {repos.map(each=>RepoSummaryElement({ repoData: each }))}
+        {repos.map(each=>RepoSummaryElement({ repoData: each, orgData }))}
     </div>
 }
 RepoList.animationTime = 300 // miliseconds
@@ -85,15 +86,14 @@ RepoList.animationTime = 300 // miliseconds
 // 
 // Org
 // 
-let index = 0
-const OrbBubble = ({ eachOrg })=> {
+const OrgBubble = ({ eachOrg })=> {
     let circle, repoListElement
     // grab an id
     const hashNumber = hash(eachOrg.name)
     // set the colors 
-    index++
-    let color1 = wrapAroundGet(index, nodeTheme.darkColors)
-    let color2 = wrapAroundGet(index, nodeTheme.lightColors)
+    OrgBubble.index++
+    let color1 = wrapAroundGet(OrgBubble.index, nodeTheme.darkColors)
+    let color2 = wrapAroundGet(OrgBubble.index, nodeTheme.lightColors)
     // randomly swap light and dark
     if (Math.random() > 0.7) {
         console.log("swapping")
@@ -158,6 +158,7 @@ const OrbBubble = ({ eachOrg })=> {
             {name: "repo2"},
             {name: "repo3"},
         ]}
+        orgData={eachOrg}
         onmouseover={(eventObject)=>{ console.log("repoListMouseOver") ;onHover(eventObject)}}
         onmouseout={offHover}
         />
@@ -197,6 +198,8 @@ const OrbBubble = ({ eachOrg })=> {
         {repoListElement}
     </SquareGridSizer>
 }
+OrgBubble.index = 0
+router.addEventListener("go", ()=>OrgBubble.index=0) // reset index when page changes
 
 
 // 
@@ -231,10 +234,9 @@ module.exports = async ({ orgData })=>{
         },
     ]
     orgData = await orgTreeData
-    // TODO: scale bubble text based on font-size / width%
     const element = <div name="waterfall-outermost" style="width: 100%; min-height: 100%; overflow: auto; display: flex; align-content: center; justify-content: center; justify-content: center; background: var(--soft-gray-gradient);">
         <SquareGrid numberOfSquares="6" style="width: 80rem; max-width: 100%; height: 100%; min-height: fit-content; padding: 2rem; box-sizing: border-box;">
-            {orgData.map(eachOrg=>OrbBubble({ eachOrg }))}
+            {orgData.map(eachOrg=>OrgBubble({ eachOrg }))}
         </SquareGrid>
     </div>
     
