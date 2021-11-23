@@ -281,7 +281,7 @@ body {
   --green: #81c784;
   --red: #e57373;
   --charcoal: hsl(180, 0%, 31%);
-  --default-subtle-shift-speed: 200s;
+  --default-subtle-shift-speed: 20s;
 }
 
 body {
@@ -516,107 +516,107 @@ body {
 
 @-webkit-keyframes RotateClockwiseAnimation {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(calc(0deg + var(--rotation-offset, 0deg)));
   }
   10% {
-    transform: rotate(72deg);
+    transform: rotate(calc(72deg + var(--rotation-offset, 0deg)));
   }
   20% {
-    transform: rotate(144deg);
+    transform: rotate(calc(144deg + var(--rotation-offset, 0deg)));
   }
   30% {
-    transform: rotate(216deg);
+    transform: rotate(calc(216deg + var(--rotation-offset, 0deg)));
   }
   40% {
-    transform: rotate(288deg);
+    transform: rotate(calc(288deg + var(--rotation-offset, 0deg)));
   }
   50% {
-    transform: rotate(360deg);
+    transform: rotate(calc(360deg + var(--rotation-offset, 0deg)));
   }
   60% {
-    transform: rotate(432deg);
+    transform: rotate(calc(432deg + var(--rotation-offset, 0deg)));
   }
   70% {
-    transform: rotate(504deg);
+    transform: rotate(calc(504deg + var(--rotation-offset, 0deg)));
   }
   80% {
-    transform: rotate(576deg);
+    transform: rotate(calc(576deg + var(--rotation-offset, 0deg)));
   }
   90% {
-    transform: rotate(648deg);
+    transform: rotate(calc(648deg + var(--rotation-offset, 0deg)));
   }
   100% {
-    transform: rotate(720deg);
+    transform: rotate(calc(720deg + var(--rotation-offset, 0deg)));
   }
 }
 @-moz-keyframes RotateClockwiseAnimation {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(calc(0deg + var(--rotation-offset, 0deg)));
   }
   10% {
-    transform: rotate(72deg);
+    transform: rotate(calc(72deg + var(--rotation-offset, 0deg)));
   }
   20% {
-    transform: rotate(144deg);
+    transform: rotate(calc(144deg + var(--rotation-offset, 0deg)));
   }
   30% {
-    transform: rotate(216deg);
+    transform: rotate(calc(216deg + var(--rotation-offset, 0deg)));
   }
   40% {
-    transform: rotate(288deg);
+    transform: rotate(calc(288deg + var(--rotation-offset, 0deg)));
   }
   50% {
-    transform: rotate(360deg);
+    transform: rotate(calc(360deg + var(--rotation-offset, 0deg)));
   }
   60% {
-    transform: rotate(432deg);
+    transform: rotate(calc(432deg + var(--rotation-offset, 0deg)));
   }
   70% {
-    transform: rotate(504deg);
+    transform: rotate(calc(504deg + var(--rotation-offset, 0deg)));
   }
   80% {
-    transform: rotate(576deg);
+    transform: rotate(calc(576deg + var(--rotation-offset, 0deg)));
   }
   90% {
-    transform: rotate(648deg);
+    transform: rotate(calc(648deg + var(--rotation-offset, 0deg)));
   }
   100% {
-    transform: rotate(720deg);
+    transform: rotate(calc(720deg + var(--rotation-offset, 0deg)));
   }
 }
 @keyframes RotateClockwiseAnimation {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(calc(0deg + var(--rotation-offset, 0deg)));
   }
   10% {
-    transform: rotate(72deg);
+    transform: rotate(calc(72deg + var(--rotation-offset, 0deg)));
   }
   20% {
-    transform: rotate(144deg);
+    transform: rotate(calc(144deg + var(--rotation-offset, 0deg)));
   }
   30% {
-    transform: rotate(216deg);
+    transform: rotate(calc(216deg + var(--rotation-offset, 0deg)));
   }
   40% {
-    transform: rotate(288deg);
+    transform: rotate(calc(288deg + var(--rotation-offset, 0deg)));
   }
   50% {
-    transform: rotate(360deg);
+    transform: rotate(calc(360deg + var(--rotation-offset, 0deg)));
   }
   60% {
-    transform: rotate(432deg);
+    transform: rotate(calc(432deg + var(--rotation-offset, 0deg)));
   }
   70% {
-    transform: rotate(504deg);
+    transform: rotate(calc(504deg + var(--rotation-offset, 0deg)));
   }
   80% {
-    transform: rotate(576deg);
+    transform: rotate(calc(576deg + var(--rotation-offset, 0deg)));
   }
   90% {
-    transform: rotate(648deg);
+    transform: rotate(calc(648deg + var(--rotation-offset, 0deg)));
   }
   100% {
-    transform: rotate(720deg);
+    transform: rotate(calc(720deg + var(--rotation-offset, 0deg)));
   }
 }
 .rotateCounterClockwise {
@@ -627,107 +627,107 @@ body {
 
 @-webkit-keyframes RotateCounterClockwiseAnimation {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(calc(0deg - var(--rotation-offset, 0deg)));
   }
   10% {
-    transform: rotate(-72deg);
+    transform: rotate(calc(-72deg - var(--rotation-offset, 0deg)));
   }
   20% {
-    transform: rotate(-144deg);
+    transform: rotate(calc(-144deg - var(--rotation-offset, 0deg)));
   }
   30% {
-    transform: rotate(-216deg);
+    transform: rotate(calc(-216deg - var(--rotation-offset, 0deg)));
   }
   40% {
-    transform: rotate(-288deg);
+    transform: rotate(calc(-288deg - var(--rotation-offset, 0deg)));
   }
   50% {
-    transform: rotate(-360deg);
+    transform: rotate(calc(-360deg - var(--rotation-offset, 0deg)));
   }
   60% {
-    transform: rotate(-432deg);
+    transform: rotate(calc(-432deg - var(--rotation-offset, 0deg)));
   }
   70% {
-    transform: rotate(-504deg);
+    transform: rotate(calc(-504deg - var(--rotation-offset, 0deg)));
   }
   80% {
-    transform: rotate(-576deg);
+    transform: rotate(calc(-576deg - var(--rotation-offset, 0deg)));
   }
   90% {
-    transform: rotate(-648deg);
+    transform: rotate(calc(-648deg - var(--rotation-offset, 0deg)));
   }
   100% {
-    transform: rotate(-720deg);
+    transform: rotate(calc(-720deg - var(--rotation-offset, 0deg)));
   }
 }
 @-moz-keyframes RotateCounterClockwiseAnimation {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(calc(0deg - var(--rotation-offset, 0deg)));
   }
   10% {
-    transform: rotate(-72deg);
+    transform: rotate(calc(-72deg - var(--rotation-offset, 0deg)));
   }
   20% {
-    transform: rotate(-144deg);
+    transform: rotate(calc(-144deg - var(--rotation-offset, 0deg)));
   }
   30% {
-    transform: rotate(-216deg);
+    transform: rotate(calc(-216deg - var(--rotation-offset, 0deg)));
   }
   40% {
-    transform: rotate(-288deg);
+    transform: rotate(calc(-288deg - var(--rotation-offset, 0deg)));
   }
   50% {
-    transform: rotate(-360deg);
+    transform: rotate(calc(-360deg - var(--rotation-offset, 0deg)));
   }
   60% {
-    transform: rotate(-432deg);
+    transform: rotate(calc(-432deg - var(--rotation-offset, 0deg)));
   }
   70% {
-    transform: rotate(-504deg);
+    transform: rotate(calc(-504deg - var(--rotation-offset, 0deg)));
   }
   80% {
-    transform: rotate(-576deg);
+    transform: rotate(calc(-576deg - var(--rotation-offset, 0deg)));
   }
   90% {
-    transform: rotate(-648deg);
+    transform: rotate(calc(-648deg - var(--rotation-offset, 0deg)));
   }
   100% {
-    transform: rotate(-720deg);
+    transform: rotate(calc(-720deg - var(--rotation-offset, 0deg)));
   }
 }
 @keyframes RotateCounterClockwiseAnimation {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(calc(0deg - var(--rotation-offset, 0deg)));
   }
   10% {
-    transform: rotate(-72deg);
+    transform: rotate(calc(-72deg - var(--rotation-offset, 0deg)));
   }
   20% {
-    transform: rotate(-144deg);
+    transform: rotate(calc(-144deg - var(--rotation-offset, 0deg)));
   }
   30% {
-    transform: rotate(-216deg);
+    transform: rotate(calc(-216deg - var(--rotation-offset, 0deg)));
   }
   40% {
-    transform: rotate(-288deg);
+    transform: rotate(calc(-288deg - var(--rotation-offset, 0deg)));
   }
   50% {
-    transform: rotate(-360deg);
+    transform: rotate(calc(-360deg - var(--rotation-offset, 0deg)));
   }
   60% {
-    transform: rotate(-432deg);
+    transform: rotate(calc(-432deg - var(--rotation-offset, 0deg)));
   }
   70% {
-    transform: rotate(-504deg);
+    transform: rotate(calc(-504deg - var(--rotation-offset, 0deg)));
   }
   80% {
-    transform: rotate(-576deg);
+    transform: rotate(calc(-576deg - var(--rotation-offset, 0deg)));
   }
   90% {
-    transform: rotate(-648deg);
+    transform: rotate(calc(-648deg - var(--rotation-offset, 0deg)));
   }
   100% {
-    transform: rotate(-720deg);
+    transform: rotate(calc(-720deg - var(--rotation-offset, 0deg)));
   }
 }
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

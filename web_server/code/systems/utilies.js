@@ -1,10 +1,8 @@
-
-
-// 
-// 
+//
+//
 // Mounted to DOM
-// 
-// 
+//
+//
 const pollingRate = 350
 const elementsBeingWatched = new Map()
 // mounted checker (keep outside for efficiency reasons)
@@ -25,21 +23,35 @@ const mountedToDom = async (element) => {
         return
     }
     // else wait on it getting added
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         if (elementsBeingWatched.has(element)) {
             elementsBeingWatched.get(element).push(resolve)
         } else {
-            elementsBeingWatched.set(element, [ resolve ])
+            elementsBeingWatched.set(element, [resolve])
         }
     })
 }
 
+//
+// hash
+//
+const hash = (object) => JSON.stringify(object).split("").reduce(
+    (hashCode, currentVal) => (hashCode = currentVal.charCodeAt(0) + (hashCode << 6) + (hashCode << 16) - hashCode),
+    0
+)
 
-// 
-// 
+//
+// wrapAroundGet
+//
+const wrapAroundGet = (number, list) => list[(number % list.length + list.length) % list.length]
+
+//
+//
 // exports
-// 
-// 
+//
+//
 module.exports = {
     mountedToDom,
+    wrapAroundGet,
+    hash,
 }

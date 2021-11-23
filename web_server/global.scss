@@ -8,7 +8,7 @@
     --green: #81c784;
     --red: #e57373;
     --charcoal: hsl(180, 0%, 31%);
-    --default-subtle-shift-speed: 200s;
+    --default-subtle-shift-speed: 20s;
 }
 
 body {
@@ -240,43 +240,43 @@ body {
     animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
 }
 @-webkit-keyframes RotateClockwiseAnimation {
-    0%{transform:rotate(0deg) }
-    10%{transform:rotate(72deg) }
-    20%{transform:rotate(144deg) }
-    30%{transform:rotate(216deg) }
-    40%{transform:rotate(288deg) }
-    50%{transform:rotate(360deg) }
-    60%{transform:rotate(432deg) }
-    70%{transform:rotate(504deg) }
-    80%{transform:rotate(576deg) }
-    90%{transform:rotate(648deg) }
-    100%{transform:rotate(720deg) }
+    0%{transform:rotate(calc(0deg + var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(72deg + var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(144deg + var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(216deg + var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(288deg + var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(360deg + var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(432deg + var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(504deg + var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(576deg + var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(648deg + var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(720deg + var(--rotation-offset,0deg))) }
 }
 @-moz-keyframes RotateClockwiseAnimation {
-    0%{transform:rotate(0deg) }
-    10%{transform:rotate(72deg) }
-    20%{transform:rotate(144deg) }
-    30%{transform:rotate(216deg) }
-    40%{transform:rotate(288deg) }
-    50%{transform:rotate(360deg) }
-    60%{transform:rotate(432deg) }
-    70%{transform:rotate(504deg) }
-    80%{transform:rotate(576deg) }
-    90%{transform:rotate(648deg) }
-    100%{transform:rotate(720deg) }
+    0%{transform:rotate(calc(0deg + var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(72deg + var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(144deg + var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(216deg + var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(288deg + var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(360deg + var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(432deg + var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(504deg + var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(576deg + var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(648deg + var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(720deg + var(--rotation-offset,0deg))) }
 }
 @keyframes RotateClockwiseAnimation {
-    0%{transform:rotate(0deg) }
-    10%{transform:rotate(72deg) }
-    20%{transform:rotate(144deg) }
-    30%{transform:rotate(216deg) }
-    40%{transform:rotate(288deg) }
-    50%{transform:rotate(360deg) }
-    60%{transform:rotate(432deg) }
-    70%{transform:rotate(504deg) }
-    80%{transform:rotate(576deg) }
-    90%{transform:rotate(648deg) }
-    100%{transform:rotate(720deg) }
+    0%{transform:rotate(calc(0deg + var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(72deg + var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(144deg + var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(216deg + var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(288deg + var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(360deg + var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(432deg + var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(504deg + var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(576deg + var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(648deg + var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(720deg + var(--rotation-offset,0deg))) }
 }
 
 .rotateCounterClockwise {
@@ -285,41 +285,41 @@ body {
     animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
 }
 @-webkit-keyframes RotateCounterClockwiseAnimation {
-    0%{transform:rotate(-0deg) }
-    10%{transform:rotate(-72deg) }
-    20%{transform:rotate(-144deg) }
-    30%{transform:rotate(-216deg) }
-    40%{transform:rotate(-288deg) }
-    50%{transform:rotate(-360deg) }
-    60%{transform:rotate(-432deg) }
-    70%{transform:rotate(-504deg) }
-    80%{transform:rotate(-576deg) }
-    90%{transform:rotate(-648deg) }
-    100%{transform:rotate(-720deg) }
+    0%{transform:rotate(calc(-0deg - var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(-72deg - var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(-144deg - var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(-216deg - var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(-288deg - var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(-360deg - var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(-432deg - var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(-504deg - var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(-576deg - var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(-648deg - var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(-720deg - var(--rotation-offset,0deg))) }
 }
 @-moz-keyframes RotateCounterClockwiseAnimation {
-    0%{transform:rotate(-0deg) }
-    10%{transform:rotate(-72deg) }
-    20%{transform:rotate(-144deg) }
-    30%{transform:rotate(-216deg) }
-    40%{transform:rotate(-288deg) }
-    50%{transform:rotate(-360deg) }
-    60%{transform:rotate(-432deg) }
-    70%{transform:rotate(-504deg) }
-    80%{transform:rotate(-576deg) }
-    90%{transform:rotate(-648deg) }
-    100%{transform:rotate(-720deg) }
+    0%{transform:rotate(calc(-0deg - var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(-72deg - var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(-144deg - var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(-216deg - var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(-288deg - var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(-360deg - var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(-432deg - var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(-504deg - var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(-576deg - var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(-648deg - var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(-720deg - var(--rotation-offset,0deg))) }
 }
 @keyframes RotateCounterClockwiseAnimation {
-    0%{transform:rotate(-0deg) }
-    10%{transform:rotate(-72deg) }
-    20%{transform:rotate(-144deg) }
-    30%{transform:rotate(-216deg) }
-    40%{transform:rotate(-288deg) }
-    50%{transform:rotate(-360deg) }
-    60%{transform:rotate(-432deg) }
-    70%{transform:rotate(-504deg) }
-    80%{transform:rotate(-576deg) }
-    90%{transform:rotate(-648deg) }
-    100%{transform:rotate(-720deg) }
+    0%{transform:rotate(calc(-0deg - var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(-72deg - var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(-144deg - var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(-216deg - var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(-288deg - var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(-360deg - var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(-432deg - var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(-504deg - var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(-576deg - var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(-648deg - var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(-720deg - var(--rotation-offset,0deg))) }
 }
