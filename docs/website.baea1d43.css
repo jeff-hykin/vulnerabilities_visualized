@@ -281,6 +281,7 @@ body {
   --green: #81c784;
   --red: #e57373;
   --charcoal: hsl(180, 0%, 31%);
+  --default-subtle-shift-speed: 200s;
 }
 
 body {
@@ -464,6 +465,270 @@ body {
   margin: 4px 8px;
   cursor: pointer;
   z-index: 10;
+}
+
+.animatedGradientBackground {
+  background: radial-gradient(var(--color1), var(--color2));
+  background-size: 800% 800%;
+  -webkit-animation: GradientBackgroundAnimation var(--default-subtle-shift-speed) ease infinite;
+  -moz-animation: GradientBackgroundAnimation var(--default-subtle-shift-speed) ease infinite;
+  animation: GradientBackgroundAnimation var(--default-subtle-shift-speed) ease infinite;
+}
+
+@-webkit-keyframes GradientBackgroundAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 51%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes GradientBackgroundAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 51%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes GradientBackgroundAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 51%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.rotateClockwise {
+  -webkit-animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+  -moz-animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+  animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+}
+
+@-webkit-keyframes RotateClockwiseAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(72deg);
+  }
+  20% {
+    transform: rotate(144deg);
+  }
+  30% {
+    transform: rotate(216deg);
+  }
+  40% {
+    transform: rotate(288deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  60% {
+    transform: rotate(432deg);
+  }
+  70% {
+    transform: rotate(504deg);
+  }
+  80% {
+    transform: rotate(576deg);
+  }
+  90% {
+    transform: rotate(648deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+@-moz-keyframes RotateClockwiseAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(72deg);
+  }
+  20% {
+    transform: rotate(144deg);
+  }
+  30% {
+    transform: rotate(216deg);
+  }
+  40% {
+    transform: rotate(288deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  60% {
+    transform: rotate(432deg);
+  }
+  70% {
+    transform: rotate(504deg);
+  }
+  80% {
+    transform: rotate(576deg);
+  }
+  90% {
+    transform: rotate(648deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+@keyframes RotateClockwiseAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(72deg);
+  }
+  20% {
+    transform: rotate(144deg);
+  }
+  30% {
+    transform: rotate(216deg);
+  }
+  40% {
+    transform: rotate(288deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  60% {
+    transform: rotate(432deg);
+  }
+  70% {
+    transform: rotate(504deg);
+  }
+  80% {
+    transform: rotate(576deg);
+  }
+  90% {
+    transform: rotate(648deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+.rotateCounterClockwise {
+  -webkit-animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+  -moz-animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+  animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+}
+
+@-webkit-keyframes RotateCounterClockwiseAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-72deg);
+  }
+  20% {
+    transform: rotate(-144deg);
+  }
+  30% {
+    transform: rotate(-216deg);
+  }
+  40% {
+    transform: rotate(-288deg);
+  }
+  50% {
+    transform: rotate(-360deg);
+  }
+  60% {
+    transform: rotate(-432deg);
+  }
+  70% {
+    transform: rotate(-504deg);
+  }
+  80% {
+    transform: rotate(-576deg);
+  }
+  90% {
+    transform: rotate(-648deg);
+  }
+  100% {
+    transform: rotate(-720deg);
+  }
+}
+@-moz-keyframes RotateCounterClockwiseAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-72deg);
+  }
+  20% {
+    transform: rotate(-144deg);
+  }
+  30% {
+    transform: rotate(-216deg);
+  }
+  40% {
+    transform: rotate(-288deg);
+  }
+  50% {
+    transform: rotate(-360deg);
+  }
+  60% {
+    transform: rotate(-432deg);
+  }
+  70% {
+    transform: rotate(-504deg);
+  }
+  80% {
+    transform: rotate(-576deg);
+  }
+  90% {
+    transform: rotate(-648deg);
+  }
+  100% {
+    transform: rotate(-720deg);
+  }
+}
+@keyframes RotateCounterClockwiseAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-72deg);
+  }
+  20% {
+    transform: rotate(-144deg);
+  }
+  30% {
+    transform: rotate(-216deg);
+  }
+  40% {
+    transform: rotate(-288deg);
+  }
+  50% {
+    transform: rotate(-360deg);
+  }
+  60% {
+    transform: rotate(-432deg);
+  }
+  70% {
+    transform: rotate(-504deg);
+  }
+  80% {
+    transform: rotate(-576deg);
+  }
+  90% {
+    transform: rotate(-648deg);
+  }
+  100% {
+    transform: rotate(-720deg);
+  }
 }
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 

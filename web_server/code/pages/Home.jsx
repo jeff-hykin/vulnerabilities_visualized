@@ -1,6 +1,7 @@
 require("../systems/on_scroll")
 const Overlay = require("../skeletons/Overlay")
 const Nodes = require("../components/Nodes")
+const Waterfall = require("../components/Waterfall")
 const { backend } = require("quik-client")
 
 window.backend = backend
@@ -9,7 +10,7 @@ window.backend = backend
 // const dataForFirst = await backend.data.vulnerabilitiesFor({product: names[0]})
 
 module.exports = ({ children, ...properties }) => {
-    return <div style="height: 100%" class="column centered">
-        <Nodes />
+    return <div style="height: 100%; overflow: scroll; justify-content: flex-start;" class="column centered">
+        <Waterfall />
     </div>
 }
