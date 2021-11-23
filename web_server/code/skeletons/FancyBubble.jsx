@@ -1,4 +1,4 @@
-module.exports = ({ color1, color2, children, ...props }) => {
+module.exports = ({ color1, color2, children, padding, ...props }) => {
     // main content
     const bubbleInnerPart = <div
         name="bubble-inner-part"
@@ -59,10 +59,26 @@ module.exports = ({ color1, color2, children, ...props }) => {
             aspect-ratio: 1;
             border-radius: 200vw;
         `}
-        {...props}
         >
             {rotatingCircle}
     </div>
     
-    return circleWithShadow
+    // wrapper #5
+    const paddingWrapper = <div
+        name="bubble-outer-part"
+        class="centered"
+        style={`
+            max-width: 100%;
+            width: 100%;
+            aspect-ratio: 1;
+            position: relative;
+            box-sizing: border-box;
+            padding: ${padding};
+        `}
+        {...props}
+        >
+            {circleWithShadow}
+    </div>
+    
+    return paddingWrapper
 }

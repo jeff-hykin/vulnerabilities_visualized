@@ -2,8 +2,13 @@ const { watch } = require("@vue-reactivity/watch")
 const {backend} = require("quik-client")
 const { nodeTheme } = require("../systems/theme")
 const { hash, wrapAroundGet } = require("../systems/utilies")
+const SquareGrid = require("../skeletons/SquareGrid")
 const SquareGridSizer = require("../skeletons/SquareGridSizer")
 const FancyBubble = require("../skeletons/FancyBubble")
+
+const ChildBubble = ({ repoData, startPosition, endPosition }) => {
+    
+}
 
 const OrbBubble = ({ eachOrg })=> {
     let element, circle
@@ -17,7 +22,7 @@ const OrbBubble = ({ eachOrg })=> {
         setTimeout(()=>(circle.style.zIndex=9999), 100)
     }
     const offHover = ()=>{
-        setTimeout(()=>(delete circle.style.zIndex), 100)
+        setTimeout(()=>(circle.style.zIndex=0), 100)
     }
     
     // create a whole bunch of wrappers
@@ -27,6 +32,7 @@ const OrbBubble = ({ eachOrg })=> {
             color2={color2}
             onmouseover={onHover}
             onmouseout={offHover}
+            padding="5%"
             >
                 {eachOrg.name}
                 {/* TODO: put other summary info here */}
@@ -57,10 +63,16 @@ module.exports = ({ orgData })=>{
             name: "Blah5",
             size: 10,
         },
+        {
+            name: "Blah6",
+            size: 2,
+        },
     ]
-    
-    const element = <div style="padding: 2rem; flex-shrink: 0; display: grid; width: 100%; aspect-ratio: 1; overflow: auto; grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;  grid-template-rows: repeat(auto-fit,10%);">
-        {orgData.map(eachOrg=>OrbBubble({ eachOrg }))}
+    // TODO: scale bubble text based on font-size / width%
+    const element = <div style="width: 100%; display: flex; align-items: center; align-content: center; justify-content: center; justify-content: center;">
+        <SquareGrid style="width: 80rem; max-width: 100%; padding: 2rem; box-sizing: border-box; overflow: auto; position: relative; padding-right: 8rem; right: -6rem; ">
+            {orgData.map(eachOrg=>OrbBubble({ eachOrg }))}
+        </SquareGrid>
     </div>
     
     return element
