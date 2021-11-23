@@ -35,7 +35,6 @@ const orgTreeData = backend.data.getOrgTree().then((orgTree) => {
 // TODO:
     // decide Repo summary format
     // decide Org summary format
-    // get org data from backend (add loading page)
 
 // 
 // Repo
@@ -61,12 +60,13 @@ const RepoSummaryElement = ({ repoData, orgData }) => {
     </div>
 }
 
-const RepoList = ({ repos=[], orgData, ...props }) =>{
+const RepoList = ({ repos={}, orgData, ...props }) =>{
     return <div
         class="our-weak-shadow"
         style={`
             z-index: 999999;
-            height: 16vh;
+            height: fit-content;
+            max-height: 17vh;
             width: 18rem;
             align-self: center;
             flex-shrink: 0;
@@ -78,7 +78,7 @@ const RepoList = ({ repos=[], orgData, ...props }) =>{
         `}
         {...props}
         >
-        {repos.map(each=>RepoSummaryElement({ repoData: each, orgData }))}
+        {Object.entries(repos).map(([name, info])=>RepoSummaryElement({ repoData: {name, ...info}, orgData }))}
     </div>
 }
 RepoList.animationTime = 300 // miliseconds
@@ -94,14 +94,11 @@ const OrgBubble = ({ eachOrg })=> {
     OrgBubble.index++
     let color1 = wrapAroundGet(OrgBubble.index, nodeTheme.darkColors)
     let color2 = wrapAroundGet(OrgBubble.index, nodeTheme.lightColors)
-    // randomly swap light and dark
+    // randomly swap light and dark to add visual variation
     if (Math.random() > 0.7) {
-        console.log("swapping")
         let swap = color1
         color1 = color2
         color2 = swap
-    } else {
-        console.log("not swapping")
     }
     
     // 
@@ -153,11 +150,7 @@ const OrgBubble = ({ eachOrg })=> {
     // 
     repoListElement = <RepoList
         // FIXME: add real repos
-        repos={[
-            {name: "repo1"},
-            {name: "repo2"},
-            {name: "repo3"},
-        ]}
+        repos={eachOrg.repoSummaries}
         orgData={eachOrg}
         onmouseover={(eventObject)=>{ console.log("repoListMouseOver") ;onHover(eventObject)}}
         onmouseout={offHover}
@@ -234,7 +227,7 @@ module.exports = async ({ orgData })=>{
         },
     ]
     orgData = await orgTreeData
-    const element = <div name="waterfall-outermost" style="width: 100%; min-height: 100%; overflow: auto; display: flex; align-content: center; justify-content: center; justify-content: center; background: var(--soft-gray-gradient);">
+    const element = <div name="waterfall-outermost" style="width: 100%; min-height: 100%; overflow-x: hidden; overflow-y: auto; display: flex; align-content: center; justify-content: center; justify-content: center; background: var(--soft-gray-gradient);">
         <SquareGrid numberOfSquares="6" style="width: 80rem; max-width: 100%; height: 100%; min-height: fit-content; padding: 2rem; box-sizing: border-box;">
             {orgData.map(eachOrg=>OrgBubble({ eachOrg }))}
         </SquareGrid>

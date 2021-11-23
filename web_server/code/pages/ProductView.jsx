@@ -4,6 +4,13 @@ const router = require("quik-router")
 // TODO:
     // retreive repo data from backend
 
+
+// 
+// 
+// helpers 
+// 
+// 
+
 const Title = ({ main, secondary }) => {
     return <h4 style="font-size: 20pt; font-weight: 100;">
         <span style="text-decoration: underline;">{`${main}`}</span> {secondary?`: ${secondary}`:""}
@@ -24,6 +31,11 @@ const SummaryTag = ({ orgName, repoName })=>{
     </div>
 }
 
+// 
+// 
+// Main
+// 
+// 
 module.exports = async ({ ...properties }) => {
     const { repoName, orgName } = router.pageInfo
     return <main
