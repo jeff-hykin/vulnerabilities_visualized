@@ -9,6 +9,8 @@
     --red: #e57373;
     --charcoal: hsl(180, 0%, 31%);
     --default-subtle-shift-speed: 20s;
+    --off-white: hsl(0, 0%, 87.8%);
+    --soft-gray-gradient: linear-gradient(-200deg, whitesmoke, var(--off-white));
 }
 
 // 
@@ -54,10 +56,6 @@ body {
     border-radius: 200vw;
     min-height: var(--size);
     min-width: var(--size);
-}
-
-.animate {
-    transition: all 0.5s ease-in-out 0s;
 }
 
 .hideItem {

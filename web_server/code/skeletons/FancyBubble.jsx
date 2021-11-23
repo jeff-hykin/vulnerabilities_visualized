@@ -70,6 +70,7 @@ module.exports = ({ color1, color2, children, padding, ...props }) => {
         style={`
             max-width: 100%;
             width: 100%;
+            flex-shrink: 0;
             aspect-ratio: 1;
             position: relative;
             box-sizing: border-box;
