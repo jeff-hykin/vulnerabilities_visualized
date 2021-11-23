@@ -1,13 +1,15 @@
 const { watch } = require("@vue-reactivity/watch")
-const {backend} = require("quik-client")
 const { nodeTheme } = require("../systems/theme")
 const { hash, wrapAroundGet } = require("../systems/utilies")
+
 const SquareGrid = require("../skeletons/SquareGrid")
 const SquareGridSizer = require("../skeletons/SquareGridSizer")
 const FancyBubble = require("../skeletons/FancyBubble")
 
+const {backend} = require("quik-client")
+const router = require("quik-router")
+
 // TODO:
-    // Repo onClick -> repo view
     // decide Repo summary format
     // decide Org summary format
     // get org data from backend (add loading page)
@@ -25,7 +27,11 @@ const RepoSummaryElement = ({ repoData }) => {
             padding: 0.25rem;
             background: lightgray;
             color: black;
+            cursor: pointer;
         `}
+        onclick={()=>{
+            router.goTo({ page: "product-view", repoName: repoData.name })
+        }}
         >
             {repoData.name}
     </div>
