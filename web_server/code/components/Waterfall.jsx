@@ -9,6 +9,29 @@ const FancyBubble = require("../skeletons/FancyBubble")
 const {backend} = require("quik-client")
 const router = require("quik-router")
 
+// Get the org data from backend
+const orgTreeData = backend.data.getOrgTree().then((orgTree) => {
+    let maxNumberOfRepos = 10
+    const keyToUseForSize = "numberOfRepos"
+    // exampleKeys:
+    //     magnitudeOfVulnerabilites: 3828
+    //     numberOfRepos: 2
+    //     numberOfVulnerabilies: 348
+    let output = []
+    for (const [key, value] of Object.entries(orgTree)) {
+        if (--maxNumberOfRepos < 0) {
+            break
+        }
+        output.push({
+            name: key,
+            size: value.orgSummary[keyToUseForSize],
+            ...value,
+        })
+    }
+    console.log(`output is:`,output)
+    return output
+})
+
 // TODO:
     // decide Repo summary format
     // decide Org summary format
@@ -145,18 +168,25 @@ const OrbBubble = ({ eachOrg })=> {
             onmouseout={offHover}
             padding="5%"
             >
-                <span
-                    name="repo-name"
-                    style={`
-                        border-radius: 0.6rem;
-                        padding: 0.3rem 0.5rem;
-                        background: var(--translucent-charcoal);
-                        color: white;
-                    `}
-                    >
-                        {eachOrg.name}
-                </span>
-                {/* TODO: put other summary info here */}
+                <div class="centered column" style="color: white; max-width: 100%; overflow:visible;">
+                    {/* Name */}
+                    <span
+                        name="repo-name"
+                        style={`
+                            border-radius: 0.6rem;
+                            padding: 0.3rem 0.5rem;
+                            background: var(--translucent-charcoal);
+                            color: white;
+                            width: max-content;
+                            display: inline-block;
+                        `}
+                        >
+                            {eachOrg.name}
+                    </span>
+                    {/* Repo count */}
+                    <br />
+                    {`(${eachOrg.size})` }
+                </div>
         </FancyBubble>}
         {repoListElement}
     </SquareGridSizer>
@@ -166,7 +196,7 @@ const OrbBubble = ({ eachOrg })=> {
 // 
 // Waterfall
 // 
-module.exports = ({ orgData })=>{
+module.exports = async ({ orgData })=>{
     // DEBUGGING
     orgData = [
         {
@@ -194,6 +224,7 @@ module.exports = ({ orgData })=>{
             size: 2,
         },
     ]
+    orgData = await orgTreeData
     // TODO: scale bubble text based on font-size / width%
     const element = <div name="waterfall-outermost" style="width: 100%; height: 100%; display: flex; align-content: center; justify-content: center; justify-content: center; background: var(--soft-gray-gradient);">
         <SquareGrid style="width: 80rem; max-width: 100%; padding: 2rem; box-sizing: border-box; overflow: auto; position: relative; padding-right: 8rem; right: -6rem; ">

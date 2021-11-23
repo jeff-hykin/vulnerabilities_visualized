@@ -15,6 +15,7 @@ module.exports = ({ color1, color2, children, padding, ...props }) => {
     const unRotatePart = <div
         name="bubble-un-rotate-part"
         class="rotateCounterClockwise centered"
+        style="max-width: 100%;"
         >
         {bubbleInnerPart}
     </div>
