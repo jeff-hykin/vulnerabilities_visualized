@@ -5,15 +5,25 @@ const { hash, wrapAroundGet } = require("../systems/utilies")
 const SquareGrid = require("../skeletons/SquareGrid")
 const SquareGridSizer = require("../skeletons/SquareGridSizer")
 const FancyBubble = require("../skeletons/FancyBubble")
-const anime = require("animejs").default
 
+// TODO:
+    // Repo onClick -> repo view
+    // decide Repo summary format
+    // decide Org summary format
+    // get org data from backend (add loading page)
+
+// 
+// Repo
+// 
 const RepoSummaryElement = ({ repoData }) => {
     return <div
-        class="shadow"
+        class="our-weak-shadow"
         style={`
             border-radius: 1rem;
-            margin-top: 0.5rem;
-            background: whitesmoke;
+            transition: all 0.2s ease-in-out 0s;
+            margin-top: 0.8rem;
+            padding: 0.25rem;
+            background: lightgray;
             color: black;
         `}
         >
@@ -23,7 +33,7 @@ const RepoSummaryElement = ({ repoData }) => {
 
 const RepoList = ({ repos=[], ...props }) =>{
     return <div
-        class="animate shadow"
+        class="our-weak-shadow"
         style={`
             z-index: 999999;
             height: 16vh;
@@ -43,13 +53,23 @@ const RepoList = ({ repos=[], ...props }) =>{
 }
 RepoList.animationTime = 300 // miliseconds
 
+// 
+// Org
+// 
 const OrbBubble = ({ eachOrg })=> {
     let circle, repoListElement
     // grab an id
     const hashNumber = hash(eachOrg.name)
     // set the colors 
-    const color1 = wrapAroundGet(hashNumber, nodeTheme.darkColors)
-    const color2 = wrapAroundGet(hashNumber, nodeTheme.lightColors)
+    let color1 = wrapAroundGet(hashNumber, nodeTheme.darkColors)
+    let color2 = wrapAroundGet(hashNumber, nodeTheme.lightColors)
+    // randomly swap light and dark
+    if (Math.random() > 0.5) {
+        let swap = color1
+        color1 = color2
+        color2 = swap
+    }
+    
     // 
     // hover
     // 
@@ -99,7 +119,11 @@ const OrbBubble = ({ eachOrg })=> {
     // 
     repoListElement = <RepoList
         // FIXME: add real repos
-        repos={[ {name: "repo1"}, ]}
+        repos={[
+            {name: "repo1"},
+            {name: "repo2"},
+            {name: "repo3"},
+        ]}
         onmouseover={(eventObject)=>{ console.log("repoListMouseOver") ;onHover(eventObject)}}
         onmouseout={offHover}
         />
@@ -115,8 +139,16 @@ const OrbBubble = ({ eachOrg })=> {
             onmouseout={offHover}
             padding="5%"
             >
-                <span name="repo-name" style="border-radius: 0.6rem; padding: 0.3rem 0.5rem; background: var(--translucent-charcoal); color: white;" >
-                    {eachOrg.name}
+                <span
+                    name="repo-name"
+                    style={`
+                        border-radius: 0.6rem;
+                        padding: 0.3rem 0.5rem;
+                        background: var(--translucent-charcoal);
+                        color: white;
+                    `}
+                    >
+                        {eachOrg.name}
                 </span>
                 {/* TODO: put other summary info here */}
         </FancyBubble>}
@@ -124,6 +156,10 @@ const OrbBubble = ({ eachOrg })=> {
     </SquareGridSizer>
 }
 
+
+// 
+// Waterfall
+// 
 module.exports = ({ orgData })=>{
     // DEBUGGING
     orgData = [
