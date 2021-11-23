@@ -75,7 +75,7 @@ module.exports = ({ children, sizeOfNodeInPixels, padding, ...properties }) => {
             const [ x, y ] = xyCenterLocations[index]
             // have them start off invisible, then fade in
             const graphNode = <div
-                class="circle centered shadow animate"
+                class="circle centered our-shadow-3 animate"
                 style={`
                     --size: ${sizeOfNodeInPixels}px ;
                     color: white;

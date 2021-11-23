@@ -1,8 +1,7 @@
 require("../systems/on_scroll")
-const GraphDisplay = require("../skeletons/GraphDisplay")
-const BaseTree = require("../skeletons/BaseTree")
-const InfoGraphic = require("../skeletons/InfoGraphic")
-const BubbleManager = require("../components/BubbleManager")
+const Overlay = require("../skeletons/Overlay")
+const Nodes = require("../components/Nodes")
+const Waterfall = require("../components/Waterfall")
 const { backend } = require("quik-client")
 
 window.backend = backend
@@ -11,9 +10,7 @@ window.backend = backend
 // const dataForFirst = await backend.data.vulnerabilitiesFor({product: names[0]})
 
 module.exports = ({ children, ...properties }) => {
-    return (
-        <body class="column centered" style="height: 100vh; overflow: hidden;">
-            <BubbleManager />
-        </body>
-    )
+    return <div style="height: 100%; overflow: scroll; justify-content: flex-start;" class="column centered">
+        <Waterfall />
+    </div>
 }

@@ -1,9 +1,11 @@
 // add CSS before everything else
 require("css-baseline/css/3")
 require("./global.scss")
+require("./static_files/tailwind")
 
 // libraries
 const router = require("quik-router")
+const Header = require("./code/skeletons/Header")
 
 // 
 // pages
@@ -11,6 +13,7 @@ const router = require("quik-router")
 const Home = require("./code/pages/Home")
 const ProductView = require("./code/pages/ProductView")
 const PageNotFound = require("./code/pages/PageNotFound")
+
 
 // 
 // every time something tries to change pages
@@ -30,9 +33,15 @@ function onRouteChange() {
         // load page
         // 
         if (previousPage == "home") {
-            document.body = <Home />
+            document.body = <body>
+                <Header />
+                <Home />
+            </body>
         } else if (previousPage == "product-view") {
-            document.body = <ProductView />
+            document.body = <body>
+                <Header />
+                <ProductView />
+            </body>
         } else {
             document.body = <PageNotFound />
         }

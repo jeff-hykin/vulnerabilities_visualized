@@ -1,0 +1,119 @@
+.animate {
+    transition: all 0.5s ease-in-out 0s;
+}
+
+.animatedGradientBackground {
+    background: radial-gradient(var(--color1), var(--color2));
+    background-size: 800% 800%;
+
+    -webkit-animation: GradientBackgroundAnimation var(--default-subtle-shift-speed) ease infinite;
+    -moz-animation: GradientBackgroundAnimation var(--default-subtle-shift-speed) ease infinite;
+    animation: GradientBackgroundAnimation var(--default-subtle-shift-speed) ease infinite;
+}
+
+@-webkit-keyframes GradientBackgroundAnimation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 51%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes GradientBackgroundAnimation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 51%}
+    100%{background-position:0% 50%}
+}
+@keyframes GradientBackgroundAnimation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 51%}
+    100%{background-position:0% 50%}
+}
+
+
+.rotateClockwise {
+    -webkit-animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+    -moz-animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+    animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+}
+@-webkit-keyframes RotateClockwiseAnimation {
+    0%{transform:rotate(calc(0deg + var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(72deg + var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(144deg + var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(216deg + var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(288deg + var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(360deg + var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(432deg + var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(504deg + var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(576deg + var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(648deg + var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(720deg + var(--rotation-offset,0deg))) }
+}
+@-moz-keyframes RotateClockwiseAnimation {
+    0%{transform:rotate(calc(0deg + var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(72deg + var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(144deg + var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(216deg + var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(288deg + var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(360deg + var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(432deg + var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(504deg + var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(576deg + var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(648deg + var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(720deg + var(--rotation-offset,0deg))) }
+}
+@keyframes RotateClockwiseAnimation {
+    0%{transform:rotate(calc(0deg + var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(72deg + var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(144deg + var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(216deg + var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(288deg + var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(360deg + var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(432deg + var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(504deg + var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(576deg + var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(648deg + var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(720deg + var(--rotation-offset,0deg))) }
+}
+
+.rotateCounterClockwise {
+    -webkit-animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+    -moz-animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+    animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+}
+@-webkit-keyframes RotateCounterClockwiseAnimation {
+    0%{transform:rotate(calc(-0deg - var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(-72deg - var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(-144deg - var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(-216deg - var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(-288deg - var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(-360deg - var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(-432deg - var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(-504deg - var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(-576deg - var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(-648deg - var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(-720deg - var(--rotation-offset,0deg))) }
+}
+@-moz-keyframes RotateCounterClockwiseAnimation {
+    0%{transform:rotate(calc(-0deg - var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(-72deg - var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(-144deg - var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(-216deg - var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(-288deg - var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(-360deg - var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(-432deg - var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(-504deg - var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(-576deg - var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(-648deg - var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(-720deg - var(--rotation-offset,0deg))) }
+}
+@keyframes RotateCounterClockwiseAnimation {
+    0%{transform:rotate(calc(-0deg - var(--rotation-offset,0deg))) }
+    10%{transform:rotate(calc(-72deg - var(--rotation-offset,0deg))) }
+    20%{transform:rotate(calc(-144deg - var(--rotation-offset,0deg))) }
+    30%{transform:rotate(calc(-216deg - var(--rotation-offset,0deg))) }
+    40%{transform:rotate(calc(-288deg - var(--rotation-offset,0deg))) }
+    50%{transform:rotate(calc(-360deg - var(--rotation-offset,0deg))) }
+    60%{transform:rotate(calc(-432deg - var(--rotation-offset,0deg))) }
+    70%{transform:rotate(calc(-504deg - var(--rotation-offset,0deg))) }
+    80%{transform:rotate(calc(-576deg - var(--rotation-offset,0deg))) }
+    90%{transform:rotate(calc(-648deg - var(--rotation-offset,0deg))) }
+    100%{transform:rotate(calc(-720deg - var(--rotation-offset,0deg))) }
+}

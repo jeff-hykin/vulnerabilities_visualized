@@ -1,0 +1,38 @@
+.node circle.basicNode {
+    fill: black;
+}
+
+.node:hover {
+    cursor: pointer;
+}
+
+.circleSelect {
+    display: none;
+}
+
+.node:hover .circleSelect {
+    display: block;
+}
+
+.link {
+    fill: none;
+    stroke: #000;
+    stroke-width: 1px;
+}
+
+.highlight {
+    stroke: rgb(168, 168, 168)!important;
+}
+
+.highlightCircle {
+    fill: rgb(168, 168, 168)!important;
+}
+
+.treeRoot {
+    opacity: 0.5;
+    transition: all 0.2s ease;
+}
+
+.treeRoot:hover {
+    opacity: 0.8;
+}
