@@ -51,7 +51,7 @@ const getVulnDataFor = async (repoName)=> {
 // 
 const commitData = {}
 const getCommitDataFor = async (repoName)=> {
-    if (commitData[repoName] == undefined) {
+    if (commitData[repoName] != undefined) {
         return commitData[repoName]
     } else {
         try {
