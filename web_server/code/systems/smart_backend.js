@@ -51,10 +51,16 @@ const getVulnDataFor = async (repoName)=> {
 // 
 const commitData = {}
 const getCommitDataFor = async (repoName)=> {
-    if (commitData[repoName]) {
+    if (commitData[repoName] == undefined) {
         return commitData[repoName]
     } else {
-        return commitData[repoName] = await backend.data.commitLogFor({ product: repoName })
+        try {
+            commitData[repoName] = await backend.data.commitLogFor({ product: repoName })
+        } catch (error) {
+            console.log(`Error getting commit data for: ${repoName}`)
+            commitData[repoName] = null
+        }
+        return commitData[repoName]
     }
 }
 

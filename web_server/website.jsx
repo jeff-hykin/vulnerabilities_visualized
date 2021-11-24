@@ -10,7 +10,8 @@ const Header = require("./code/skeletons/Header")
 // 
 // pages
 // 
-const Home = require("./code/pages/Home")
+const OrgWaterfall = require("./code/pages/OrgWaterfall")
+const RepoWaterfall = require("./code/pages/RepoWaterfall")
 const ProductView = require("./code/pages/ProductView")
 const PageNotFound = require("./code/pages/PageNotFound")
 
@@ -26,16 +27,21 @@ function onRouteChange() {
         
         // silently redirect to home page
         if (previousPage == null) {
-            previousPage = "home"
+            previousPage = "repo-waterfall"
         }
         
         // 
         // load page
         // 
-        if (previousPage == "home") {
+        if (previousPage == "repo-waterfall") {
             document.body = <body>
                 <Header />
-                <Home />
+                <RepoWaterfall />
+            </body>
+        } else if (previousPage == "org-waterfall") {
+            document.body = <body>
+                <Header />
+                <OrgWaterfall />
             </body>
         } else if (previousPage == "product-view") {
             document.body = <body>

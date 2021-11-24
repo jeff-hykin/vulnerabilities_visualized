@@ -5,12 +5,29 @@
 .animatedGradientBackground {
     background: radial-gradient(var(--color1), var(--color2));
     background-size: 250% 250%;
-
+    
     -webkit-animation: GradientBackgroundAnimation var(--default-subtle-shift-speed) ease infinite;
     -moz-animation: GradientBackgroundAnimation var(--default-subtle-shift-speed) ease infinite;
     animation: GradientBackgroundAnimation var(--default-subtle-shift-speed) ease infinite;
 }
 
+.rotateClockwise {
+    // disabling rotation for now (much better performance)
+    // -webkit-animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+    // -moz-animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+    // animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+}
+.rotateCounterClockwise {
+    // disabling rotation for now (much better performance)
+    // -webkit-animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+    // -moz-animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+    // animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
+}
+
+
+// 
+// Gradient Background
+// 
 @-webkit-keyframes GradientBackgroundAnimation {
     0%{background-position:0% 50%}
     50%{background-position:100% 51%}
@@ -28,11 +45,9 @@
 }
 
 
-.rotateClockwise {
-    -webkit-animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-    -moz-animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-    animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-}
+// 
+// Clockwise
+// 
 @-webkit-keyframes RotateClockwiseAnimation {
     0%{transform:rotate(calc(0deg + var(--rotation-offset,0deg))) }
     10%{transform:rotate(calc(72deg + var(--rotation-offset,0deg))) }
@@ -73,11 +88,9 @@
     100%{transform:rotate(calc(720deg + var(--rotation-offset,0deg))) }
 }
 
-.rotateCounterClockwise {
-    -webkit-animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-    -moz-animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-    animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-}
+// 
+// CounterClockwise
+// 
 @-webkit-keyframes RotateCounterClockwiseAnimation {
     0%{transform:rotate(calc(-0deg - var(--rotation-offset,0deg))) }
     10%{transform:rotate(calc(-72deg - var(--rotation-offset,0deg))) }

@@ -1,0 +1,2 @@
+- Orgs seem to reflect who looks for bugs more than who has more bugs
+- Many repos are not comparable (Linux vs Windows 7, Windows 8, Windows 10)

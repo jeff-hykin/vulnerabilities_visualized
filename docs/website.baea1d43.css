@@ -339,12 +339,6 @@ body {
     background-position: 0% 50%;
   }
 }
-.rotateClockwise {
-  -webkit-animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-  -moz-animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-  animation: RotateClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-}
-
 @-webkit-keyframes RotateClockwiseAnimation {
   0% {
     transform: rotate(calc(0deg + var(--rotation-offset, 0deg)));
@@ -450,12 +444,6 @@ body {
     transform: rotate(calc(720deg + var(--rotation-offset, 0deg)));
   }
 }
-.rotateCounterClockwise {
-  -webkit-animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-  -moz-animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-  animation: RotateCounterClockwiseAnimation var(--rotateSpeed, var(--default-subtle-shift-speed)) linear infinite;
-}
-
 @-webkit-keyframes RotateCounterClockwiseAnimation {
   0% {
     transform: rotate(calc(0deg - var(--rotation-offset, 0deg)));
