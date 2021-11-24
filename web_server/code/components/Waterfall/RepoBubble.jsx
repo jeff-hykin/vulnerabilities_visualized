@@ -50,6 +50,11 @@ const RepoBubble = ({ eachRepo })=> {
             color2={color2}
             rotationOffset={`${Math.random()*360}deg`}
             // padding basically adjusts the size of bubble
+            onclick={(eventObject)=>router.goTo({
+                page: "product-view",
+                orgName: eachRepo.orgName,
+                repoName: eachRepo.name,
+            })}
             padding={`${paddingAmount}%`}
             >
                 <div class="centered column" style="color: white; height: 100%; max-width: 100%; overflow:visible;">
