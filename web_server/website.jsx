@@ -24,26 +24,28 @@ function onRouteChange() {
     // if the page changes
     if (previousPage != router.pageInfo.page) {
         previousPage = router.pageInfo.page
+        let currentPage = router.pageInfo.page
         
         // silently redirect to home page
-        if (previousPage == null) {
-            previousPage = "repo-waterfall"
+        if (currentPage == null) {
+            currentPage = "repo-waterfall"
+            router.goSecretlyTo({ page: "repo-waterfall", ...router.pageInfo})
         }
         
         // 
         // load page
         // 
-        if (previousPage == "repo-waterfall") {
+        if (currentPage == "repo-waterfall") {
             document.body = <body>
                 <Header />
                 <RepoWaterfall />
             </body>
-        } else if (previousPage == "org-waterfall") {
+        } else if (currentPage == "org-waterfall") {
             document.body = <body>
                 <Header />
                 <OrgWaterfall />
             </body>
-        } else if (previousPage == "product-view") {
+        } else if (currentPage == "product-view") {
             document.body = <body>
                 <Header />
                 <ProductView />

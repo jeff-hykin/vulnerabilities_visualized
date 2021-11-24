@@ -13,7 +13,7 @@ module.exports = () => smartBackend.getOrgTree().then((orgTree) => {
     // Flatten out into Repos (and add some data to them)
     // 
     const repos = []
-    for (const eachOrg of Object.values(orgTree)) {
+    for (const [ eachOrgName, eachOrg ] of Object.entries(orgTree)) {
         for (const [ eachRepoName, eachRepoValue ] of Object.entries(eachOrg.repoSummaries)) {
             const bubbleSize = (eachRepoValue.numberOfVulnerabilies/magicNumberThatMakesTheUILookGood1).toFixed(3) - 0
             const lastTouched = (new DateTime(eachRepoValue.newestVulnerabilityTime)).unix
@@ -21,6 +21,7 @@ module.exports = () => smartBackend.getOrgTree().then((orgTree) => {
                 ...eachRepoValue,
                 name: eachRepoName,
                 size: bubbleSize,
+                orgName: eachOrgName,
                 lastTouched: lastTouched,
                 orderMetric: bubbleSize + Math.sqrt(lastTouched)/magicNumberThatMakesTheUILookGood2,
             })

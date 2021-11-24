@@ -4882,7 +4882,7 @@ var getCommitDataFor = /*#__PURE__*/function () {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
-            if (!(commitData[repoName] == undefined)) {
+            if (!(commitData[repoName] != undefined)) {
               _context5.next = 4;
               break;
             }
@@ -5200,11 +5200,11 @@ module.exports = function (_ref) {
     style: "\n            min-width: 101%;\n            aspect-ratio: 1;\n            --color1: ".concat(color1, ";\n            --color2: ").concat(color2, ";\n            border-radius: 200vw;\n        ")
   }, unRotatePart); // wrapper #3
 
-  var rotatingCircle = /*#__PURE__*/React.createElement("div", _extends({
+  var rotatingCircle = /*#__PURE__*/React.createElement("div", {
     name: "bubble-outer-part",
     class: "rotateClockwise centered",
     style: "\n            min-width: 101%;\n            aspect-ratio: 1;\n            border-radius: 200vw;\n        "
-  }, props), animatedColorGradientPart); // wrapper #4
+  }, animatedColorGradientPart); // wrapper #4
 
   var circleWithShadow = /*#__PURE__*/React.createElement("div", {
     name: "bubble-outer-part",
@@ -5484,19 +5484,22 @@ module.exports = function () {
     // 
     var repos = [];
 
-    for (var _i = 0, _Object$values = Object.values(orgTree); _i < _Object$values.length; _i++) {
-      var eachOrg = _Object$values[_i];
+    for (var _i = 0, _Object$entries = Object.entries(orgTree); _i < _Object$entries.length; _i++) {
+      var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+          eachOrgName = _Object$entries$_i[0],
+          eachOrg = _Object$entries$_i[1];
 
-      for (var _i2 = 0, _Object$entries = Object.entries(eachOrg.repoSummaries); _i2 < _Object$entries.length; _i2++) {
-        var _Object$entries$_i = _slicedToArray(_Object$entries[_i2], 2),
-            eachRepoName = _Object$entries$_i[0],
-            eachRepoValue = _Object$entries$_i[1];
+      for (var _i2 = 0, _Object$entries2 = Object.entries(eachOrg.repoSummaries); _i2 < _Object$entries2.length; _i2++) {
+        var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+            eachRepoName = _Object$entries2$_i[0],
+            eachRepoValue = _Object$entries2$_i[1];
 
         var bubbleSize = (eachRepoValue.numberOfVulnerabilies / magicNumberThatMakesTheUILookGood1).toFixed(3) - 0;
         var lastTouched = new DateTime(eachRepoValue.newestVulnerabilityTime).unix;
         repos.push(_objectSpread(_objectSpread({}, eachRepoValue), {}, {
           name: eachRepoName,
           size: bubbleSize,
+          orgName: eachOrgName,
           lastTouched: lastTouched,
           orderMetric: bubbleSize + Math.sqrt(lastTouched) / magicNumberThatMakesTheUILookGood2
         }));
@@ -5599,6 +5602,13 @@ var RepoBubble = function RepoBubble(_ref) {
     color2: color2,
     rotationOffset: "".concat(Math.random() * 360, "deg") // padding basically adjusts the size of bubble
     ,
+    onclick: function onclick(eventObject) {
+      return router.goTo({
+        page: "product-view",
+        orgName: eachRepo.orgName,
+        repoName: eachRepo.name
+      });
+    },
     padding: "".concat(paddingAmount, "%")
   }, /*#__PURE__*/React.createElement("div", {
     class: "centered column",
@@ -5638,11 +5648,9 @@ module.exports = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime
         case 2:
           RepoData = _context.sent;
           return _context.abrupt("return", RepoData.map(function (eachRepo) {
-            var eachThing = RepoBubble({
+            return RepoBubble({
               eachRepo: eachRepo
             });
-            console.log("eachThing is:", eachThing);
-            return eachThing;
           }));
 
         case 4:
@@ -8278,6 +8286,12 @@ module.exports = function (_ref) {
   }, /*#__PURE__*/React.createElement(Campsite, null)));
 };
 },{"../atoms/Campsite":"../code/atoms/Campsite.jsx","../components/NightSky":"../code/components/NightSky.jsx"}],"../website.jsx":[function(require,module,exports) {
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 // add CSS before everything else
 require("css-baseline/css/3");
 
@@ -8309,20 +8323,24 @@ var previousPage = NaN; // NaN is just for init (makes comparision always not-eq
 function onRouteChange() {
   // if the page changes
   if (previousPage != router.pageInfo.page) {
-    previousPage = router.pageInfo.page; // silently redirect to home page
+    previousPage = router.pageInfo.page;
+    var currentPage = router.pageInfo.page; // silently redirect to home page
 
-    if (previousPage == null) {
-      previousPage = "repo-waterfall";
+    if (currentPage == null) {
+      currentPage = "repo-waterfall";
+      router.goSecretlyTo(_objectSpread({
+        page: "repo-waterfall"
+      }, router.pageInfo));
     } // 
     // load page
     // 
 
 
-    if (previousPage == "repo-waterfall") {
+    if (currentPage == "repo-waterfall") {
       document.body = /*#__PURE__*/React.createElement("body", null, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(RepoWaterfall, null));
-    } else if (previousPage == "org-waterfall") {
+    } else if (currentPage == "org-waterfall") {
       document.body = /*#__PURE__*/React.createElement("body", null, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(OrgWaterfall, null));
-    } else if (previousPage == "product-view") {
+    } else if (currentPage == "product-view") {
       document.body = /*#__PURE__*/React.createElement("body", null, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(ProductView, null));
     } else {
       document.body = /*#__PURE__*/React.createElement(PageNotFound, null);
