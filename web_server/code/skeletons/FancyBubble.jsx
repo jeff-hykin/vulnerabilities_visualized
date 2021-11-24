@@ -44,7 +44,6 @@ module.exports = ({ color1, color2, rotationOffset, children, padding, ...props 
             aspect-ratio: 1;
             border-radius: 200vw;
         `}
-        {...props}
         >
             {animatedColorGradientPart}
     </div>
