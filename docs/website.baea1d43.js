@@ -4937,8 +4937,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -4958,65 +4956,37 @@ var _require = require("good-js"),
 
 var smartBackend = require("../../systems/smart_backend");
 
-module.exports = function (_ref) {
-  var _ref$maxNumberOfOrgs = _ref.maxNumberOfOrgs,
-      maxNumberOfOrgs = _ref$maxNumberOfOrgs === void 0 ? 300 : _ref$maxNumberOfOrgs;
+var maxNumberOfOrgs = 300;
+
+module.exports = function () {
   return smartBackend.getOrgTree().then(function (orgTree) {
-    var keyToUseForSize = "numberOfRepos"; // 
+    // 
+    // convert structure method
+    // 
+    var output = [];
+
+    for (var _i = 0, _Object$entries = Object.entries(orgTree); _i < _Object$entries.length; _i++) {
+      var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+          key = _Object$entries$_i[0],
+          value = _Object$entries$_i[1];
+
+      var lastTouched = new DateTime(value.orgSummary.newestVulnerabilityTime).unix;
+      output.push(_objectSpread(_objectSpread({}, value), {}, {
+        name: key,
+        size: value.orgSummary.numberOfRepos,
+        orderMetric: Math.log(lastTouched) + Math.log(value.orgSummary.numberOfVulnerabilies)
+      }));
+    } // 
     // sorting method
     // 
 
-    var repos = Object.entries(orgTree).map(function (_ref2) {
-      var _ref3 = _slicedToArray(_ref2, 2),
-          key = _ref3[0],
-          value = _ref3[1];
 
-      // add a unix time value
-      var lastTouched = new DateTime(value.orgSummary.newestVulnerabilityTime).unix; // create the score
-
-      value.orderMetric = Math.log(lastTouched) + Math.log(value.orgSummary.numberOfVulnerabilies); // example inputs:
-      //     magnitudeOfVulnerabilites: 1627.0999999999913
-      //     newestVulnerabilityTime: "2021-10-4"
-      //     numberOfRepos: 1
-      //     numberOfVulnerabilies: 307
-      //     oldestVulnerabilityTime: "2021-10-4"
-
-      return [key, value];
-    }).sort(object.compareProperty({
-      keyList: ['1', 'orderMetric'],
+    output = output.sort(object.compareProperty({
+      keyList: ['orderMetric'],
       largestFirst: true
-    })); // 
-    // convert structure method
-    // 
-
-    var output = [];
-
-    var _iterator = _createForOfIteratorHelper(repos),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var _step$value = _slicedToArray(_step.value, 2),
-            key = _step$value[0],
-            value = _step$value[1];
-
-        if (--maxNumberOfOrgs < 0) {
-          break;
-        }
-
-        output.push(_objectSpread({
-          name: key,
-          size: value.orgSummary[keyToUseForSize]
-        }, value));
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-
+    }));
     console.log("output is:", output.slice(0, 5));
-    return output;
+    return output.slice(0, maxNumberOfOrgs);
   });
 };
 },{"good-date":"../../node_modules/good-date/index.js","good-js":"../../node_modules/good-js/index.js","../../systems/smart_backend":"../code/systems/smart_backend.js"}],"../code/systems/theme.js":[function(require,module,exports) {
@@ -5219,7 +5189,81 @@ module.exports = function (_ref) {
   }, props), circleWithShadow);
   return paddingWrapper;
 };
-},{}],"../code/components/Waterfall/OrgBubble.jsx":[function(require,module,exports) {
+},{}],"../code/components/Waterfall/RepoSummaryElement.jsx":[function(require,module,exports) {
+var router = require("quik-router");
+
+module.exports = function (_ref) {
+  var repoData = _ref.repoData,
+      orgData = _ref.orgData;
+  return /*#__PURE__*/React.createElement("div", {
+    class: "our-weak-shadow",
+    style: "\n            border-radius: 1rem;\n            transition: all 0.2s ease-in-out 0s;\n            margin-top: 0.8rem;\n            padding: 0.25rem;\n            background: lightgray;\n            color: black;\n            cursor: pointer;\n        ",
+    onclick: function onclick() {
+      // TODO: record the scroll position, then do a goto, also add scrolling logic to main waterfall element
+      router.goTo({
+        page: "product-view",
+        orgName: orgData.name,
+        repoName: repoData.name
+      });
+    }
+  }, repoData.name);
+};
+},{"quik-router":"../../node_modules/quik-router/main/main.js"}],"../code/components/Waterfall/RepoList.jsx":[function(require,module,exports) {
+var _excluded = ["repos", "orgData"];
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var RepoSummaryElement = require("./RepoSummaryElement");
+
+var RepoList = function RepoList(_ref) {
+  var _ref$repos = _ref.repos,
+      repos = _ref$repos === void 0 ? {} : _ref$repos,
+      orgData = _ref.orgData,
+      props = _objectWithoutProperties(_ref, _excluded);
+
+  return /*#__PURE__*/React.createElement("div", _extends({
+    class: "our-weak-shadow",
+    style: "\n            z-index: 999999;\n            height: fit-content;\n            max-height: 17vh;\n            width: 18rem;\n            align-self: center;\n            flex-shrink: 0;\n            background: white;\n            border-radius: 1rem;\n            overflow: auto;\n            padding: 0.5rem;\n            margin-top: -25px;\n            transition: all ".concat(RepoList.animationTime / 1000, "s ease-in-out 0s;\n        ")
+  }, props), Object.entries(repos).map(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 2),
+        name = _ref3[0],
+        info = _ref3[1];
+
+    return RepoSummaryElement({
+      repoData: _objectSpread({
+        name: name
+      }, info),
+      orgData: orgData
+    });
+  }));
+};
+
+RepoList.animationTime = 300; // miliseconds
+
+module.exports = RepoList;
+},{"./RepoSummaryElement":"../code/components/Waterfall/RepoSummaryElement.jsx"}],"../code/components/Waterfall/OrgBubble.jsx":[function(require,module,exports) {
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -5237,7 +5281,9 @@ var _require2 = require("../../systems/utilies"),
 
 var SquareGridSizer = require("../../skeletons/SquareGridSizer");
 
-var FancyBubble = require("../../skeletons/FancyBubble"); // 
+var FancyBubble = require("../../skeletons/FancyBubble");
+
+var RepoList = require("../../components/Waterfall/RepoList"); // 
 // Org
 // 
 
@@ -5367,7 +5413,7 @@ router.addEventListener("go", function () {
 }); // reset index when page changes
 
 module.exports = OrgBubble;
-},{"quik-router":"../../node_modules/quik-router/main/main.js","../../systems/theme":"../code/systems/theme.js","../../systems/utilies":"../code/systems/utilies.js","../../skeletons/SquareGridSizer":"../code/skeletons/SquareGridSizer.jsx","../../skeletons/FancyBubble":"../code/skeletons/FancyBubble.jsx"}],"../code/components/Waterfall/OrgStream.jsx":[function(require,module,exports) {
+},{"quik-router":"../../node_modules/quik-router/main/main.js","../../systems/theme":"../code/systems/theme.js","../../systems/utilies":"../code/systems/utilies.js","../../skeletons/SquareGridSizer":"../code/skeletons/SquareGridSizer.jsx","../../skeletons/FancyBubble":"../code/skeletons/FancyBubble.jsx","../../components/Waterfall/RepoList":"../code/components/Waterfall/RepoList.jsx"}],"../code/components/Waterfall/OrgStream.jsx":[function(require,module,exports) {
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
