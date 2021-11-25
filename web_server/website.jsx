@@ -25,9 +25,11 @@ const pages = {
 // every time something tries to change pages
 // 
 let previousPage = NaN // NaN is just for init (makes comparision always not-equal)
-function onRouteChange() {
+const transitionHandlers = []
+async function onRouteChange() {
     // if the page changes
     if (previousPage != router.pageInfo.page) {
+        // keep track of (what will be) the previous 
         previousPage = router.pageInfo.page
         let currentPage = router.pageInfo.page
         
@@ -54,7 +56,6 @@ function onRouteChange() {
             const mainExisted = main != null
             // if somehow the page gets broken, reset it
             if (!mainExisted) {
-                console.debug(`main was null:`)
                 document.body = <body>
                     <Header />
                     {main = <main />}
@@ -67,10 +68,13 @@ function onRouteChange() {
         // animate fade between pages
         // 
         const [ oldMain, mainExisted ] = getMainElement()
-        const duration = 500 // miliseconds
+        const mainElementPromise = getNewMain()
+        const duration = 300 // miliseconds
         oldMain.style.transition = `all ${duration}ms ease-in-out 0s`
         oldMain.style.opacity = 0
-        setTimeout(async ()=>{
+        transitionHandlers.push(setTimeout(async ()=>{
+            // remove other pending page actions (from user spamming the back/forwards button)
+            transitionHandlers.map(each=>clearTimeout(each))
             // 
             // replace old main with a dummy
             // 
@@ -83,8 +87,9 @@ function onRouteChange() {
             // 
             // setup new main
             // 
-            // (needs to be done after removing old main, cause two mains can't exist at the same time)
-            const newMainElement = await getNewMain()
+            const newMainElement = await mainElementPromise
+            newMainElement.setAttribute("id", Math.random())
+            // (needs to be done after removing old main, cause two mains shouldn't exist at the same time)
             const originalTransitionProperty = newMainElement.style.transition
             const originalOpacityProperty = (newMainElement.style.opacity == "") ? 1 : newMainElement.style.opacity
             newMainElement.style.opacity = 0
@@ -97,12 +102,14 @@ function onRouteChange() {
             parent.removeChild(dummy)
             
             // animate the new main
-            setTimeout(() => {
+            transitionHandlers.push(setTimeout(async () => {
                 newMainElement.style.opacity = originalOpacityProperty
                 // restore the new main's transition property
-                setTimeout( ()=>newMainElement.style.transition=originalTransitionProperty,  duration*1.1 )
-            }, 0)
-        }, duration*1.1*mainExisted)
+                transitionHandlers.push(setTimeout(()=>{
+                    newMainElement.style.transition=originalTransitionProperty
+                },  duration*1.1 ))
+            }, 100)) // needs to be non-zero so that the browser doesn't optimize it out (the opacity=0 needs to "sink in" before the opacity=1)
+        }, duration*1.1*mainExisted)) // the mainExisted is saves time on initial page load
     }
 }
 router.addEventListener("go", onRouteChange)

@@ -22017,15 +22017,15 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 // add CSS before everything else
 require("css-baseline/css/3");
@@ -22061,127 +22061,162 @@ var pages = {
 
 var previousPage = NaN; // NaN is just for init (makes comparision always not-equal)
 
+var transitionHandlers = [];
+
 function onRouteChange() {
-  // if the page changes
-  if (previousPage != router.pageInfo.page) {
-    previousPage = router.pageInfo.page;
-    var currentPage = router.pageInfo.page; // silently redirect to homePage
+  return _onRouteChange.apply(this, arguments);
+}
 
-    if (currentPage == null) {
-      currentPage = homePage;
-      router.goSecretlyTo(_objectSpread({
-        page: homePage
-      }, router.pageInfo));
-    } // 
-    // create the new main element
-    // 
+function _onRouteChange() {
+  _onRouteChange = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+    var currentPage, getNewMain, getMainElement, _getMainElement, _getMainElement2, oldMain, mainExisted, mainElementPromise, duration;
+
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            // if the page changes
+            if (previousPage != router.pageInfo.page) {
+              // keep track of (what will be) the previous 
+              previousPage = router.pageInfo.page;
+              currentPage = router.pageInfo.page; // silently redirect to homePage
+
+              if (currentPage == null) {
+                currentPage = homePage;
+                router.goSecretlyTo(_objectSpread({
+                  page: homePage
+                }, router.pageInfo));
+              } // 
+              // create the new main element
+              // 
 
 
-    var getNewMain = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var Page, newMain;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                Page = pages[currentPage] || PageNotFound;
-                _context.next = 3;
-                return Page({}, []);
+              getNewMain = /*#__PURE__*/function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                  var Page, newMain;
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          Page = pages[currentPage] || PageNotFound;
+                          _context.next = 3;
+                          return Page({}, []);
 
-              case 3:
-                newMain = _context.sent;
-                return _context.abrupt("return", newMain);
+                        case 3:
+                          newMain = _context.sent;
+                          return _context.abrupt("return", newMain);
 
-              case 5:
-              case "end":
-                return _context.stop();
+                        case 5:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
+
+                return function getNewMain() {
+                  return _ref.apply(this, arguments);
+                };
+              }(); // 
+              // get the old main element
+              // 
+
+
+              getMainElement = function getMainElement() {
+                var main = document.querySelector("main");
+                var mainExisted = main != null; // if somehow the page gets broken, reset it
+
+                if (!mainExisted) {
+                  document.body = /*#__PURE__*/React.createElement("body", null, /*#__PURE__*/React.createElement(Header, null), main = /*#__PURE__*/React.createElement("main", null));
+                }
+
+                return [main, mainExisted];
+              }; // 
+              // animate fade between pages
+              // 
+
+
+              _getMainElement = getMainElement(), _getMainElement2 = _slicedToArray(_getMainElement, 2), oldMain = _getMainElement2[0], mainExisted = _getMainElement2[1];
+              mainElementPromise = getNewMain();
+              duration = 300; // miliseconds
+
+              oldMain.style.transition = "all ".concat(duration, "ms ease-in-out 0s");
+              oldMain.style.opacity = 0;
+              transitionHandlers.push(setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                var _getMainElement3, _getMainElement4, oldMain, _, parent, dummy, newMainElement, originalTransitionProperty, originalOpacityProperty;
+
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                  while (1) {
+                    switch (_context3.prev = _context3.next) {
+                      case 0:
+                        // remove other pending page actions (from user spamming the back/forwards button)
+                        transitionHandlers.map(function (each) {
+                          return clearTimeout(each);
+                        }); // 
+                        // replace old main with a dummy
+                        // 
+
+                        _getMainElement3 = getMainElement(), _getMainElement4 = _slicedToArray(_getMainElement3, 2), oldMain = _getMainElement4[0], _ = _getMainElement4[1];
+                        parent = oldMain.parentNode;
+                        dummy = /*#__PURE__*/React.createElement("div", null);
+                        parent.insertBefore(dummy, oldMain);
+                        parent.removeChild(oldMain); // 
+                        // setup new main
+                        // 
+
+                        _context3.next = 8;
+                        return mainElementPromise;
+
+                      case 8:
+                        newMainElement = _context3.sent;
+                        newMainElement.setAttribute("id", Math.random()); // (needs to be done after removing old main, cause two mains shouldn't exist at the same time)
+
+                        originalTransitionProperty = newMainElement.style.transition;
+                        originalOpacityProperty = newMainElement.style.opacity == "" ? 1 : newMainElement.style.opacity;
+                        newMainElement.style.opacity = 0;
+                        newMainElement.style.transition = "all ".concat(duration, "ms ease-in-out 0s"); // 
+                        // replace dummy with new main
+                        // 
+
+                        parent.insertBefore(newMainElement, dummy);
+                        parent.removeChild(dummy); // animate the new main
+
+                        transitionHandlers.push(setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                            while (1) {
+                              switch (_context2.prev = _context2.next) {
+                                case 0:
+                                  newMainElement.style.opacity = originalOpacityProperty; // restore the new main's transition property
+
+                                  transitionHandlers.push(setTimeout(function () {
+                                    newMainElement.style.transition = originalTransitionProperty;
+                                  }, duration * 1.1));
+
+                                case 2:
+                                case "end":
+                                  return _context2.stop();
+                              }
+                            }
+                          }, _callee2);
+                        })), 100)); // needs to be non-zero so that the browser doesn't optimize it out (the opacity=0 needs to "sink in" before the opacity=1)
+
+                      case 17:
+                      case "end":
+                        return _context3.stop();
+                    }
+                  }
+                }, _callee3);
+              })), duration * 1.1 * mainExisted)); // the mainExisted is saves time on initial page load
             }
-          }
-        }, _callee);
-      }));
 
-      return function getNewMain() {
-        return _ref.apply(this, arguments);
-      };
-    }(); // 
-    // get the old main element
-    // 
-
-
-    var getMainElement = function getMainElement() {
-      var main = document.querySelector("main");
-      var mainExisted = main != null; // if somehow the page gets broken, reset it
-
-      if (!mainExisted) {
-        console.debug("main was null:");
-        document.body = /*#__PURE__*/React.createElement("body", null, /*#__PURE__*/React.createElement(Header, null), main = /*#__PURE__*/React.createElement("main", null));
-      }
-
-      return [main, mainExisted];
-    }; // 
-    // animate fade between pages
-    // 
-
-
-    var _getMainElement = getMainElement(),
-        _getMainElement2 = _slicedToArray(_getMainElement, 2),
-        oldMain = _getMainElement2[0],
-        mainExisted = _getMainElement2[1];
-
-    var duration = 500; // miliseconds
-
-    oldMain.style.transition = "all ".concat(duration, "ms ease-in-out 0s");
-    oldMain.style.opacity = 0;
-    setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      var _getMainElement3, _getMainElement4, oldMain, _, parent, dummy, newMainElement, originalTransitionProperty, originalOpacityProperty;
-
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              // 
-              // replace old main with a dummy
-              // 
-              _getMainElement3 = getMainElement(), _getMainElement4 = _slicedToArray(_getMainElement3, 2), oldMain = _getMainElement4[0], _ = _getMainElement4[1];
-              parent = oldMain.parentNode;
-              dummy = /*#__PURE__*/React.createElement("div", null);
-              parent.insertBefore(dummy, oldMain);
-              parent.removeChild(oldMain); // 
-              // setup new main
-              // 
-              // (needs to be done after removing old main, cause two mains can't exist at the same time)
-
-              _context2.next = 7;
-              return getNewMain();
-
-            case 7:
-              newMainElement = _context2.sent;
-              originalTransitionProperty = newMainElement.style.transition;
-              originalOpacityProperty = newMainElement.style.opacity == "" ? 1 : newMainElement.style.opacity;
-              newMainElement.style.opacity = 0;
-              newMainElement.style.transition = "all ".concat(duration, "ms ease-in-out 0s"); // 
-              // replace dummy with new main
-              // 
-
-              parent.insertBefore(newMainElement, dummy);
-              parent.removeChild(dummy); // animate the new main
-
-              setTimeout(function () {
-                newMainElement.style.opacity = originalOpacityProperty; // restore the new main's transition property
-
-                setTimeout(function () {
-                  return newMainElement.style.transition = originalTransitionProperty;
-                }, duration * 1.1);
-              }, 0);
-
-            case 15:
-            case "end":
-              return _context2.stop();
-          }
+          case 1:
+          case "end":
+            return _context4.stop();
         }
-      }, _callee2);
-    })), duration * 1.1 * mainExisted);
-  }
+      }
+    }, _callee4);
+  }));
+  return _onRouteChange.apply(this, arguments);
 }
 
 router.addEventListener("go", onRouteChange);
