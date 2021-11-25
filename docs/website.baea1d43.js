@@ -2745,8 +2745,8 @@ module.exports = function (_ref) {
       properties = _objectWithoutProperties(_ref, _excluded);
 
   return /*#__PURE__*/React.createElement("div", {
-    style: "width: 100%; height: fit-content; padding: 1.2rem; margin: 0;",
-    class: "px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8"
+    style: "min-width: 100%; height: fit-content; padding: 1.2rem; margin: 0; z-index: 9999999;",
+    class: "px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 shadow"
   }, /*#__PURE__*/React.createElement("div", {
     class: "relative flex items-center justify-between"
   }, /*#__PURE__*/React.createElement("a", {
@@ -5201,7 +5201,7 @@ module.exports = function (_ref) {
     onclick: function onclick() {
       // TODO: record the scroll position, then do a goto, also add scrolling logic to main waterfall element
       router.goTo({
-        page: "product-view",
+        page: "ProductView",
         orgName: orgData.name,
         repoName: repoData.name
       });
@@ -5474,7 +5474,7 @@ module.exports = /*#__PURE__*/function () {
 
           case 3:
             repoStreamElements = _context.sent;
-            return _context.abrupt("return", /*#__PURE__*/React.createElement("div", {
+            return _context.abrupt("return", /*#__PURE__*/React.createElement("main", {
               style: "height: 100%; overflow: scroll; justify-content: flex-start;",
               class: "column centered"
             }, /*#__PURE__*/React.createElement(Waterfall, null, repoStreamElements)));
@@ -5650,7 +5650,7 @@ var RepoBubble = function RepoBubble(_ref) {
     ,
     onclick: function onclick(eventObject) {
       return router.goTo({
-        page: "product-view",
+        page: "ProductView",
         orgName: eachRepo.orgName,
         repoName: eachRepo.name
       });
@@ -5734,7 +5734,7 @@ module.exports = /*#__PURE__*/function () {
 
           case 3:
             repoStreamElements = _context.sent;
-            return _context.abrupt("return", /*#__PURE__*/React.createElement("div", {
+            return _context.abrupt("return", /*#__PURE__*/React.createElement("main", {
               style: "height: 100%; overflow: scroll; justify-content: flex-start;",
               class: "column centered"
             }, /*#__PURE__*/React.createElement(Waterfall, null, repoStreamElements)));
@@ -19576,7 +19576,7 @@ module.exports = /*#__PURE__*/function () {
             properties = Object.assign({}, _ref13);
             _router$pageInfo = router.pageInfo, repoName = _router$pageInfo.repoName, orgName = _router$pageInfo.orgName;
             return _context4.abrupt("return", /*#__PURE__*/React.createElement("main", {
-              name: "main-product-view",
+              name: "main-ProductView",
               class: "centered row",
               style: "width: 100%; height: 100%;"
             }, /*#__PURE__*/React.createElement(LeftSideContainer, null, /*#__PURE__*/React.createElement(SummaryTag, {
@@ -21986,10 +21986,13 @@ module.exports = function (_ref) {
   var children = _ref.children,
       properties = _objectWithoutProperties(_ref, _excluded);
 
-  return /*#__PURE__*/React.createElement("body", {
+  return /*#__PURE__*/React.createElement("main", {
     class: "column centered",
     style: {
-      overflow: "hidden"
+      overflow: "hidden",
+      position: 'fixed',
+      width: '100vw',
+      height: '100vh'
     }
   }, /*#__PURE__*/React.createElement(NightSky, null), /*#__PURE__*/React.createElement("h3", {
     style: {
@@ -22002,6 +22005,22 @@ module.exports = function (_ref) {
   }, /*#__PURE__*/React.createElement(Campsite, null)));
 };
 },{"../atoms/Campsite":"../code/atoms/Campsite.jsx","../components/NightSky":"../code/components/NightSky.jsx"}],"../website.jsx":[function(require,module,exports) {
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -22029,10 +22048,16 @@ var RepoWaterfall = require("./code/pages/RepoWaterfall");
 
 var ProductView = require("./code/pages/ProductView");
 
-var PageNotFound = require("./code/pages/PageNotFound"); // 
+var PageNotFound = require("./code/pages/PageNotFound");
+
+var homePage = "RepoWaterfall";
+var pages = {
+  OrgWaterfall: OrgWaterfall,
+  RepoWaterfall: RepoWaterfall,
+  ProductView: ProductView
+}; // 
 // every time something tries to change pages
 // 
-
 
 var previousPage = NaN; // NaN is just for init (makes comparision always not-equal)
 
@@ -22040,27 +22065,122 @@ function onRouteChange() {
   // if the page changes
   if (previousPage != router.pageInfo.page) {
     previousPage = router.pageInfo.page;
-    var currentPage = router.pageInfo.page; // silently redirect to home page
+    var currentPage = router.pageInfo.page; // silently redirect to homePage
 
     if (currentPage == null) {
-      currentPage = "repo-waterfall";
+      currentPage = homePage;
       router.goSecretlyTo(_objectSpread({
-        page: "repo-waterfall"
+        page: homePage
       }, router.pageInfo));
     } // 
-    // load page
+    // create the new main element
     // 
 
 
-    if (currentPage == "repo-waterfall") {
-      document.body = /*#__PURE__*/React.createElement("body", null, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(RepoWaterfall, null));
-    } else if (currentPage == "org-waterfall") {
-      document.body = /*#__PURE__*/React.createElement("body", null, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(OrgWaterfall, null));
-    } else if (currentPage == "product-view") {
-      document.body = /*#__PURE__*/React.createElement("body", null, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(ProductView, null));
-    } else {
-      document.body = /*#__PURE__*/React.createElement(PageNotFound, null);
-    }
+    var getNewMain = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var Page, newMain;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                Page = pages[currentPage] || PageNotFound;
+                _context.next = 3;
+                return Page({}, []);
+
+              case 3:
+                newMain = _context.sent;
+                return _context.abrupt("return", newMain);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function getNewMain() {
+        return _ref.apply(this, arguments);
+      };
+    }(); // 
+    // get the old main element
+    // 
+
+
+    var getMainElement = function getMainElement() {
+      var main = document.querySelector("main");
+      var mainExisted = main != null; // if somehow the page gets broken, reset it
+
+      if (!mainExisted) {
+        console.debug("main was null:");
+        document.body = /*#__PURE__*/React.createElement("body", null, /*#__PURE__*/React.createElement(Header, null), main = /*#__PURE__*/React.createElement("main", null));
+      }
+
+      return [main, mainExisted];
+    }; // 
+    // animate fade between pages
+    // 
+
+
+    var _getMainElement = getMainElement(),
+        _getMainElement2 = _slicedToArray(_getMainElement, 2),
+        oldMain = _getMainElement2[0],
+        mainExisted = _getMainElement2[1];
+
+    var duration = 500; // miliseconds
+
+    oldMain.style.transition = "all ".concat(duration, "ms ease-in-out 0s");
+    oldMain.style.opacity = 0;
+    setTimeout( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var _getMainElement3, _getMainElement4, oldMain, _, parent, dummy, newMainElement, originalTransitionProperty, originalOpacityProperty;
+
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              // 
+              // replace old main with a dummy
+              // 
+              _getMainElement3 = getMainElement(), _getMainElement4 = _slicedToArray(_getMainElement3, 2), oldMain = _getMainElement4[0], _ = _getMainElement4[1];
+              parent = oldMain.parentNode;
+              dummy = /*#__PURE__*/React.createElement("div", null);
+              parent.insertBefore(dummy, oldMain);
+              parent.removeChild(oldMain); // 
+              // setup new main
+              // 
+              // (needs to be done after removing old main, cause two mains can't exist at the same time)
+
+              _context2.next = 7;
+              return getNewMain();
+
+            case 7:
+              newMainElement = _context2.sent;
+              originalTransitionProperty = newMainElement.style.transition;
+              originalOpacityProperty = newMainElement.style.opacity == "" ? 1 : newMainElement.style.opacity;
+              newMainElement.style.opacity = 0;
+              newMainElement.style.transition = "all ".concat(duration, "ms ease-in-out 0s"); // 
+              // replace dummy with new main
+              // 
+
+              parent.insertBefore(newMainElement, dummy);
+              parent.removeChild(dummy); // animate the new main
+
+              setTimeout(function () {
+                newMainElement.style.opacity = originalOpacityProperty; // restore the new main's transition property
+
+                setTimeout(function () {
+                  return newMainElement.style.transition = originalTransitionProperty;
+                }, duration * 1.1);
+              }, 0);
+
+            case 15:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    })), duration * 1.1 * mainExisted);
   }
 }
 

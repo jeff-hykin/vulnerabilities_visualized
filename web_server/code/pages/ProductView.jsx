@@ -122,7 +122,7 @@ const RightSideContainer = ({ children })=>{
 // 
 module.exports = async ({ ...properties }) => {
     const { repoName, orgName } = router.pageInfo
-    return <main name="main-product-view" class="centered row" style={`width: 100%; height: 100%;`} >
+    return <main name="main-ProductView" class="centered row" style={`width: 100%; height: 100%;`} >
             <LeftSideContainer>
                 <SummaryTag orgName={orgName} repoName={repoName} />
                 <RepoGraph repoName={repoName} />

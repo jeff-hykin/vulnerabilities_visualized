@@ -14,7 +14,7 @@ module.exports = ({ repoData, orgData }) => {
         `}
         onclick={()=>{
             // TODO: record the scroll position, then do a goto, also add scrolling logic to main waterfall element
-            router.goTo({ page: "product-view", orgName: orgData.name, repoName: repoData.name })
+            router.goTo({ page: "ProductView", orgName: orgData.name, repoName: repoData.name })
         }}
         >
             {repoData.name}

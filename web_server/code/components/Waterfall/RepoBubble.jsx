@@ -51,7 +51,7 @@ const RepoBubble = ({ eachRepo })=> {
             rotationOffset={`${Math.random()*360}deg`}
             // padding basically adjusts the size of bubble
             onclick={(eventObject)=>router.goTo({
-                page: "product-view",
+                page: "ProductView",
                 orgName: eachRepo.orgName,
                 repoName: eachRepo.name,
             })}

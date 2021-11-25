@@ -3,9 +3,9 @@ const RepoStream = require("../components/Waterfall/RepoStream")
 
 module.exports = async ({ children, ...properties }) => {
     const repoStreamElements = await RepoStream()
-    return <div style="height: 100%; overflow: scroll; justify-content: flex-start;" class="column centered">
+    return <main style="height: 100%; overflow: scroll; justify-content: flex-start;" class="column centered">
         <Waterfall>
             {repoStreamElements}
         </Waterfall>
-    </div>
+    </main>
 }

@@ -2,8 +2,8 @@
 
 module.exports = ({ children, ...properties }) => {
     return <div
-        style="width: 100%; height: fit-content; padding: 1.2rem; margin: 0;"
-        class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8"
+        style="min-width: 100%; height: fit-content; padding: 1.2rem; margin: 0; z-index: 9999999;"
+        class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 shadow"
         >
         <div class="relative flex items-center justify-between">
             <a
