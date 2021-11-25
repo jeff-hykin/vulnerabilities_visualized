@@ -1,6 +1,8 @@
 const { watch } = require("@vue-reactivity/watch")
 const router = require("quik-router")
 const smartBackend = require("../systems/smart_backend")
+const Positioner = require("../skeletons/Positioner")
+const BaseTree = require("../skeletons/BaseTree")
 
 // 
 // 
@@ -18,17 +20,10 @@ const SummaryTag = async ({ orgName, repoName })=>{
     // TODO: use this data for something
     const summaryData = await smartBackend.getRepoSummaryDataFor(orgName, repoName)
     console.debug(`summaryData is:`,summaryData)
-    return <div
-        style={`
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            text-align: left;
-        `}
-        >
-            <Title main="Org" secondary={orgName} />
-            <Title main="Repo" secondary={repoName} />
-    </div>
+    return <Positioner verticalAlignment="top" horizontalAlignment="left" positionSelf="relativeToParent" top="1rem" left="1rem">
+        <Title main="Org" secondary={orgName} />
+        <Title main="Repo" secondary={repoName} />
+    </Positioner>
 }
 
 const ChartCard = ({ children, ...props }) => {
@@ -64,6 +59,68 @@ const ChartList = async ({ orgName, repoName }) => {
         </ChartCard>
         
     </div>
+}
+
+const RepoGraph = async ({ repoName }) => {
+    const vulnData = await smartBackend.getVulnDataFor(repoName)
+    console.debug(`vulnData is:`,vulnData)
+    // FIXME: convert vulnData to match the exampleData form
+    const exampleData = {
+        name: "topLevel",
+        parent: "null",
+        blurb: 10,
+        type: "black",
+        level: "black",
+        children: [
+            {
+                name: "midLevel",
+                parent: "topLevel",
+                blurb: 5,
+                type: "black",
+                level: "none",
+                children: [
+                    {
+                        name: "lowA",
+                        parent: "midLevel",
+                        blurb: 5,
+                        type: "Type of bug",
+                        level: "red",
+                    },
+                    {
+                        name: "lowB",
+                        parent: "midLevel",
+                        blurb: 18,
+                        type: "Type of vulnerability",
+                        level: "red",
+                    },
+                ],
+            },
+            {
+                name: "midLevelB",
+                parent: "topLevel",
+                blurb: 10,
+                type: "grey",
+                level: "none",
+                children: [
+                    {
+                        name: "lowC",
+                        parent: "midLevelB",
+                        blurb: 5,
+                        type: "Type of vulnerability",
+                        level: "red",
+                    },
+                    {
+                        name: "lowD",
+                        parent: "midLevelB",
+                        blurb: 18,
+                        type: "Type of vulnerability",
+                        level: "red",
+                    },
+                ],
+            },
+        ],
+    }
+    return <BaseTree treeData={exampleData} />
 }
 
 const LeftSide = ({ children })=>{
@@ -112,10 +169,8 @@ module.exports = async ({ ...properties }) => {
         `}
         >
             <LeftSide>
-                Left Side
-                <br />
-                TODO: Put Anythony's Tree Component Here
                 <SummaryTag orgName={orgName} repoName={repoName} />
+                <RepoGraph repoName={repoName} />
             </LeftSide>
             
             <RightSide>
