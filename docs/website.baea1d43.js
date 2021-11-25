@@ -19319,6 +19319,24 @@ module.exports = function (_ref) {
 },{"../../static_files/d3_v3":"../static_files/d3_v3.js"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
 var _excluded = ["children"];
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -19449,7 +19467,7 @@ var ChartList = /*#__PURE__*/function () {
 
 var RepoGraph = /*#__PURE__*/function () {
   var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(_ref7) {
-    var repoName, vulnData, exampleData;
+    var repoName, vulnData, maxNumberOfVulns, modifiedVulnData, branches;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -19460,59 +19478,58 @@ var RepoGraph = /*#__PURE__*/function () {
 
           case 3:
             vulnData = _context3.sent;
-            console.debug("vulnData is:", vulnData); // FIXME: convert vulnData to match the exampleData form
+            maxNumberOfVulns = 72; // FIXME: showing all of them makes the graph unusable
 
-            exampleData = {
-              name: "topLevel",
-              parent: "null",
-              blurb: 10,
-              type: "black",
-              level: "black",
-              children: [{
-                name: "midLevel",
-                parent: "topLevel",
-                blurb: 5,
-                type: "black",
-                level: "none",
-                children: [{
-                  name: "lowA",
-                  parent: "midLevel",
-                  blurb: 5,
-                  type: "Type of bug",
-                  level: "red"
-                }, {
-                  name: "lowB",
-                  parent: "midLevel",
-                  blurb: 18,
-                  type: "Type of vulnerability",
-                  level: "red"
-                }]
-              }, {
-                name: "midLevelB",
-                parent: "topLevel",
-                blurb: 10,
-                type: "grey",
-                level: "none",
-                children: [{
-                  name: "lowC",
-                  parent: "midLevelB",
-                  blurb: 5,
-                  type: "Type of vulnerability",
-                  level: "red"
-                }, {
-                  name: "lowD",
-                  parent: "midLevelB",
-                  blurb: 18,
-                  type: "Type of vulnerability",
-                  level: "red"
-                }]
-              }]
+            modifiedVulnData = vulnData.map(function (each) {
+              return _objectSpread(_objectSpread({}, each), {}, {
+                name: each.cveId.replace(/cve-/i, ""),
+                level: 'red'
+              });
+            }).slice(0, maxNumberOfVulns);
+            branches = {
+              mild: modifiedVulnData.filter(function (each) {
+                return each.score <= 3.3333;
+              }).map(function (each) {
+                return _objectSpread(_objectSpread({}, each), {}, {
+                  parent: 'mild'
+                });
+              }),
+              notable: modifiedVulnData.filter(function (each) {
+                return each.score > 3.3333 && each.score < 6.6666;
+              }).map(function (each) {
+                return _objectSpread(_objectSpread({}, each), {}, {
+                  parent: 'notable'
+                });
+              }),
+              major: modifiedVulnData.filter(function (each) {
+                return each.score >= 6.6666;
+              }).map(function (each) {
+                return _objectSpread(_objectSpread({}, each), {}, {
+                  parent: 'major'
+                });
+              })
             };
             return _context3.abrupt("return", /*#__PURE__*/React.createElement(BaseTree, {
-              treeData: exampleData
+              treeData: {
+                name: "topLevel",
+                parent: "null",
+                level: "black",
+                children: Object.entries(branches).map(function (_ref9) {
+                  var _ref10 = _slicedToArray(_ref9, 2),
+                      name = _ref10[0],
+                      children = _ref10[1];
+
+                  return {
+                    parent: "topLevel",
+                    level: "none",
+                    name: name,
+                    children: children
+                  };
+                })
+              }
             }));
 
-          case 7:
+          case 8:
           case "end":
             return _context3.stop();
         }
@@ -19525,8 +19542,8 @@ var RepoGraph = /*#__PURE__*/function () {
   };
 }();
 
-var LeftSide = function LeftSide(_ref9) {
-  var children = _ref9.children;
+var LeftSideContainer = function LeftSideContainer(_ref11) {
+  var children = _ref11.children;
   return /*#__PURE__*/React.createElement("div", {
     name: "left-side",
     class: "centered",
@@ -19534,8 +19551,8 @@ var LeftSide = function LeftSide(_ref9) {
   }, children);
 };
 
-var RightSide = function RightSide(_ref10) {
-  var children = _ref10.children;
+var RightSideContainer = function RightSideContainer(_ref12) {
+  var children = _ref12.children;
   return /*#__PURE__*/React.createElement("div", {
     name: "right-side",
     class: "centered",
@@ -19549,25 +19566,25 @@ var RightSide = function RightSide(_ref10) {
 
 
 module.exports = /*#__PURE__*/function () {
-  var _ref12 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(_ref11) {
+  var _ref14 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(_ref13) {
     var properties, _router$pageInfo, repoName, orgName;
 
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            properties = Object.assign({}, _ref11);
+            properties = Object.assign({}, _ref13);
             _router$pageInfo = router.pageInfo, repoName = _router$pageInfo.repoName, orgName = _router$pageInfo.orgName;
             return _context4.abrupt("return", /*#__PURE__*/React.createElement("main", {
               name: "main-product-view",
               class: "centered row",
-              style: "\n            width: 100%;\n            height: 100%;\n        "
-            }, /*#__PURE__*/React.createElement(LeftSide, null, /*#__PURE__*/React.createElement(SummaryTag, {
+              style: "width: 100%; height: 100%;"
+            }, /*#__PURE__*/React.createElement(LeftSideContainer, null, /*#__PURE__*/React.createElement(SummaryTag, {
               orgName: orgName,
               repoName: repoName
             }), /*#__PURE__*/React.createElement(RepoGraph, {
               repoName: repoName
-            })), /*#__PURE__*/React.createElement(RightSide, null, /*#__PURE__*/React.createElement(ChartList, {
+            })), /*#__PURE__*/React.createElement(RightSideContainer, null, /*#__PURE__*/React.createElement(ChartList, {
               orgName: orgName,
               repoName: repoName
             }))));
@@ -19581,7 +19598,7 @@ module.exports = /*#__PURE__*/function () {
   }));
 
   return function (_x4) {
-    return _ref12.apply(this, arguments);
+    return _ref14.apply(this, arguments);
   };
 }();
 },{"@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","../systems/smart_backend":"../code/systems/smart_backend.js","../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../skeletons/BaseTree":"../code/skeletons/BaseTree.jsx"}],"../code/atoms/Campsite.jsx":[function(require,module,exports) {

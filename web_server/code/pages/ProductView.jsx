@@ -63,67 +63,30 @@ const ChartList = async ({ orgName, repoName }) => {
 
 const RepoGraph = async ({ repoName }) => {
     const vulnData = await smartBackend.getVulnDataFor(repoName)
-    console.debug(`vulnData is:`,vulnData)
-    // FIXME: convert vulnData to match the exampleData form
-    const exampleData = {
-        name: "topLevel",
-        parent: "null",
-        blurb: 10,
-        type: "black",
-        level: "black",
-        children: [
-            {
-                name: "midLevel",
-                parent: "topLevel",
-                blurb: 5,
-                type: "black",
-                level: "none",
-                children: [
-                    {
-                        name: "lowA",
-                        parent: "midLevel",
-                        blurb: 5,
-                        type: "Type of bug",
-                        level: "red",
-                    },
-                    {
-                        name: "lowB",
-                        parent: "midLevel",
-                        blurb: 18,
-                        type: "Type of vulnerability",
-                        level: "red",
-                    },
-                ],
-            },
-            {
-                name: "midLevelB",
-                parent: "topLevel",
-                blurb: 10,
-                type: "grey",
-                level: "none",
-                children: [
-                    {
-                        name: "lowC",
-                        parent: "midLevelB",
-                        blurb: 5,
-                        type: "Type of vulnerability",
-                        level: "red",
-                    },
-                    {
-                        name: "lowD",
-                        parent: "midLevelB",
-                        blurb: 18,
-                        type: "Type of vulnerability",
-                        level: "red",
-                    },
-                ],
-            },
-        ],
+    const maxNumberOfVulns = 72 // FIXME: showing all of them makes the graph unusable
+    const modifiedVulnData = vulnData.map(each=>({...each, name: each.cveId.replace(/cve-/i, ""), level: 'red'})).slice(0,maxNumberOfVulns)
+    
+    const branches = {
+        mild:    modifiedVulnData.filter(each=>each.score<=3.3333                     ).map(each=>({...each, parent:'mild'    })),
+        notable: modifiedVulnData.filter(each=>each.score >3.3333 && each.score<6.6666).map(each=>({...each, parent:'notable' })),
+        major:   modifiedVulnData.filter(each=>each.score>=6.6666                     ).map(each=>({...each, parent:'major'   })),
     }
-    return <BaseTree treeData={exampleData} />
+    return <BaseTree
+        treeData={{
+            name: "topLevel",
+            parent: "null",
+            level: "black",
+            children: Object.entries(branches).map(([name, children])=>({
+                parent: "topLevel",
+                level: "none",
+                name,
+                children,
+            })),
+        }}
+    />
 }
 
-const LeftSide = ({ children })=>{
+const LeftSideContainer = ({ children })=>{
     return <div
         name="left-side"
         class="centered"
@@ -137,7 +100,7 @@ const LeftSide = ({ children })=>{
     </div>
 }
 
-const RightSide = ({ children })=>{
+const RightSideContainer = ({ children })=>{
     return <div 
         name="right-side"
         class="centered"
@@ -159,22 +122,14 @@ const RightSide = ({ children })=>{
 // 
 module.exports = async ({ ...properties }) => {
     const { repoName, orgName } = router.pageInfo
-    
-    return <main
-        name="main-product-view"
-        class="centered row"
-        style={`
-            width: 100%;
-            height: 100%;
-        `}
-        >
-            <LeftSide>
+    return <main name="main-product-view" class="centered row" style={`width: 100%; height: 100%;`} >
+            <LeftSideContainer>
                 <SummaryTag orgName={orgName} repoName={repoName} />
                 <RepoGraph repoName={repoName} />
-            </LeftSide>
+            </LeftSideContainer>
             
-            <RightSide>
+            <RightSideContainer>
                 <ChartList orgName={orgName} repoName={repoName} />
-            </RightSide>
+            </RightSideContainer>
     </main>
 }
