@@ -1061,7 +1061,7 @@ window.React = {
             }
         }
         if (key instanceof Function) {
-            const output = isConstructor(key) ? new key({...properties, children}) : key({...properties, children: children})
+            const output = isConstructor(key) ? new key({...properties, children}) : key({...properties, children})
             // allow async components
             if (output instanceof Promise) {
                 const elementPromise = output
@@ -1079,7 +1079,8 @@ window.React = {
         if (properties instanceof Object) {
             for (const [key, value] of Object.entries(properties)) {
                 try {
-                    element.setAttribute(key, value)
+                    const kebabCase = key.replace(/(?<=[a-z])([A-Z])(?=[a-z])/g, (each)=>`-${each.toLowerCase()}`)
+                    element.setAttribute(kebabCase, value)
                 } catch (error) {
                 }
                 element[key] = value
@@ -9970,7 +9971,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64966" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49568" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
