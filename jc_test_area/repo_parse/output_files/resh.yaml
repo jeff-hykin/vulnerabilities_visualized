@@ -1,0 +1,362 @@
+86f15e7b4bc2ab1af9c247fc6cfd18b5008475df:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Jun 28 08:08:31 2020 -0500
+    Message: |
+        Update README.md
+
+7d9aea0b19cd35f13b9d332e8e4ead12ecf25d9f:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Jun 28 08:08:22 2020 -0500
+    Message: |
+        Update README.md
+
+053a929a1cd3e972090cf6c3767dd91db1f59ed7:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Feb 23 14:33:19 2019 -0600
+    Message: |
+        Update README.md
+
+289ec0e18806c1f0b9ef7c3969d2cc73feca69a6:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 16 10:56:04 2018 -0500
+    Message: |
+        Update README.md
+
+1c61cc47edae5be29b9fc54c22b1b08d5992863e:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 16 10:55:33 2018 -0500
+    Message: |
+        Update README.md
+
+9d718edcd1a9a9a580a1148bedcedea54b4c35db:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Mar 27 13:34:13 2018 -0500
+    Message: |
+        Delete installGraphicalSSH.rb
+
+fd15c66e9369e85975ac21cdddd811fbc848873c:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Mar 27 13:33:48 2018 -0500
+    Message: |
+        Delete .DS_Store
+
+cbaa85b1c2bd00eb4269f6e427f8160acf4af98e:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Feb 12 00:43:42 2018 -0600
+    Message: |
+        Update README.md
+
+60a1c073ee3d9f91971cb89b468f4aea6f7fdfb0:
+    Merge: b9f47c2 ca2d837
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Sun Jan 21 03:49:13 2018 -0600
+    Message: |
+        Merge branch 'master' of https://github.com/jeff-hykin/resh
+
+b9f47c247b75d19dd488439096030235cecb3862:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Sun Jan 21 03:49:06 2018 -0600
+    Message: |
+        improve the find command
+
+ca2d8376c37c2f1b267c8150f928ba39ebfd367b:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Tue Jan 2 02:36:30 2018 -0500
+    Message: |
+        keeping things up to date
+
+755666407ac4109c0a70027e3165f530667babdf:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Tue Jan 2 02:21:48 2018 -0500
+    Message: |
+        lots of bug fixes, 0.2 version of Sudo added        One large dependency for sudo, will break sudo for anyone without the dependency.
+
+87c078acf77b56defd3e3ba6930f6f3a22d111af:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Sat Dec 30 00:06:53 2017 -0500
+    Message: |
+        update
+
+ac60a430563616b0c45c71306c09e7d93d9c3a9a:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Fri Dec 29 00:27:19 2017 -0500
+    Message: |
+        add stability
+
+3a22b471bb59e1f20399ab78266745298062c4e9:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Thu Dec 7 10:44:49 2017 -0600
+    Message: |
+        Delete LICENSE
+
+b3bc1cc363f0878ad05800e399e96c1e5b3ef55c:
+    Merge: c3bf0fc c7e2512
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Wed Dec 6 19:43:28 2017 -0600
+    Message: |
+        Merge pull request #1 from jeff-hykin/add-license-1                Create LICENSE
+
+c7e25123767cdb7b27cc323b7ce2ab0b3b3d4ab3:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Wed Dec 6 19:42:51 2017 -0600
+    Message: |
+        Create LICENSE
+
+c3bf0fc429f66a0da9ffce6c78ecbd8fca4dfa57:
+    Merge: e735746 21f12d1
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Tue Nov 28 15:23:54 2017 -0600
+    Message: |
+        Merge branch 'master' of https://github.com/jeff-hykin/resh
+
+e735746437c34e88cfee7b74c68186eb03ef9508:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Tue Nov 28 15:22:55 2017 -0600
+    Message: |
+        fixed some errors involving horizontal scrolling
+
+007a38f287fc1fb9c8ed17cbbbf8432a0e315769:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Tue Nov 28 12:41:09 2017 -0600
+    Message: |
+        making ssh more robust
+
+e2f72dcb9c9cef8f959c65874a549dc6af0ebe88:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Tue Nov 28 11:50:54 2017 -0600
+    Message: |
+        fixed ssh and horizontal scroll bar
+
+e0f016a96fea27ccd15a0c618372d587f18615a1:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Tue Nov 28 10:25:14 2017 -0600
+    Message: |
+        added scroll bar
+
+8d1e4bb0a0c4d06616f6e021d3b87d9850fe85dd:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Mon Nov 27 23:49:13 2017 -0600
+    Message: |
+        updates
+
+d4373d8a32e0568e0d8113776b2289f10159fd38:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Mon Nov 27 23:49:01 2017 -0600
+    Message: |
+        updates
+
+f95cc6db0e8aebeae078012c12e7eaac2b833197:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Mon Nov 27 23:48:23 2017 -0600
+    Message: |
+        Touched up size of command
+
+73808947ceaa7ac4a381f7fd901cb3775a489852:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Mon Nov 27 23:40:04 2017 -0600
+    Message: |
+        added size of command
+
+81211b1c224bf3aeaa463841d98e12d0d7c9e1d2:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Mon Nov 27 23:25:45 2017 -0600
+    Message: |
+        temp fix for ssh
+
+21f12d1faebd8c2227137f976767eb3cf6e9be8e:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 11:54:04 2017 -0600
+    Message: |
+        Update README.md
+
+2ea7e207d4fa76dede5d995b46e270e86247f73b:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 11:50:00 2017 -0600
+    Message: |
+        Update README.md
+
+7801c29549785cbf4f7e029f9b20d385d21598d0:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 11:27:31 2017 -0600
+    Message: |
+        adding the app file
+
+08e6dc3a02c4f40c43457367b55ea2e17a425621:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 11:19:14 2017 -0600
+    Message: |
+        getting rid of duplicates
+
+9c19325de44eeea9befe95fb17020b20e2f34170:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 11:18:08 2017 -0600
+    Message: |
+        adding node dependencies
+
+0d54b0ea4c1ef0d43d277642ec40c6a96fc1b68e:
+    Author: JeffHykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 11:13:28 2017 -0600
+    Message: |
+        adding npm dependencies
+
+cb9d82c5fbd40ef20dcaaaf3da17687109db7dee:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 10:18:57 2017 -0600
+    Message: |
+        Delete node_modules.zip
+
+b07863616000e2ddb7a4a59e36d289bbd6aad693:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 10:15:57 2017 -0600
+    Message: |
+        Add files via upload
+
+1be4c724f595b748a6abda5719024da4bd01fb37:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 09:03:51 2017 -0600
+    Message: |
+        Delete package.json
+
+2a3930b01917b6fa4892737b783d90476bbe5327:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 09:03:43 2017 -0600
+    Message: |
+        Delete node_modules.zip
+
+847821c15bb2ead22f282c2a4ed5296b7e9c9d24:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 09:03:34 2017 -0600
+    Message: |
+        Delete main.sass
+
+2a8f3f333cb7a5852cefe1a05afc7345759f42dc:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 09:03:25 2017 -0600
+    Message: |
+        Delete main.js
+
+35fbd78f968ac7a0667a63c8dcf0e13e6969ad20:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 09:02:53 2017 -0600
+    Message: |
+        Delete main.css
+
+50e458cbf5481414398b3cdf5c5e09b2870560ce:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 09:01:20 2017 -0600
+    Message: |
+        Delete index.pug
+
+693dda69a2dd00bf787f6bbb93c65571999511f4:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 09:01:12 2017 -0600
+    Message: |
+        Delete index.js
+
+8af7e145eaa36cd9a79e3808dfc0186b042c7193:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 09:01:02 2017 -0600
+    Message: |
+        Delete index.html
+
+0edaf26a7e252d3370e95aba5306e2abb84932b2:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 08:51:02 2017 -0600
+    Message: |
+        Delete compile_and_run.py
+
+e51c2999a9f8f6ce111fb16fd080097b0cbb71c1:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sun Nov 26 08:50:52 2017 -0600
+    Message: |
+        Delete compile.py
+
+da2f1feb695544cfd1b5c61f92e849e06369b389:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Wed Nov 22 01:01:37 2017 -0600
+    Message: |
+        Update README.md
+
+874eedc211edd3f82b69164585b32e964707722f:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sat Oct 14 20:10:55 2017 -0500
+    Message: |
+        Update README.md
+
+a6deabe330fc7e89cd98261a1737aa60bbc7d489:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sat Oct 14 20:08:11 2017 -0500
+    Message: |
+        Update README.md
+
+77089108cbe5513e13629a93ecc535c6d8052a53:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sat Oct 14 20:06:37 2017 -0500
+    Message: |
+        Update README.md
+
+53eea026760e5ba9f53e55f4fb581bb561f376fe:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sat Oct 14 20:05:10 2017 -0500
+    Message: |
+        Update README.md
+
+e1d1f6e0b4a86ba758130f8bc946102f6f47811c:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Sat Oct 14 20:04:51 2017 -0500
+    Message: |
+        Update README.md
+
+0b3604ecbde85db3f11123bfbba217e8080b1249:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 5 00:38:01 2017 -0500
+    Message: |
+        added video
+
+fedbb14314788dc0230c56c315bfdc7297dfd2db:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 31 21:45:21 2017 -0500
+    Message: |
+        added .gif
+
+667731fb4701572f229264d2339d1c967b531a91:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Mon Aug 28 02:35:33 2017 -0500
+    Message: |
+        Update README.md
+
+15f8bba314a045763adc77bffd4f7b13228807a9:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Mon Aug 28 02:34:53 2017 -0500
+    Message: |
+        Update README.md
+
+47c1f00c76914d26b7f7a122da913438607a08a1:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Mon Aug 28 02:33:46 2017 -0500
+    Message: |
+        Update README.md
+
+f9faca5bf238705a2f6e89e14d989de083c69e82:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Mon Aug 28 02:21:52 2017 -0500
+    Message: |
+        node modules                the actual node modules folder couldn't be uploaded, so the zip will have to be the substitute
+
+39942f1b76f63757884f6be7a6fea3af9ea5032d:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Mon Aug 28 02:19:19 2017 -0500
+    Message: |
+        Add files via upload
+
+de7484bc51671e6cf084b98c69f6fb692fd7c15e:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Mon Aug 28 02:18:49 2017 -0500
+    Message: |
+        Add files via upload
+
+e1f614457caec3a7d68a59ba156b971d40f8664a:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Mon Aug 28 02:15:04 2017 -0500
+    Message: |
+        Initial commit

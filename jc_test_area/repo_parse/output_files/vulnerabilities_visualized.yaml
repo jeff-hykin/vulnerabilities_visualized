@@ -1,0 +1,1800 @@
+cb0011ab87368ea6ee9e1d639901792bd08a4326:
+    Author: Quivun <Quivun@users.noreply.github.com>
+    Date:   Fri Oct 22 12:08:13 2021 -0500
+    Message: |
+        repoCommits                TODO : Executable/File search -> tool run -> output to outputfiles
+
+916fb5865e3a220caed269b395285fe090442bf3:
+    Author: Anthony <yihonganthony@gmail.com>
+    Date:   Thu Oct 21 00:02:23 2021 -0500
+    Message: |
+        Made function param optional
+
+937dd2a98a2ab6d46f42c45fced863afda99e26e:
+    Author: Anthony <yihonganthony@gmail.com>
+    Date:   Wed Oct 20 23:51:58 2021 -0500
+    Message: |
+        Added reusable tree component with data structure
+
+545e4a43711628820c16ce4606cccbbde9e22dd3:
+    Merge: 9137e0e 648e9ad
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Oct 15 11:54:14 2021 -0500
+    Message: |
+        Merge branch 'master' of https://github.com/jeff-hykin/vulnerabilities_visualized
+
+9137e0edb031c7cfb16a3910c72de24e6ff8f947:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Oct 15 11:52:57 2021 -0500
+    Message: |
+        optimize scrolling
+
+648e9ad2741b8600a22f50b4cbdce19d3aa3ca6d:
+    Merge: 8ce6c25 b9e4307
+    Author: c-mai <51352051+c-mai@users.noreply.github.com>
+    Date:   Wed Oct 13 12:39:46 2021 -0500
+    Message: |
+        Merge branch 'master' of https://github.com/jeff-hykin/vulerabilities_visualized
+
+8ce6c25697a19a26a6571b9b1e2105946a19944f:
+    Author: c-mai <51352051+c-mai@users.noreply.github.com>
+    Date:   Wed Oct 13 12:39:44 2021 -0500
+    Message: |
+        added an analysis notebook
+
+c896db87e65281a1a792219ff921cc948ac6a4ee:
+    Merge: 244198e b9e4307
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Oct 11 11:34:33 2021 -0500
+    Message: |
+        Merge branch 'master' of https://github.com/jeff-hykin/vulnerabilities_visualized
+
+b9e4307f9b10ff855171291ccb4971a15f89649f:
+    Merge: d773e6b 47ab339
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Oct 11 11:03:26 2021 -0500
+    Message: |
+        Merge branch 'master' of https://github.com/jeff-hykin/vulerabilities_visualized into master
+
+d773e6bc71a13b3cc2c90fc90f6719de83d8c4f4:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Oct 11 11:03:26 2021 -0500
+    Message: |
+        wip internal scrolling
+
+c19641ee995c9bb8df4e5bfd074bf125c21202b5:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Oct 11 10:10:32 2021 -0500
+    Message: |
+        info graphic scrolling partly working
+
+0aecced6377a93808a4676bbb9c110775ca134ba:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Oct 11 09:11:29 2021 -0500
+    Message: |
+        pan and zoom nodes working
+
+47ab339b60c02e1fd158d537845cca8a104e2f03:
+    Merge: a4fb660 351815c
+    Author: c-mai <51352051+c-mai@users.noreply.github.com>
+    Date:   Sun Oct 10 23:55:04 2021 -0500
+    Message: |
+        Merge branch 'master' of https://github.com/jeff-hykin/vulerabilities_visualized
+
+a4fb660c13922af20770ee23d4d77be72819f6d6:
+    Author: c-mai <51352051+c-mai@users.noreply.github.com>
+    Date:   Sun Oct 10 23:53:44 2021 -0500
+    Message: |
+        added product and vendor name to csv
+
+244198e28e1961a3e4956687cd66e353e60fd107:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Oct 8 12:12:58 2021 -0500
+    Message: |
+        improve scrolling
+
+deadb4883505680865bc8307dc7855722c3d2ddc:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Oct 8 11:56:58 2021 -0500
+    Message: |
+        scrolling works
+
+351815c0ac64366d9517836e7de2809368ee3446:
+    Merge: f46ae20 0717393
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Oct 7 13:05:05 2021 -0500
+    Message: |
+        Merge branch 'master' of https://github.com/jeff-hykin/vulnerabilities_visualized
+
+f46ae204e287830e71a3377446b2699f7c960b60:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Oct 7 13:04:15 2021 -0500
+    Message: |
+        add the onScroll tool
+
+071739374c72cea5814fadaf3e8914ddc8ef4430:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Wed Oct 6 18:33:51 2021 -0500
+    Message: |
+        add FrequencyChart example
+
+9590d3f6f803f6e4c50e28dc924796d0fa61a292:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Oct 1 11:19:05 2021 -0500
+    Message: |
+        improve grid example
+
+a33f406f7b4db9d7933a2eac800283a3de15df48:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Oct 1 11:01:08 2021 -0500
+    Message: |
+        basic hex graph layout working
+
+ca3ac3e57b721319179727003cad0965d9b2e3e7:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 30 20:48:17 2021 -0500
+    Message: |
+        shadow
+
+d83dd43c27a7eac681aa95dd22fb84b1e0de19f7:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 30 20:38:45 2021 -0500
+    Message: |
+        -
+
+f99d4e8dc44deb47ea8607ce0990de1cc559ea83:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 30 20:35:49 2021 -0500
+    Message: |
+        clean up the website code
+
+f29dde445618dc99ab105f7fe3920ef6bd604986:
+    Author: c-mai <51352051+c-mai@users.noreply.github.com>
+    Date:   Wed Sep 29 18:53:45 2021 -0500
+    Message: |
+        scraped the cvedetails
+
+9c0b2af3148dd33964c2e9ccfd0c0b250aad21cc:
+    Author: c-mai <51352051+c-mai@users.noreply.github.com>
+    Date:   Mon Sep 27 12:40:10 2021 -0500
+    Message: |
+        created a jupyter notebook
+
+165fac59e1e20142aa270d4e772e302f12abc3dd:
+    Author: c-mai <51352051+c-mai@users.noreply.github.com>
+    Date:   Mon Sep 27 12:19:04 2021 -0500
+    Message: |
+        first scrape for cve details
+
+762549328d2063df588a2b0e39f529dd134e1563:
+    Merge: 515beea f22d815
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 11:07:07 2021 -0500
+    Message: |
+        Merge branch pnpm of https://github.com/jeff-hykin/projectr into master
+
+f22d815c43e14d1094df8594bd0b277ce41ba1e6:
+    Merge: 1f1f578 0d7a8c1
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:58:31 2021 -0500
+    Message: |
+        -
+
+0d7a8c1be2eed332a187553c5e0866b3be005ec6:
+    Merge: dc489d5 846049b
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:57:25 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+846049b8017af4aa367a271e83887f3406f4bed7:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:57:20 2021 -0500
+    Message: |
+        -
+
+dc489d5e83cd810dab6a81bc689d5a87770a832a:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:57:05 2021 -0500
+    Message: |
+        update relatively_link
+
+1f1f578a20b0e31607e6c605a3268fb1fac7907c:
+    Merge: 3920a4e b2488c4
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:54:04 2021 -0500
+    Message: |
+        Merge branch 'node' into pnpm
+
+b2488c4a14e76244832f6d99479c2934f15f8f7a:
+    Merge: 9a33079 78d38fb
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:53:53 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+78d38fbcac5d1e1108daef60089f0c0e98778f3d:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:53:25 2021 -0500
+    Message: |
+        update relatively_link
+
+6f77f9702cb271e2f941164dbb89757d33617fed:
+    Merge: 483fa17 98036e3
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:52:50 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+98036e3622c243c2595c07a9a9f9312d5a87952d:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:52:04 2021 -0500
+    Message: |
+        -
+
+b6fd3313beda4f80b7051211cb790a4f34da590a:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:50:43 2021 -0500
+    Message: |
+        -
+
+09731d5cc6a277de81591b7dcad909faaea9ccdf:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 10:48:53 2021 -0500
+    Message: |
+        improve docs and setup
+
+483fa17ba9f82dd21e63b2c766c9230383ece5f0:
+    Merge: 2ee351f aff4e7c
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 18 08:35:24 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+aff4e7cb8681b241a607b261905c833dc62f3651:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 18:27:02 2021 -0500
+    Message: |
+        fix realpath on macos
+
+b3df60840246449842650e810665d7083011c359:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 16:25:20 2021 -0500
+    Message: |
+        fix minor glitch
+
+305c0f843c6b33e4ed201a12574ae8e59dd2bf29:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 16:20:24 2021 -0500
+    Message: |
+        trying color round 3
+
+a2bed372486fd8b7ea3d4b7bdaadef3a4d847e4e:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 15:14:29 2021 -0500
+    Message: |
+        trying color round 2
+
+2cb352f4636553a603f36e31011e9c76fbd3887d:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 15:07:59 2021 -0500
+    Message: |
+        -
+
+515beea3f51e78776b9214b8f8620effd9c0f892:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 15:06:04 2021 -0500
+    Message: |
+        -
+
+c97ae2ed86c251da7ced19f54c78325e8f621b00:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 15:05:53 2021 -0500
+    Message: |
+        -
+
+b1ffc181f1ab5ec118578930d8dc55e5118aa576:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 15:02:46 2021 -0500
+    Message: |
+        add color
+
+d7cc76a206f86b266c10e4d8729bb0b66814b328:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 14:42:14 2021 -0500
+    Message: |
+        -
+
+d1774534590c72672f8081c87c5b67c3eacf179b:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 14:33:36 2021 -0500
+    Message: |
+        -
+
+14dfb4c1f2cc7db502814e244631781f2038aab8:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 17 09:08:22 2021 -0500
+    Message: |
+        add curl
+
+3920a4e11aa02d9d7fdd301188dd87808140cf7d:
+    Merge: a56ff54 9a33079
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Wed Sep 15 07:33:27 2021 -0500
+    Message: |
+        Merge branch 'node' into pnpm
+
+9a3307990ac931daf1aefeba59e9f2115adc282c:
+    Merge: 496ba89 2ee351f
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Wed Sep 15 07:33:11 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+2ee351f6456ff0ae6d1d5e85b16cb4628ffefdfd:
+    Merge: d10c341 e51878a
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 16:56:10 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+e51878ab687a926080f12dc1879f527a51257052:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 16:55:59 2021 -0500
+    Message: |
+        -
+
+496ba894373c82ab9e217b8d8c82240e1b20de20:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 15:16:08 2021 -0500
+    Message: |
+        -
+
+a56ff54c1e52f85f2c232b74ee52bdf1e8aa3f10:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 15:14:07 2021 -0500
+    Message: |
+        -
+
+0b6a33fef325c83900cccb5de2183b41c6935390:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 15:13:53 2021 -0500
+    Message: |
+        -
+
+d10c3411e365a9ad3f6807f424de91504aca3429:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 15:12:59 2021 -0500
+    Message: |
+        -
+
+edf262f6502c1fdadad1317247c9a920f3e61071:
+    Merge: 7814b2b 7e22acc
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 15:10:03 2021 -0500
+    Message: |
+        Merge branch 'node' into pnpm
+
+7e22acc09ee02c50a007cce935c5bec28bab46e5:
+    Merge: 6d522c4 33a7b78
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 15:09:54 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+33a7b786f3c3b7ea189bd63731af571e318b2883:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 15:06:01 2021 -0500
+    Message: |
+        create connections
+
+263e1025ffc317fef3edd9b07a5577a70037694a:
+    Merge: 6df134b 41a1992
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 15:03:34 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+41a1992a91d67d6bca19a168a12b5ffc76bb1a3c:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 15:03:16 2021 -0500
+    Message: |
+        -
+
+7814b2ba073fc192e30b31fdcf3280d24cea21c5:
+    Merge: fe93655 6d522c4
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 14:38:11 2021 -0500
+    Message: |
+        Merge branch 'node' into pnpm
+
+6d522c4378375b122193598e917fdf052a7d2478:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 14:38:04 2021 -0500
+    Message: |
+        -
+
+c665d196fac85c75066c0ae8901862b3e46ce609:
+    Merge: 70e6b9a 6df134b
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 14:37:39 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+6df134be9dbc97dc7164ca5f55b9b63c7298bf77:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 14:37:10 2021 -0500
+    Message: |
+        -
+
+fe9365538153a8b57b685ed535f0a37cd9d17708:
+    Merge: f38bd91 d15f77c
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 14:19:42 2021 -0500
+    Message: |
+        Merge branch 'pnpm' of https://github.com/jeff-hykin/fornix into pnpm
+
+f38bd9144259b65ca0259872d34384a674772509:
+    Merge: 1fd7836 70e6b9a
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 14:19:39 2021 -0500
+    Message: |
+        Merge branch 'node' into pnpm
+
+70e6b9a7a7f4324918b72282e57ed66c770c8f40:
+    Merge: 3b40a1c ee6fb83
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 14:19:27 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+0614d351cb4c878bb2469559873990700347aa8c:
+    Merge: a149d97 5dbfad8
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 14:18:29 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+a149d974631d22a6438213ab6a9dff4b78374033:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 14:18:18 2021 -0500
+    Message: |
+        -
+
+5dbfad8d9ec8055e8d811a8e6ff1d49b007b1c44:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 14:17:25 2021 -0500
+    Message: |
+        fix links to work with macos ln -s
+
+ee6fb830d095f5fa38ac4806a8ea9bb47d3c621c:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 13:49:43 2021 -0500
+    Message: |
+        fix git alternate object
+
+0e4b1d3b718f463d7c6349a4746cfd70805c6aca:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 13:16:33 2021 -0500
+    Message: |
+        improve python clean and purge
+
+d15f77c95cdea922795b16d9322d5f75d3f2c5df:
+    Merge: 1fd7836 3b40a1c
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 13:09:05 2021 -0500
+    Message: |
+        Merge branch 'node' into pnpm
+
+3b40a1c24cfd7351f9f18b68fb67b48b5f2ab494:
+    Merge: be29ed1 9ab6da7
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 13:08:28 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+9ab6da72e1b03ccc9eaf24fc33274a4a4c0c5e4c:
+    Merge: 80339b6 8e97eed
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 12:57:01 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+8e97eed8e39edca366508be1d0cbc4b354c33e1b:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Sep 14 12:56:21 2021 -0500
+    Message: |
+        fix git alternate object
+
+812839d4a923a9c8d1b38da99a814cc3dc653ef6:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 21:23:59 2021 -0500
+    Message: |
+        -
+
+d84bfae22bc984d9642843003286c703657bed7b:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 21:16:17 2021 -0500
+    Message: |
+        -
+
+86f8fc118f6a29558728e4bc3c5fb1ba9738697e:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 21:15:25 2021 -0500
+    Message: |
+        add d3 demo
+
+489067aaa08a8492b383940eb97048099f82683d:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 20:26:31 2021 -0500
+    Message: |
+        update install commit
+
+2e167599040ddd1148aa7fa18022acfb4d019e3c:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 20:22:34 2021 -0500
+    Message: |
+        add simple web server
+
+eb9b83d5a5849b02a476976025020c0f7cc56cc3:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 18:47:48 2021 -0500
+    Message: |
+        improve commands command
+
+be29ed1fe96a62d29b49d6436871eead287f4790:
+    Merge: ba5d044 80339b6
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 18:45:56 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+80339b6893ff44983b2450d3d97d23d71886e81c:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 18:44:50 2021 -0500
+    Message: |
+        -
+
+3bfef0b069f7f6301c0166c0198be14c9ed8b691:
+    Merge: ee823c3 3ec6b8f
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 17:29:09 2021 -0500
+    Message: |
+        Merge branch 'quik_github_pages' of https://github.com/jeff-hykin/projectr into master
+
+ee823c3c30ab5ec76d77a8cbbe6c9da89e45181f:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 15:37:44 2021 -0500
+    Message: |
+        add show date command
+
+5a996daec441a007b86c7933fce19ae917a470d1:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 15:35:54 2021 -0500
+    Message: |
+        add sonar scanner
+
+57b09d669492c5d6cb12e475aa08be806408b1e6:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 15:32:41 2021 -0500
+    Message: |
+        add structure
+
+0a80ee0006452b949570a21ed89800faae0a567f:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 15:30:51 2021 -0500
+    Message: |
+        -
+
+ce348fed630bb327b2c800caeed1f996e591579b:
+    Merge: fd760e0 c0d3da1
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 13 15:26:48 2021 -0500
+    Message: |
+        Merge branch 'python' of https://github.com/jeff-hykin/projectr into master
+
+fd760e004e022079461f3c43b07efdc63811aee8:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 12 16:49:44 2021 -0500
+    Message: |
+        -
+
+3d573eb1126cca0214d693092ddb55f2e70fdf9f:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 12 16:47:40 2021 -0500
+    Message: |
+        setup wording
+
+3ec6b8f09ee27958565bbf19b883b97f554a4cd3:
+    Merge: 7e822dd 1fd7836
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 12 16:28:32 2021 -0500
+    Message: |
+        Merge branch 'pnpm' into quik-github-pages
+
+1fd78368eeb8be178f3d3e370b69674f36fc4c07:
+    Merge: bd0811c ba5d044
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 12 16:26:48 2021 -0500
+    Message: |
+        Merge branch 'node' into pnpm
+
+ba5d044c000f38192baaf5ffbd5b61ada3a9bec4:
+    Merge: 7d3fa11 c0d3da1
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 12 16:26:37 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+c0d3da15be2e038b799ffabf576b14e82a738485:
+    Merge: ebc5f3f 123d002
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 12 16:26:19 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+123d002d853814e591396cf12b59bbdc94a4bbd0:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 12 16:10:52 2021 -0500
+    Message: |
+        add installer_helper
+
+82a103f52af82f036751c30b187a6a231c013fa0:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 11 19:10:00 2021 -0500
+    Message: |
+        -
+
+b7f28cbbb4441eba690081d4e9750538fd9d23b1:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 11 15:30:10 2021 -0500
+    Message: |
+        fix not having systemd
+
+19d5f19b0180c8f41a0e79eb5358de659cfbd3ee:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Sep 11 15:22:09 2021 -0500
+    Message: |
+        -
+
+bd0811c9a967a2d978003e3666eed43bc563e8f3:
+    Merge: ba6f160 3f55b06
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 10 20:16:01 2021 -0500
+    Message: |
+        Merge branch 'pnpm' of https://github.com/jeff-hykin/fornix into pnpm
+
+ba6f1605acfe43aa58b5a842781500c69232f6dd:
+    Merge: 931405b 7d3fa11
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 10 20:15:57 2021 -0500
+    Message: |
+        Merge branch 'node' into pnpm
+
+7d3fa116428d9d375ae1e976239f0954c8f96871:
+    Merge: 80401cb 94248e4
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 10 20:15:48 2021 -0500
+    Message: |
+        Merge branch 'node' of https://github.com/jeff-hykin/fornix into node
+
+80401cb7282ff23225215931fdbc8b48e2f68b00:
+    Merge: eba283f ebc5f3f
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 10 20:15:43 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+ebc5f3fc61915ef8c149101a455707b664fffcea:
+    Merge: b264b71 5ec858a
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 10 20:15:19 2021 -0500
+    Message: |
+        Merge branch 'python' of https://github.com/jeff-hykin/fornix into python
+
+b264b71b456577df6195fd72ebb0f26b811d2391:
+    Merge: 56318b1 a3f7146
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 10 20:15:13 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+3f55b06bae98f5a60e05b922d522a340ea82979b:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 10 12:03:19 2021 -0500
+    Message: |
+        link into global pnpm store
+
+a3f7146125c3e5f41f99bba4a9d00af36ae9a9d3:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 9 13:31:36 2021 -0500
+    Message: |
+        -
+
+f1374110694f07da09852586631570f8aa12caef:
+    Merge: 931405b 94248e4
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 9 13:30:23 2021 -0500
+    Message: |
+        -
+
+94248e4b0094433aa70617fe5aa1b599c1a7d438:
+    Merge: 9350a5e 5ec858a
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 9 13:29:34 2021 -0500
+    Message: |
+        -
+
+5ec858a8152a0293761e67c0088f4f77389687fa:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 9 13:27:39 2021 -0500
+    Message: |
+        upgrade git hooks
+
+a49a011006736a65bca2024acd684972f6c1336a:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 9 13:23:07 2021 -0500
+    Message: |
+        upgrade to relative_link__file_to__relative_link__file_to__
+
+2628faaff17c2f3bc561e2e81b1d913bba12967f:
+    Merge: 56318b1 01407d5
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 9 13:22:59 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+01407d5b8d674afe89e9b53328915c2e947c38ff:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 9 13:18:35 2021 -0500
+    Message: |
+        upgrade to relative_link__file_to__
+
+9350a5ecacf3be7d61115abf06d93a15b2050ad9:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 9 13:11:04 2021 -0500
+    Message: |
+        make linking function generic
+
+7e822dd89c1138d80ab6f239e14b6c92336a9331:
+    Merge: 931405b d54d489
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 6 14:58:11 2021 -0500
+    Message: |
+        Merge branch 'master' of https://github.com/jeff-hykin/viz_site into quik-github-pages
+
+d54d489a2df77574da6fa2434a12ece700ce73f9:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 6 14:52:23 2021 -0500
+    Message: |
+        setup server
+
+9234935f3e3ea2148fda053da45de3af1270d832:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 6 12:00:00 2021 -0500
+    Message: |
+        init quik-server
+
+931405bf2cc31cbc05a532955dba07d9aca30d39:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 6 11:56:23 2021 -0500
+    Message: |
+        init
+
+fb089b443f373e706a5ad3bbb18bdf9b74c2d703:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 6 11:46:16 2021 -0500
+    Message: |
+        add index.html
+
+b3a0cccdcc6404d11cf6e6dcdc14b65e81b73a32:
+    Merge: f145ecf eba283f
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Mon Sep 6 11:43:30 2021 -0500
+    Message: |
+        Merge remote-tracking branch '__mixin__/node'
+
+f145ecfd333009968aa9b863d7829167dced4ede:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 5 18:20:45 2021 -0500
+    Message: |
+        fix a shebang
+
+eba283f8c6f62017accc7224fbf60b9d03394d3f:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 5 12:04:04 2021 -0500
+    Message: |
+        fix naming
+
+83f43c963b46c1448b67061cbf2ff483942319af:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 5 12:03:29 2021 -0500
+    Message: |
+        add resume
+
+954f1d6e4ad517e452b00235b45a0d66431095d4:
+    Merge: fc5ef97 56318b1
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 5 10:41:48 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+56318b15ccf514230ee1d06b9a34a2173643234a:
+    Merge: ae2eac8 da270c8
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 5 10:41:39 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+da270c86966b55260a4fe80b752a37a0318bb5e2:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 5 10:41:16 2021 -0500
+    Message: |
+        fix call to ssl fix
+
+fc5ef973d61d571ed292426e454c0b78097d8b15:
+    Merge: cdfe062 ae2eac8
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 5 10:19:27 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+ae2eac8437438f2e6814726706aaf6632b4bb971:
+    Merge: e5550ef 186bdbe
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sun Sep 5 10:19:15 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+186bdbe8ebeca335b8777891d8aa7d1ebe659f9b:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Sep 3 18:31:23 2021 -0500
+    Message: |
+        improve inject_into_path (add PATH wrapper)
+
+759a9427070ab51001ba8bbd202282c78e09bfdb:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 2 12:34:29 2021 -0500
+    Message: |
+        -
+
+cdfe062470657df1a03d96e02437ca1812b4b0c0:
+    Merge: 3efdc13 e5550ef
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 2 12:11:35 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+e5550ef9b8fae52baa0db9e5e2555992442a8346:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 2 12:11:19 2021 -0500
+    Message: |
+        -
+
+3efdc139e133b910a0d314af65d6ada5518cf95f:
+    Merge: b7e3995 4d784ab
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 2 12:10:55 2021 -0500
+    Message: |
+        upgrade to fornix
+
+4d784ab3e84253bb539b081cdbc613fd0dc1e566:
+    Merge: eb46ffd d3592ea
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 2 12:07:33 2021 -0500
+    Message: |
+        upgrade python to fornix
+
+d3592ea9bd4a6d095a6dae69b9cb61509e7b07fb:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 2 12:03:25 2021 -0500
+    Message: |
+        finish fornix switch
+
+632ad02fbc6154429e87fed3007b542743752a54:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 2 11:58:35 2021 -0500
+    Message: |
+        switch to fornix pt 2
+
+bd49dd36d7168f2381e0c2ad9bf9bfa8151433dc:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Sep 2 07:43:31 2021 -0500
+    Message: |
+        change projectr to fornix internally
+
+eb46ffd187cc4acc3a83cb2ee473b0288a734944:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 19:28:01 2021 -0500
+    Message: |
+        fix semicolons
+
+3f8b16681ef0cd95bc94f3954b4cd3ba506c5451:
+    Merge: a2e4cd4 a8bbbda
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 16:32:54 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+a8bbbda1f193acb054ada3ff0d88fbb0b315555c:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 16:32:45 2021 -0500
+    Message: |
+        -
+
+a2e4cd44401a03e44af95958ba33a8528e14bf18:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 15:05:53 2021 -0500
+    Message: |
+        -
+
+b7e39959b1725c5a8cf0c4c67e5dbdbe99846952:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 14:59:12 2021 -0500
+    Message: |
+        -
+
+a25d7479666488358d48416415ee40bbc8f1af41:
+    Merge: 41556d4 90e14ab
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 13:26:16 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+90e14ab7edafd0e5a8eacf35fbd2afc70fb94ed1:
+    Merge: 50a9c2a 817751b
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 13:25:59 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+817751ba42a204f2ad8b05acf9dda98630373f26:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 13:24:55 2021 -0500
+    Message: |
+        add autocompletion for project commands
+
+41556d4d103cfcd6e93cbdb73131afe4a25a19a3:
+    Merge: fdaa55e 50a9c2a
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 12:22:15 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+50a9c2a78b8a1e070dcd97e0cf55d4fd1c249fa1:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 12:10:11 2021 -0500
+    Message: |
+        -
+
+79a7e8e95961cb44b87b998e66e99af2255f54e6:
+    Merge: 5f5ec8d db50b1b
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 12:10:06 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+db50b1bdf7edd2ca620b9562ad4c5fa444fb16cb:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 11:56:45 2021 -0500
+    Message: |
+        reoganization pt5
+
+73d561b2b5f14e58e6fa2185f85093098388ebb3:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 11:52:09 2021 -0500
+    Message: |
+        reoganization pt4
+
+86da0be08589e889c56698cbe32391c3754485ad:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 11:24:05 2021 -0500
+    Message: |
+        reoganization pt3
+
+bc90b489838d9fc2a7d21ead78b015966be033c1:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 10:52:08 2021 -0500
+    Message: |
+        reorganize pt2
+
+d471fbff165c7b81c31105f1525437dcba35a0be:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 28 10:14:27 2021 -0500
+    Message: |
+        reoganization pt1
+
+fdaa55ef1ae601fef853b15dcf649373e829a526:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:57:48 2021 -0500
+    Message: |
+        -
+
+2e58fd71ee5d727a817245a323eefbb0640e5094:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:53:49 2021 -0500
+    Message: |
+        -
+
+e470eb8a61ad2ec0408e2900ad8ced18275d17e6:
+    Merge: c530e8b 5f5ec8d
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:53:27 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+5f5ec8de6ffd4b75abf7ad217e80c93694768086:
+    Merge: 51620c7 2ae204f
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:50:40 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+2ae204f7a11723e17fa8df443e4121b5683eff15:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:48:27 2021 -0500
+    Message: |
+        -
+
+81a1922a79482b8c38dc8916cd2bd910f4b3c72a:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:48:12 2021 -0500
+    Message: |
+        -
+
+87ef19d4c9bb913cf0ab2b5d4ef164c8aa4b6748:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:48:05 2021 -0500
+    Message: |
+        -
+
+5141de938457ceed0bac0620fdd4eed25051d90a:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:44:22 2021 -0500
+    Message: |
+        improve setup instructions
+
+e38d3470f7f67b428d0369b141e50dea09af8fda:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:40:50 2021 -0500
+    Message: |
+        -
+
+e82a4dd0c203d327693285947e1c5c30342723c3:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:09:23 2021 -0500
+    Message: |
+        -
+
+47eb5f687481ad6e11cab2c96f652a048bb34c0e:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 17:07:38 2021 -0500
+    Message: |
+        -
+
+2d81e22cbde8c44527912c42965ca54895dda06d:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 16:37:43 2021 -0500
+    Message: |
+        -
+
+a04d195861b63a8e3e5285c664b797b46c0bfb7f:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 16:34:12 2021 -0500
+    Message: |
+        -
+
+a0ac130df4155aa4220796361f0481ac1b760d2c:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 16:33:24 2021 -0500
+    Message: |
+        -
+
+aec975a5f71d905acb894e244e7d572aad2e62ee:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 16:28:04 2021 -0500
+    Message: |
+        -
+
+4ea7c2b7dfab265716a47bf411246ff50809f855:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 16:27:07 2021 -0500
+    Message: |
+        -
+
+8f9cfdff0e55091d275b8e6375fb0cc78c6bc25c:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 16:25:21 2021 -0500
+    Message: |
+        -
+
+6b8a5dd290b4ccec3153cf1a10c6860801fee5b5:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 16:20:26 2021 -0500
+    Message: |
+        -
+
+b1d0cf20547fa93634ee695d651ad5b81fe86be6:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 16:16:27 2021 -0500
+    Message: |
+        -
+
+283f5e4a6d63d14874954f21f393727467a0b7a3:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 16:16:01 2021 -0500
+    Message: |
+        -
+
+c530e8bd0a444d64857f4d1e38c1f49ea630ad4c:
+    Merge: f48ed53 51620c7
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 15:04:25 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+51620c76a8943c6aa655f876b03882e85fcf497a:
+    Merge: a70e1f7 0086871
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 15:04:12 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+0086871dfa38a186531ba169e92eb43de7a7d385:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 15:03:41 2021 -0500
+    Message: |
+        fix bug
+
+f48ed5344174ebbca8cd07e57bde04c869590321:
+    Merge: 9600ecb a70e1f7
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 14:49:04 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+a70e1f75b6176b9512ba63c8954cb17c9250b88b:
+    Merge: a3de1f1 942d137
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 14:48:48 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+942d137686e63fefc1ed24d6026ac176dec11559:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 27 14:48:39 2021 -0500
+    Message: |
+        fix manual start
+
+9600ecb587ea5a7bca2d38bf42084da3d5c5f499:
+    Merge: fe2dc71 a3de1f1
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 13:37:51 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+a3de1f18e4e41f113dbcfd82e541e1fb36d54cfb:
+    Merge: d10624d 9d09a61
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 13:37:32 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+9d09a61d3df26de35edbd7f01b87ff7e418a1561:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 13:28:17 2021 -0500
+    Message: |
+        -
+
+d10624df1e8fa9fe865a1ed84e5ffb0875a7b77e:
+    Merge: d1e1d69 879740e
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 11:52:22 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+879740e3c2b5782a9389c70fe09e15a44b8cebce:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 11:52:15 2021 -0500
+    Message: |
+        -
+
+d1e1d69785982b6a756908fad5548faf8bdb1237:
+    Merge: e85c0c7 b990ef9
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 11:50:49 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+b990ef97502ed995d01d900a4d682490cb00912f:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 11:50:42 2021 -0500
+    Message: |
+        -
+
+fe2dc71ba6007c9d401740ed1d50f812cfda305e:
+    Merge: c6d45cb e85c0c7
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 10:59:02 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+e85c0c7523c2aa601afbd417df1feda2d0b1eefe:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 10:58:32 2021 -0500
+    Message: |
+        rename check pip modules
+
+4c8dc3fe98bffce5660c05aa90a78c592aa34863:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 10:57:28 2021 -0500
+    Message: |
+        cleanup python initilize
+
+90a538ea42ee02db087c15fbbbca6cd6d84922fd:
+    Merge: 3ee0e04 7696ec8
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 10:52:34 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+7696ec844a2708e79627d2426fbd58e5a58226f7:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 10:52:25 2021 -0500
+    Message: |
+        implement link_extension_file__to__ everywhere
+
+82d243dec3c4b95f5aaa21f69826397025cd0de5:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 10:46:16 2021 -0500
+    Message: |
+        improve link_extension_file__to__
+
+f46757c70b6690bb90f1b5f88126d45805212774:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 10:33:17 2021 -0500
+    Message: |
+        add link_extension_file__to__
+
+69ae8799289f7b341bf4e08f86ac10309efcd56a:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 09:18:48 2021 -0500
+    Message: |
+        add a fixer for broken system links
+
+3ee0e04604feb9b91c37f6d4b106d2c719f4b9e1:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 09:07:43 2021 -0500
+    Message: |
+        improve python automatic and manual setup
+
+bf6fb0734a0ce2be65a6dc9bb17f05bb5fdf1e66:
+    Merge: ac06c76 84addba
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 08:41:45 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+84addba9f303ad610e6014c334753234741c2d17:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 26 08:41:34 2021 -0500
+    Message: |
+        -
+
+c6d45cb89357729055a0e3482f92f7afcae1a674:
+    Merge: 1ba0ec5 ac06c76
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 14 14:24:37 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+ac06c76dec7c54bdc321fa9445928e56b132fd7b:
+    Merge: 365a538 bfdf3d9
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 14 14:24:07 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+bfdf3d9ea3ce2cb0361f67133d37d3c12ecb05cb:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 14 14:23:53 2021 -0500
+    Message: |
+        improve git case detection
+
+1ba0ec516d14283b59a6840404d40012824161f1:
+    Merge: ec69882 365a538
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 14 13:25:56 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+365a5381507370e9db60de8baa35a80fbfeb5fd2:
+    Merge: 281026a 3ee3ef7
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 14 13:25:33 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+3ee3ef717b68306fa503151b321d5f5b1177bb66:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 14 13:25:20 2021 -0500
+    Message: |
+        remove last usages of PWD
+
+ec6988234c3163962015d55232d11b1a541ac2df:
+    Merge: 4e8f11e 281026a
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 13 18:01:10 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+281026ae40c09b5820681cb4de5d023a76d45c2e:
+    Merge: 46c20f1 0975d5e
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 13 18:00:44 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+0975d5eb35ae45554c44dad92f01e95dcfe41c38:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Aug 13 18:00:34 2021 -0500
+    Message: |
+        add frozenStd.buildPackages
+
+421a13c5c835a20a4b709922b681005e42386e1a:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 12 08:56:32 2021 -0500
+    Message: |
+        add .ignore
+
+a98c05294620ccdb3a4b16cad15aca530b937bba:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 12 08:54:50 2021 -0500
+    Message: |
+        add zip and unzip
+
+2a815a4db5afe9dfef1d8de8afc0a6845ac92ecd:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 12 08:44:18 2021 -0500
+    Message: |
+        -
+
+4e8f11e3532a9f74c5956cbbdbeade8d5fa9b9ae:
+    Merge: 3bfcdc9 46c20f1
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 12 07:05:28 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+46c20f1e35facc02fd8a1e4e4e65aff9c74cf6e1:
+    Merge: 30fbc80 985ee91
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 12 07:04:31 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+985ee914aaaea48125cf2e18b34fbd1e000d9687:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Thu Aug 12 07:04:08 2021 -0500
+    Message: |
+        improve remove output
+
+3b77e347a82d6540b462f0a93ff19be5281dd93c:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Wed Aug 11 10:45:32 2021 -0500
+    Message: |
+        -
+
+e9f939ad0c89623fca07f1f67440017cd509000e:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Wed Aug 11 09:10:35 2021 -0500
+    Message: |
+        -
+
+cd37df377acd8d255c85e3bb1b37dbab81a5b34b:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Wed Aug 11 09:09:41 2021 -0500
+    Message: |
+        improve command listing
+
+fa728ef420c215f25909e47e1f6583140ac6e820:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Wed Aug 11 08:51:14 2021 -0500
+    Message: |
+        improve setting up env message
+
+3bfcdc9e62768ec24e6287dd3ed18cbaf749bcb2:
+    Merge: ba99bd0 30fbc80
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 7 15:57:06 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+30fbc8085d9d349232b08f865da282ed3ab770c9:
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Sat Aug 7 15:56:55 2021 -0500
+    Message: |
+        -
+
+ba99bd0633825eac30b94cd7e67d203ce6df17af:
+    Merge: ef6ce54 3449ce2
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 12:19:09 2021 -0500
+    Message: |
+        -
+
+3449ce2f19d4dad42ab0c49e6595d767bd3c6e5b:
+    Merge: 944725a 516fc37
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 12:17:05 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+516fc37fcb18d1a52dcf21f41c50ed4bd9ba693d:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 12:16:57 2021 -0500
+    Message: |
+        add complex package instructions
+
+ef6ce54e7dd2a161f336c01908db5deb9f862594:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 12:10:36 2021 -0500
+    Message: |
+        add node.js versions
+
+f4ac3a14be17653050c1030b91bfc9f89da3cc30:
+    Merge: 14462d2 944725a
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 12:00:25 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+944725a7ac7eb49bc321766c89f33b1a06f37e5a:
+    Merge: af8608f 0de04b9
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 11:58:42 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+0de04b93cc9c662d3455ff4ac1c97befc4f67f65:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 11:57:38 2021 -0500
+    Message: |
+        improve nix.toml
+
+14462d2321a11f8a4ff6da0a84c059ef005f4ba8:
+    Merge: ff35d08 af8608f
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 10:45:38 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+af8608fe6684b971ebc9883ac3317afd70d94916:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 10:44:44 2021 -0500
+    Message: |
+        add cuda instructions
+
+d68c9a3b351821a5180dddbb413357a53c3ed63e:
+    Merge: bc00b71 1bd2d62
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 10:36:56 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+1bd2d620d3741bd7365de46cba3f7d406820d71e:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 10:36:16 2021 -0500
+    Message: |
+        fix linux includes
+
+cfd8597c817880d752933f8ad7c2cc32d5d0b57b:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 10:32:27 2021 -0500
+    Message: |
+        add some standard tools
+
+ff35d08dae8bfb3ee4057d96cc04c2ae57a7a035:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 22:42:50 2021 -0500
+    Message: |
+        -
+
+66dd46fe580346ad3f120087f6d6456eecb37b47:
+    Merge: 4fc487d bc00b71
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 22:41:21 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+bc00b71b8e2c2234bb0750b59726e7b1ddac4bba:
+    Merge: f2bd6bc 22ae481
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 22:41:12 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+22ae48108560da046165242110693d181c969c82:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 22:40:52 2021 -0500
+    Message: |
+        projectr lookup working
+
+4fc487d53bc99d951e876e1dd8b51a5ca0b5c45b:
+    Merge: bc2feac f2bd6bc
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 22:35:08 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+f2bd6bce101600cce65ca3e0ed78ea4906fa45b2:
+    Merge: 501a894 ea1e28d
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 22:34:55 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+ea1e28dc536b762f99bb8dc669855933f4c46b81:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 22:34:35 2021 -0500
+    Message: |
+        -
+
+921712f34b71500e6d414346f76a267c2d8f3e62:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 22:29:17 2021 -0500
+    Message: |
+        -
+
+7b1fe8cb669c68bb5ee9d20a68a842debe2dc8cb:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 22:28:59 2021 -0500
+    Message: |
+        -
+
+bc2feac1e96f8a3424a4c1c777ff858732814678:
+    Merge: daa86b2 501a894
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 21:40:31 2021 -0500
+    Message: |
+        -
+
+daa86b2e4deef5ea56d467cbc1e981e9733a6be8:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 21:37:23 2021 -0500
+    Message: |
+        merge with python
+
+501a894349daeefd035ed8d8e14a2a3958128385:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 21:27:11 2021 -0500
+    Message: |
+        add poetry files
+
+e642c327b8aef92fa6b7a59f4e15a6cc0a4c5535:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 21:24:33 2021 -0500
+    Message: |
+        -
+
+bea61fb0f117750181bb576548e6e4ae74c8e7e7:
+    Merge: abf1ee5 dccc4bd
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 21:24:27 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+dccc4bd24e26d00b2c9249d501a58d9f9267acf9:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 21:24:16 2021 -0500
+    Message: |
+        update SETUP
+
+abf1ee5efadf70677bcfdff017c12e8974dd5429:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 21:22:36 2021 -0500
+    Message: |
+        -
+
+e3131850fcd79517db83aa6cdc419a3439f07376:
+    Merge: 8027331 0969b52
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 21:22:17 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+0969b52ef47896fb35bfa723268f1c2a4ebbd38e:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 21:04:23 2021 -0500
+    Message: |
+        add cleaning and purging hooks
+
+272579b65792d73d2f8efa8070ec3b71fcd3561e:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 20:25:32 2021 -0500
+    Message: |
+        combine underscore and start
+
+ae82e487ccf6ed3a23cce155099200d16dca0cb2:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 20:11:21 2021 -0500
+    Message: |
+        reorganize manual and automatic setup
+
+250fa7221e634eedf81ff8871248917f709eacf0:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 19:50:11 2021 -0500
+    Message: |
+        new design, nix.toml
+
+bae3aa713a578adbeaaea608c0bb380ca7eef418:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 18:57:11 2021 -0500
+    Message: |
+        rename projectr_core.sh
+
+07a2e9057227595c077ead12cd2c5e1e2f110e60:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 18:39:13 2021 -0500
+    Message: |
+        change path injection location
+
+c6ea0c315e9f8d2ba6eaeb3f50a0311cd2e45d5e:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Fri Jul 30 18:35:34 2021 -0500
+    Message: |
+        rename project.config
+
+32fa310b88fa3f83da6789f47fc682ecbc4a530e:
+    Merge: 78b7fcf 8027331
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Jul 3 08:32:33 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+80273313be550820abc8e6de74d96df725f3cff6:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Sat Jul 3 08:32:20 2021 -0500
+    Message: |
+        fix poetry check
+
+78b7fcf6d376928b496f12fda50e3ef4218de741:
+    Merge: 7ca1d67 02df8c7
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Thu Jul 1 10:18:02 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+02df8c7ab05284106b5746296320b879006836e4:
+    Merge: 9654372 3f89830
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Thu Jul 1 10:17:50 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+3f89830569cdb42cbec34ae01839eb54e6824865:
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Thu Jul 1 10:17:36 2021 -0500
+    Message: |
+        add ssl fix
+
+7ca1d67775241fa56207faed3856418f6a5a63b7:
+    Merge: ea956dc 9654372
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Tue Jun 22 13:11:39 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+9654372886253c2cf62bea28ebf21bed9fc174e1:
+    Merge: 9c8ff99 37e0e8a
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Tue Jun 22 13:11:16 2021 -0500
+    Message: |
+        Merge branch 'master' into python
+
+37e0e8a26993984f77b5f55233706876bbaeadbc:
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Tue Jun 22 13:10:56 2021 -0500
+    Message: |
+        fix gfpull
+
+5096834772051f1e59aeced49d5a0dca72be1546:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Wed Jun 9 12:20:47 2021 -0500
+    Message: |
+        git shortcut improvements
+
+ea956dc05c6dca3749326cfaaa0c4d3f6c904517:
+    Merge: 8dc18d6 9c8ff99
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Jun 8 13:43:36 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+9c8ff99d089a82196b892831092310b37a5bfd5d:
+    Merge: 2d683ac 0dcc70b
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Jun 8 13:43:20 2021 -0500
+    Message: |
+        Merge branch 'main' into python
+
+0dcc70bdabb9c0c93a585f22fc53a77c4e6cc7f7:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Jun 8 13:43:10 2021 -0500
+    Message: |
+        -
+
+8dc18d6c292306f1c61002ea310d304b9fd0a883:
+    Merge: 2c893ac 2d683ac
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Jun 8 13:18:30 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+2d683acd645da555f541fd1432aa9ec56cab2c5a:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Jun 8 13:18:08 2021 -0500
+    Message: |
+        -
+
+2c893ac0b205ce2e674354147b447e2d40103865:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Jun 8 13:08:09 2021 -0500
+    Message: |
+        add xcode
+
+e2dbd7eade2a3e912d7ff4e408f1e3d12b627d5f:
+    Merge: 01ddc4d 7255d76
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Fri May 28 10:18:02 2021 -0500
+    Message: |
+        Merge branch 'python' into node
+
+7255d76e0ad23064b693be14cd85e83f282e7700:
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Fri May 28 10:17:28 2021 -0500
+    Message: |
+        fix SSL and tmp error
+
+1b93857a1cc98f5919830bdd94e4005dd8631cc0:
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Fri May 28 10:14:53 2021 -0500
+    Message: |
+        improve pip check
+
+6ce43ad3a10866f7abddd48e56ff111ee3ebeb70:
+    Merge: 9a3e995 1a41d0b
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Fri May 28 10:01:36 2021 -0500
+    Message: |
+        Merge branch 'main' into python
+
+1a41d0b16fbb1a077367ea5c312fc8f52c5b7af7:
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Fri May 28 10:01:24 2021 -0500
+    Message: |
+        no args goes to shell
+
+01ddc4de2948685d5dd16fd2a231741601247d10:
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Fri May 28 09:56:32 2021 -0500
+    Message: |
+        add node
+
+9a3e9957999710a81de130a92781a031db734f9e:
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Wed May 26 19:05:21 2021 -0500
+    Message: |
+        add python
+
+5a90607d9b64611e6ccdbc8caf9c55dbebcc1c02:
+    Author: jeff.hykin <jeff.hykin@gmail.com>
+    Date:   Wed May 26 19:02:51 2021 -0500
+    Message: |
+        reinit
+
+642e2d4ba539d3ed755e25c15a66c81aa9d3df15:
+    Author: jeff-hykin <jeff.hykin@gmail.com>
+    Date:   Mon Aug 31 10:58:13 2020 -0500
+    Message: |
+        - init

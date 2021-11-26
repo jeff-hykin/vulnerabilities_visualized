@@ -1,0 +1,62 @@
+{
+    "95b0cd16e308c956503fa3a7c3ab3d90cef315c2": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Wed Jan 27 09:36:29 2021 -0600",
+        "Message": "Added things to work on in the future\n"
+    },
+    "52b371837e92b65fda570823bec6ee4f3a076cde": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Wed Jan 27 09:15:32 2021 -0600",
+        "Message": "Created a default constructor\n"
+    },
+    "7b1062c9c0faca630cd20f7ee8d9056965da672b": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Wed Jan 27 09:09:53 2021 -0600",
+        "Message": "fixed test for full theater and cli interface\n"
+    },
+    "9777d9020b29fb4a13116ff8b8adc33a01179cb1": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Wed Jan 27 05:47:24 2021 -0600",
+        "Message": "properly shows that it can't fufill rsvp in the file\n"
+    },
+    "dc917ed93344b658feeac71f023b7bcd84187b46": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Wed Jan 27 05:35:43 2021 -0600",
+        "Message": "can now enter reservations via command line for testing\n"
+    },
+    "370b91aff79b5ec1fcc409caec77e44f1fa1ddc2": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Wed Jan 27 04:59:59 2021 -0600",
+        "Message": "fixed not being able to use all 20 seats in a row\n"
+    },
+    "613e3c8aa9ef1f1d2a967f67796a6f0b9bfd8682": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Wed Jan 27 04:48:38 2021 -0600",
+        "Message": "fixed bug which made it so that the class had persistent seat assignments\n"
+    },
+    "7149e291d8559972405df935f3b75358fe39c2bc": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Wed Jan 27 03:16:58 2021 -0600",
+        "Message": "updated readme with assumptions and wrote basic greedy algorithm\n"
+    },
+    "d5242e787c541a0ce1bda623bcdc4161a9b3915d": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Wed Jan 27 01:05:01 2021 -0600",
+        "Message": "Added test to make sure the output was in the right format with the expected amount of seat assignments\n"
+    },
+    "38fcd3f7cce58447ddb63903b9057e3371ba037d": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Wed Jan 27 00:21:41 2021 -0600",
+        "Message": "Created Class that would represent the Movie Theather\n"
+    },
+    "06ac1cdc04afcfdfb86a8aae71eea93ea5a03c79": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Tue Jan 26 23:15:42 2021 -0600",
+        "Message": "created a main executable file that would read and write to files\n"
+    },
+    "b4e2dc03d2356ef8660b00972279ca4a21f4d8f4": {
+        "Author": "conormai <conormai@tamu.edu>",
+        "Date": "Tue Jan 26 22:12:10 2021 -0600",
+        "Message": "first commit\n"
+    }
+}

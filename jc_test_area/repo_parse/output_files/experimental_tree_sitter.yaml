@@ -1,0 +1,1197 @@
+24ee84fa6349ae78fad045a6686235d59d71eb22:
+    Merge: 6d43676 4fa6d3a
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 14:45:31 2021 -0500
+    Message: |
+        Merge pull request #19 from jeff-hykin/dependabot/npm_and_yarn/tar-4.4.15                Bump tar from 4.4.8 to 4.4.15
+
+6d436764e80ddda0fc2c93243e57c17a8b37c508:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 14:30:19 2021 -0500
+    Message: |
+        switch images
+
+4fa6d3afcb70e64f418fa4259512ad0e778fa8bb:
+    Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+    Date:   Tue Aug 3 19:26:14 2021 +0000
+    Message: |
+        Bump tar from 4.4.8 to 4.4.15                Bumps [tar](https://github.com/npm/node-tar) from 4.4.8 to 4.4.15.        - [Release notes](https://github.com/npm/node-tar/releases)        - [Changelog](https://github.com/npm/node-tar/blob/main/CHANGELOG.md)        - [Commits](https://github.com/npm/node-tar/compare/v4.4.8...v4.4.15)                ---        updated-dependencies:        - dependency-name: tar        dependency-type: direct:production        ...                Signed-off-by: dependabot[bot] <support@github.com>
+
+9febc5f08c880fab459883b2f5e72edd2c6d94df:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 14:21:05 2021 -0500
+    Message: |
+        finishing touches
+
+e0d68b024f90d49d5e7297bbbf5295c31394ce15:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 13:23:06 2021 -0500
+    Message: |
+        update dependencies
+
+e32481e545187a7161c1d529e9689211b8de61ae:
+    Author: Jeff Hykin <jeff.hykin@gmail.com>
+    Date:   Tue Aug 3 13:19:23 2021 -0500
+    Message: |
+        mixin projectr/node
+
+471169a992a8222329f9649e7e15f5c42d9097a1:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue Nov 3 22:10:05 2020 -0800
+    Message: |
+        0.1.26
+
+a31f48a07ad014d9f5115434dad1ca9894a12a82:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue Nov 3 22:09:36 2020 -0800
+    Message: |
+        Deprecate
+
+7faaf5b29034ff19ae429fde9a324fa1b5e6caae:
+    Merge: 5db2bc6 203a24d
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue Nov 3 22:08:32 2020 -0800
+    Message: |
+        Merge branch 'master' of https://github.com/georgewfraser/vscode-tree-sitter
+
+5db2bc642adcf326504f3092d9e81aa30cb090cb:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue Nov 3 22:08:29 2020 -0800
+    Message: |
+        Remove rust tests
+
+203a24d5bdf1a90635e5ca08d4fc5401655b485d:
+    Author: inJuly <50487716+inJuly0@users.noreply.github.com>
+    Date:   Wed Aug 26 10:38:55 2020 +0530
+    Message: |
+        fixed incorrect directory name in README.md (#32)                line 41 and 42: the paths should be "./src/colors.ts" and "./src/extension.ts" according to the source        but they read "./lib/colors/ts" and "./lib/extension.ts" instead
+
+6ebfcb9e805a3a65907900481485b524501c5445:
+    Author: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+    Date:   Tue Aug 25 22:08:42 2020 -0700
+    Message: |
+        Bump lodash from 4.17.15 to 4.17.19 (#31)                Bumps [lodash](https://github.com/lodash/lodash) from 4.17.15 to 4.17.19.        - [Release notes](https://github.com/lodash/lodash/releases)        - [Commits](https://github.com/lodash/lodash/compare/4.17.15...4.17.19)                Signed-off-by: dependabot[bot] <support@github.com>                Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+7a8d4afd62df7e412d9c2a871298ce13973529e4:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Mar 7 19:14:47 2020 -0800
+    Message: |
+        0.1.25
+
+066a7dc0e9aea53a84c002dc7a6617dbbd3f5c7b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Mar 7 19:14:44 2020 -0800
+    Message: |
+        Run publish via npm
+
+36b895c03e5f5fc750fc7df4e036784f99dedd0f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Mar 7 19:13:59 2020 -0800
+    Message: |
+        Invoke vsce via npm
+
+4b5cba7df51e48f0e1ecbc63d909c77dce5c8892:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Mar 7 19:11:48 2020 -0800
+    Message: |
+        Rust type names are namespaces in some contexts
+
+4f3cd0e36db3ae325e25d012d3cfefd0ed63c546:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Mar 7 19:06:45 2020 -0800
+    Message: |
+        async should be a regular keyword
+
+de0d83b5896ad761eb1006423c9a4e37b13064fb:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Mar 7 19:06:38 2020 -0800
+    Message: |
+        Add 0b0 nums
+
+d935ea8dbd7e6253efb5b0ea58f6420cabe16cc0:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Mar 7 19:06:32 2020 -0800
+    Message: |
+        Drop verilog, update deps, builds on OSX
+
+b54af995ba9bfeebffb382df9683878fa79ae0b9:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Oct 19 20:24:02 2019 -0700
+    Message: |
+        method_spec creates a scope
+
+e8daf4c6d399c43280591cb17ac29fa8ab586199:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu Sep 19 11:13:29 2019 -0700
+    Message: |
+        0.1.24
+
+70950042b6df423c8686719d231e0a9c668873f7:
+    Author: Alex Zatelepin <ztlpn@users.noreply.github.com>
+    Date:   Wed Oct 9 02:24:56 2019 +0300
+    Message: |
+        Set extensionKind to "ui" (#24)                Fixes #23
+
+79dad301cb3c4091807821489f031407979107e7:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu Sep 19 11:12:23 2019 -0700
+    Message: |
+        Use imperative-style API
+
+39b6001dcd6f5420d91d11e0f24b7deb5c454694:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu Jul 18 08:06:02 2019 -0700
+    Message: |
+        0.1.23
+
+89287718e10275535914dbbeda9acba5d709a5c3:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu Jul 18 08:05:50 2019 -0700
+    Message: |
+        Run `npm audit fix`
+
+b4e27faa0b33d9c98ee6d2febd48da65681db99b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu Jul 18 08:04:06 2019 -0700
+    Message: |
+        Remve cson dep
+
+776256b029e4491bdd4d732dac4cb48de6958dfb:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Jun 22 11:06:47 2019 -0700
+    Message: |
+        Don't color errors
+
+e0e7405049f307a240a8fd8f24a1b11aecb23f66:
+    Author: Aaron Janse <aaron@ajanse.me>
+    Date:   Wed Jul 17 15:53:28 2019 +0000
+    Message: |
+        Add support for Verilog (#22)                * first attempt                * add support for verilog                * fix error highlighting                * update tree-siter-verilog                * add screenshot                * fix typo
+
+11b71b5c7afb2037b48958a832a9d579a870766c:
+    Author:  <iam@lach.pw>
+    Date:   Mon Jun 17 21:51:45 2019 +0500
+    Message: |
+        Update dependencies, fix build issue (.d.ts is in web-tree-sitter package)
+
+ca9c00590668696fbdf7a7db6816280e4be7cf2e:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon Jun 17 07:23:26 2019 -0700
+    Message: |
+        Variadic params
+
+7d960e350200896252b6cb497089afe507a4de3e:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun Jun 16 10:55:32 2019 -0700
+    Message: |
+        Type switches create a scope and locals
+
+3cae04bf892b977f5e5ab7bba876f58cc6443416:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun Jun 16 09:33:58 2019 -0700
+    Message: |
+        For and if create a new scope
+
+17e44cda453a022b8f03ee8db3cf46e259bd880b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun Jun 16 09:20:11 2019 -0700
+    Message: |
+        Type case creates a new scope
+
+f4f98e5d3f5dacd9a3173b9c9010b6bc98d14b26:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun Jun 16 09:13:06 2019 -0700
+    Message: |
+        Case clauses create a new scope
+
+f266594bae77490db6c15a385c6fff2b007b8011:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun Jun 2 10:47:50 2019 -0700
+    Message: |
+        0.1.22
+
+e84e87c48f3d768d6e916f5f5c51d6e465981dea:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun Jun 2 10:47:07 2019 -0700
+    Message: |
+        Update Go screenshot
+
+767fc5e3c02885e94716c2e8f03dc0a2172f8846:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun Jun 2 10:44:02 2019 -0700
+    Message: |
+        Update example
+
+97a3fcd3cefc713d2d30757cbbaae8ebb5053dc7:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Jun 1 20:44:16 2019 +0100
+    Message: |
+        Fix import alias
+
+9716b616e938f7a7c355c2d22c8ac6095b241615:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Jun 1 20:31:02 2019 +0100
+    Message: |
+        Break down scan function
+
+0202368872758afdfc7b7793ca044d389e6e0b84:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Jun 1 18:56:45 2019 +0100
+    Message: |
+        Fix
+
+8643df2fd0853ec8b4accbe150db23e3c2a62751:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Jun 1 18:50:17 2019 +0100
+    Message: |
+        Simplify
+
+0ff93771dd859bef3a9330280247327b446d18ee:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Jun 1 18:41:41 2019 +0100
+    Message: |
+        Simplify
+
+f498b3131b3af4f0f8f3efd07f2bf76a6f077da7:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Jun 1 17:04:21 2019 +0100
+    Message: |
+        Benchmark script
+
+a32a3bc9bc4da60f0eb19b0223ae9a8f55605d31:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Jun 1 17:04:16 2019 +0100
+    Message: |
+        Update tests
+
+ab7611cfb276901b798d25e4710227246c965d24:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Jun 1 16:35:59 2019 +0100
+    Message: |
+        Simplify
+
+2573c730b4a944c65c320dcb6ee0477e23734c69:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat Jun 1 15:35:54 2019 +0100
+    Message: |
+        Coloring top-level vars is more useful
+
+0239d20b30d6af2d7446f258a7f275a71b8ea03e:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 29 22:34:43 2019 +0100
+    Message: |
+        Tests
+
+b5dde2308189bd1c0855b05702c24ad8e3da6ad0:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 29 22:28:05 2019 +0100
+    Message: |
+        Tests
+
+f131ba663ed801632c2637e93d4a8e5716fdf027:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 29 22:13:16 2019 +0100
+    Message: |
+        Color type names in qualifiers
+
+298994e633232722a306e76e44b4e9c857ff8a00:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 28 23:17:22 2019 +0100
+    Message: |
+        0.1.21
+
+316bfe16e1b8e048105f55def8dda555bd48423c:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 28 22:57:41 2019 +0100
+    Message: |
+        More tests
+
+dbb5757123d53b4e40254f1e4c58562ac669d65f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 27 23:34:23 2019 +0100
+    Message: |
+        Add categories
+
+9ea9648040bf181c4ab2d1f06961ee931d02478f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 27 23:31:42 2019 +0100
+    Message: |
+        Print tree
+
+d9b3322394b98a7f825f9a878a41779a98141821:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 27 17:04:04 2019 +0100
+    Message: |
+        Shorten
+
+4f5c1f975cd487c282fef1cb82542f31dd4aef8a:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 27 16:03:12 2019 +0100
+    Message: |
+        Add test script
+
+6071b72ef69f9d936e3f8e9154f27abc82431f4b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 27 15:58:13 2019 +0100
+    Message: |
+        0.1.20
+
+bad278c23f9fe0179de86aae2ee037750019c051:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 27 15:37:30 2019 +0100
+    Message: |
+        Don't need this anymore
+
+e3bf66a2df9d874ba56b768478bc4058391065ea:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 27 15:35:39 2019 +0100
+    Message: |
+        Un-break test
+
+4f05b2c6ccc31b0d4922e5a171e524e98c8f5bec:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 27 15:33:46 2019 +0100
+    Message: |
+        Run tests on azure
+
+c99765fa45c0966b0c92bc18bcb38ec84e707cc1:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 27 15:26:01 2019 +0100
+    Message: |
+        Coloring method parameters is inconsistent
+
+6c1debf4eab96895946333ff07a0be649bac59de:
+    Merge: e0ed998 5bdb252
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 27 15:25:22 2019 +0100
+    Message: |
+        Merge branch 'connorshea-ruby-improve'
+
+e0ed998484d076b8275bf08551a8b7ea5f88fd43:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 22:22:32 2019 -0700
+    Message: |
+        Tests
+
+2163d0f557e51914c3827d1f3ac1e358a3b92b1c:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 21:34:10 2019 -0700
+    Message: |
+        Move color functions to their own file
+
+d677d153a016119987f6821f6163401f84599699:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 21:16:07 2019 -0700
+    Message: |
+        Rename
+
+43befb78cfa8fe4a7525fdb8ed19043b75d963bf:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 20:54:05 2019 -0700
+    Message: |
+        := can modify an existing variable
+
+c1d7120acc5738a607cecdaace82c158b38acc0a:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 20:29:40 2019 -0700
+    Message: |
+        Update benchmark code
+
+3f151455afae0d9335fb52d6293c87b651887922:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 20:20:31 2019 -0700
+    Message: |
+        Fix function color
+
+94da858d67af7d85b51cb05afd0e4653f1ef8eb1:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 20:18:59 2019 -0700
+    Message: |
+        Load lazily
+
+667e89cfc9927d5f9cadbcb6a7753957bfb11198:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 16:09:52 2019 -0700
+    Message: |
+        0.1.19
+
+d5cd8650f1e701b44b75020c00fe07a4b1ee19a8:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 16:06:49 2019 -0700
+    Message: |
+        Fix scopes
+
+5bdb252d2b48b0758e252c0ea30f01a629ad6318:
+    Author: Connor Shea <connor.james.shea@gmail.com>
+    Date:   Sun May 26 16:59:02 2019 -0600
+    Message: |
+        Move identifier check down.                Also replaced some non-null assertion operators to prevent failures when they are, in fact, null.
+
+d9b65e0648d70fe0a821fc55b9556a5a64865837:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 15:53:12 2019 -0700
+    Message: |
+        Clean up absent scopes
+
+46397444787f7f8608b1ef11a5dc8b420fb9865d:
+    Author: Connor Shea <connor.james.shea@gmail.com>
+    Date:   Sun May 26 16:45:19 2019 -0600
+    Message: |
+        Add highlighting for Ruby method parameters.
+
+b8faf95ee5b86cab667e9309e572efa277fb1256:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 15:44:25 2019 -0700
+    Message: |
+        Optimize colorGo
+
+351587462c108d6ec95269e58fa3457c6460667a:
+    Author: Connor Shea <connor.james.shea@gmail.com>
+    Date:   Sun May 26 16:37:20 2019 -0600
+    Message: |
+        Add various keywords to the Ruby TextMate language file.
+
+bab6edee2571854ef8e71b7c67c6fc3b33a8518e:
+    Author: Connor Shea <connor.james.shea@gmail.com>
+    Date:   Sun May 26 16:36:52 2019 -0600
+    Message: |
+        Change symbols from constant.numeric to constant.language.
+
+f835b7768f15b74e81266b0a4fa3aa72efc94edc:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 15:08:49 2019 -0700
+    Message: |
+        Simplify
+
+6d1339874b39646185831c6a9ff13791f298c805:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 14:44:45 2019 -0700
+    Message: |
+        Underline mutable locals
+
+17e274f708b9f01a1b47a31691fc702eda49d861:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 14:44:17 2019 -0700
+    Message: |
+        Script for benchmarking
+
+e662f228c036d195816ea24c5d66f6887169bdfa:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 11:33:12 2019 -0700
+    Message: |
+        Update screenshots
+
+24be280b631539b823327b9dd79fc7db697b8511:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 11:22:16 2019 -0700
+    Message: |
+        Move tmlanguage files
+
+2ef59ac8fd2b3bc163d34a4810330408899881e9:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 26 11:11:37 2019 -0700
+    Message: |
+        Add .js support
+
+eb7b70313b9401160fbc3cf5c2c5bc57c35d3977:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 25 21:41:18 2019 -0700
+    Message: |
+        0.1.18
+
+0013e17e12d78e799681ff929b95dc4a61a265ea:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 25 21:39:47 2019 -0700
+    Message: |
+        Fix various coloring problems in #12
+
+0397a743f155297476f7033b64964286d7aee990:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 25 12:15:38 2019 -0700
+    Message: |
+        Add ruby screenshot
+
+f7ad9b24a6cafa29ffca7f8141ea8517048c661d:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 25 12:08:55 2019 -0700
+    Message: |
+        0.1.17
+
+259d37c9743b001087dc488b51296af4063ca7ed:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 25 12:05:22 2019 -0700
+    Message: |
+        Fix control keywords
+
+0faa97e55d8689f65f852de78cecb0b4f1b3fe2e:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 25 11:21:55 2019 -0700
+    Message: |
+        Color methods as functions
+
+11f530df7cd203c308773cb4181a9038a9684df9:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu May 23 23:47:19 2019 -0700
+    Message: |
+        Seems reasonable
+
+561babeec18acb8a4fcb640aaf34608cbf8fc53f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu May 23 23:24:16 2019 -0700
+    Message: |
+        Simplify grammar
+
+bfa8002d5ee71bb7729aa1f542608838651994ef:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu May 23 22:46:00 2019 -0700
+    Message: |
+        Add ruby
+
+8f5d623aeb2f36ff7a9fa5bea99515baaed45eff:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 25 10:25:13 2019 -0700
+    Message: |
+        Allow color functions to use arbitrary scopes
+
+1331402d11e83d8770f03c35465dbf89b8b8018f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 25 10:08:16 2019 -0700
+    Message: |
+        Formatting
+
+b599bb508c1c8b21bcf3311b1719f7fc9cb08e6d:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 25 10:07:10 2019 -0700
+    Message: |
+        Load decorations lazily
+
+0e12c0bbc97e6daded5c779fff11804735283d8b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Fri May 24 21:39:03 2019 -0700
+    Message: |
+        0.1.16
+
+5a3ef0e65c6f61bc0413fdda2b2438e6cdadc9cd:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Fri May 24 21:38:44 2019 -0700
+    Message: |
+        Normalize package names
+
+cf939f64c200d2959f663810c6a2970a3419aa82:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Fri May 24 21:22:53 2019 -0700
+    Message: |
+        Use theme colors (fixes #10)
+
+fa406055bf2bb48bccda1b25ddfc8f94e8963e8a:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu May 23 22:37:20 2019 -0700
+    Message: |
+        0.1.15
+
+f9aa1a23b617cd8fd6ce1ad072f55d341b93219b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu May 23 22:36:28 2019 -0700
+    Message: |
+        Workaround of #13
+
+4b6b6e6f2ea92cf06e512236c53c8f84a9be4510:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu May 23 17:59:18 2019 -0700
+    Message: |
+        0.1.14
+
+d26842d81c48e89c93dac133fc713559bef707b8:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu May 23 17:57:09 2019 -0700
+    Message: |
+        Fix package members
+
+7d96480c18fdb501fcc1db001e01742ef5aaf128:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu May 23 10:12:53 2019 -0700
+    Message: |
+        TODO
+
+8fb69dab3977ac6ba1754db9fb9744c1781a206b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Thu May 23 10:12:48 2019 -0700
+    Message: |
+        Close open asts
+
+28572fd308adb0ee88db05704f8253de000e49fc:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 23:13:17 2019 -0700
+    Message: |
+        Fix template
+
+f3ca8de69d831b79813bd607702568e5cf6a612c:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 23:10:02 2019 -0700
+    Message: |
+        Color ; as keyword
+
+9db4c49fe2b7b7217bc11bd1bf26f4b8e1cf1120:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 22:53:08 2019 -0700
+    Message: |
+        0.1.13
+
+08c68d705558710b5a03819c7610268caf27f10e:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 22:52:52 2019 -0700
+    Message: |
+        Remove stray console.log
+
+671120784ec357cfcbcd49de90bd99b7f6fd09cd:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 22:44:56 2019 -0700
+    Message: |
+        0.1.12
+
+601d2ff6ec3d5387a6574d1178b68772ade404ca:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 22:44:49 2019 -0700
+    Message: |
+        Update readme
+
+758d5227dee704570125ea86a0a5ff2e0371a1e9:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 22:43:09 2019 -0700
+    Message: |
+        Fix module
+
+2c2223c6c1a0c44a65c1b529eb0ab3b0a2fc8701:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 22:43:02 2019 -0700
+    Message: |
+        Rebuild
+
+c2b407f5ad117a00fae3d85d98348af15a15853c:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 22:38:09 2019 -0700
+    Message: |
+        Name step
+
+0d24451fd04fcbecf188432f17f6d0b3293f67bd:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 22:35:29 2019 -0700
+    Message: |
+        Build zips
+
+7ef1ce95f6b8c53b20564fa91e8737a522f856a8:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 22:31:12 2019 -0700
+    Message: |
+        Switch to wasm (thanks @jeff-hykin !)
+
+aa39e4ca32d434b43c3b454123de9ea899bac736:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 20:46:02 2019 -0700
+    Message: |
+        Use case as a heuristic to identify types in use declarations (fixes #6)
+
+3af25c10841c9998e3f09fa5c30cd34d10d774fb:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 19:44:38 2019 -0700
+    Message: |
+        Instructions for color themes (#10)
+
+d2942b4fb4ade5aa2f5bd40405e8c2e94142b97a:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 19:19:43 2019 -0700
+    Message: |
+        0.1.11
+
+52b3bb1e476996a9444b4493e4850e691c4839c2:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Wed May 22 19:17:55 2019 -0700
+    Message: |
+        Package members aren't fields
+
+da23646c6635077b2c30448ae7cba9e076f02cb6:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 21 23:32:45 2019 -0700
+    Message: |
+        Use const
+
+a032823a15f1152fe2fb2491130fe268293805eb:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 21 22:40:42 2019 -0700
+    Message: |
+        0.1.10
+
+fc0236f5b4d4313a681acba62d47b512a374f320:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 21 18:52:04 2019 -0700
+    Message: |
+        Apply deltas one at a time
+
+2d485365cdd5b46331e6245b703544dcbc9c4468:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 21 18:27:15 2019 -0700
+    Message: |
+        Simplify
+
+33d5e7e62b59d1bfbc8bb465bdc5ce55f1151ff5:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 21 18:24:15 2019 -0700
+    Message: |
+        Revert formatting
+
+5407be0e8ea70fbf12ce0c617dd3c7930a2e9636:
+    Merge: e4c9595 f18530e
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 21 18:18:59 2019 -0700
+    Message: |
+        Merge pull request #9 from OriginalDecode/fix_exception_invalid_language                Fixed an exception that crashed the extension due to invalid language.
+
+f18530e31775bba0e149d27e99c826fb7f8a7b64:
+    Author: OriginalDecode <originaldecode@outlook.com>
+    Date:   Tue May 21 20:01:05 2019 +0200
+    Message: |
+        Fixed an exception that crashed the extension due to invalid language.
+
+e4c9595dd64b05afdff23785edb3be7a00b8ca59:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 21 09:30:38 2019 -0700
+    Message: |
+        0.1.9
+
+3b2d4cd2e5433af8620fe32cb35bab4479e15a60:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 21 09:26:44 2019 -0700
+    Message: |
+        Fix block comments (fixes #8)
+
+b894d39bccd3ba573693edb87e3e1acb408cb5f8:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 21 09:19:54 2019 -0700
+    Message: |
+        Add contributing guide
+
+a6e4a565f3c95e246f0cc135676beb0e71547a23:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Tue May 21 09:19:13 2019 -0700
+    Message: |
+        Add license
+
+e4602179410eb53036e721b3d31ceb366e564b18:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 23:30:29 2019 -0700
+    Message: |
+        Skip bad language ids
+
+0825e86e7f14b03fb25a2ea335685fc1f8795882:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 23:21:42 2019 -0700
+    Message: |
+        Update README
+
+232c28e3708bb8f1913d5d067f1c9668f263d5b2:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 23:21:01 2019 -0700
+    Message: |
+        Move to top
+
+d78455cca3c56fb537fadbbd39c65511f3c6c712:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 23:20:09 2019 -0700
+    Message: |
+        Separate color functions
+
+e92edc8a9c211b71c39e91a6027d7888c4fb42d7:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 22:29:30 2019 -0700
+    Message: |
+        0.1.8
+
+5251102509046dc8ca636b3fb75e7a3b50e085ae:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 22:28:34 2019 -0700
+    Message: |
+        Fix download link
+
+9fefcada466bb73a0ce39c2ab0299f224b62aa9e:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 22:15:27 2019 -0700
+    Message: |
+        0.1.7
+
+d885c497627a29e1f1df1499afd837bc24495be0:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 22:14:53 2019 -0700
+    Message: |
+        Update instructions
+
+820459401b3ccb4194b76e0e4eee95cc49b1bd13:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 22:02:20 2019 -0700
+    Message: |
+        Fix assets path
+
+7da3186ccf4ac136539e46163d334315788b18d7:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 21:54:00 2019 -0700
+    Message: |
+        Fix case
+
+9b8a5e612503ded526d5735f4e145d1314a9db61:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 21:47:02 2019 -0700
+    Message: |
+        Try a new service connection
+
+f05f11f3b11a5f3ab21201d181b9c0153777b47b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 21:38:56 2019 -0700
+    Message: |
+        Release to github
+
+49bb64391b386c15fac9e4db9eefe78e38dfed13:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 21:31:24 2019 -0700
+    Message: |
+        Try older version of win
+
+e50891906c924b40ddae2819ee7598f88a0715b6:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 21:16:38 2019 -0700
+    Message: |
+        Run for all OSs
+
+3b1a514ee6afe263a1cc53cb41941557d051ca7c:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 21:12:46 2019 -0700
+    Message: |
+        Names
+
+e2be66a00bf67819b8632bfa3ef87581cc32980f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 21:10:44 2019 -0700
+    Message: |
+        electron-rebuild
+
+21a29edc938cb4bf3b2468dd05a22a06a9a6bcec:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 21:07:57 2019 -0700
+    Message: |
+        Install vsce
+
+02b01338c4a570f406364c12efc4b650b9e3dd4f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 21:04:11 2019 -0700
+    Message: |
+        Add build script
+
+d4cbfe8bd02cea527785f53332b85ec7c1f508bf:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 23:16:50 2019 -0700
+    Message: |
+        0.1.6
+
+1fb4299206b41cccff17e283b008cbbb7db6093b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 23:16:47 2019 -0700
+    Message: |
+        Fix note
+
+2ba419bb8d57025e91d7abb6980f5c6832935501:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Mon May 20 20:55:44 2019 -0700
+    Message: |
+        Set up CI with Azure Pipelines                [skip ci]
+
+da2f3fbe7edda275b0146498d8c18c51d1a7ceee:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 23:15:35 2019 -0700
+    Message: |
+        0.1.5
+
+e88f0d668dd0546c50c29b7342de4bfa0b8ae7a7:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 21:33:40 2019 -0700
+    Message: |
+        Note
+
+28ccdb30bc3c727274f6a2d655c504e7c97fe475:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 21:31:32 2019 -0700
+    Message: |
+        Debugging
+
+75e8a35ffb91c63853853098cc79c9cf25119978:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 18:56:06 2019 -0700
+    Message: |
+        0.1.4
+
+30514c38acd1f85e3345564665515b72f150a9dd:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 18:54:23 2019 -0700
+    Message: |
+        Check if document is cached
+
+62326b94e77eb955d266f75c93040a88c232287f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 18:52:06 2019 -0700
+    Message: |
+        Log activation
+
+2f149c930742a9394ee288583173b90731ddfe55:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 16:58:30 2019 -0700
+    Message: |
+        0.1.3
+
+bfbaa6dc5e6cfc7cede368892c6b7c94874f53e5:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 16:56:17 2019 -0700
+    Message: |
+        Polish
+
+9cf05aa83ac3b5582bbcedb9202877beb690ef7f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 16:41:52 2019 -0700
+    Message: |
+        More TODOs
+
+24ac13f2a9fd9944a3b6900c89fe4777abc3db85:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 16:33:37 2019 -0700
+    Message: |
+        TODOs
+
+0bb166e27102361a5287a7fcec232b868886386a:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 15:24:15 2019 -0700
+    Message: |
+        Instructions for adding languages
+
+fb4400b78481845c6a8497d079508d28aea25c19:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 15:06:22 2019 -0700
+    Message: |
+        0.1.2
+
+cb0ac53d6de8c1a5b54c680006b8e624118f3d5c:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 15:06:15 2019 -0700
+    Message: |
+        Rust screenshot
+
+c5a14acecab0300ead929204b4c62073565f7d01:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 15:01:36 2019 -0700
+    Message: |
+        Refactor tm grammar
+
+2fa57b5c19f5430dd1e03b013d70cb256f9b0c6f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 14:34:08 2019 -0700
+    Message: |
+        Simplify keywords
+
+ed457d64d9fe00a5eb0ba38bff915a04e4c99814:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 14:20:49 2019 -0700
+    Message: |
+        Support rust
+
+750d0b849d20688d15e4fc4e89c1a031ad12fb8b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 14:20:36 2019 -0700
+    Message: |
+        Cleanup
+
+c7ac85f2c39c5b6e8ace1965f031f8e6c0d339b6:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 14:20:19 2019 -0700
+    Message: |
+        Simplify rust grammar
+
+263b99367830ea50d5e864d254c8f2645c6c8bfe:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 13:14:52 2019 -0700
+    Message: |
+        Add rust grammar
+
+f7f143fd5b55c67d0a978d1c939bebdbd4e9983e:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 12:36:15 2019 -0700
+    Message: |
+        0.1.1
+
+5578e6e14b4a3b4b2ba979eaa300f5b6ce33e626:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 12:34:45 2019 -0700
+    Message: |
+        Typo
+
+007b1f0e77595a642854d777dbd76ed2d66ee8db:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 12:34:32 2019 -0700
+    Message: |
+        Change order
+
+ab9297e9f24d8822765e7211f99b3e7418991b10:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 12:33:27 2019 -0700
+    Message: |
+        Explain examples
+
+af7a7807c9c3405165ed62e89d031a3d67a0b52e:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 12:31:09 2019 -0700
+    Message: |
+        v0.1.0
+
+d2a3abc3a627b0a07693ea3abb4f93e036fa28fa:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 12:30:08 2019 -0700
+    Message: |
+        Names
+
+91c221a5bb44e93f0ada1e53bbb71d0ab8e10402:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 12:28:35 2019 -0700
+    Message: |
+        Fix security warning
+
+2d465be813998dc70a91fc6498ec6602fb9a701a:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 12:24:10 2019 -0700
+    Message: |
+        Extract function
+
+789aa617b65868f47f5792e153d39af5ebd4a38b:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 12:24:01 2019 -0700
+    Message: |
+        type is a contextual keyword
+
+f833e95ea64583d61d0fba5c6946aacb7cfe3aa8:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 12:15:48 2019 -0700
+    Message: |
+        Screenshots
+
+b3d2fd08616a2c3f134f6a5ccf77b546ffa44dd5:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 11:49:40 2019 -0700
+    Message: |
+        Semi-reserved
+
+44e2f680edbc538f7ea2075e50dbe397b6029682:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 11:42:00 2019 -0700
+    Message: |
+        Cleanup
+
+b6234dbe8fbcd694685e58d2631d73810a3ee0ab:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 11:39:55 2019 -0700
+    Message: |
+        Simplify typescript
+
+4f57c2f510dd6de5ed789587d76caada08f2c5e9:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 11:06:58 2019 -0700
+    Message: |
+        TS keywords from https://github.com/microsoft/TypeScript-Handbook/pull/344/files#diff-daa0bcf39081bf404388820939d9c877
+
+ec20f9886a9171c532a5baeebe75f8e18addb124:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 10:52:26 2019 -0700
+    Message: |
+        Simplify C++
+
+3ae3172c5b8ab5144fcdf508f8b6022adf5525e9:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 10:03:34 2019 -0700
+    Message: |
+        Use tree-sitter for function name in Go
+
+c1e8a8dc34f564e58f062b9de2663c2100ff533f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 00:15:37 2019 -0700
+    Message: |
+        Color 1 more line in each direction
+
+a681dc2d72a0ed7f28e93ee1d062f49161925092:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 00:12:38 2019 -0700
+    Message: |
+        Icon
+
+f48922c0d71e36cf7dbb8c695b7d1a714c00274c:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sun May 19 00:08:25 2019 -0700
+    Message: |
+        Cleanup
+
+da0380e690631d97f8fc4abc5277a4cb59edad30:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 23:57:50 2019 -0700
+    Message: |
+        C and C++ work
+
+d4ec82d589e3d151f50188635514e1d631764ff5:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 23:10:38 2019 -0700
+    Message: |
+        Add cpp
+
+1f86feef653b5cc443237704c0c69488cb5f808d:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 23:04:13 2019 -0700
+    Message: |
+        Only set visible decorations
+
+c2b7d8f5ef3f5947fcd258beeaff2be97fda38ad:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 22:32:37 2019 -0700
+    Message: |
+        Make buildable
+
+8c30fcfd53d112153a7385c16f04ae2dce367c7c:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 22:16:22 2019 -0700
+    Message: |
+        Typescript works
+
+2e7b5994352470dc3674c2dcbf00472caafe8ddb:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 21:20:46 2019 -0700
+    Message: |
+        Add typescript
+
+6a0f549a0a577a4c10b1b99a48d9c6e387d04929:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 21:10:07 2019 -0700
+    Message: |
+        Working for go!
+
+55f6b9d6eadcc2afca67c6db00c87e9fd9c57be9:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 19:21:55 2019 -0700
+    Message: |
+        Simplify
+
+1079e2c99766d27d16a289a0662b43d9ece4802f:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 19:14:12 2019 -0700
+    Message: |
+        Remove punctuation
+
+67f2e9c22893602ec3930bf1390fad8ea78358c9:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 19:08:40 2019 -0700
+    Message: |
+        Incorporate go syntax
+
+3fd6df7187f52e28e1217535a7f8d692e1f6fbdc:
+    Author: George Fraser <george@fivetran.com>
+    Date:   Sat May 18 19:03:26 2019 -0700
+    Message: |
+        Initial setup
