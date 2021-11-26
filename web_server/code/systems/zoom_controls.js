@@ -1,5 +1,5 @@
 const panzoom = require('panzoom')
-
+const { mountedToDom } = require('./utilities')
 
 module.exports = {
     addControls(element, options={}) {
@@ -20,22 +20,7 @@ module.exports = {
             connect()
         // otherwise wait for it to get attached
         } else {
-            const observer = new MutationObserver((mutationList, observer)=>{
-                mutationList.forEach( (mutation) => {
-                    switch(mutation.type) {
-                    case 'childList':
-                        if (element.parentElement) {
-                            connect()
-                        }
-                        break
-                    }
-                })
-            })
-            observer.observe(element, {
-                childList: true,
-                attributes: true,
-                subtree: true,
-            })
+            mountedToDom(element).then(()=>connect())
         }
     }
 }

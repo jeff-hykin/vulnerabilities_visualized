@@ -29,8 +29,12 @@ for (const [vendorName, vulnerabilities] of Object.entries(vulnByVendor)) {
     const vulnByProduct = {}
 
     for (const eachVuln of vulnerabilities) {
+        
         if (typeof eachVuln.product == 'string' && eachVuln.product.length) {
-            vulnByProduct[eachVuln.product] || (vulnByProduct[eachVuln.product] = [])
+            // if hasn't been created yet make it as an array
+            if (!(vulnByProduct[eachVuln.product] instanceof Array)) {
+                vulnByProduct[eachVuln.product] = []
+            }
             vulnByProduct[eachVuln.product].push(eachVuln)
         }
     }
@@ -38,4 +42,4 @@ for (const [vendorName, vulnerabilities] of Object.entries(vulnByVendor)) {
     vulnByVendor[vendorName] = vulnByProduct
 }
 const fs = require("fs")
-fs.writeFileSync("./data/vulnerabilities_by_vendor.json", JSON.stringify(vulnByVendor,0,4))
+fs.writeFileSync("./data/vulnerabilities_by_vendor.json", JSON.stringify(vulnByVendor))

@@ -2,7 +2,11 @@ const OrgBubble = require("../components/OrgBubble")
 const { reactive } = require("@vue/reactivity")
 const { watch } = require("@vue-reactivity/watch")
 const router = require("quik-router")
+const { backend } = require("quik-client")
 const stringify = require('fast-json-stable-stringify');
+
+// get the tree data from backend
+const orgTreePromise = backend.data.getOrgTree().then(orgTree=>(console.log("orgTree data loaded", orgTree), orgTree))
 
 const repoData = {
     name: "topLevel",

@@ -1,4 +1,4 @@
-const d3 = require("../../static_files/d3.js")
+const d3 = require("../../static_files/d3_v3")
 
 module.exports = ({ treeData, onNodeClick = () => {} }) => {
     const container = <div></div>

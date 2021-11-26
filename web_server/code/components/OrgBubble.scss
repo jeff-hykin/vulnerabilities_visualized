@@ -1,0 +1,95 @@
+.backButton {
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: bold;
+    margin: 4px 8px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.repoContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    transition: all 0.5s ease-in-out 0s;
+    box-sizing: content-box;
+}
+
+.orgBubble {
+    visibility: hidden;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    opacity: 0;
+    transition: all 0.5s ease-in-out 0s;
+    box-sizing: content-box;
+    
+    --border-radius: 50px;
+    --background: #4db6ac46;
+    --padding: 20px;
+    --width: 80%;
+    
+    &.overview {
+        opacity: 1;
+        visibility: visible;
+        width: var(--width);
+        min-width: var(--width);
+        max-width: var(--width);
+        max-height: 300px;
+        min-height: 300px;
+        overflow: hidden;
+        background-color: var(--background);
+        border-radius: var(--boder-radius);
+        padding: var(--padding);
+        margin-bottom: 3rem;
+        z-index: 10;
+    }
+    
+    &.focused {
+        opacity: 1;
+        visibility: visible;
+        width: 90%;
+        height: 90vh;
+        overflow: auto;
+        background-color: var(--background);
+        border-radius: var(--boder-radius);
+        padding: var(--padding);
+        z-index: 10;
+        position: fixed;
+        
+        &.repoFocus {
+            background-color: transparent;
+            max-width: 100vw;
+            max-height: 100vh;
+            padding: 20px 10px;
+            
+            & > .repoContainer > :not(.repo.selected) {
+                opacity: 0;
+            }
+            
+            & > .repoContainer > .repo.selected {
+                position: fixed;
+                top: -15%;
+                left: 0;
+                width: 50vw;
+                min-width: 50vw;
+                max-width: 50vw;
+                height: 100vh;
+                min-height: 100vh;
+                max-height: 100vh;
+                display: flex;
+                align-items: center;
+                align-content: center;
+                justify-content: center;
+                justify-content: center;
+                text-align: center;
+                transform: scale(2);
+            }
+        }
+    }
+    
+    .repo {
+        transition: all 0.5s ease-in-out 0s;
+        opacity: 1;
+    }
+}
