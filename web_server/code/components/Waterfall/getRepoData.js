@@ -1,6 +1,7 @@
 const DateTime = require("good-date")
 const { object } = require("good-js")
 const smartBackend = require("../../systems/smart_backend")
+const orgTree = require("../../../../data/vulnerabilities_org_tree.json")
 
 // parameters for tweaking
 const maxNumberOfRepos = 300
@@ -8,7 +9,8 @@ const magicNumberThatMakesTheUILookGood1 = 400  // importance of number of vulne
 const magicNumberThatMakesTheUILookGood2 = 7 // inverse importance of most recent date when sorting
 const minNumberOfVulns = 20
 
-module.exports = () => smartBackend.getOrgTree().then((orgTree) => {
+module.exports = async () => {
+    // const orgTree = await smartBackend.getOrgTree()
     
     // 
     // Flatten out into Repos (and add some data to them)
@@ -69,4 +71,4 @@ module.exports = () => smartBackend.getOrgTree().then((orgTree) => {
     // 
     console.log(`output is:`,output.slice(0,5))
     return output.slice(0, maxNumberOfRepos)
-})
+}

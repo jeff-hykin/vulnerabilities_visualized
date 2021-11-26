@@ -1,11 +1,14 @@
 const DateTime = require("good-date")
 const { object } = require("good-js")
 const smartBackend = require("../../systems/smart_backend")
+const orgTree = require("../../../../data/vulnerabilities_org_tree.json")
 
 const magicNumberThatMakesUiLookGood1 = 2.3
 const maxNumberOfOrgs = 300
 
-module.exports = () => smartBackend.getOrgTree().then((orgTree) => {
+module.exports = async () => {
+    // const orgTree = await smartBackend.getOrgTree()
+
     // 
     // convert structure method
     // 
@@ -54,4 +57,4 @@ module.exports = () => smartBackend.getOrgTree().then((orgTree) => {
 
     console.log(`output is:`,output.slice(0,5))
     return output.slice(0, maxNumberOfOrgs)
-})
+}
