@@ -13,12 +13,14 @@ const Header = require("./code/skeletons/Header")
 const OrgWaterfall = require("./code/pages/OrgWaterfall")
 const RepoWaterfall = require("./code/pages/RepoWaterfall")
 const ProductView = require("./code/pages/ProductView")
+const DummyPage = require("./code/pages/DummyPage")
 const PageNotFound = require("./code/pages/PageNotFound")
 const homePage = "RepoWaterfall"
 const pages = {
     OrgWaterfall,
     RepoWaterfall,
     ProductView,
+    DummyPage,
 }
 
 // 
@@ -32,7 +34,7 @@ async function onRouteChange() {
         // keep track of (what will be) the previous 
         previousPage = router.pageInfo.page
         let currentPage = router.pageInfo.page
-        
+
         // silently redirect to homePage
         if (currentPage == null) {
             currentPage = homePage

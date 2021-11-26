@@ -1,5 +1,5 @@
 const panzoom = require('panzoom')
-const { mountedToDom } = require('./utilies')
+const { mountedToDom } = require('./utilities')
 
 module.exports = {
     addControls(element, options={}) {

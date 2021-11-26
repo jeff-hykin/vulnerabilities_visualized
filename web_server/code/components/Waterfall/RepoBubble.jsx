@@ -1,7 +1,7 @@
 const router = require("quik-router")
 
 const { nodeTheme } = require("../../systems/theme")
-const { hash, wrapAroundGet } = require("../../systems/utilies")
+const { hash, wrapAroundGet } = require("../../systems/utilities")
 const SquareGridSizer = require("../../skeletons/SquareGridSizer")
 const FancyBubble = require("../../skeletons/FancyBubble")
 

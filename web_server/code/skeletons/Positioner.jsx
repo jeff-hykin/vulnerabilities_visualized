@@ -96,15 +96,15 @@ const rowAlignment = (horizontalAlignment, verticalAlignment, innerAlignment, wr
     }
 }
 
-const computeFlexAlignmentAttributes = (directionIsRow, verticalAlignment, horizontalAlignment, innerAlignment, wrap) => {
+const computeFlexAlignmentAttributes = (directionIsRow, horizontalAlignment, verticalAlignment, innerAlignment, wrap) => {
     // convert to css form
-    verticalAlignment = humanPositionToCssFlexbox(verticalAlignment)
     horizontalAlignment = humanPositionToCssFlexbox(horizontalAlignment)
+    verticalAlignment = humanPositionToCssFlexbox(verticalAlignment)
     // then pick the correct one
     if (directionIsRow) {
-        return rowAlignment(verticalAlignment, horizontalAlignment, innerAlignment, wrap)
+        return rowAlignment(horizontalAlignment, verticalAlignment, innerAlignment, wrap)
     } else {
-        return columnAlignment(verticalAlignment, horizontalAlignment, innerAlignment, wrap)
+        return columnAlignment(horizontalAlignment, verticalAlignment, innerAlignment, wrap)
     }
 }
 
@@ -123,8 +123,8 @@ module.exports = ({ row, column, reverse, wrap, positionSelf='relativeToSelf', v
             // handle the justifyContent/alignContent attributes
             ...computeFlexAlignmentAttributes(
                 row,
-                verticalAlignment,
                 horizontalAlignment,
+                verticalAlignment,
                 innerAlignment,
                 wrap,
             ),

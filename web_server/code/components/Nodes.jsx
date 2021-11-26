@@ -1,7 +1,7 @@
 const G6 = require("@antv/g6").default
 const { backend } = require("quik-client")
 const { nodeTheme } = require("../systems/theme")
-const { mountedToDom } = require('../systems/utilies')
+const { mountedToDom } = require('../systems/utilities')
 
 // how data needs to be for the graph
 const exampleData = {
