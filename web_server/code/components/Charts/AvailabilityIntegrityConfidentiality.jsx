@@ -18,8 +18,8 @@ module.exports = ({ vulnData })=> {
         Object.values(buckets).map(each=>each.length)
     )
     
-    const cardHeight = 23 // rem
-    const minGuiSize = 6
+    const cardHeight = 32 // rem
+    const minGuiSize = 8
     const maxGuiSize = cardHeight/2
     const linearMapper = createLinearMapper({min,max}, {min: minGuiSize, max: maxGuiSize})
     
@@ -27,10 +27,11 @@ module.exports = ({ vulnData })=> {
     // Create chart
     // 
     return <Positioner row maxHeight={`${cardHeight}rem`} width="100%" verticalAlignment="center" horizontalAlignment="center">
-        <Positioner width="50%" horizontalAlignment="right">
+        {/* Left Side */}
+        <Positioner horizontalAlignment="right">
             <Positioner height="fit-content" maxHeight={`${maxGuiSize}rem`} verticalAlignment="bottom" horizontalAlignment="right">
                 <Positioner aspectRatio={1} height={`${linearMapper(buckets.confidentiality.length)}rem`} verticalAlignment="bottom" horizontalAlignment="right">
-                    <FancyBubble color1={nodeTheme.lightColors[0]} color2={nodeTheme.lightColors[0]} padding={0}>
+                    <FancyBubble hoverShadow={false} color1={nodeTheme.lightColors[4]} color2={nodeTheme.darkColors[4]} padding={0}>
                         <div style="padding: 1rem; color: white;">
                             Confidentality
                             <br />
@@ -39,9 +40,9 @@ module.exports = ({ vulnData })=> {
                     </FancyBubble>
                 </Positioner>
             </Positioner>
-            <Positioner height={`${maxGuiSize}rem`} width="50%" verticalAlignment="top" horizontalAlignment="right">
+            <Positioner maxHeight={`${maxGuiSize}rem`} verticalAlignment="top" horizontalAlignment="right">
                 <Positioner marginTop="1rem" aspectRatio={1} height={`${linearMapper(buckets.integrity.length)}rem`} verticalAlignment="top" horizontalAlignment="right">
-                    <FancyBubble color1={nodeTheme.lightColors[1]} color2={nodeTheme.lightColors[1]} padding={0}>
+                    <FancyBubble hoverShadow={false} color1={nodeTheme.lightColors[0]} color2={nodeTheme.darkColors[0]} padding={0}>
                         <div style="padding: 1rem; color: white;">
                             Integrity
                             <br />
@@ -51,9 +52,11 @@ module.exports = ({ vulnData })=> {
                 </Positioner>
             </Positioner>
         </Positioner>
-        <Positioner maxHeight={`${cardHeight}rem`} width="50%" verticalAlignment="center" horizontalAlignment="left">
-            <Positioner aspectRatio={1} height={`${linearMapper(buckets.availability.length)}rem`}>
-                <FancyBubble color1={nodeTheme.lightColors[2]} color2={nodeTheme.lightColors[2]} padding={0}>
+        
+        {/* Right Side */}
+        <Positioner maxHeight={`${cardHeight}rem`} verticalAlignment="center" horizontalAlignment="left">
+            <Positioner marginLeft="1rem" aspectRatio={1} height={`${linearMapper(buckets.availability.length)}rem`}>
+                <FancyBubble hoverShadow={false} color1={nodeTheme.lightColors[6]} color2={nodeTheme.darkColors[6]} padding={0}>
                     <div style="padding: 1rem; color: white;">
                         Availability
                         <br />
@@ -62,5 +65,6 @@ module.exports = ({ vulnData })=> {
                 </FancyBubble>
             </Positioner>
         </Positioner>
+        
     </Positioner>
 }

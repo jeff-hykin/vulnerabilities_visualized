@@ -25952,7 +25952,7 @@ module.exports = function (_ref) {
   }, children);
 };
 },{}],"../code/skeletons/FancyBubble.jsx":[function(require,module,exports) {
-var _excluded = ["color1", "color2", "rotationOffset", "children", "padding"];
+var _excluded = ["color1", "color2", "rotationOffset", "children", "padding", "hoverShadow"];
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -25967,6 +25967,8 @@ module.exports = function (_ref) {
       rotationOffset = _ref$rotationOffset === void 0 ? "0deg" : _ref$rotationOffset,
       children = _ref.children,
       padding = _ref.padding,
+      _ref$hoverShadow = _ref.hoverShadow,
+      hoverShadow = _ref$hoverShadow === void 0 ? true : _ref$hoverShadow,
       props = _objectWithoutProperties(_ref, _excluded);
 
   // main content
@@ -25996,7 +25998,7 @@ module.exports = function (_ref) {
 
   var circleWithShadow = /*#__PURE__*/React.createElement("div", {
     name: "bubble-outer-part",
-    class: "our-strong-shadow centered",
+    class: "".concat(hoverShadow ? 'our-strong-shadow' : 'our-shadow-1', " centered"),
     style: "\n            max-width: 99%;\n            width: 99%;\n            transition: all 0.2s ease-in-out 0s;\n            aspect-ratio: 1;\n            border-radius: 200vw;\n            --rotation-offset: ".concat(rotationOffset, ";\n        ")
   }, rotatingCircle); // wrapper #5
 
@@ -67025,9 +67027,9 @@ module.exports = function (_ref) {
       median = _stats2[4],
       sum = _stats2[5];
 
-  var cardHeight = 23; // rem
+  var cardHeight = 32; // rem
 
-  var minGuiSize = 6;
+  var minGuiSize = 8;
   var maxGuiSize = cardHeight / 2;
   var linearMapper = createLinearMapper({
     min: min,
@@ -67046,7 +67048,6 @@ module.exports = function (_ref) {
     verticalAlignment: "center",
     horizontalAlignment: "center"
   }, /*#__PURE__*/React.createElement(Positioner, {
-    width: "50%",
     horizontalAlignment: "right"
   }, /*#__PURE__*/React.createElement(Positioner, {
     height: "fit-content",
@@ -67059,14 +67060,14 @@ module.exports = function (_ref) {
     verticalAlignment: "bottom",
     horizontalAlignment: "right"
   }, /*#__PURE__*/React.createElement(FancyBubble, {
-    color1: nodeTheme.lightColors[0],
-    color2: nodeTheme.lightColors[0],
+    hoverShadow: false,
+    color1: nodeTheme.lightColors[4],
+    color2: nodeTheme.darkColors[4],
     padding: 0
   }, /*#__PURE__*/React.createElement("div", {
     style: "padding: 1rem; color: white;"
   }, "Confidentality", /*#__PURE__*/React.createElement("br", null), "(".concat(buckets.confidentiality.length, ")"))))), /*#__PURE__*/React.createElement(Positioner, {
-    height: "".concat(maxGuiSize, "rem"),
-    width: "50%",
+    maxHeight: "".concat(maxGuiSize, "rem"),
     verticalAlignment: "top",
     horizontalAlignment: "right"
   }, /*#__PURE__*/React.createElement(Positioner, {
@@ -67076,22 +67077,24 @@ module.exports = function (_ref) {
     verticalAlignment: "top",
     horizontalAlignment: "right"
   }, /*#__PURE__*/React.createElement(FancyBubble, {
-    color1: nodeTheme.lightColors[1],
-    color2: nodeTheme.lightColors[1],
+    hoverShadow: false,
+    color1: nodeTheme.lightColors[0],
+    color2: nodeTheme.darkColors[0],
     padding: 0
   }, /*#__PURE__*/React.createElement("div", {
     style: "padding: 1rem; color: white;"
   }, "Integrity", /*#__PURE__*/React.createElement("br", null), "(".concat(buckets.integrity.length, ")")))))), /*#__PURE__*/React.createElement(Positioner, {
     maxHeight: "".concat(cardHeight, "rem"),
-    width: "50%",
     verticalAlignment: "center",
     horizontalAlignment: "left"
   }, /*#__PURE__*/React.createElement(Positioner, {
+    marginLeft: "1rem",
     aspectRatio: 1,
     height: "".concat(linearMapper(buckets.availability.length), "rem")
   }, /*#__PURE__*/React.createElement(FancyBubble, {
-    color1: nodeTheme.lightColors[2],
-    color2: nodeTheme.lightColors[2],
+    hoverShadow: false,
+    color1: nodeTheme.lightColors[6],
+    color2: nodeTheme.darkColors[6],
     padding: 0
   }, /*#__PURE__*/React.createElement("div", {
     style: "padding: 1rem; color: white;"

@@ -1,4 +1,4 @@
-module.exports = ({ color1, color2, rotationOffset="0deg", children, padding, ...props }) => {
+module.exports = ({ color1, color2, rotationOffset="0deg", children, padding, hoverShadow=true, ...props }) => {
     // main content
     const bubbleInnerPart = <div
         name="bubble-inner-part"
@@ -52,7 +52,7 @@ module.exports = ({ color1, color2, rotationOffset="0deg", children, padding, ..
     // wrapper #4
     const circleWithShadow = <div
         name="bubble-outer-part"
-        class="our-strong-shadow centered"
+        class={`${hoverShadow?'our-strong-shadow' : 'our-shadow-1'} centered`}
         style={`
             max-width: 99%;
             width: 99%;
