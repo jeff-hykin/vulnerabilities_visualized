@@ -66822,7 +66822,88 @@ module.exports = function (_ref) {
   });
   return canvas;
 };
-},{"lodash-contrib":"../../node_modules/lodash-contrib/dist/lodash-contrib.commonjs.js","../systems/chartjs":"../code/systems/chartjs.js","../systems/utilities":"../code/systems/utilities.js"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
+},{"lodash-contrib":"../../node_modules/lodash-contrib/dist/lodash-contrib.commonjs.js","../systems/chartjs":"../code/systems/chartjs.js","../systems/utilities":"../code/systems/utilities.js"}],"../code/components/Charts/DateSeverityChart.jsx":[function(require,module,exports) {
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var DateTime = require("good-date");
+
+var _require = require("../../systems/utilities"),
+    numbers = _require.numbers,
+    sum = _require.sum,
+    getFrequencies = _require.getFrequencies,
+    arrayAsObjectKeys = _require.arrayAsObjectKeys;
+
+var FrequencyChart = require("../../components/FrequencyChart");
+
+module.exports = function (_ref) {
+  var vulnData = _ref.vulnData;
+  // 
+  // convert data
+  // 
+  vulnData = vulnData.map(function (each) {
+    return _objectSpread(_objectSpread({}, each), {}, {
+      year: each.publishDate.replace(/(\d+)-(\d+)-(\d+)/, "$1") - 0,
+      publishDate: new DateTime(each.publishDate),
+      publishUnixTime: new DateTime(each.publishDate).unix
+    });
+  });
+  var vulnYears = new Set(vulnData.map(function (each) {
+    return each.year;
+  }));
+  var freqByYear = getFrequencies(vulnData.map(function (each) {
+    return each.year;
+  }));
+  var vulnScores = vulnData.map(function (each) {
+    return each.score;
+  });
+  var dates = vulnData.map(function (each) {
+    return each.publishUnixTime;
+  });
+  var maxDateMiliseconds = Math.max.apply(Math, _toConsumableArray(dates));
+  var minDateMiliseconds = Math.min.apply(Math, _toConsumableArray(dates));
+  var dateRange = maxDateMiliseconds - minDateMiliseconds;
+  var averageNumberOfMilisecondsInAMonth = 2629800000;
+  var averageNumberOfMilisecondsInAYear = 31557600000;
+  var years = dateRange / averageNumberOfMilisecondsInAYear;
+  var yearBuckets = numbers({
+    count: years,
+    min: new DateTime(minDateMiliseconds).year,
+    max: new DateTime(maxDateMiliseconds).year,
+    decimals: 0
+  });
+  console.log("vulnData.length is:", vulnData.length);
+  console.log("vulnYears is:", vulnYears);
+  console.log("freqByYear is:", freqByYear);
+  console.debug("vulnData is:", vulnData.slice(0, 50)); // 
+  // Create chart
+  // 
+
+  return /*#__PURE__*/React.createElement(FrequencyChart, {
+    label: "By Year",
+    height: 100,
+    width: 200,
+    data: _objectSpread(_objectSpread({}, arrayAsObjectKeys(yearBuckets, 0)), getFrequencies(vulnData.map(function (each) {
+      return each.publishDate.year;
+    })))
+  });
+};
+},{"good-date":"../../node_modules/good-date/index.js","../../systems/utilities":"../code/systems/utilities.js","../../components/FrequencyChart":"../code/components/FrequencyChart.jsx"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -66856,11 +66937,8 @@ var _require2 = require("../systems/utilities"),
     numbers = _require2.numbers,
     sum = _require2.sum,
     getFrequencies = _require2.getFrequencies,
-    arrayAsObjectKeys = _require2.arrayAsObjectKeys;
+    arrayAsObjectKeys = _require2.arrayAsObjectKeys; // components
 
-var DateTime = require("good-date");
-
-window.DateTime = DateTime; // components
 
 var Positioner = require("../skeletons/Positioner");
 
@@ -66870,7 +66948,9 @@ var RepoGraph = require("../components/RepoGraph");
 
 var Title = require("../components/Title");
 
-var FrequencyChart = require("../components/FrequencyChart"); // 
+var FrequencyChart = require("../components/FrequencyChart");
+
+var DateSeverityChart = require("../components/Charts/DateSeverityChart"); // 
 // 
 // helpers 
 // 
@@ -66920,7 +67000,7 @@ var SummaryTag = /*#__PURE__*/function () {
 
 var ChartList = /*#__PURE__*/function () {
   var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(_ref3) {
-    var orgName, repoName, commitData, vulnData, unixTimeOf1999, vulnYears, freqByYear, vulnScores, dates, maxDateMiliseconds, minDateMiliseconds, dateRange, averageNumberOfMilisecondsInAMonth, averageNumberOfMilisecondsInAYear, years, yearBuckets;
+    var orgName, repoName, commitData, vulnData;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -66937,46 +67017,7 @@ var ChartList = /*#__PURE__*/function () {
           case 6:
             vulnData = _context2.sent;
             console.debug("vulnData is:", vulnData.slice(0, 50));
-            console.debug("commitData is:", (commitData || []).slice(0, 50)); // const unixTimeOf2002 = 1199899999999
-            // const unixTimeOf2002 = 1120000000000
-
-            unixTimeOf1999 = 1450000000000;
-            vulnData = vulnData.map(function (each) {
-              return _objectSpread(_objectSpread({}, each), {}, {
-                year: each.publishDate.replace(/(\d+)-(\d+)-(\d+)/, "$1") - 0,
-                publishDate: new DateTime(each.publishDate),
-                publishUnixTime: new DateTime(each.publishDate).unix
-              });
-            }); // vulnData = vulnData.filter(each => each.publishUnixTime > unixTimeOf1999)
-
-            console.log("vulnData.length is:", vulnData.length);
-            vulnYears = new Set(vulnData.map(function (each) {
-              return each.year;
-            }));
-            freqByYear = getFrequencies(vulnData.map(function (each) {
-              return each.year;
-            }));
-            console.log("vulnYears is:", vulnYears);
-            console.log("freqByYear is:", freqByYear);
-            vulnScores = vulnData.map(function (each) {
-              return each.score;
-            });
-            dates = vulnData.map(function (each) {
-              return each.publishUnixTime;
-            });
-            maxDateMiliseconds = Math.max.apply(Math, _toConsumableArray(dates));
-            minDateMiliseconds = Math.min.apply(Math, _toConsumableArray(dates));
-            dateRange = maxDateMiliseconds - minDateMiliseconds;
-            averageNumberOfMilisecondsInAMonth = 2629800000;
-            averageNumberOfMilisecondsInAYear = 31557600000;
-            years = dateRange / averageNumberOfMilisecondsInAYear;
-            yearBuckets = numbers({
-              count: years,
-              min: new DateTime(minDateMiliseconds).year,
-              max: new DateTime(maxDateMiliseconds).year,
-              decimals: 0
-            });
-            console.debug("vulnData is:", vulnData.slice(0, 50));
+            console.debug("commitData is:", (commitData || []).slice(0, 50));
             return _context2.abrupt("return", /*#__PURE__*/React.createElement("div", {
               style: "width: 100%; max-width: 50rem; padding: 2rem; box-sizing: border-box;"
             }, /*#__PURE__*/React.createElement(ChartCard, {
@@ -66990,18 +67031,13 @@ var ChartList = /*#__PURE__*/function () {
               })))
             })), /*#__PURE__*/React.createElement(ChartCard, {
               name: "by-year"
-            }, /*#__PURE__*/React.createElement(FrequencyChart, {
-              label: "By Year",
-              height: 100,
-              width: 200,
-              data: _objectSpread(_objectSpread({}, arrayAsObjectKeys(yearBuckets, 0)), getFrequencies(vulnData.map(function (each) {
-                return each.publishDate.year;
-              })))
+            }, /*#__PURE__*/React.createElement(DateSeverityChart, {
+              vulnData: vulnData
             })), /*#__PURE__*/React.createElement(ChartCard, {
               name: "card-1:dummy-card"
             }, "I'm a Dummy Card 2, Replace me with an actual chart")));
 
-          case 27:
+          case 10:
           case "end":
             return _context2.stop();
         }
@@ -67094,7 +67130,7 @@ module.exports = /*#__PURE__*/function () {
     return _ref8.apply(this, arguments);
   };
 }();
-},{"@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","../systems/smart_backend":"../code/systems/smart_backend.js","../systems/utilities":"../code/systems/utilities.js","good-date":"../../node_modules/good-date/index.js","../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../skeletons/ChartCard":"../code/skeletons/ChartCard.jsx","../components/RepoGraph":"../code/components/RepoGraph.jsx","../components/Title":"../code/components/Title.jsx","../components/FrequencyChart":"../code/components/FrequencyChart.jsx"}],"../code/pages/DummyPage.jsx":[function(require,module,exports) {
+},{"@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","../systems/smart_backend":"../code/systems/smart_backend.js","../systems/utilities":"../code/systems/utilities.js","../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../skeletons/ChartCard":"../code/skeletons/ChartCard.jsx","../components/RepoGraph":"../code/components/RepoGraph.jsx","../components/Title":"../code/components/Title.jsx","../components/FrequencyChart":"../code/components/FrequencyChart.jsx","../components/Charts/DateSeverityChart":"../code/components/Charts/DateSeverityChart.jsx"}],"../code/pages/DummyPage.jsx":[function(require,module,exports) {
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }

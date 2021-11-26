@@ -2,8 +2,6 @@ const { watch } = require("@vue-reactivity/watch")
 const router = require("quik-router")
 const smartBackend = require("../systems/smart_backend")
 const { numbers, sum, getFrequencies, arrayAsObjectKeys } = require("../systems/utilities")
-const DateTime = require("good-date")
-window.DateTime = DateTime
 
 // components
 const Positioner = require("../skeletons/Positioner")
@@ -11,6 +9,7 @@ const ChartCard = require("../skeletons/ChartCard")
 const RepoGraph = require("../components/RepoGraph")
 const Title = require("../components/Title")
 const FrequencyChart = require("../components/FrequencyChart")
+const DateSeverityChart = require("../components/Charts/DateSeverityChart")
 
 
 // 
@@ -32,41 +31,9 @@ const SummaryTag = async ({ orgName, repoName })=>{
 const ChartList = async ({ orgName, repoName }) => {
     // get data from the backend
     const commitData = await smartBackend.getCommitDataFor(repoName)
-    let vulnData   = await smartBackend.getVulnDataFor(repoName)
+    const vulnData   = await smartBackend.getVulnDataFor(repoName)
     console.debug(`vulnData is:`,vulnData.slice(0,50))
     console.debug(`commitData is:`,(commitData||[]).slice(0,50))
-    
-    // const unixTimeOf2002 = 1199899999999
-    // const unixTimeOf2002 = 1120000000000
-    const unixTimeOf1999 = 1450000000000
-    vulnData = vulnData.map(each=>({
-        ...each,
-        year: each.publishDate.replace(/(\d+)-(\d+)-(\d+)/,"$1")-0,
-        publishDate: new DateTime(each.publishDate),
-        publishUnixTime: (new DateTime(each.publishDate)).unix,
-    }))
-    // vulnData = vulnData.filter(each => each.publishUnixTime > unixTimeOf1999)
-    console.log(`vulnData.length is:`,vulnData.length)
-    const vulnYears = new Set(vulnData.map(each=>each.year))
-    const freqByYear = getFrequencies(vulnData.map(each=>each.year))
-    console.log(`vulnYears is:`,vulnYears)
-    console.log(`freqByYear is:`,freqByYear)
-    const vulnScores = vulnData.map(each=>each.score)
-    const dates = vulnData.map(each=>each.publishUnixTime)
-    const maxDateMiliseconds = Math.max(...dates)
-    const minDateMiliseconds = Math.min(...dates)
-    const dateRange = maxDateMiliseconds - minDateMiliseconds
-    const averageNumberOfMilisecondsInAMonth = 2629800000
-    const averageNumberOfMilisecondsInAYear = 31557600000
-    const years = dateRange / averageNumberOfMilisecondsInAYear
-    const yearBuckets = numbers({
-        count: years,
-        min: (new DateTime(minDateMiliseconds)).year,
-        max: (new DateTime(maxDateMiliseconds)).year,
-        decimals: 0,
-    })
-    
-    console.debug(`vulnData is:`,vulnData.slice(0,50))
     
     return <div style="width: 100%; max-width: 50rem; padding: 2rem; box-sizing: border-box;">
         
@@ -85,17 +52,7 @@ const ChartList = async ({ orgName, repoName }) => {
         </ChartCard>
         
         <ChartCard name="by-year">
-            <FrequencyChart
-                label="By Year"
-                height={100}
-                width={200}
-                data={{
-                    ...arrayAsObjectKeys(yearBuckets, 0),
-                    ...getFrequencies(
-                        vulnData.map(each=>each.publishDate.year)
-                    )
-                }}
-                />
+            <DateSeverityChart vulnData={vulnData} />
         </ChartCard>
         
         <ChartCard name="card-1:dummy-card">
