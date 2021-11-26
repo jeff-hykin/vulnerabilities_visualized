@@ -24,15 +24,8 @@ const computeColors = (index) => {
 }
 const computePaddingAndCellCount = (size) => {
     const numberOfCells = (size/magicNumberThatMakesTheUILookGood1)+1
-    let paddingAmount = 0
-    // randomize for small repos
-    if (size == 1) {
-        paddingAmount = Math.random()*(minPadding - maxPadding) + maxPadding
-    // make it depend on size for big repos
-    } else {
-        const relativeSmallness = Math.ceil(numberOfCells) - numberOfCells
-        paddingAmount = (1-relativeSmallness)*(minPadding - maxPadding) + maxPadding
-    }
+    const relativeSmallness = Math.ceil(numberOfCells) - numberOfCells
+    let paddingAmount = (1-relativeSmallness)*(minPadding - maxPadding) + maxPadding
     return [ paddingAmount, Math.ceil(numberOfCells) ]
 }
 
@@ -74,7 +67,7 @@ const RepoBubble = ({ eachRepo })=> {
                     </span>
                     {/* Repo count */}
                     <br />
-                    {`(${eachRepo.size})` }
+                    {`(${eachRepo.numberOfVulnerabilies})` }
                 </div>
         </FancyBubble>
     </SquareGridSizer>

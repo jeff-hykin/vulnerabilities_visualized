@@ -7,14 +7,14 @@ const RepoList = ({ repos={}, orgData, ...props }) =>{
             z-index: 999999;
             height: fit-content;
             max-height: 17vh;
-            width: 18rem;
+            width: 20rem;
             align-self: center;
             flex-shrink: 0;
             background: white;
             border-radius: 1rem;
             overflow: auto;
-            padding: 0.5rem;
-            margin-top: -25px;
+            padding: 1rem;
+            margin-top: -25%;
             transition: all ${RepoList.animationTime/1000}s ease-in-out 0s;
         `}
         {...props}

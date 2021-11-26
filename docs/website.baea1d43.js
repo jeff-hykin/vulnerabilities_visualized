@@ -26101,7 +26101,7 @@ var RepoList = function RepoList(_ref) {
 
   return /*#__PURE__*/React.createElement("div", _extends({
     class: "our-weak-shadow",
-    style: "\n            z-index: 999999;\n            height: fit-content;\n            max-height: 17vh;\n            width: 18rem;\n            align-self: center;\n            flex-shrink: 0;\n            background: white;\n            border-radius: 1rem;\n            overflow: auto;\n            padding: 0.5rem;\n            margin-top: -25px;\n            transition: all ".concat(RepoList.animationTime / 1000, "s ease-in-out 0s;\n        ")
+    style: "\n            z-index: 999999;\n            height: fit-content;\n            max-height: 17vh;\n            width: 20rem;\n            align-self: center;\n            flex-shrink: 0;\n            background: white;\n            border-radius: 1rem;\n            overflow: auto;\n            padding: 1rem;\n            margin-top: -25%;\n            transition: all ".concat(RepoList.animationTime / 1000, "s ease-in-out 0s;\n        ")
   }, props), Object.entries(repos).map(function (_ref2) {
     var _ref3 = _slicedToArray(_ref2, 2),
         name = _ref3[0],
@@ -26398,14 +26398,16 @@ var smartBackend = require("../../systems/smart_backend"); // parameters for twe
 var maxNumberOfRepos = 300;
 var magicNumberThatMakesTheUILookGood1 = 400; // importance of number of vulnerabilies when sorting
 
-var magicNumberThatMakesTheUILookGood2 = 63; // inverse importance of most recent date when sorting
+var magicNumberThatMakesTheUILookGood2 = 7; // inverse importance of most recent date when sorting
+
+var minNumberOfVulns = 20;
 
 module.exports = function () {
   return smartBackend.getOrgTree().then(function (orgTree) {
     // 
     // Flatten out into Repos (and add some data to them)
     // 
-    var repos = [];
+    var output = [];
 
     for (var _i = 0, _Object$entries = Object.entries(orgTree); _i < _Object$entries.length; _i++) {
       var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
@@ -26419,20 +26421,59 @@ module.exports = function () {
 
         var bubbleSize = (eachRepoValue.numberOfVulnerabilies / magicNumberThatMakesTheUILookGood1).toFixed(3) - 0;
         var lastTouched = new DateTime(eachRepoValue.newestVulnerabilityTime).unix;
-        repos.push(_objectSpread(_objectSpread({}, eachRepoValue), {}, {
+
+        if (eachRepoValue.numberOfVulnerabilies < minNumberOfVulns) {
+          continue;
+        }
+
+        output.push(_objectSpread(_objectSpread({}, eachRepoValue), {}, {
           name: eachRepoName,
-          size: bubbleSize,
+          size: Math.pow(bubbleSize, 1 / 2.3) * 3.8,
           orgName: eachOrgName,
           lastTouched: lastTouched,
           orderMetric: bubbleSize + Math.sqrt(lastTouched) / magicNumberThatMakesTheUILookGood2
         }));
       }
     } // 
+    // 
+    // Keep removing small repos until there's a nice balance
+    // 
+    // 
+
+
+    var _loop = function _loop() {
+      var numberOf1RepoOrgs = output.filter(function (each) {
+        return Math.ceil(each.bubbleSize / 2) == 1;
+      }).length;
+      var numberOfBiggerOrgs = output.filter(function (each) {
+        return Math.ceil(each.bubbleSize / 2) != 1;
+      }).length;
+
+      if (numberOfBiggerOrgs > numberOf1RepoOrgs * 5.5) {
+        return "break";
+      }
+
+      var amountToRemove = Math.ceil(numberOf1RepoOrgs * 0.1);
+      output = output.filter(function (each) {
+        if (each.bubbleSize == 1 && amountToRemove > 0) {
+          --amountToRemove;
+          return false;
+        } else {
+          return true;
+        }
+      });
+    };
+
+    while (true) {
+      var _ret = _loop();
+
+      if (_ret === "break") break;
+    } // 
     // sorting method
     // 
 
 
-    var output = repos.sort(object.compareProperty({
+    output = output.sort(object.compareProperty({
       keyList: ['orderMetric'],
       largestFirst: true
     })); // 
@@ -26489,15 +26530,8 @@ var computeColors = function computeColors(index) {
 
 var computePaddingAndCellCount = function computePaddingAndCellCount(size) {
   var numberOfCells = size / magicNumberThatMakesTheUILookGood1 + 1;
-  var paddingAmount = 0; // randomize for small repos
-
-  if (size == 1) {
-    paddingAmount = Math.random() * (minPadding - maxPadding) + maxPadding; // make it depend on size for big repos
-  } else {
-    var relativeSmallness = Math.ceil(numberOfCells) - numberOfCells;
-    paddingAmount = (1 - relativeSmallness) * (minPadding - maxPadding) + maxPadding;
-  }
-
+  var relativeSmallness = Math.ceil(numberOfCells) - numberOfCells;
+  var paddingAmount = (1 - relativeSmallness) * (minPadding - maxPadding) + maxPadding;
   return [paddingAmount, Math.ceil(numberOfCells)];
 }; // 
 // Repo
@@ -26540,7 +26574,7 @@ var RepoBubble = function RepoBubble(_ref) {
     name: "repo-name",
     class: "centered",
     style: "\n                            border-radius: 0.6rem;\n                            padding: 0.3rem 0.5rem;\n                            background: var(--translucent-charcoal);\n                            color: white;\n                            max-width: 110%;\n                        "
-  }, eachRepo.name), /*#__PURE__*/React.createElement("br", null), "(".concat(eachRepo.size, ")"))));
+  }, eachRepo.name), /*#__PURE__*/React.createElement("br", null), "(".concat(eachRepo.numberOfVulnerabilies, ")"))));
 };
 
 RepoBubble.index = 0;
