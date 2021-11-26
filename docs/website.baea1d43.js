@@ -25853,6 +25853,48 @@ var numbers = function numbers(_ref2) {
   values.push(max.toFixed(decimals) - 0);
   return values;
 }; // 
+// stats
+// 
+
+/**
+ * @param {Array} listOfNumbers - yup
+ * @return {Array} [min,max,range,average,median,sum]
+ *
+ * @example
+ *     const [min,max,range,average,median,sum] = stats([1,50352,3,4,5555234])
+ */
+
+
+var stats = function stats(listOfNumbers) {
+  var median = listOfNumbers[Math.floor(listOfNumbers.length / 2)];
+  var min = Infinity,
+      max = -Infinity,
+      sum = 0;
+
+  var _iterator3 = _createForOfIteratorHelper(listOfNumbers),
+      _step3;
+
+  try {
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      var each = _step3.value;
+      sum += each;
+
+      if (each > max) {
+        max = each;
+      }
+
+      if (each < min) {
+        min = each;
+      }
+    }
+  } catch (err) {
+    _iterator3.e(err);
+  } finally {
+    _iterator3.f();
+  }
+
+  return [min, max, max - min, sum / listOfNumbers.length, median, sum];
+}; // 
 // Array to object keys
 // 
 
@@ -25861,6 +25903,27 @@ var arrayAsObjectKeys = function arrayAsObjectKeys(array, defaultValue) {
   return array.reduce(function (acc, curr) {
     return acc[curr] = defaultValue, acc;
   }, {});
+}; // 
+// Linear Mapping
+// 
+
+
+var createLinearMapper = function createLinearMapper() {
+  var from = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    min: 0,
+    max: 1
+  };
+  var to = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+    min: 0,
+    max: 100
+  };
+  var fromRange = from.max - from.min;
+  var toRange = to.max - to.min;
+  return function (value) {
+    var normalized = (value - from.min) / fromRange;
+    var newMapping = normalized * toRange + to.min;
+    return newMapping;
+  };
 }; //
 //
 // exports
@@ -25875,6 +25938,8 @@ module.exports = {
   getFrequencies: getFrequencies,
   numbers: numbers,
   sum: sum,
+  stats: stats,
+  createLinearMapper: createLinearMapper,
   arrayAsObjectKeys: arrayAsObjectKeys
 };
 },{"lodash-contrib":"../../node_modules/lodash-contrib/dist/lodash-contrib.commonjs.js"}],"../code/skeletons/SquareGridSizer.jsx":[function(require,module,exports) {
@@ -25898,7 +25963,8 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 module.exports = function (_ref) {
   var color1 = _ref.color1,
       color2 = _ref.color2,
-      rotationOffset = _ref.rotationOffset,
+      _ref$rotationOffset = _ref.rotationOffset,
+      rotationOffset = _ref$rotationOffset === void 0 ? "0deg" : _ref$rotationOffset,
       children = _ref.children,
       padding = _ref.padding,
       props = _objectWithoutProperties(_ref, _excluded);
@@ -25906,6 +25972,7 @@ module.exports = function (_ref) {
   // main content
   var bubbleInnerPart = /*#__PURE__*/React.createElement("div", {
     name: "bubble-inner-part",
+    class: "centered",
     style: "\n            width: 100%;\n            aspect-ratio: 1;\n            border-radius: 200vw;\n        "
   }, children); // wrapper #1
 
@@ -66903,7 +66970,134 @@ module.exports = function (_ref) {
     })))
   });
 };
-},{"good-date":"../../node_modules/good-date/index.js","../../systems/utilities":"../code/systems/utilities.js","../../components/FrequencyChart":"../code/components/FrequencyChart.jsx"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
+},{"good-date":"../../node_modules/good-date/index.js","../../systems/utilities":"../code/systems/utilities.js","../../components/FrequencyChart":"../code/components/FrequencyChart.jsx"}],"../code/components/Charts/AvailabilityIntegrityConfidentiality.jsx":[function(require,module,exports) {
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var Positioner = require("../../skeletons/Positioner");
+
+var FancyBubble = require("../../skeletons/FancyBubble");
+
+var _require = require("../../systems/theme"),
+    nodeTheme = _require.nodeTheme;
+
+var _require2 = require("../../systems/utilities"),
+    numbers = _require2.numbers,
+    stats = _require2.stats,
+    createLinearMapper = _require2.createLinearMapper,
+    getFrequencies = _require2.getFrequencies,
+    arrayAsObjectKeys = _require2.arrayAsObjectKeys;
+
+module.exports = function (_ref) {
+  var vulnData = _ref.vulnData;
+  // 
+  // convert data
+  // 
+  var buckets = {
+    confidentiality: vulnData.filter(function (each) {
+      return each.confidentiality && each.confidentiality != 'None';
+    }),
+    integrity: vulnData.filter(function (each) {
+      return each.integrity && each.integrity != 'None';
+    }),
+    availability: vulnData.filter(function (each) {
+      return each.availability && each.availability != 'None';
+    })
+  };
+
+  var _stats = stats(Object.values(buckets).map(function (each) {
+    return each.length;
+  })),
+      _stats2 = _slicedToArray(_stats, 6),
+      min = _stats2[0],
+      max = _stats2[1],
+      range = _stats2[2],
+      average = _stats2[3],
+      median = _stats2[4],
+      sum = _stats2[5];
+
+  var cardHeight = 23; // rem
+
+  var minGuiSize = 6;
+  var maxGuiSize = cardHeight / 2;
+  var linearMapper = createLinearMapper({
+    min: min,
+    max: max
+  }, {
+    min: minGuiSize,
+    max: maxGuiSize
+  }); // 
+  // Create chart
+  // 
+
+  return /*#__PURE__*/React.createElement(Positioner, {
+    row: true,
+    maxHeight: "".concat(cardHeight, "rem"),
+    width: "100%",
+    verticalAlignment: "center",
+    horizontalAlignment: "center"
+  }, /*#__PURE__*/React.createElement(Positioner, {
+    width: "50%",
+    horizontalAlignment: "right"
+  }, /*#__PURE__*/React.createElement(Positioner, {
+    height: "fit-content",
+    maxHeight: "".concat(maxGuiSize, "rem"),
+    verticalAlignment: "bottom",
+    horizontalAlignment: "right"
+  }, /*#__PURE__*/React.createElement(Positioner, {
+    aspectRatio: 1,
+    height: "".concat(linearMapper(buckets.confidentiality.length), "rem"),
+    verticalAlignment: "bottom",
+    horizontalAlignment: "right"
+  }, /*#__PURE__*/React.createElement(FancyBubble, {
+    color1: nodeTheme.lightColors[0],
+    color2: nodeTheme.lightColors[0],
+    padding: 0
+  }, /*#__PURE__*/React.createElement("div", {
+    style: "padding: 1rem; color: white;"
+  }, "Confidentality", /*#__PURE__*/React.createElement("br", null), "(".concat(buckets.confidentiality.length, ")"))))), /*#__PURE__*/React.createElement(Positioner, {
+    height: "".concat(maxGuiSize, "rem"),
+    width: "50%",
+    verticalAlignment: "top",
+    horizontalAlignment: "right"
+  }, /*#__PURE__*/React.createElement(Positioner, {
+    marginTop: "1rem",
+    aspectRatio: 1,
+    height: "".concat(linearMapper(buckets.integrity.length), "rem"),
+    verticalAlignment: "top",
+    horizontalAlignment: "right"
+  }, /*#__PURE__*/React.createElement(FancyBubble, {
+    color1: nodeTheme.lightColors[1],
+    color2: nodeTheme.lightColors[1],
+    padding: 0
+  }, /*#__PURE__*/React.createElement("div", {
+    style: "padding: 1rem; color: white;"
+  }, "Integrity", /*#__PURE__*/React.createElement("br", null), "(".concat(buckets.integrity.length, ")")))))), /*#__PURE__*/React.createElement(Positioner, {
+    maxHeight: "".concat(cardHeight, "rem"),
+    width: "50%",
+    verticalAlignment: "center",
+    horizontalAlignment: "left"
+  }, /*#__PURE__*/React.createElement(Positioner, {
+    aspectRatio: 1,
+    height: "".concat(linearMapper(buckets.availability.length), "rem")
+  }, /*#__PURE__*/React.createElement(FancyBubble, {
+    color1: nodeTheme.lightColors[2],
+    color2: nodeTheme.lightColors[2],
+    padding: 0
+  }, /*#__PURE__*/React.createElement("div", {
+    style: "padding: 1rem; color: white;"
+  }, "Availability", /*#__PURE__*/React.createElement("br", null), "(".concat(buckets.availability.length, ")"))))));
+};
+},{"../../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../../skeletons/FancyBubble":"../code/skeletons/FancyBubble.jsx","../../systems/theme":"../code/systems/theme.js","../../systems/utilities":"../code/systems/utilities.js"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -66944,13 +67138,17 @@ var Positioner = require("../skeletons/Positioner");
 
 var ChartCard = require("../skeletons/ChartCard");
 
+var FancyBubble = require("../skeletons/FancyBubble");
+
 var RepoGraph = require("../components/RepoGraph");
 
 var Title = require("../components/Title");
 
 var FrequencyChart = require("../components/FrequencyChart");
 
-var DateSeverityChart = require("../components/Charts/DateSeverityChart"); // 
+var DateSeverityChart = require("../components/Charts/DateSeverityChart");
+
+var AvailabilityIntegrityConfidentiality = require("../components/Charts/AvailabilityIntegrityConfidentiality"); // 
 // 
 // helpers 
 // 
@@ -67032,6 +67230,10 @@ var ChartList = /*#__PURE__*/function () {
             })), /*#__PURE__*/React.createElement(ChartCard, {
               name: "by-year"
             }, /*#__PURE__*/React.createElement(DateSeverityChart, {
+              vulnData: vulnData
+            })), /*#__PURE__*/React.createElement(ChartCard, {
+              name: "AvailabilityIntegrityConfidentiality"
+            }, /*#__PURE__*/React.createElement(AvailabilityIntegrityConfidentiality, {
               vulnData: vulnData
             })), /*#__PURE__*/React.createElement(ChartCard, {
               name: "card-1:dummy-card"
@@ -67130,7 +67332,7 @@ module.exports = /*#__PURE__*/function () {
     return _ref8.apply(this, arguments);
   };
 }();
-},{"@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","../systems/smart_backend":"../code/systems/smart_backend.js","../systems/utilities":"../code/systems/utilities.js","../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../skeletons/ChartCard":"../code/skeletons/ChartCard.jsx","../components/RepoGraph":"../code/components/RepoGraph.jsx","../components/Title":"../code/components/Title.jsx","../components/FrequencyChart":"../code/components/FrequencyChart.jsx","../components/Charts/DateSeverityChart":"../code/components/Charts/DateSeverityChart.jsx"}],"../static_files/d3_v7.js":[function(require,module,exports) {
+},{"@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","../systems/smart_backend":"../code/systems/smart_backend.js","../systems/utilities":"../code/systems/utilities.js","../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../skeletons/ChartCard":"../code/skeletons/ChartCard.jsx","../skeletons/FancyBubble":"../code/skeletons/FancyBubble.jsx","../components/RepoGraph":"../code/components/RepoGraph.jsx","../components/Title":"../code/components/Title.jsx","../components/FrequencyChart":"../code/components/FrequencyChart.jsx","../components/Charts/DateSeverityChart":"../code/components/Charts/DateSeverityChart.jsx","../components/Charts/AvailabilityIntegrityConfidentiality":"../code/components/Charts/AvailabilityIntegrityConfidentiality.jsx"}],"../static_files/d3_v7.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }

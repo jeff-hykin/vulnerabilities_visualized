@@ -6,10 +6,12 @@ const { numbers, sum, getFrequencies, arrayAsObjectKeys } = require("../systems/
 // components
 const Positioner = require("../skeletons/Positioner")
 const ChartCard = require("../skeletons/ChartCard")
+const FancyBubble = require("../skeletons/FancyBubble")
 const RepoGraph = require("../components/RepoGraph")
 const Title = require("../components/Title")
 const FrequencyChart = require("../components/FrequencyChart")
 const DateSeverityChart = require("../components/Charts/DateSeverityChart")
+const AvailabilityIntegrityConfidentiality = require("../components/Charts/AvailabilityIntegrityConfidentiality")
 
 
 // 
@@ -55,7 +57,12 @@ const ChartList = async ({ orgName, repoName }) => {
             <DateSeverityChart vulnData={vulnData} />
         </ChartCard>
         
+        <ChartCard name="AvailabilityIntegrityConfidentiality">
+            <AvailabilityIntegrityConfidentiality vulnData={vulnData} />
+        </ChartCard>
+        
         <ChartCard name="card-1:dummy-card">
+            
             {/* FIXME */}
             I'm a Dummy Card 2, Replace me with an actual chart
             {/* FIXME */}

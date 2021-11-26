@@ -1,7 +1,8 @@
-module.exports = ({ color1, color2, rotationOffset, children, padding, ...props }) => {
+module.exports = ({ color1, color2, rotationOffset="0deg", children, padding, ...props }) => {
     // main content
     const bubbleInnerPart = <div
         name="bubble-inner-part"
+        class="centered"
         style={`
             width: 100%;
             aspect-ratio: 1;
