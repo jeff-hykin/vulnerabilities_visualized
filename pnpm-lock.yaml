@@ -26,6 +26,7 @@ specifiers:
   '@babel/core': ^7.0.0-0
   '@babel/plugin-transform-react-jsx': ^7.14.9
   '@babel/runtime': ^7.16.3
+  '@kurkle/color': ^0.1.9
   '@socket.io/component-emitter': ^3.0.0
   '@types/d3-timer': 1.0.9
   '@vue-reactivity/watch': ^0.1.6
@@ -41,7 +42,8 @@ specifiers:
   base64-arraybuffer: 0.1.5
   bezier-easing: ^2.1.0
   blob: 0.0.5
-  chart.js: ^3.5.1
+  chart.js: ^3.6.0
+  chartjs-adapter-luxon: ^1.1.0
   color: 3.1.3
   color-convert: 1.9.1
   color-name: 1.0.0
@@ -73,7 +75,7 @@ specifiers:
   good-date: ^1.3.16
   good-dom: ^4.2.1
   good-js: 3.1.1
-  good-jsx: ^1.4.1
+  good-jsx: ^1.4.2
   hammerjs: 2.0.8
   has-binary2: ~1.0.2
   has-cors: 1.1.0
@@ -87,6 +89,7 @@ specifiers:
   json3: ^3.3.3
   lodash: ^4.17.21
   lodash-contrib: ^4.1200.1
+  luxon: ^2.1.1
   materialize-css: ^1.0.0-rc.2
   ml-array-max: 1.1.2
   ml-array-min: 1.1.2
@@ -101,7 +104,7 @@ specifiers:
   polyline-miter-util: 1.0.1
   polyline-normals: 2.0.2
   probe.gl: 3.1.1
-  quik-backend: 1.1.1
+  quik-backend: ^1.2.1
   quik-client: ^1.0.0
   quik-dom: ^1.0.6
   quik-router: ^1.0.0
@@ -151,6 +154,7 @@ dependencies:
   '@antv/scale': 0.3.4
   '@antv/util': 2.0.9
   '@babel/runtime': 7.16.3
+  '@kurkle/color': 0.1.9
   '@socket.io/component-emitter': 3.0.0
   '@types/d3-timer': 1.0.9
   '@vue-reactivity/watch': 0.1.6_e12bd40890938bd287f438db6ddcccb5
@@ -166,7 +170,8 @@ dependencies:
   base64-arraybuffer: 0.1.5
   bezier-easing: 2.1.0
   blob: 0.0.5
-  chart.js: 3.5.1
+  chart.js: 3.6.0
+  chartjs-adapter-luxon: 1.1.0_chart.js@3.6.0+luxon@2.1.1
   color: 3.1.3
   color-convert: 1.9.1
   color-name: 1.0.0
@@ -198,7 +203,7 @@ dependencies:
   good-date: 1.3.16
   good-dom: 4.2.1
   good-js: 3.1.1
-  good-jsx: 1.4.1
+  good-jsx: 1.4.2
   hammerjs: 2.0.8
   has-binary2: 1.0.3
   has-cors: 1.1.0
@@ -212,6 +217,7 @@ dependencies:
   json3: 3.3.3
   lodash: 4.17.21
   lodash-contrib: 4.1200.1
+  luxon: 2.1.1
   materialize-css: 1.0.0-rc.2
   ml-array-max: 1.1.2
   ml-array-min: 1.1.2
@@ -226,7 +232,7 @@ dependencies:
   polyline-miter-util: 1.0.1
   polyline-normals: 2.0.2
   probe.gl: 3.1.1
-  quik-backend: 1.1.1
+  quik-backend: 1.2.1
   quik-client: 1.0.0
   quik-dom: 1.0.6
   quik-router: 1.0.0
@@ -1788,6 +1794,10 @@ packages:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
     dev: false
 
+  /@kurkle/color/0.1.9:
+    resolution: {integrity: sha512-K3Aul4Ct6O48yWw0/az5rqk2K76oNXXX3Su32Xkh4SfMFvPt0QEkq0Q6+3icE5S3U2c88WAuq3Vh1Iaz4aUH+w==}
+    dev: false
+
   /@mrmlnc/readdir-enhanced/2.2.1:
     resolution: {integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g==}
     engines: {node: '>=4'}
@@ -2528,8 +2538,18 @@ packages:
       escape-string-regexp: 1.0.5
       supports-color: 5.5.0
 
-  /chart.js/3.5.1:
-    resolution: {integrity: sha512-m5kzt72I1WQ9LILwQC4syla/LD/N413RYv2Dx2nnTkRS9iv/ey1xLTt0DnPc/eWV4zI+BgEgDYBIzbQhZHc/PQ==}
+  /chart.js/3.6.0:
+    resolution: {integrity: sha512-iOzzDKePL+bj+ccIsVAgWQehCXv8xOKGbaU2fO/myivH736zcx535PGJzQGanvcSGVOqX6yuLZsN3ygcQ35UgQ==}
+    dev: false
+
+  /chartjs-adapter-luxon/1.1.0_chart.js@3.6.0+luxon@2.1.1:
+    resolution: {integrity: sha512-CS+xBWEyXYVLBZ3dSY/MwlSXhz8er4JjkApazY84ft/++oOLsmkt6TaXBCsUFudum7QdoYmpxiL/gSp20+emkw==}
+    peerDependencies:
+      chart.js: ^3.0.0
+      luxon: ^1.0.0 || ^2.0.0
+    dependencies:
+      chart.js: 3.6.0
+      luxon: 2.1.1
     dev: false
 
   /chokidar/2.1.8:
@@ -3889,6 +3909,12 @@ packages:
       good-dom: 4.2.1
     dev: false
 
+  /good-jsx/1.4.2:
+    resolution: {integrity: sha512-SklAqijm2u7E7aMXFbjg5ojuhywrhpwxAkVl//bKq71D+idMS2QaFiuO2XeYpVG6PfL/TXJWZCeQ3jd4nYt1aw==}
+    dependencies:
+      good-dom: 4.2.1
+    dev: false
+
   /graceful-fs/4.2.8:
     resolution: {integrity: sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==}
     dev: false
@@ -4681,6 +4707,11 @@ packages:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
       tslib: 2.3.1
+    dev: false
+
+  /luxon/2.1.1:
+    resolution: {integrity: sha512-6VQVNw7+kQu3hL1ZH5GyOhnk8uZm21xS7XJ/6vDZaFNcb62dpFDKcH8TI5NkoZOdMRxr7af7aYGrJlE/Wv0i1w==}
+    engines: {node: '>=12'}
     dev: false
 
   /magic-string/0.22.5:
@@ -5848,8 +5879,8 @@ packages:
     deprecated: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
     dev: false
 
-  /quik-backend/1.1.1:
-    resolution: {integrity: sha512-Nq2jGyjeIu93GrnIKhb9UfC+rUuhPcuzR3soBE2kuqQeeCaBUpyiMsWVTFdpLN+8+lTMvzMeTXwpvFs8xuuUYA==}
+  /quik-backend/1.2.1:
+    resolution: {integrity: sha512-9RbnYDw+Mc5bQdgdG4zLIxcAS/F5QhfNBMcQBI0Re70T4h+9u6btSIZ8S6gc9u1cS4VPWyiyPHvbvO7U822s7A==}
     dependencies:
       socket.io: 2.2.0
       socket.io-client: 2.2.0

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+cd "$FORNIX_FOLDER"
+
+echo "csv to json"
+npx csvtojson ./data/vulnerabilities.csv > ./data/vulnerabilities.json
+echo "convert_vulns_csv"
+node ./data_processing/convert_vulns_csv.js 
+echo "vuln_by_product"
+node ./data_processing/vuln_by_product.js   
+echo "vuln_by_vendor"
+node ./data_processing/vuln_by_vendor.js   
+echo "vuln_org_tree"
+node ./data_processing/vuln_org_tree.js   
+echo "commits_to_yaml"
+node ./data_processing/commits_to_yaml.js
