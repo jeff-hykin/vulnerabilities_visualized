@@ -45,7 +45,15 @@ const ChartList = async ({ orgName, repoName }) => {
                 height={100}
                 width={200}
                 data={{
-                    ...[...Array(11)], // "0":0, "1":0, .... "10":0,
+                    "1":0,
+                    "2":0,
+                    "3":0,
+                    "4":0,
+                    "5":0,
+                    "6":0,
+                    "7":0,
+                    "8":0,
+                    "9":0,
                     ...getFrequencies(
                         vulnData.map(each=>Math.round(each.score))
                     )

@@ -5,7 +5,7 @@ const smartBackend = require("../../systems/smart_backend")
 // parameters for tweaking
 const maxNumberOfRepos = 300
 const magicNumberThatMakesTheUILookGood1 = 400  // importance of number of vulnerabilies when sorting
-const magicNumberThatMakesTheUILookGood2 = 3300 // inverse importance of most recent date when sorting
+const magicNumberThatMakesTheUILookGood2 = 63 // inverse importance of most recent date when sorting
 
 module.exports = () => smartBackend.getOrgTree().then((orgTree) => {
     

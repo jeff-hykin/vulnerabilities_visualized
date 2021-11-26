@@ -4956,6 +4956,7 @@ var _require = require("good-js"),
 
 var smartBackend = require("../../systems/smart_backend");
 
+var magicNumberThatMakesUiLookGood1 = 2.3;
 var maxNumberOfOrgs = 300;
 
 module.exports = function () {
@@ -4974,8 +4975,42 @@ module.exports = function () {
       output.push(_objectSpread(_objectSpread({}, value), {}, {
         name: key,
         size: value.orgSummary.numberOfRepos,
-        orderMetric: Math.log(lastTouched) + Math.log(value.orgSummary.numberOfVulnerabilies)
+        orderMetric: Math.pow(lastTouched, 1 / magicNumberThatMakesUiLookGood1) - Math.sqrt(value.orgSummary.numberOfVulnerabilies)
       }));
+    } // 
+    // 
+    // Keep removing small repos until there's a nice balance
+    // 
+    // 
+
+
+    var _loop = function _loop() {
+      var numberOf1RepoOrgs = output.filter(function (each) {
+        return each.orgSummary.numberOfRepos == 1;
+      }).length;
+      var numberOfBiggerOrgs = output.filter(function (each) {
+        return each.orgSummary.numberOfRepos != 1;
+      }).length;
+
+      if (numberOfBiggerOrgs > numberOf1RepoOrgs * 5) {
+        return "break";
+      }
+
+      var amountToRemove = Math.ceil(numberOf1RepoOrgs * 0.1);
+      output = output.filter(function (each) {
+        if (each.orgSummary.numberOfRepos == 1 && amountToRemove > 0) {
+          --amountToRemove;
+          return false;
+        } else {
+          return true;
+        }
+      });
+    };
+
+    while (true) {
+      var _ret = _loop();
+
+      if (_ret === "break") break;
     } // 
     // sorting method
     // 
@@ -25966,7 +26001,8 @@ module.exports = function (_ref) {
       _ref$rotationOffset = _ref.rotationOffset,
       rotationOffset = _ref$rotationOffset === void 0 ? "0deg" : _ref$rotationOffset,
       children = _ref.children,
-      padding = _ref.padding,
+      _ref$padding = _ref.padding,
+      padding = _ref$padding === void 0 ? 0 : _ref$padding,
       _ref$hoverShadow = _ref.hoverShadow,
       hoverShadow = _ref$hoverShadow === void 0 ? true : _ref$hoverShadow,
       props = _objectWithoutProperties(_ref, _excluded);
@@ -26084,7 +26120,15 @@ RepoList.animationTime = 300; // miliseconds
 
 module.exports = RepoList;
 },{"./RepoSummaryElement":"../code/components/Waterfall/RepoSummaryElement.jsx"}],"../code/components/Waterfall/OrgBubble.jsx":[function(require,module,exports) {
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -26103,7 +26147,28 @@ var SquareGridSizer = require("../../skeletons/SquareGridSizer");
 
 var FancyBubble = require("../../skeletons/FancyBubble");
 
-var RepoList = require("../../components/Waterfall/RepoList"); // 
+var RepoList = require("../../components/Waterfall/RepoList");
+
+var magicNumberThatMakesTheUILookGood1 = 1.5; // scales down the size of the bubbles linearly
+
+var magicNumberThatMakesTheUILookGood2 = 2.6; // scales down the size of the bubbles quadtratically
+
+var minPadding = 1.5;
+var maxPadding = 12;
+
+var computePaddingAndCellCount = function computePaddingAndCellCount(size) {
+  var numberOfCells = Math.pow(size, 1 / magicNumberThatMakesTheUILookGood2) / magicNumberThatMakesTheUILookGood1 + 1;
+  var paddingAmount = 0; // randomize for small repos
+
+  if (size == 1) {
+    paddingAmount = Math.random() * (minPadding - maxPadding) + maxPadding; // make it depend on size for big repos
+  } else {
+    var relativeSmallness = Math.ceil(numberOfCells) - numberOfCells;
+    paddingAmount = (1 - relativeSmallness) * (minPadding - maxPadding) + maxPadding;
+  }
+
+  return [paddingAmount, Math.ceil(numberOfCells)];
+}; // 
 // Org
 // 
 
@@ -26191,24 +26256,16 @@ var OrgBubble = function OrgBubble(_ref) {
     onmouseout: offHover
   });
   repoListElement.style.opacity = 0;
-  repoListElement.style.pointerEvents = "none"; // have it non-linearly increase with size
+  repoListElement.style.pointerEvents = "none";
 
-  var numberOfCells = Math.ceil(Math.sqrt(eachOrg.size) + 1);
-  var minPadding = 1.5;
-  var maxPadding = 12;
-  var paddingAmount = 0; // randomize for small repos
-
-  if (eachOrg.size == 1) {
-    paddingAmount = Math.random() * (minPadding - maxPadding) + maxPadding; // make it depend on size for big repos
-  } else {
-    var unroundedNumberOfCells = Math.sqrt(eachOrg.size) + 1;
-    var relativeSmallness = numberOfCells - unroundedNumberOfCells;
-    paddingAmount = (1 - relativeSmallness) * (minPadding - maxPadding) + maxPadding;
-  } // create a whole bunch of wrappers
+  var _computePaddingAndCel = computePaddingAndCellCount(eachOrg.size),
+      _computePaddingAndCel2 = _slicedToArray(_computePaddingAndCel, 2),
+      paddingAmount = _computePaddingAndCel2[0],
+      numberOfCells = _computePaddingAndCel2[1]; // create a whole bunch of wrappers
 
 
   return /*#__PURE__*/React.createElement(SquareGridSizer, {
-    numberOfCells: Math.sqrt(eachOrg.size) + 1
+    numberOfCells: numberOfCells
   }, circle = /*#__PURE__*/React.createElement(FancyBubble, {
     color1: color1,
     color2: color2,
@@ -26224,7 +26281,7 @@ var OrgBubble = function OrgBubble(_ref) {
     name: "repo-name",
     class: "centered",
     style: "\n                            border-radius: 0.6rem;\n                            padding: 0.3rem 0.5rem;\n                            background: var(--translucent-charcoal);\n                            color: white;\n                            max-width: 110%;\n                        "
-  }, eachOrg.name), /*#__PURE__*/React.createElement("br", null), "(".concat(eachOrg.size, ")"))), repoListElement);
+  }, eachOrg.name), /*#__PURE__*/React.createElement("br", null), "(".concat(eachOrg.orgSummary.numberOfRepos, ")"))), repoListElement);
 };
 
 OrgBubble.index = 0;
@@ -26341,7 +26398,7 @@ var smartBackend = require("../../systems/smart_backend"); // parameters for twe
 var maxNumberOfRepos = 300;
 var magicNumberThatMakesTheUILookGood1 = 400; // importance of number of vulnerabilies when sorting
 
-var magicNumberThatMakesTheUILookGood2 = 3300; // inverse importance of most recent date when sorting
+var magicNumberThatMakesTheUILookGood2 = 63; // inverse importance of most recent date when sorting
 
 module.exports = function () {
   return smartBackend.getOrgTree().then(function (orgTree) {
@@ -66973,6 +67030,8 @@ module.exports = function (_ref) {
   });
 };
 },{"good-date":"../../node_modules/good-date/index.js","../../systems/utilities":"../code/systems/utilities.js","../../components/FrequencyChart":"../code/components/FrequencyChart.jsx"}],"../code/components/Charts/AvailabilityIntegrityConfidentiality.jsx":[function(require,module,exports) {
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -66998,6 +67057,13 @@ var _require2 = require("../../systems/utilities"),
     createLinearMapper = _require2.createLinearMapper,
     getFrequencies = _require2.getFrequencies,
     arrayAsObjectKeys = _require2.arrayAsObjectKeys;
+
+var computeColorPairs = function computeColorPairs(number, score) {
+  return {
+    color1: score > 0 ? nodeTheme.lightColors[number] : "lightgray",
+    color2: score > 0 ? nodeTheme.darkColors[number] : "lightgray"
+  };
+};
 
 module.exports = function (_ref) {
   var vulnData = _ref.vulnData;
@@ -67059,12 +67125,9 @@ module.exports = function (_ref) {
     height: "".concat(linearMapper(buckets.confidentiality.length), "rem"),
     verticalAlignment: "bottom",
     horizontalAlignment: "right"
-  }, /*#__PURE__*/React.createElement(FancyBubble, {
-    hoverShadow: false,
-    color1: nodeTheme.lightColors[4],
-    color2: nodeTheme.darkColors[4],
-    padding: 0
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(FancyBubble, _extends({
+    hoverShadow: false
+  }, computeColorPairs(4, buckets.confidentiality.length)), /*#__PURE__*/React.createElement("div", {
     style: "padding: 1rem; color: white;"
   }, "Confidentality", /*#__PURE__*/React.createElement("br", null), "(".concat(buckets.confidentiality.length, ")"))))), /*#__PURE__*/React.createElement(Positioner, {
     maxHeight: "".concat(maxGuiSize, "rem"),
@@ -67076,12 +67139,11 @@ module.exports = function (_ref) {
     height: "".concat(linearMapper(buckets.integrity.length), "rem"),
     verticalAlignment: "top",
     horizontalAlignment: "right"
-  }, /*#__PURE__*/React.createElement(FancyBubble, {
-    hoverShadow: false,
-    color1: nodeTheme.lightColors[0],
-    color2: nodeTheme.darkColors[0],
+  }, /*#__PURE__*/React.createElement(FancyBubble, _extends({
+    hoverShadow: false
+  }, computeColorPairs(0, buckets.integrity.length), {
     padding: 0
-  }, /*#__PURE__*/React.createElement("div", {
+  }, computeColorPairs(0, buckets.integrity.length)), /*#__PURE__*/React.createElement("div", {
     style: "padding: 1rem; color: white;"
   }, "Integrity", /*#__PURE__*/React.createElement("br", null), "(".concat(buckets.integrity.length, ")")))))), /*#__PURE__*/React.createElement(Positioner, {
     maxHeight: "".concat(cardHeight, "rem"),
@@ -67091,28 +67153,13 @@ module.exports = function (_ref) {
     marginLeft: "1rem",
     aspectRatio: 1,
     height: "".concat(linearMapper(buckets.availability.length), "rem")
-  }, /*#__PURE__*/React.createElement(FancyBubble, {
-    hoverShadow: false,
-    color1: nodeTheme.lightColors[6],
-    color2: nodeTheme.darkColors[6],
-    padding: 0
-  }, /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(FancyBubble, _extends({
+    hoverShadow: false
+  }, computeColorPairs(6, buckets.availability.length)), /*#__PURE__*/React.createElement("div", {
     style: "padding: 1rem; color: white;"
   }, "Availability", /*#__PURE__*/React.createElement("br", null), "(".concat(buckets.availability.length, ")"))))));
 };
 },{"../../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../../skeletons/FancyBubble":"../code/skeletons/FancyBubble.jsx","../../systems/theme":"../code/systems/theme.js","../../systems/utilities":"../code/systems/utilities.js"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -67227,7 +67274,17 @@ var ChartList = /*#__PURE__*/function () {
               label: "Severity",
               height: 100,
               width: 200,
-              data: _objectSpread(_objectSpread({}, _toConsumableArray(Array(11))), getFrequencies(vulnData.map(function (each) {
+              data: _objectSpread({
+                "1": 0,
+                "2": 0,
+                "3": 0,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0
+              }, getFrequencies(vulnData.map(function (each) {
                 return Math.round(each.score);
               })))
             })), /*#__PURE__*/React.createElement(ChartCard, {

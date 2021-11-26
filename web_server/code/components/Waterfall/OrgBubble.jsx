@@ -7,6 +7,25 @@ const FancyBubble = require("../../skeletons/FancyBubble")
 const RepoList = require("../../components/Waterfall/RepoList")
 
 
+const magicNumberThatMakesTheUILookGood1 = 1.5  // scales down the size of the bubbles linearly
+const magicNumberThatMakesTheUILookGood2 = 2.6  // scales down the size of the bubbles quadtratically
+const minPadding = 1.5
+const maxPadding = 12
+
+const computePaddingAndCellCount = (size) => {
+    const numberOfCells = (Math.pow(size, 1/magicNumberThatMakesTheUILookGood2) / magicNumberThatMakesTheUILookGood1)+1
+    let paddingAmount = 0
+    // randomize for small repos
+    if (size == 1) {
+        paddingAmount = Math.random()*(minPadding - maxPadding) + maxPadding
+    // make it depend on size for big repos
+    } else {
+        const relativeSmallness = Math.ceil(numberOfCells) - numberOfCells
+        paddingAmount = (1-relativeSmallness)*(minPadding - maxPadding) + maxPadding
+    }
+    return [ paddingAmount, Math.ceil(numberOfCells) ]
+}
+
 // 
 // Org
 // 
@@ -81,23 +100,9 @@ const OrgBubble = ({ eachOrg })=> {
     repoListElement.style.opacity = 0
     repoListElement.style.pointerEvents = "none"
     
-    // have it non-linearly increase with size
-    const numberOfCells = Math.ceil(Math.sqrt(eachOrg.size)+1)
-    const minPadding = 1.5
-    const maxPadding = 12
-    let paddingAmount = 0
-    // randomize for small repos
-    if (eachOrg.size == 1) {
-        paddingAmount = Math.random()*(minPadding - maxPadding) + maxPadding
-    // make it depend on size for big repos
-    } else {
-        const unroundedNumberOfCells = Math.sqrt(eachOrg.size)+1
-        const relativeSmallness = numberOfCells - unroundedNumberOfCells
-        paddingAmount = (1-relativeSmallness)*(minPadding - maxPadding) + maxPadding
-    }
-    
+    const [ paddingAmount, numberOfCells ] = computePaddingAndCellCount(eachOrg.size)
     // create a whole bunch of wrappers
-    return <SquareGridSizer numberOfCells={Math.sqrt(eachOrg.size)+1} >
+    return <SquareGridSizer numberOfCells={numberOfCells} >
         {circle = <FancyBubble
             color1={color1}
             color2={color2}
@@ -124,7 +129,7 @@ const OrgBubble = ({ eachOrg })=> {
                     </span>
                     {/* Repo count */}
                     <br />
-                    {`(${eachOrg.size})` }
+                    {`(${eachOrg.orgSummary.numberOfRepos})` }
                 </div>
         </FancyBubble>}
         {repoListElement}

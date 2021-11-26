@@ -1,4 +1,4 @@
-module.exports = ({ color1, color2, rotationOffset="0deg", children, padding, hoverShadow=true, ...props }) => {
+module.exports = ({ color1, color2, rotationOffset="0deg", children, padding=0, hoverShadow=true, ...props }) => {
     // main content
     const bubbleInnerPart = <div
         name="bubble-inner-part"
