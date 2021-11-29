@@ -29,7 +29,7 @@ for (const [org, repos] of Object.entries(vulnByVendor)) {
     for (const [repoName, vulnerabilities] of Object.entries(repos)) {
         allRepoSummaryStats[repoName] = {
             numberOfVulnerabilies: vulnerabilities.length,
-            magnitudeOfVulnerabilites: sum(...vulnerabilities.map(each=>(each.score+1))), // add 1 because some are 0
+            magnitudeOfVulnerabilites: sum(...vulnerabilities.map(each=>((each.score-0)+1))), // add 1 because some are 0
             oldestVulnerabilityTime: Math.min(...vulnerabilities.map(each=>new DateTime(each.publishDate))),
             newestVulnerabilityTime: Math.max(...vulnerabilities.map(each=>new DateTime(each.publishDate))),
         }
