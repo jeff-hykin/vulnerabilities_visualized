@@ -1,4 +1,3 @@
-const ForceGraph = require("../skeletons/ForceGraph")
 const Positioner = require("../skeletons/Positioner")
 const Circle = require("../components/Svg/Circle")
 const smartBackend = require("../systems/smart_backend")
@@ -7,18 +6,6 @@ const { stats } = require("../systems/utilities")
 const { vulnColors } = require("../systems/theme")
 
 
-const testdata = {
-    "nodes":[
-          {"name":"bug1","color": "red"},
-          {"name":"bug2","color": "red"},
-          {"name":"bug3","color": "yellow"},
-          {"name":"bug4","color": "orange"}
-      ],
-      "links":[
-          {"source":2,"target":1},
-          {"source":0,"target":2}
-      ]
-  }
 const severityCategory = (each)=>{
     if (each.score<=3.3333) {
         return "mild"
@@ -60,13 +47,15 @@ const updateHoverTag = (eventObject) => {
 }
 
 module.exports = async ({ orgName, repoName }) => {
-    const maxNumberOfVulns = 10 // FIXME: showing all of them makes the graph unusable
+    // FIXME: add timeline markers
+    const maxNumberOfVulns = Infinity
     const vulnData = await smartBackend.getVulnDataFor(repoName)
     const summaryData = await smartBackend.getRepoSummaryDataFor(orgName, repoName)
     const modifiedVulnData = vulnData.map(each=>({
         ...each,
         name: each.cveId.replace(/cve-/i, ""),
         level: 'red',
+        date: new DateTime(each.publishDate),
         unixSeconds: (new DateTime(each.publishDate)).unix / 1000
     })).slice(0,maxNumberOfVulns)
     const [min,max,range,average,median,sum] = stats(modifiedVulnData.map(each=>each.unixSeconds))
@@ -75,21 +64,24 @@ module.exports = async ({ orgName, repoName }) => {
     console.log(`range is:`,range)
     
     // create some timeline dots
-    const yAxisScale = 0.00001
+    const yAxisScale = 0.000015
+    const yAxisPadding = 100
     const xAxisScale = 10
-    const sizeScale = 3
+    const xAxisPadding = 100
+    const sizeScale = 7
     // create a circle for each dot
     const vulnDots = modifiedVulnData.map(each=>
         <Circle
             size={`${(each.score+1)*sizeScale}px`}
-            y={((max - each.unixSeconds)*yAxisScale) - 100}
-            x={((each.score/2) * xAxisScale) + 100}
+            y={((max - each.unixSeconds)*yAxisScale) + yAxisPadding}
+            x={((each.score/2) * xAxisScale) + xAxisPadding}
             color={vulnColors.severity[severityCategory(each)]}
             borderColor="white"
             onHoverElement={<Positioner padding="1rem" maxHeight="30vh" overflow="auto" lineHeight="1.3rem">
                     <span>    <b>Id</b>: {each.cveId}                                                           </span>
                     <span>    <b>Difficulty to perform</b>: {each.complexity}                                   </span>
                     <span>    <b>Severity</b>: {`${each.score}`}                                                </span>
+                    <span>    <b>Date</b>: {`${each.date.date}`}                                                </span>
                     <span>    <b>Attibutes</b>: {`${each.vulnerabilityTypes}`.replace(/^[ \t\n]*$/g,"[None]")}  </span>
                     <Positioner width="100%" minHeight="1rem" />
                     <span>    <b>Breakdown of destruction potential</b>: <br/>                                  </span>
@@ -114,9 +106,32 @@ module.exports = async ({ orgName, repoName }) => {
             }
             />
     )
-    
-    return <svg width="20rem" height={(max-min)*yAxisScale} onmouseover={updateHoverTag}>
-        {vulnDots}
-    </svg>
-    // <ForceGraph json={testdata} onNodeClick={(d) => console.log(d)}/>
+    const minHeight = ((max-min)*yAxisScale) + yAxisPadding + yAxisPadding
+    const Title = ({text})=>{
+        return <h4
+            style={{
+                padding: "3rem",
+                fontSize: "1.8rem",
+                textDecoration: "underline",
+                marginLeft: "30px",
+                width: "100%",
+                display: "block",
+                fontFamily: "Roboto",
+                fontWeight: "100",
+                color: "gray",
+                textAlign: "left",
+            }}
+            >
+                {text}
+        </h4>
+    }
+    return <Positioner verticalAlignment="top" horizontalAlignment="center" height="100%" width="100%" position="absolute">
+        <Positioner horizontalAlignment="center" maxHeight="100%" overflowY="auto" width="100%">
+            <Title text="Most Recent Vulnerabilites" />
+            <svg style={`min-height: ${minHeight}px`} width="20rem" height={minHeight} onmouseover={updateHoverTag}>
+                {vulnDots}
+            </svg>
+            <Title text="Oldest Vulnerabilites" />
+        </Positioner>
+    </Positioner>
 }

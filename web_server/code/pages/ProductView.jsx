@@ -24,7 +24,7 @@ const SummaryTag = async ({ orgName, repoName })=>{
     // TODO: use this data for something
     const summaryData = await smartBackend.getRepoSummaryDataFor(orgName, repoName)
     console.debug(`summaryData is:`,summaryData)
-    return <Positioner verticalAlignment="top" horizontalAlignment="left" positionSelf="relativeToParent" top="1rem" left="1rem">
+    return <Positioner verticalAlignment="top" horizontalAlignment="left" width="100%">
         <Title main="Org" secondary={orgName} />
         <Title main="Repo" secondary={repoName} />
     </Positioner>
@@ -38,6 +38,10 @@ const ChartList = async ({ orgName, repoName }) => {
     console.debug(`commitData is:`,(commitData||[]).slice(0,50))
     
     return <div style="width: 100%; max-width: 50rem; padding: 2rem; box-sizing: border-box;">
+        
+        <ChartCard name="severity-bar-chart">
+            <SummaryTag orgName={orgName} repoName={repoName} />
+        </ChartCard>
         
         <ChartCard name="severity-bar-chart">
             <FrequencyChart
@@ -122,7 +126,6 @@ module.exports = async ({ ...properties }) => {
     return <main name="ProductView" style={`width: 100%; flex: 1 0 auto;`} >
             <div style={{ height: "100%", maxHeight: "100%", width: "100%", minWidth: "100%", maxWidth: "100%", position: 'relative', display: 'flex' }}>
                 <LeftSideContainer>
-                    <SummaryTag orgName={orgName} repoName={repoName} />
                     <RepoGraph orgName={orgName} repoName={repoName} />
                 </LeftSideContainer>
                 
