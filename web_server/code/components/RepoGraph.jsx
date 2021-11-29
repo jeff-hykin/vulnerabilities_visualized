@@ -86,20 +86,20 @@ module.exports = async ({ orgName, repoName }) => {
             x={((each.score/2) * xAxisScale) + 100}
             color={vulnColors.severity[severityCategory(each)]}
             borderColor="white"
-            onHoverElement={<Positioner padding="1rem" maxHeight="50vh" overflow="auto">
-                    <span>    <b>Id</b>: {each.cveId}    </span>
-                    <span>    <b>Difficulty to perform</b>: {each.complexity}       </span>
-                    <span>    <b>Severity</b>: {`${each.score}`}               </span>
-                    <span>    <b>Attibutes</b>: {each.vulnerabilityTypes}      </span>
-                    <Positioner width="100%" height="1rem" />
-                    <span>    <b>Breakdown of destruction potential</b>: <br/>              </span>
+            onHoverElement={<Positioner padding="1rem" maxHeight="30vh" overflow="auto" lineHeight="1.3rem">
+                    <span>    <b>Id</b>: {each.cveId}                                                           </span>
+                    <span>    <b>Difficulty to perform</b>: {each.complexity}                                   </span>
+                    <span>    <b>Severity</b>: {`${each.score}`}                                                </span>
+                    <span>    <b>Attibutes</b>: {`${each.vulnerabilityTypes}`.replace(/^[ \t\n]*$/g,"[None]")}  </span>
+                    <Positioner width="100%" minHeight="1rem" />
+                    <span>    <b>Breakdown of destruction potential</b>: <br/>                                  </span>
                     <span style={{paddingLeft: "1.2rem"}}>
                         <b>Availability</b>: {each.availability} <br/>
                         <b>Confidentiality</b>: {each.confidentiality} <br/>
                         <b>Integrity</b>: {each.integrity} <br/>
                     </span>
-                    <Positioner width="100%" height="1rem" />
-                    <span>    <b>Description</b>        </span>
+                    <Positioner width="100%" minHeight="1rem" />
+                    <span>    <b>Description</b>    </span>
                     <span style={{
                         display: "flex",
                         minWidth:"130px",
