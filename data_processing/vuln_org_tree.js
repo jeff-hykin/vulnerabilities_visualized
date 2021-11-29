@@ -2,8 +2,17 @@ const fs = require("fs")
 const DateTime = require("good-date")
 
 const sum = (arg1, ...args) => {
-    let total = arg1
+    let total = arg1-0
+    // NaN check
+    if (total !== total) {
+        total = 0
+    }
     for (let each of args) {
+        each = each-0
+        // NaN check
+        if (each != each) {
+            each = 0
+        }
         total += arg1
     }
     return total

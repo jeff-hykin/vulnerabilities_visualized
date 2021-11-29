@@ -49,18 +49,18 @@ const getVulnDataFor = async (repoName)=> {
 // 
 // getCommitDataFor
 // 
-const commitData = {}
+const fullCommitData = {}
 const getCommitDataFor = async (repoName)=> {
-    if (commitData[repoName] != undefined) {
-        return commitData[repoName]
+    if (fullCommitData[repoName] != undefined) {
+        return fullCommitData[repoName]
     } else {
         try {
-            commitData[repoName] = await backend.data.commitLogFor({ product: repoName })
+            fullCommitData[repoName] = await backend.data.commitLogFor({ product: repoName })
         } catch (error) {
             console.log(`Error getting commit data for: ${repoName}`)
-            commitData[repoName] = null
+            fullCommitData[repoName] = null
         }
-        return commitData[repoName]
+        return fullCommitData[repoName]
     }
 }
 
@@ -88,4 +88,5 @@ module.exports = {
     getRepoSummaryDataFor,
     getVulnDataFor,
     getCommitDataFor,
+    getFullCommitDataFor,
 }

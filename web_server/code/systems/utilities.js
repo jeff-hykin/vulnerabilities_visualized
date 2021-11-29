@@ -56,7 +56,7 @@ const wrapAroundGet = (number, list) => list[(number % list.length + list.length
 // 
 // sum
 // 
-const sum = (list) => list.reduce((a, b) => a + b, 0)
+const sum = (list) => list.reduce((a, b) => (a-0) + (b-0), 0)
 
 // 
 // numbers
