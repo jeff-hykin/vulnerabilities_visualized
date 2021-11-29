@@ -38,7 +38,7 @@ module.exports = ({ vulnData })=> {
         <Positioner horizontalAlignment="right">
             <Positioner height="fit-content" maxHeight={`${maxGuiSize}rem`} verticalAlignment="bottom" horizontalAlignment="right">
                 <Positioner aspectRatio={1} height={`${linearMapper(buckets.confidentiality.length)}rem`} verticalAlignment="bottom" horizontalAlignment="right">
-                    <FancyBubble hoverShadow={false} {...computeColorPairs(confidentiality,buckets.confidentiality.length)}>
+                    <FancyBubble hoverShadow={false} {...computeColorPairs("confidentiality",buckets.confidentiality.length)}>
                         <div style="padding: 1rem; color: white;">
                             Confidentality
                             <br />
