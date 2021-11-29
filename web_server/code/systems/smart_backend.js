@@ -64,6 +64,24 @@ const getCommitDataFor = async (repoName)=> {
     }
 }
 
+// 
+// getFullCommitDataFor
+// 
+const commitData = {}
+const getFullCommitDataFor = async (repoName)=> {
+    if (commitData[repoName] != undefined) {
+        return commitData[repoName]
+    } else {
+        try {
+            commitData[repoName] = await backend.data.fullCommitLogFor({ product: repoName })
+        } catch (error) {
+            console.log(`Error getting commit data for: ${repoName}`)
+            commitData[repoName] = null
+        }
+        return commitData[repoName]
+    }
+}
+
 module.exports = {
     getOrgTree,
     getOrgSummaryDataFor,

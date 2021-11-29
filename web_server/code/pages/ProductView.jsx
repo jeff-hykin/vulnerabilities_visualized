@@ -32,7 +32,7 @@ const SummaryTag = async ({ orgName, repoName })=>{
 
 const ChartList = async ({ orgName, repoName }) => {
     // get data from the backend
-    const commitData = await smartBackend.getCommitDataFor(repoName)
+    const commitData = await smartBackend.getFullCommitDataFor(repoName)
     const vulnData   = await smartBackend.getVulnDataFor(repoName)
     console.debug(`vulnData is:`,vulnData.slice(0,50))
     console.debug(`commitData is:`,(commitData||[]).slice(0,50))

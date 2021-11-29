@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+repo_url="$1"
+
+cd "$FORNIX_FOLDER"
+"$FORNIX_FOLDER/data_processing/gather_commits.sh" "$repo_url"
