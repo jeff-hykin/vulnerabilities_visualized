@@ -123,7 +123,7 @@ module.exports = async ({ ...properties }) => {
             <div style={{ height: "100%", maxHeight: "100%", width: "100%", minWidth: "100%", maxWidth: "100%", position: 'relative', display: 'flex' }}>
                 <LeftSideContainer>
                     <SummaryTag orgName={orgName} repoName={repoName} />
-                    <RepoGraph repoName={repoName} />
+                    <RepoGraph orgName={orgName} repoName={repoName} />
                 </LeftSideContainer>
                 
                 <RightSideContainer>

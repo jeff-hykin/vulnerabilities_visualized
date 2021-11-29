@@ -1,13 +1,13 @@
 const Positioner = require("../../skeletons/Positioner")
 const FancyBubble = require("../../skeletons/FancyBubble")
 
-const { nodeTheme } = require("../../systems/theme")
+const { vulnColors } = require("../../systems/theme")
 const { numbers, stats, createLinearMapper, getFrequencies, arrayAsObjectKeys } = require("../../systems/utilities")
 
-const computeColorPairs = (number, score)=> {
+const computeColorPairs = (which, score)=> {
     return {
-        color1:  score > 0 ? nodeTheme.lightColors[number] : "lightgray",
-        color2:  score > 0 ? nodeTheme.darkColors[number] : "lightgray",
+        color1:  score > 0 ? vulnColors[which].light : "lightgray",
+        color2:  score > 0 ? vulnColors[which].dark : "lightgray",
     }
 }
 
@@ -38,7 +38,7 @@ module.exports = ({ vulnData })=> {
         <Positioner horizontalAlignment="right">
             <Positioner height="fit-content" maxHeight={`${maxGuiSize}rem`} verticalAlignment="bottom" horizontalAlignment="right">
                 <Positioner aspectRatio={1} height={`${linearMapper(buckets.confidentiality.length)}rem`} verticalAlignment="bottom" horizontalAlignment="right">
-                    <FancyBubble hoverShadow={false} {...computeColorPairs(4,buckets.confidentiality.length)}>
+                    <FancyBubble hoverShadow={false} {...computeColorPairs(confidentiality,buckets.confidentiality.length)}>
                         <div style="padding: 1rem; color: white;">
                             Confidentality
                             <br />
@@ -49,7 +49,7 @@ module.exports = ({ vulnData })=> {
             </Positioner>
             <Positioner maxHeight={`${maxGuiSize}rem`} verticalAlignment="top" horizontalAlignment="right">
                 <Positioner marginTop="1rem" aspectRatio={1} height={`${linearMapper(buckets.integrity.length)}rem`} verticalAlignment="top" horizontalAlignment="right">
-                    <FancyBubble hoverShadow={false} {...computeColorPairs(0,buckets.integrity.length)} padding={0} {...computeColorPairs(0,buckets.integrity.length)}>
+                    <FancyBubble hoverShadow={false} {...computeColorPairs("integrity",buckets.integrity.length)} padding={0}>
                         <div style="padding: 1rem; color: white;">
                             Integrity
                             <br />
@@ -63,7 +63,7 @@ module.exports = ({ vulnData })=> {
         {/* Right Side */}
         <Positioner maxHeight={`${cardHeight}rem`} verticalAlignment="center" horizontalAlignment="left">
             <Positioner marginLeft="1rem" aspectRatio={1} height={`${linearMapper(buckets.availability.length)}rem`}>
-                <FancyBubble hoverShadow={false} {...computeColorPairs(6,buckets.availability.length)}>
+                <FancyBubble hoverShadow={false} {...computeColorPairs("availability",buckets.availability.length)}>
                     <div style="padding: 1rem; color: white;">
                         Availability
                         <br />

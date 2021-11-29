@@ -10,7 +10,7 @@
  *         />
  */
 module.exports = ({ size, x, y, color="#69b3a2", borderColor, children, ...props }) => {
-    return <circle r={size} fill={color} stroke={borderColor||color} {...props}>
+    return <circle r={size} cx={x} cy={y} fill={color} stroke={borderColor||color} {...props}>
         {children}
     </circle>
 }

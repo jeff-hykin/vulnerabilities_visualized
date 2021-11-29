@@ -280,6 +280,7 @@ body {
   --teal: #4db6ac;
   --green: #81c784;
   --red: #e57373;
+  --yellow: #ffe082;
   --charcoal: hsl(180, 0%, 31%);
   --translucent-charcoal: hsla(0, 0%, 31%, 0.65);
   --default-subtle-shift-speed: 15s;

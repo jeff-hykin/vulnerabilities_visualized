@@ -9,4 +9,23 @@ module.exports = {
         uLightColors: ["#CFF6FF", "#BCFCFF", "#FFECF5", "#ECFBFF", "#EAD9FF", "#FFF8DA", "#DCE2EE", "#FFE7F0", "#EEFFCE"],
         uDarkColors:  ["#CADBFF", "#A9FFEB", "#FFC4DD", "#CACDFF", "#FFD4F2", "#FFD3C9", "#EBF2FF", "#FFCBCB", "#CAFFF3"],
     },
+    vulnColors: {
+        confidentiality: {
+            dark: "#AE6CFF",
+            light: "#FFA1E3",
+        },
+        integrity: {
+            dark:  "#8FE9FF",
+            light: "#7DA8FF",
+        },
+        availability: {
+            dark:  "#BFCFEE",
+            light: "#5D7092",
+        },
+        severity: {
+            mild: "#ffe082",
+            notable: "#ffb74d",
+            major: "#e57373",
+        }
+    },
 }
