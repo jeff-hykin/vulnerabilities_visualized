@@ -1,4 +1,5 @@
 const ForceGraph = require("../skeletons/ForceGraph")
+const Positioner = require("../skeletons/Positioner")
 const Circle = require("../components/Svg/Circle")
 const smartBackend = require("../systems/smart_backend")
 const DateTime = require("good-date")
@@ -39,18 +40,17 @@ const hoverTag = <div
     }}
     />
 const updateHoverTag = (eventObject) => {
-    console.log(`eventObject is:`,eventObject)
     if (hoverTag.parentElement != document.body) {
         document.body.append(hoverTag)
     }
     // if the element has a title
-    if (typeof eventObject.target.title == 'string') {
+    if (eventObject.target.onHoverElement) {
         // give it the right content
-        hoverTag.innerHTML = eventObject.target.title
+        hoverTag.innerHTML = ""
+        hoverTag.appendChild(eventObject.target.onHoverElement)
         // put it in the right position
         hoverTag.style.left = `${eventObject.clientX}px`
         hoverTag.style.top  = `${eventObject.clientY}px`
-        console.log(`eventObject.clientY is:`,eventObject.clientY)
         // show it
         hoverTag.style.opacity = 1
     } else {
@@ -86,7 +86,32 @@ module.exports = async ({ orgName, repoName }) => {
             x={((each.score/2) * xAxisScale) + 100}
             color={vulnColors.severity[severityCategory(each)]}
             borderColor="white"
-            title="Circle #1"
+            onHoverElement={<Positioner padding="1rem" maxHeight="50vh" overflow="auto">
+                    <span>    <b>Id</b>: {each.cveId}    </span>
+                    <span>    <b>Difficulty to perform</b>: {each.complexity}       </span>
+                    <span>    <b>Severity</b>: {`${each.score}`}               </span>
+                    <span>    <b>Attibutes</b>: {each.vulnerabilityTypes}      </span>
+                    <Positioner width="100%" height="1rem" />
+                    <span>    <b>Breakdown of destruction potential</b>: <br/>              </span>
+                    <span style={{paddingLeft: "1.2rem"}}>
+                        <b>Availability</b>: {each.availability} <br/>
+                        <b>Confidentiality</b>: {each.confidentiality} <br/>
+                        <b>Integrity</b>: {each.integrity} <br/>
+                    </span>
+                    <Positioner width="100%" height="1rem" />
+                    <span>    <b>Description</b>        </span>
+                    <span style={{
+                        display: "flex",
+                        minWidth:"130px",
+                        width: "350px",
+                        maxWidth: "80vw",
+                        padding: "7px",
+                        color: "gray",
+                    }} >
+                        {each.description}
+                    </span>
+                </Positioner>
+            }
             />
     )
     
