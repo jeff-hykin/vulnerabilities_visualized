@@ -4,7 +4,8 @@ const smartBackend = require("../systems/smart_backend")
 const DateTime = require("good-date")
 const { stats } = require("../systems/utilities")
 const { vulnColors } = require("../systems/theme")
-
+const router = require("quik-router")
+const { watch } = require("@vue-reactivity/watch")
 
 const severityCategory = (each)=>{
     if (each.score<=3.3333) {
@@ -45,6 +46,7 @@ const updateHoverTag = (eventObject) => {
         hoverTag.style.opacity = 0
     }
 }
+watch(router.pageInfo, updateHoverTag) // fixes a small bug
 
 module.exports = async ({ orgName, repoName }) => {
     // FIXME: add timeline markers
