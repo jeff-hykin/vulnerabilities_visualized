@@ -27276,7 +27276,7 @@ module.exports = function (_ref) {
     stroke: borderColor || color
   }, props), children);
 };
-},{}],"../code/components/RepoGraph.jsx":[function(require,module,exports) {
+},{}],"../code/components/Timeline.jsx":[function(require,module,exports) {
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -27301,7 +27301,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var Positioner = require("../skeletons/Positioner");
 
-var Circle = require("../components/Svg/Circle");
+var Circle = require("./Svg/Circle");
 
 var smartBackend = require("../systems/smart_backend");
 
@@ -27365,13 +27365,13 @@ watch(router.pageInfo, updateHoverTag); // fixes a small bug
 
 module.exports = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
-    var orgName, repoName, maxNumberOfVulns, vulnData, summaryData, modifiedVulnData, _stats, _stats2, min, max, range, average, median, sum, yAxisScale, yAxisPadding, xAxisScale, xAxisPadding, sizeScale, vulnDots, minHeight, Title;
+    var orgName, repoName, summaryData, maxNumberOfVulns, vulnData, modifiedVulnData, _stats, _stats2, min, max, range, average, median, sum, yAxisScale, yAxisPadding, xAxisScale, xAxisPadding, sizeScale, vulnDots, minHeight, Title;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            orgName = _ref.orgName, repoName = _ref.repoName;
+            orgName = _ref.orgName, repoName = _ref.repoName, summaryData = _ref.summaryData;
             // FIXME: add timeline markers
             maxNumberOfVulns = Infinity;
             _context.next = 4;
@@ -27379,11 +27379,6 @@ module.exports = /*#__PURE__*/function () {
 
           case 4:
             vulnData = _context.sent;
-            _context.next = 7;
-            return smartBackend.getRepoSummaryDataFor(orgName, repoName);
-
-          case 7:
-            summaryData = _context.sent;
             modifiedVulnData = vulnData.map(function (each) {
               return _objectSpread(_objectSpread({}, each), {}, {
                 name: each.cveId.replace(/cve-/i, ""),
@@ -27394,10 +27389,7 @@ module.exports = /*#__PURE__*/function () {
             }).slice(0, maxNumberOfVulns);
             _stats = stats(modifiedVulnData.map(function (each) {
               return each.unixSeconds;
-            })), _stats2 = _slicedToArray(_stats, 6), min = _stats2[0], max = _stats2[1], range = _stats2[2], average = _stats2[3], median = _stats2[4], sum = _stats2[5];
-            console.log("max is:", max);
-            console.log("min is:", min);
-            console.log("range is:", range); // create some timeline dots
+            })), _stats2 = _slicedToArray(_stats, 6), min = _stats2[0], max = _stats2[1], range = _stats2[2], average = _stats2[3], median = _stats2[4], sum = _stats2[5]; // create some timeline dots
 
             yAxisScale = 0.000015;
             yAxisPadding = 100;
@@ -27483,7 +27475,7 @@ module.exports = /*#__PURE__*/function () {
               text: "Oldest Vulnerabilites"
             }))));
 
-          case 22:
+          case 16:
           case "end":
             return _context.stop();
         }
@@ -27495,15 +27487,17 @@ module.exports = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
-},{"../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../components/Svg/Circle":"../code/components/Svg/Circle.jsx","../systems/smart_backend":"../code/systems/smart_backend.js","good-date":"../../node_modules/good-date/index.js","../systems/utilities":"../code/systems/utilities.js","../systems/theme":"../code/systems/theme.js","quik-router":"../../node_modules/quik-router/main/main.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/components/Title.jsx":[function(require,module,exports) {
+},{"../skeletons/Positioner":"../code/skeletons/Positioner.jsx","./Svg/Circle":"../code/components/Svg/Circle.jsx","../systems/smart_backend":"../code/systems/smart_backend.js","good-date":"../../node_modules/good-date/index.js","../systems/utilities":"../code/systems/utilities.js","../systems/theme":"../code/systems/theme.js","quik-router":"../../node_modules/quik-router/main/main.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/components/Title.jsx":[function(require,module,exports) {
 module.exports = function (_ref) {
   var main = _ref.main,
-      secondary = _ref.secondary;
+      secondary = _ref.secondary,
+      _ref$scale = _ref.scale,
+      scale = _ref$scale === void 0 ? 1 : _ref$scale;
   return /*#__PURE__*/React.createElement("h4", {
-    style: "font-size: 20pt; font-weight: 100;"
+    style: "font-size: ".concat(20 * scale, "pt;")
   }, /*#__PURE__*/React.createElement("span", {
-    style: "text-decoration: underline;"
-  }, "".concat(main)), " ", secondary ? ": ".concat(secondary) : "");
+    style: "text-decoration: underline; font-weight: 100; font-family: Roboto; color: gray;"
+  }, "".concat(main)), secondary ? ": ".concat(secondary) : "");
 };
 },{}],"../../node_modules/chart.js/dist/chunks/helpers.segment.js":[function(require,module,exports) {
 "use strict";
@@ -54325,7 +54319,52 @@ module.exports = function (_ref) {
     style: "padding: 1rem; color: white;"
   }, "Availability", /*#__PURE__*/React.createElement("br", null), "(".concat(buckets.availability.length, ")"))))));
 };
-},{"../../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../../skeletons/FancyBubble":"../code/skeletons/FancyBubble.jsx","../../systems/theme":"../code/systems/theme.js","../../systems/utilities":"../code/systems/utilities.js"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
+},{"../../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../../skeletons/FancyBubble":"../code/skeletons/FancyBubble.jsx","../../systems/theme":"../code/systems/theme.js","../../systems/utilities":"../code/systems/utilities.js"}],"../code/components/Charts/AttributeFrequency.jsx":[function(require,module,exports) {
+var Positioner = require("../../skeletons/Positioner");
+
+var FrequencyChart = require("../FrequencyChart");
+
+var _require = require("../../systems/utilities"),
+    numbers = _require.numbers,
+    stats = _require.stats,
+    createLinearMapper = _require.createLinearMapper,
+    getFrequencies = _require.getFrequencies,
+    arrayAsObjectKeys = _require.arrayAsObjectKeys;
+
+var nameConversion = {
+  "DoS": "Denial of Service",
+  "Exec": "Execute Code",
+  "Overflow": "Overflow",
+  "+Info": "Gain Information",
+  "+Priv": "Gain Privilege",
+  "Corr.": "Memory Corruption",
+  "Trav.": "Directory Traversal" // Bypass Something
+  // XSS
+  // Sql Injection
+
+};
+
+module.exports = function (_ref) {
+  var vulnData = _ref.vulnData;
+  var allAttributes = vulnData.map(function (each) {
+    return each.vulnerabilityTypes.split(" ");
+  }).flat();
+  var cleanedAttributes = allAttributes.map( // give attribute-less vulns a name
+  function (each) {
+    return each.length == 0 ? "[None]" : each;
+  }).filter( // code is a duplicate for "Code Execution"
+  function (each) {
+    return each != "Code" && each != "Mem." && each != "Dir.";
+  }).map( // give them more human names
+  function (each) {
+    return nameConversion[each] || each;
+  });
+  return /*#__PURE__*/React.createElement(FrequencyChart, {
+    label: "Vulnerability Attributes",
+    elements: cleanedAttributes
+  });
+};
+},{"../../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../FrequencyChart":"../code/components/FrequencyChart.jsx","../../systems/utilities":"../code/systems/utilities.js"}],"../code/pages/ProductView.jsx":[function(require,module,exports) {
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -54356,7 +54395,7 @@ var ChartCard = require("../skeletons/ChartCard");
 
 var FancyBubble = require("../skeletons/FancyBubble");
 
-var RepoGraph = require("../components/RepoGraph");
+var Timeline = require("../components/Timeline");
 
 var Title = require("../components/Title");
 
@@ -54364,7 +54403,9 @@ var FrequencyChart = require("../components/FrequencyChart");
 
 var DateSeverityChart = require("../components/Charts/DateSeverityChart");
 
-var AvailabilityIntegrityConfidentiality = require("../components/Charts/AvailabilityIntegrityConfidentiality"); // 
+var AvailabilityIntegrityConfidentiality = require("../components/Charts/AvailabilityIntegrityConfidentiality");
+
+var AttributeFrequency = require("../components/Charts/AttributeFrequency"); // 
 // 
 // helpers 
 // 
@@ -54378,26 +54419,32 @@ var SummaryTag = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            orgName = _ref.orgName, repoName = _ref.repoName;
-            _context.next = 3;
-            return smartBackend.getRepoSummaryDataFor(orgName, repoName);
-
-          case 3:
-            summaryData = _context.sent;
-            console.debug("summaryData is:", summaryData);
+            orgName = _ref.orgName, repoName = _ref.repoName, summaryData = _ref.summaryData;
             return _context.abrupt("return", /*#__PURE__*/React.createElement(Positioner, {
+              row: true,
               verticalAlignment: "top",
-              horizontalAlignment: "left",
-              width: "100%"
+              horizontalAlignment: "space-between",
+              width: "100%",
+              padding: "1rem 3rem"
+            }, /*#__PURE__*/React.createElement(Positioner, {
+              horizontalAlignment: "left"
             }, /*#__PURE__*/React.createElement(Title, {
-              main: "Org",
-              secondary: orgName
-            }), /*#__PURE__*/React.createElement(Title, {
-              main: "Repo",
+              main: "Project",
+              scale: 1.2,
               secondary: repoName
-            })));
+            }), /*#__PURE__*/React.createElement(Positioner, {
+              paddingTop: "0.5rem"
+            }), /*#__PURE__*/React.createElement(Title, {
+              main: "Orgianization",
+              scale: 0.8,
+              secondary: orgName
+            })), /*#__PURE__*/React.createElement(Positioner, null, /*#__PURE__*/React.createElement(Title, {
+              main: "Vulnerability Metrics:"
+            }), /*#__PURE__*/React.createElement(Positioner, {
+              paddingLeft: "2rem"
+            }, /*#__PURE__*/React.createElement("span", null, "    ", /*#__PURE__*/React.createElement("b", null, "Total Quantity"), ": ", "".concat(summaryData.numberOfVulnerabilies), "      "), /*#__PURE__*/React.createElement("span", null, "    ", /*#__PURE__*/React.createElement("b", null, "Total Severity"), ": ", "".concat(summaryData.magnitudeOfVulnerabilites), "  "), /*#__PURE__*/React.createElement("span", null, "    ", /*#__PURE__*/React.createElement("b", null, "Most Recent"), ": ", "".concat(summaryData.newestVulnerabilityTime), "       "), /*#__PURE__*/React.createElement("span", null, "    ", /*#__PURE__*/React.createElement("b", null, "Oldest"), ": ", "".concat(summaryData.oldestVulnerabilityTime), "            ")))));
 
-          case 6:
+          case 2:
           case "end":
             return _context.stop();
         }
@@ -54412,12 +54459,12 @@ var SummaryTag = /*#__PURE__*/function () {
 
 var ChartList = /*#__PURE__*/function () {
   var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(_ref3) {
-    var orgName, repoName, commitData, vulnData;
+    var orgName, repoName, summaryData, commitData, vulnData;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            orgName = _ref3.orgName, repoName = _ref3.repoName;
+            orgName = _ref3.orgName, repoName = _ref3.repoName, summaryData = _ref3.summaryData;
             _context2.next = 3;
             return smartBackend.getFullCommitDataFor(repoName);
 
@@ -54436,7 +54483,8 @@ var ChartList = /*#__PURE__*/function () {
               name: "severity-bar-chart"
             }, /*#__PURE__*/React.createElement(SummaryTag, {
               orgName: orgName,
-              repoName: repoName
+              repoName: repoName,
+              summaryData: summaryData
             })), /*#__PURE__*/React.createElement(ChartCard, {
               name: "severity-bar-chart"
             }, /*#__PURE__*/React.createElement(FrequencyChart, {
@@ -54457,7 +54505,7 @@ var ChartList = /*#__PURE__*/function () {
                 return Math.round(each.score);
               })))
             })), /*#__PURE__*/React.createElement(ChartCard, {
-              name: "by-year"
+              name: "DateSeverityChart"
             }, /*#__PURE__*/React.createElement(DateSeverityChart, {
               vulnData: vulnData
             })), /*#__PURE__*/React.createElement(ChartCard, {
@@ -54465,8 +54513,10 @@ var ChartList = /*#__PURE__*/function () {
             }, /*#__PURE__*/React.createElement(AvailabilityIntegrityConfidentiality, {
               vulnData: vulnData
             })), /*#__PURE__*/React.createElement(ChartCard, {
-              name: "card-1:dummy-card"
-            }, "I'm a Dummy Card 2, Replace me with an actual chart")));
+              name: "AttributeFrequency"
+            }, /*#__PURE__*/React.createElement(AttributeFrequency, {
+              vulnData: vulnData
+            }))));
 
           case 10:
           case "end":
@@ -54518,14 +54568,19 @@ var RightSideContainer = function RightSideContainer(_ref6) {
 
 module.exports = /*#__PURE__*/function () {
   var _ref8 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(_ref7) {
-    var properties, _router$pageInfo, repoName, orgName;
+    var properties, _router$pageInfo, orgName, repoName, summaryData;
 
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             properties = Object.assign({}, _ref7);
-            _router$pageInfo = router.pageInfo, repoName = _router$pageInfo.repoName, orgName = _router$pageInfo.orgName;
+            _router$pageInfo = router.pageInfo, orgName = _router$pageInfo.orgName, repoName = _router$pageInfo.repoName;
+            _context3.next = 4;
+            return smartBackend.getRepoSummaryDataFor(orgName, repoName);
+
+          case 4:
+            summaryData = _context3.sent;
             return _context3.abrupt("return", /*#__PURE__*/React.createElement("main", {
               name: "ProductView",
               style: "width: 100%; flex: 1 0 auto;"
@@ -54539,15 +54594,17 @@ module.exports = /*#__PURE__*/function () {
                 position: 'relative',
                 display: 'flex'
               }
-            }, /*#__PURE__*/React.createElement(LeftSideContainer, null, /*#__PURE__*/React.createElement(RepoGraph, {
+            }, /*#__PURE__*/React.createElement(LeftSideContainer, null, /*#__PURE__*/React.createElement(Timeline, {
               orgName: orgName,
-              repoName: repoName
+              repoName: repoName,
+              summaryData: summaryData
             })), /*#__PURE__*/React.createElement(RightSideContainer, null, /*#__PURE__*/React.createElement(ChartList, {
               orgName: orgName,
-              repoName: repoName
+              repoName: repoName,
+              summaryData: summaryData
             })))));
 
-          case 3:
+          case 6:
           case "end":
             return _context3.stop();
         }
@@ -54559,7 +54616,7 @@ module.exports = /*#__PURE__*/function () {
     return _ref8.apply(this, arguments);
   };
 }();
-},{"@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","../systems/smart_backend":"../code/systems/smart_backend.js","../systems/utilities":"../code/systems/utilities.js","../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../skeletons/ChartCard":"../code/skeletons/ChartCard.jsx","../skeletons/FancyBubble":"../code/skeletons/FancyBubble.jsx","../components/RepoGraph":"../code/components/RepoGraph.jsx","../components/Title":"../code/components/Title.jsx","../components/FrequencyChart":"../code/components/FrequencyChart.jsx","../components/Charts/DateSeverityChart":"../code/components/Charts/DateSeverityChart.jsx","../components/Charts/AvailabilityIntegrityConfidentiality":"../code/components/Charts/AvailabilityIntegrityConfidentiality.jsx"}],"../static_files/d3_v7.js":[function(require,module,exports) {
+},{"@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs","quik-router":"../../node_modules/quik-router/main/main.js","../systems/smart_backend":"../code/systems/smart_backend.js","../systems/utilities":"../code/systems/utilities.js","../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../skeletons/ChartCard":"../code/skeletons/ChartCard.jsx","../skeletons/FancyBubble":"../code/skeletons/FancyBubble.jsx","../components/Timeline":"../code/components/Timeline.jsx","../components/Title":"../code/components/Title.jsx","../components/FrequencyChart":"../code/components/FrequencyChart.jsx","../components/Charts/DateSeverityChart":"../code/components/Charts/DateSeverityChart.jsx","../components/Charts/AvailabilityIntegrityConfidentiality":"../code/components/Charts/AvailabilityIntegrityConfidentiality.jsx","../components/Charts/AttributeFrequency":"../code/components/Charts/AttributeFrequency.jsx"}],"../static_files/d3_v7.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }

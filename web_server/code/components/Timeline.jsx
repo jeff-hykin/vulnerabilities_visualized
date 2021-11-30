@@ -1,5 +1,5 @@
 const Positioner = require("../skeletons/Positioner")
-const Circle = require("../components/Svg/Circle")
+const Circle = require("./Svg/Circle")
 const smartBackend = require("../systems/smart_backend")
 const DateTime = require("good-date")
 const { stats } = require("../systems/utilities")
@@ -48,11 +48,10 @@ const updateHoverTag = (eventObject) => {
 }
 watch(router.pageInfo, updateHoverTag) // fixes a small bug
 
-module.exports = async ({ orgName, repoName }) => {
+module.exports = async ({ orgName, repoName, summaryData }) => {
     // FIXME: add timeline markers
     const maxNumberOfVulns = Infinity
     const vulnData = await smartBackend.getVulnDataFor(repoName)
-    const summaryData = await smartBackend.getRepoSummaryDataFor(orgName, repoName)
     const modifiedVulnData = vulnData.map(each=>({
         ...each,
         name: each.cveId.replace(/cve-/i, ""),
@@ -61,9 +60,6 @@ module.exports = async ({ orgName, repoName }) => {
         unixSeconds: (new DateTime(each.publishDate)).unix / 1000
     })).slice(0,maxNumberOfVulns)
     const [min,max,range,average,median,sum] = stats(modifiedVulnData.map(each=>each.unixSeconds))
-    console.log(`max is:`,max)
-    console.log(`min is:`,min)
-    console.log(`range is:`,range)
     
     // create some timeline dots
     const yAxisScale = 0.000015

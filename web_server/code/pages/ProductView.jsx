@@ -7,11 +7,12 @@ const { numbers, sum, getFrequencies, arrayAsObjectKeys } = require("../systems/
 const Positioner = require("../skeletons/Positioner")
 const ChartCard = require("../skeletons/ChartCard")
 const FancyBubble = require("../skeletons/FancyBubble")
-const RepoGraph = require("../components/RepoGraph")
+const Timeline = require("../components/Timeline")
 const Title = require("../components/Title")
 const FrequencyChart = require("../components/FrequencyChart")
 const DateSeverityChart = require("../components/Charts/DateSeverityChart")
 const AvailabilityIntegrityConfidentiality = require("../components/Charts/AvailabilityIntegrityConfidentiality")
+const AttributeFrequency = require("../components/Charts/AttributeFrequency")
 
 
 // 
@@ -20,17 +21,27 @@ const AvailabilityIntegrityConfidentiality = require("../components/Charts/Avail
 // 
 // 
 
-const SummaryTag = async ({ orgName, repoName })=>{
-    // TODO: use this data for something
-    const summaryData = await smartBackend.getRepoSummaryDataFor(orgName, repoName)
-    console.debug(`summaryData is:`,summaryData)
-    return <Positioner verticalAlignment="top" horizontalAlignment="left" width="100%">
-        <Title main="Org" secondary={orgName} />
-        <Title main="Repo" secondary={repoName} />
+const SummaryTag = async ({ orgName, repoName, summaryData })=>{
+    return <Positioner row verticalAlignment="top" horizontalAlignment="space-between" width="100%" padding="1rem 3rem">
+        <Positioner horizontalAlignment="left">
+            <Title main="Project" scale={1.2} secondary={repoName} />
+            <Positioner paddingTop="0.5rem" />
+            <Title main="Orgianization" scale={0.8} secondary={orgName} />
+        </Positioner>
+        
+        <Positioner>
+            <Title main="Vulnerability Metrics:" />
+            <Positioner paddingLeft="2rem">
+                <span>    <b>Total Quantity</b>: {`${summaryData.numberOfVulnerabilies}`}      </span>
+                <span>    <b>Total Severity</b>: {`${summaryData.magnitudeOfVulnerabilites}`}  </span>
+                <span>    <b>Most Recent</b>: {`${summaryData.newestVulnerabilityTime}`}       </span>
+                <span>    <b>Oldest</b>: {`${summaryData.oldestVulnerabilityTime}`}            </span>
+            </Positioner>
+        </Positioner>
     </Positioner>
 }
 
-const ChartList = async ({ orgName, repoName }) => {
+const ChartList = async ({ orgName, repoName, summaryData }) => {
     // get data from the backend
     const commitData = await smartBackend.getFullCommitDataFor(repoName)
     const vulnData   = await smartBackend.getVulnDataFor(repoName)
@@ -40,7 +51,7 @@ const ChartList = async ({ orgName, repoName }) => {
     return <div style="width: 100%; max-width: 50rem; padding: 2rem; box-sizing: border-box;">
         
         <ChartCard name="severity-bar-chart">
-            <SummaryTag orgName={orgName} repoName={repoName} />
+            <SummaryTag orgName={orgName} repoName={repoName} summaryData={summaryData} />
         </ChartCard>
         
         <ChartCard name="severity-bar-chart">
@@ -65,7 +76,7 @@ const ChartList = async ({ orgName, repoName }) => {
                 />
         </ChartCard>
         
-        <ChartCard name="by-year">
+        <ChartCard name="DateSeverityChart">
             <DateSeverityChart vulnData={vulnData} />
         </ChartCard>
         
@@ -73,11 +84,8 @@ const ChartList = async ({ orgName, repoName }) => {
             <AvailabilityIntegrityConfidentiality vulnData={vulnData} />
         </ChartCard>
         
-        <ChartCard name="card-1:dummy-card">
-            
-            {/* FIXME */}
-            I'm a Dummy Card 2, Replace me with an actual chart
-            {/* FIXME */}
+        <ChartCard name="AttributeFrequency">
+            <AttributeFrequency vulnData={vulnData} />
         </ChartCard>
         
     </div>
@@ -122,15 +130,16 @@ const RightSideContainer = ({ children })=>{
 // 
 // 
 module.exports = async ({ ...properties }) => {
-    const { repoName, orgName } = router.pageInfo
+    const { orgName, repoName } = router.pageInfo
+    const summaryData = await smartBackend.getRepoSummaryDataFor(orgName, repoName)
     return <main name="ProductView" style={`width: 100%; flex: 1 0 auto;`} >
             <div style={{ height: "100%", maxHeight: "100%", width: "100%", minWidth: "100%", maxWidth: "100%", position: 'relative', display: 'flex' }}>
                 <LeftSideContainer>
-                    <RepoGraph orgName={orgName} repoName={repoName} />
+                    <Timeline orgName={orgName} repoName={repoName} summaryData={summaryData} />
                 </LeftSideContainer>
                 
                 <RightSideContainer>
-                    <ChartList orgName={orgName} repoName={repoName} />
+                    <ChartList orgName={orgName} repoName={repoName} summaryData={summaryData} />
                 </RightSideContainer>
             </div>
     </main>
