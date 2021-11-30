@@ -13,5 +13,8 @@ module.exports = ({product})=>{
         }
         byCve.set(product, Object.values(thisRepoByCve))
     }
-    return byCve.get(product)
+    const returnValue = byCve.get(product)
+    // un-cache because the server has so little ram
+    byCve.delete(product)
+    return returnValue
 }
