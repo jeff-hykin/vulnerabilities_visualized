@@ -99,6 +99,7 @@ module.exports = async ({ orgName, repoName }) => {
                         maxWidth: "80vw",
                         padding: "7px",
                         color: "gray",
+                        paddingBottom: "3.5rem",
                     }} >
                         {each.description}
                     </span>
