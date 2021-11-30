@@ -129,7 +129,7 @@ module.exports = async ({ orgName, repoName }) => {
         </h4>
     }
     return <Positioner verticalAlignment="top" horizontalAlignment="center" height="100%" width="100%" position="absolute">
-        <Positioner horizontalAlignment="center" maxHeight="100%" overflowY="auto" width="100%">
+        <Positioner horizontalAlignment="center" maxHeight="100%" overflowY="auto" overflowX="hidden" width="100%">
             <Title text="Most Recent Vulnerabilites" />
             <svg style={`min-height: ${minHeight}px`} width="20rem" height={minHeight} onmouseover={updateHoverTag}>
                 {vulnDots}

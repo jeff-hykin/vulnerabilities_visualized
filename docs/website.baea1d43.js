@@ -27313,6 +27313,11 @@ var _require = require("../systems/utilities"),
 var _require2 = require("../systems/theme"),
     vulnColors = _require2.vulnColors;
 
+var router = require("quik-router");
+
+var _require3 = require("@vue-reactivity/watch"),
+    watch = _require3.watch;
+
 var severityCategory = function severityCategory(each) {
   if (each.score <= 3.3333) {
     return "mild";
@@ -27355,6 +27360,8 @@ var updateHoverTag = function updateHoverTag(eventObject) {
     hoverTag.style.opacity = 0;
   }
 };
+
+watch(router.pageInfo, updateHoverTag); // fixes a small bug
 
 module.exports = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
@@ -27463,6 +27470,7 @@ module.exports = /*#__PURE__*/function () {
               horizontalAlignment: "center",
               maxHeight: "100%",
               overflowY: "auto",
+              overflowX: "hidden",
               width: "100%"
             }, /*#__PURE__*/React.createElement(Title, {
               text: "Most Recent Vulnerabilites"
@@ -27487,7 +27495,7 @@ module.exports = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
-},{"../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../components/Svg/Circle":"../code/components/Svg/Circle.jsx","../systems/smart_backend":"../code/systems/smart_backend.js","good-date":"../../node_modules/good-date/index.js","../systems/utilities":"../code/systems/utilities.js","../systems/theme":"../code/systems/theme.js"}],"../code/components/Title.jsx":[function(require,module,exports) {
+},{"../skeletons/Positioner":"../code/skeletons/Positioner.jsx","../components/Svg/Circle":"../code/components/Svg/Circle.jsx","../systems/smart_backend":"../code/systems/smart_backend.js","good-date":"../../node_modules/good-date/index.js","../systems/utilities":"../code/systems/utilities.js","../systems/theme":"../code/systems/theme.js","quik-router":"../../node_modules/quik-router/main/main.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/components/Title.jsx":[function(require,module,exports) {
 module.exports = function (_ref) {
   var main = _ref.main,
       secondary = _ref.secondary;
@@ -80098,7 +80106,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63768" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50975" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
