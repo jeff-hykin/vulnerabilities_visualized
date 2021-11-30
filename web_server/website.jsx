@@ -1,6 +1,7 @@
 // add CSS before everything else
 require("css-baseline/css/3")
 require("./global.scss")
+require("./static_files/tailwind")
 
 // libraries
 const router = require("quik-router")
