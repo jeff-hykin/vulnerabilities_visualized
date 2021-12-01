@@ -157,7 +157,7 @@ const VulnerabilityDots = ({vulnStats, modifiedVulnData, timeCompressor, yAxisSc
 
 const CommitBars = ({commitData, timeCompressor, yAxisScale, yAxisPadding, minHeight}) => {
     if (!commitData) {
-        return commitData = []
+        commitData = []
     }
     const byMonth = {}
     for (const eachCommit of commitData) {
