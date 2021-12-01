@@ -76,6 +76,7 @@ const getFullCommitDataFor = async (repoName)=> {
             commitData[repoName] = await backend.data.fullCommitLogFor({ product: repoName })
         } catch (error) {
             console.log(`Error getting commit data for: ${repoName}`)
+            console.debug(error)
             commitData[repoName] = null
         }
         return commitData[repoName]
