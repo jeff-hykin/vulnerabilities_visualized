@@ -89,7 +89,27 @@ fs.writeFileSync(outputFileName, fileAsString)
 console.error("formatting+validating file")
 const fileString = fs.readFileSync(outputFileName).toString()
 const commits = JSON.parse(fileString)
-const commitsWithEasyDate = commits.map(each=>({...each, commitDate: each.commitFullDate.replace(/^(\d+-\d+-\d+) .+/, "$1")}))
+
+
+// example
+// {
+//     "hash": "8883fa17",
+//     "author": "Jeff Hykin",
+//     "date": "Fri Nov 26 17:59:33 2021 -0600",
+//     "email": "jeff.hykin@gmail.com",
+//     "message": "improve mobile view",
+//     "commitFullDate": "2021-11-26 17:59:33 -0600",
+//     "age": "3 days ago",
+//     "filesChanged": 4,
+//     "linesChanged": 24,
+//     "insertions": 12,
+//     "deletions": 12,
+//     "commitDate": "2021-11-26"
+// },
+const commitsWithEasyDate = commits.map(each=>{
+    each.commitDate = each.commitFullDate.replace(/^(\d+-\d+-\d+) .+/, "$1")
+    return [ each.filesChanged, each.linesChanged, each.commitDate,]
+})
 // save it again but formatted
-fs.writeFileSync(outputFileName, JSON.stringify(commitsWithEasyDate,0,4))
+fs.writeFileSync(outputFileName, JSON.stringify(commitsWithEasyDate))
 console.log(outputFileName)

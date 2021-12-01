@@ -11,7 +11,14 @@ module.exports = async ({product})=>{
     if (!cachedData.has(repoName)) {
         const location = path.join("data",'full_commit_logs',repoName+".json")
         const stringValue = await fs.readFile(location)
-        const objectValue = JSON.parse(stringValue)
+        const objectValue = JSON.parse(stringValue).map(each=>{
+            // convert from compressed list form
+            const [ filesChanged, linesChanged, commitDate,] = each
+            // to decompressed object form (depends on the format of data_processing/format_commit_data.js)
+            return {
+                filesChanged, linesChanged, commitDate,
+            }
+        })
         cachedData.set(repoName, objectValue)
     }
     const returnValue = cachedData.get(repoName)

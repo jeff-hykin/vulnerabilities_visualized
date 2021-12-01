@@ -2,7 +2,7 @@ const Positioner = require("../skeletons/Positioner")
 const Circle = require("./Svg/Circle")
 const smartBackend = require("../systems/smart_backend")
 const DateTime = require("good-date")
-const { stats } = require("../systems/utilities")
+const { stats, numbers } = require("../systems/utilities")
 const { vulnColors } = require("../systems/theme")
 const router = require("quik-router")
 const { watch } = require("@vue-reactivity/watch")
@@ -16,6 +16,29 @@ const severityCategory = (each)=>{
         return "major"
     }
 }
+
+const Title = ({text})=>{
+    return <h4
+        style={{
+            padding: "3rem",
+            fontSize: "1.8rem",
+            textDecoration: "underline",
+            marginLeft: "30px",
+            width: "100%",
+            display: "block",
+            fontFamily: "Roboto",
+            fontWeight: "100",
+            color: "gray",
+            textAlign: "left",
+        }}
+        >
+            {text}
+    </h4>
+}
+    
+// 
+// Hover Tag (probably should be in systems/)
+// 
 const hoverTag = <div
     class="our-weak-shadow"
     style={{
@@ -32,7 +55,7 @@ const updateHoverTag = (eventObject) => {
         document.body.append(hoverTag)
     }
     // if the element has a title
-    if (eventObject.target.onHoverElement) {
+    if (eventObject.target && eventObject.target.onHoverElement) {
         // give it the right content
         hoverTag.innerHTML = ""
         hoverTag.appendChild(eventObject.target.onHoverElement)
@@ -48,22 +71,37 @@ const updateHoverTag = (eventObject) => {
 }
 watch(router.pageInfo, updateHoverTag) // fixes a small bug
 
-module.exports = async ({ orgName, repoName, summaryData }) => {
-    // FIXME: add timeline markers
-    const maxNumberOfVulns = Infinity
-    const vulnData = await smartBackend.getVulnDataFor(repoName)
-    const modifiedVulnData = vulnData.map(each=>({
-        ...each,
-        name: each.cveId.replace(/cve-/i, ""),
-        level: 'red',
-        date: new DateTime(each.publishDate),
-        unixSeconds: (new DateTime(each.publishDate)).unix / 1000
-    })).slice(0,maxNumberOfVulns)
-    const [min,max,range,average,median,sum] = stats(modifiedVulnData.map(each=>each.unixSeconds))
+const YearMarkers = ({vulnStats, timeCompressor})=> {
+    const [min,max,range,average,median,sum] = vulnStats
+    const newestDate = new DateTime(max*1000)
+    const oldestDate = new DateTime(min*1000)
+    let runningYear = oldestDate.year
+    const yearIncrementor = new DateTime([oldestDate.year+1])
+    const dates = []
+    while (true) {
+        runningYear++
+        dates.push(new DateTime([runningYear]))
+        if (newestDate.unix <= dates.slice(-1)[0]) {
+            break
+        }
+    }
+    dates.pop()
     
+    return <Positioner positionSelf="relativeToParent" left={0} top={0}>
+        <Title text="Year" />
+        <Positioner>
+            {dates.map(
+                each=><Positioner positionSelf="relativeToParent" left={85} top={timeCompressor(each.unix/1000)} font-size="16pt" transform="translateY(-130%)" min-width="max-content">
+                    {`Jan ${each.year}`}
+                </Positioner>
+            )}
+        </Positioner>
+    </Positioner>
+}
+
+const VulnerabilityDots = ({vulnStats, modifiedVulnData, timeCompressor, yAxisScale, yAxisPadding}) => {
+    const [min,max,range,average,median,sum] = vulnStats
     // create some timeline dots
-    const yAxisScale = 0.000015
-    const yAxisPadding = 100
     const xAxisScale = 10
     const xAxisPadding = 100
     const sizeScale = 7
@@ -71,11 +109,12 @@ module.exports = async ({ orgName, repoName, summaryData }) => {
     const vulnDots = modifiedVulnData.map(each=>
         <Circle
             size={`${(each.score+1)*sizeScale}px`}
-            y={((max - each.unixSeconds)*yAxisScale) + yAxisPadding}
-            x={((each.score/2) * xAxisScale) + xAxisPadding}
+            y={timeCompressor(each.unixSeconds)}
+            x={(((each.score/2) * xAxisScale) + xAxisPadding)+ (Math.random()*70)}
             color={vulnColors.severity[severityCategory(each)]}
             borderColor="white"
-            onHoverElement={<Positioner padding="1rem" maxHeight="30vh" overflow="auto" lineHeight="1.3rem">
+            onHoverElement={
+                <Positioner padding="1rem" maxHeight="30vh" overflow="auto" lineHeight="1.3rem">
                     <span>    <b>Id</b>: {each.cveId}                                                           </span>
                     <span>    <b>Difficulty to perform</b>: {each.complexity}                                   </span>
                     <span>    <b>Severity</b>: {`${each.score}`}                                                </span>
@@ -106,31 +145,55 @@ module.exports = async ({ orgName, repoName, summaryData }) => {
             />
     )
     const minHeight = ((max-min)*yAxisScale) + yAxisPadding + yAxisPadding
-    const Title = ({text})=>{
-        return <h4
-            style={{
-                padding: "3rem",
-                fontSize: "1.8rem",
-                textDecoration: "underline",
-                marginLeft: "30px",
-                width: "100%",
-                display: "block",
-                fontFamily: "Roboto",
-                fontWeight: "100",
-                color: "gray",
-                textAlign: "left",
-            }}
-            >
-                {text}
-        </h4>
+    return <Positioner>
+        <Title text="Vulnerabilites" />
+        <svg style={`min-height: ${minHeight}px`} width="20rem" height={minHeight} onmouseover={updateHoverTag}>
+            {vulnDots}
+        </svg>
+    </Positioner>
+}
+
+module.exports = async ({ orgName, repoName, summaryData, commitData }) => {
+    // FIXME: add timeline markers
+    const maxNumberOfVulns = Infinity
+    const vulnData = await smartBackend.getVulnDataFor(repoName)
+    const modifiedVulnData = vulnData.map(each=>({
+        ...each,
+        name: each.cveId.replace(/cve-/i, ""),
+        level: 'red',
+        date: new DateTime(each.publishDate),
+        unixSeconds: (new DateTime(each.publishDate)).unix / 1000
+    })).slice(0,maxNumberOfVulns)
+    
+    // 
+    // time compression
+    // 
+    const vulnStats = stats(modifiedVulnData.map(each=>each.unixSeconds))
+    const [min,max,range,average,median,sum] = vulnStats
+    const yAxisScale = 0.000015
+    const yAxisPadding = 100
+    const timeCompressor = (eachTimeInUnixSeconds)=> {
+        return ((max - eachTimeInUnixSeconds)*yAxisScale) + yAxisPadding
     }
+    
     return <Positioner verticalAlignment="top" horizontalAlignment="center" height="100%" width="100%" position="absolute">
-        <Positioner horizontalAlignment="center" maxHeight="100%" overflowY="auto" overflowX="hidden" width="100%">
-            <Title text="Most Recent Vulnerabilites" />
-            <svg style={`min-height: ${minHeight}px`} width="20rem" height={minHeight} onmouseover={updateHoverTag}>
-                {vulnDots}
-            </svg>
-            <Title text="Oldest Vulnerabilites" />
+        <Positioner row horizontalAlignment="space-around" maxHeight="100%" overflowY="auto" overflowX="hidden" width="100%">
+            <YearMarkers
+                vulnStats={vulnStats}
+                timeCompressor={timeCompressor}
+                />
+            <VulnerabilityDots
+                modifiedVulnData={modifiedVulnData}
+                vulnStats={vulnStats}
+                yAxisScale={yAxisScale}
+                yAxisPadding={yAxisPadding}
+                timeCompressor={timeCompressor}
+                />
+            {/* <CommitDots
+                yAxisScale={yAxisScale}
+                yAxisPadding={yAxisPadding}
+                timeCompressor={timeCompressor}
+                /> */}
         </Positioner>
     </Positioner>
 }

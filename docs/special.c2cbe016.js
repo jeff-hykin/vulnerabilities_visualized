@@ -893,7 +893,6 @@ Object.defineProperties(window.HTMLElement.prototype, {
             if (typeof styles == "string") {
                 this.css = styles
             } else {
-                console.debug(`styles is:`,styles)
                 Object.assign(this.style, styles)
             }
         }
@@ -1511,7 +1510,7 @@ function coerce(val) {
   return val;
 }
 
-},{"ms":"../../node_modules/debug/node_modules/ms/index.js"}],"../../node_modules/.pnpm/process@0.11.10/node_modules/process/browser.js":[function(require,module,exports) {
+},{"ms":"../../node_modules/debug/node_modules/ms/index.js"}],"../../node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -1762,7 +1761,11 @@ function useColors() {
   // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
 
 
-  return typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || typeof window !== 'undefined' && window.console && (window.console.firebug || window.console.exception && window.console.table) || typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
+  return typeof document !== 'undefined' && document.documentElement && document.documentElement.style && document.documentElement.style.WebkitAppearance || // is firebug? http://stackoverflow.com/a/398120/376773
+  typeof window !== 'undefined' && window.console && (window.console.firebug || window.console.exception && window.console.table) || // is firefox >= v31?
+  // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+  typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31 || // double check webkit in userAgent just in case we are in a worker
+  typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/);
 }
 /**
  * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
@@ -1880,7 +1883,7 @@ function localstorage() {
     return window.localStorage;
   } catch (e) {}
 }
-},{"./debug":"../../node_modules/debug/src/debug.js","process":"../../node_modules/.pnpm/process@0.11.10/node_modules/process/browser.js"}],"../../node_modules/socket.io-client/lib/url.js":[function(require,module,exports) {
+},{"./debug":"../../node_modules/debug/src/debug.js","process":"../../node_modules/process/browser.js"}],"../../node_modules/socket.io-client/lib/url.js":[function(require,module,exports) {
 
 /**
  * Module dependencies.
@@ -2141,7 +2144,7 @@ module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],"../../node_modules/.pnpm/buffer@4.9.2/node_modules/base64-js/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -2293,7 +2296,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],"../../node_modules/.pnpm/buffer@4.9.2/node_modules/ieee754/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/ieee754/index.js":[function(require,module,exports) {
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -2380,14 +2383,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],"../../node_modules/.pnpm/buffer@4.9.2/node_modules/isarray/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/buffer/node_modules/isarray/index.js":[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],"../../node_modules/.pnpm/buffer@4.9.2/node_modules/buffer/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/buffer/index.js":[function(require,module,exports) {
 
 var global = arguments[3];
 /*!
@@ -4180,7 +4183,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/base64-js/index.js","ieee754":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/ieee754/index.js","isarray":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/isarray/index.js","buffer":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/buffer/index.js"}],"../../node_modules/socket.io-parser/is-buffer.js":[function(require,module,exports) {
+},{"base64-js":"../../node_modules/base64-js/index.js","ieee754":"../../node_modules/ieee754/index.js","isarray":"../../node_modules/buffer/node_modules/isarray/index.js","buffer":"../../node_modules/buffer/index.js"}],"../../node_modules/socket.io-parser/is-buffer.js":[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 
 module.exports = isBuf;
@@ -4203,7 +4206,7 @@ function isBuf(obj) {
           (withNativeArrayBuffer && (obj instanceof ArrayBuffer || isView(obj)));
 }
 
-},{"buffer":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/buffer/index.js"}],"../../node_modules/socket.io-parser/binary.js":[function(require,module,exports) {
+},{"buffer":"../../node_modules/buffer/index.js"}],"../../node_modules/socket.io-parser/binary.js":[function(require,module,exports) {
 /*global Blob,File*/
 
 /**
@@ -4913,7 +4916,7 @@ function hasBinary (obj) {
   return false;
 }
 
-},{"isarray":"../../node_modules/has-binary2/node_modules/isarray/index.js","buffer":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/buffer/index.js"}],"../../node_modules/arraybuffer.slice/index.js":[function(require,module,exports) {
+},{"isarray":"../../node_modules/has-binary2/node_modules/isarray/index.js","buffer":"../../node_modules/buffer/index.js"}],"../../node_modules/arraybuffer.slice/index.js":[function(require,module,exports) {
 /**
  * An abstraction for slicing an arraybuffer even when
  * ArrayBuffer.prototype.slice is not supported
@@ -7320,7 +7323,7 @@ JSONPPolling.prototype.doWrite = function (data, fn) {
   }
 };
 
-},{"./polling":"../../node_modules/engine.io-client/lib/transports/polling.js","component-inherit":"../../node_modules/component-inherit/index.js"}],"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/_empty.js":[function(require,module,exports) {
+},{"./polling":"../../node_modules/engine.io-client/lib/transports/polling.js","component-inherit":"../../node_modules/component-inherit/index.js"}],"../../node_modules/parcel-bundler/src/builtins/_empty.js":[function(require,module,exports) {
 
 },{}],"../../node_modules/engine.io-client/lib/transports/websocket.js":[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
@@ -7618,7 +7621,7 @@ WS.prototype.check = function () {
   return !!WebSocketImpl && !('__initialize' in WebSocketImpl && this.name === WS.prototype.name);
 };
 
-},{"../transport":"../../node_modules/engine.io-client/lib/transport.js","engine.io-parser":"../../node_modules/engine.io-parser/lib/browser.js","parseqs":"../../node_modules/parseqs/index.js","component-inherit":"../../node_modules/component-inherit/index.js","yeast":"../../node_modules/yeast/index.js","debug":"../../node_modules/debug/src/browser.js","ws":"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/_empty.js","buffer":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/buffer/index.js"}],"../../node_modules/engine.io-client/lib/transports/index.js":[function(require,module,exports) {
+},{"../transport":"../../node_modules/engine.io-client/lib/transport.js","engine.io-parser":"../../node_modules/engine.io-parser/lib/browser.js","parseqs":"../../node_modules/parseqs/index.js","component-inherit":"../../node_modules/component-inherit/index.js","yeast":"../../node_modules/yeast/index.js","debug":"../../node_modules/debug/src/browser.js","ws":"../../node_modules/parcel-bundler/src/builtins/_empty.js","buffer":"../../node_modules/buffer/index.js"}],"../../node_modules/engine.io-client/lib/transports/index.js":[function(require,module,exports) {
 /**
  * Module dependencies
  */
@@ -9944,7 +9947,7 @@ _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
 }))();
 
 ;
-},{"quik-client":"../../node_modules/quik-client/index.js","regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","good-jsx":"../../node_modules/good-jsx/index.js","socket.io-client":"../../node_modules/socket.io-client/lib/index.js"}],"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"quik-client":"../../node_modules/quik-client/index.js","regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","good-jsx":"../../node_modules/good-jsx/index.js","socket.io-client":"../../node_modules/socket.io-client/lib/index.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -9972,7 +9975,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50975" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57833" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -10148,5 +10151,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","special.js"], null)
+},{}]},{},["../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","special.js"], null)
 //# sourceMappingURL=/special.c2cbe016.js.map
