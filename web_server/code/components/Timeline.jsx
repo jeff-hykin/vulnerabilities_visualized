@@ -184,6 +184,7 @@ const CommitBars = ({commitData, timeCompressor, yAxisScale, yAxisPadding, minHe
                 ({ y, width, date, linesChanged})=><Rectangle x={0} y={y-30} width={width} height={25} onHoverElement={<span>{`${date} (${linesChanged})`}</span>} />
             )}
         </svg>
+        {scaledMonthPairs.length==0&&<span>[No Data]</span>}
     </Positioner>
 }
 
