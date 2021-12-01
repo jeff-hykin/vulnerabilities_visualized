@@ -135,7 +135,7 @@ module.exports = async ({ ...properties }) => {
     return <main name="ProductView" style={`width: 100%; flex: 1 0 auto;`} >
             <div style={{ height: "100%", maxHeight: "100%", width: "100%", minWidth: "100%", maxWidth: "100%", position: 'relative', display: 'flex' }}>
                 <LeftSideContainer>
-                    <Timeline orgName={orgName} repoName={repoName} summaryData={summaryData} />
+                    <Timeline orgName={orgName} repoName={repoName} summaryData={summaryData} commitData={commitData} />
                 </LeftSideContainer>
                 
                 <RightSideContainer>

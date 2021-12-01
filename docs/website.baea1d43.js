@@ -54709,7 +54709,8 @@ module.exports = /*#__PURE__*/function () {
             }, /*#__PURE__*/React.createElement(LeftSideContainer, null, /*#__PURE__*/React.createElement(Timeline, {
               orgName: orgName,
               repoName: repoName,
-              summaryData: summaryData
+              summaryData: summaryData,
+              commitData: commitData
             })), /*#__PURE__*/React.createElement(RightSideContainer, null, /*#__PURE__*/React.createElement(ChartList, {
               orgName: orgName,
               repoName: repoName,
