@@ -1,5 +1,6 @@
 const Positioner = require("../skeletons/Positioner")
 const Circle = require("./Svg/Circle")
+const Rectangle = require("./Svg/Rectangle")
 const smartBackend = require("../systems/smart_backend")
 const DateTime = require("good-date")
 const { stats, numbers } = require("../systems/utilities")
@@ -48,6 +49,7 @@ const hoverTag = <div
         borderRadius: "3px",
         padding: "4px 5px 2px",
         transition: "all 0.5s ease-in-out 0s",
+        zIndex:999999,
     }}
     />
 const updateHoverTag = (eventObject) => {
@@ -87,7 +89,7 @@ const YearMarkers = ({vulnStats, timeCompressor})=> {
     }
     dates.pop()
     
-    return <Positioner positionSelf="relativeToParent" left={0} top={0}>
+    return <Positioner positionSelf="relativeToParent" left={0} top={0} fontFamily="Roboto">
         <Title text="Year" />
         <Positioner>
             {dates.map(
@@ -110,7 +112,7 @@ const VulnerabilityDots = ({vulnStats, modifiedVulnData, timeCompressor, yAxisSc
         <Circle
             size={`${(each.score+1)*sizeScale}px`}
             y={timeCompressor(each.unixSeconds)}
-            x={(((each.score/2) * xAxisScale) + xAxisPadding)+ (Math.random()*70)}
+            x={(((each.score/2) * xAxisScale) + xAxisPadding)+ (Math.random()*120)}
             color={vulnColors.severity[severityCategory(each)]}
             borderColor="white"
             onHoverElement={
@@ -147,8 +149,37 @@ const VulnerabilityDots = ({vulnStats, modifiedVulnData, timeCompressor, yAxisSc
     const minHeight = ((max-min)*yAxisScale) + yAxisPadding + yAxisPadding
     return <Positioner>
         <Title text="Vulnerabilites" />
-        <svg style={`min-height: ${minHeight}px`} width="20rem" height={minHeight} onmouseover={updateHoverTag}>
+        <svg style={`min-height: ${minHeight}px;border-left: solid lightgray 1px;`} width="20rem" height={minHeight}>
             {vulnDots}
+        </svg>
+    </Positioner>
+}
+
+const CommitBars = ({commitData, timeCompressor, yAxisScale, yAxisPadding, minHeight}) => {
+    const byMonth = {}
+    for (const eachCommit of commitData) {
+        const date = new DateTime(eachCommit.commitDate)
+        const monthKey = JSON.stringify([date.year, date.month])
+        if (!(monthKey in byMonth)) {
+            byMonth[monthKey] = 0
+        }
+        byMonth[monthKey] += eachCommit.linesChanged
+    }
+    const scaledMonthPairs = Object.entries(byMonth).map(
+        ([monthKey, linesChanged])=>({
+            y: timeCompressor((new DateTime(JSON.parse(monthKey))).unix/1000),
+            width: Math.pow(Math.log(linesChanged), 2),
+            date: (new DateTime(JSON.parse(monthKey))).date,
+            linesChanged,
+        })
+    )
+    const adjustmentBecauseSomethingIsSlightlyOff = 30 // corrisponds with the 
+    return <Positioner>
+        <Title text="Lines Changed" />
+        <svg style={`min-height: ${minHeight}px; transform: scaleX(-1); border-right: solid lightgray 1px;`} width="20rem" height={minHeight} onmouseover={updateHoverTag}>
+            {scaledMonthPairs.map(
+                ({ y, width, date, linesChanged})=><Rectangle x={0} y={y-30} width={width} height={25} onHoverElement={<span>{`${date} (${linesChanged})`}</span>} />
+            )}
         </svg>
     </Positioner>
 }
@@ -173,12 +204,13 @@ module.exports = async ({ orgName, repoName, summaryData }) => {
     const [min,max,range,average,median,sum] = vulnStats
     const yAxisScale = 0.000015
     const yAxisPadding = 100
+    const minHeight = ((max-min)*yAxisScale) + yAxisPadding + yAxisPadding
     const timeCompressor = (eachTimeInUnixSeconds)=> {
         return ((max - eachTimeInUnixSeconds)*yAxisScale) + yAxisPadding
     }
     
-    return <Positioner verticalAlignment="top" horizontalAlignment="center" height="100%" width="100%" position="absolute">
-        <Positioner row horizontalAlignment="space-around" maxHeight="100%" overflowY="auto" overflowX="hidden" width="100%">
+    return <Positioner verticalAlignment="top" horizontalAlignment="center" height="100%" width="100%" position="absolute" onmouseover={updateHoverTag}>
+        <Positioner row horizontalAlignment="right" maxHeight="100%" overflowY="auto" overflowX="hidden" width="100%">
             <YearMarkers
                 vulnStats={vulnStats}
                 timeCompressor={timeCompressor}
@@ -190,11 +222,13 @@ module.exports = async ({ orgName, repoName, summaryData }) => {
                 yAxisPadding={yAxisPadding}
                 timeCompressor={timeCompressor}
                 />
-            {/* <CommitDots
+            <CommitBars
+                commitData={commitData}
                 yAxisScale={yAxisScale}
                 yAxisPadding={yAxisPadding}
                 timeCompressor={timeCompressor}
-                /> */}
+                minHeight={minHeight}
+                />
         </Positioner>
     </Positioner>
 }

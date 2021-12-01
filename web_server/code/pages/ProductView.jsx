@@ -94,11 +94,12 @@ const ChartList = async ({ orgName, repoName, summaryData }) => {
 const LeftSideContainer = ({ children })=>{
     return <div
         name="left-side"
-        class="centered"
+        class="our-shadow-2 centered"
         style={`
             width: 50%;
             height: 100%;
             position: relative;
+            z-index: 2;
         `}
         >
             {children}
@@ -132,7 +133,7 @@ const RightSideContainer = ({ children })=>{
 module.exports = async ({ ...properties }) => {
     const { orgName, repoName } = router.pageInfo
     const summaryData = await smartBackend.getRepoSummaryDataFor(orgName, repoName)
-    return <main name="ProductView" style={`width: 100%; flex: 1 0 auto;`} >
+    return <main name="ProductView" style={`width: 100%; flex: 1 0 auto; overflow: hidden;`} >
             <div style={{ height: "100%", maxHeight: "100%", width: "100%", minWidth: "100%", maxWidth: "100%", position: 'relative', display: 'flex' }}>
                 <LeftSideContainer>
                     <Timeline orgName={orgName} repoName={repoName} summaryData={summaryData} />

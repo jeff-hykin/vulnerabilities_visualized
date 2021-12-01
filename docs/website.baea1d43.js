@@ -27283,6 +27283,47 @@ module.exports = function (_ref) {
     stroke: borderColor || color
   }, props), children);
 };
+},{}],"../code/components/Svg/Rectangle.jsx":[function(require,module,exports) {
+var _excluded = ["width", "height", "x", "y", "color", "borderThickness", "borderColor", "children"];
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+/**
+ * Create an SVG Rectangle
+ *
+ * @example
+ *     <Rectangle
+ *         width={100}
+ *         height={1000}
+ *         x={100}
+ *         y={100}
+ *         />
+ */
+module.exports = function (_ref) {
+  var width = _ref.width,
+      height = _ref.height,
+      x = _ref.x,
+      y = _ref.y,
+      _ref$color = _ref.color,
+      color = _ref$color === void 0 ? "#69b3a2" : _ref$color,
+      _ref$borderThickness = _ref.borderThickness,
+      borderThickness = _ref$borderThickness === void 0 ? 0 : _ref$borderThickness,
+      borderColor = _ref.borderColor,
+      children = _ref.children,
+      props = _objectWithoutProperties(_ref, _excluded);
+
+  return /*#__PURE__*/React.createElement("rect", _extends({
+    x: x,
+    y: y,
+    width: width,
+    height: height,
+    style: "fill:".concat(color, ";stroke-width:").concat(borderThickness, ";stroke:").concat(borderColor || color)
+  }, props));
+};
 },{}],"../code/components/Timeline.jsx":[function(require,module,exports) {
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
@@ -27293,6 +27334,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -27309,6 +27352,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Positioner = require("../skeletons/Positioner");
 
 var Circle = require("./Svg/Circle");
+
+var Rectangle = require("./Svg/Rectangle");
 
 var smartBackend = require("../systems/smart_backend");
 
@@ -27365,7 +27410,8 @@ var hoverTag = /*#__PURE__*/React.createElement("div", {
     background: "white",
     borderRadius: "3px",
     padding: "4px 5px 2px",
-    transition: "all 0.5s ease-in-out 0s"
+    transition: "all 0.5s ease-in-out 0s",
+    zIndex: 999999
   }
 });
 
@@ -27423,7 +27469,8 @@ var YearMarkers = function YearMarkers(_ref2) {
   return /*#__PURE__*/React.createElement(Positioner, {
     positionSelf: "relativeToParent",
     left: 0,
-    top: 0
+    top: 0,
+    fontFamily: "Roboto"
   }, /*#__PURE__*/React.createElement(Title, {
     text: "Year"
   }), /*#__PURE__*/React.createElement(Positioner, null, dates.map(function (each) {
@@ -27462,7 +27509,7 @@ var VulnerabilityDots = function VulnerabilityDots(_ref3) {
     return /*#__PURE__*/React.createElement(Circle, {
       size: "".concat((each.score + 1) * sizeScale, "px"),
       y: timeCompressor(each.unixSeconds),
-      x: each.score / 2 * xAxisScale + xAxisPadding + Math.random() * 70,
+      x: each.score / 2 * xAxisScale + xAxisPadding + Math.random() * 120,
       color: vulnColors.severity[severityCategory(each)],
       borderColor: "white",
       onHoverElement: /*#__PURE__*/React.createElement(Positioner, {
@@ -27497,22 +27544,86 @@ var VulnerabilityDots = function VulnerabilityDots(_ref3) {
   return /*#__PURE__*/React.createElement(Positioner, null, /*#__PURE__*/React.createElement(Title, {
     text: "Vulnerabilites"
   }), /*#__PURE__*/React.createElement("svg", {
-    style: "min-height: ".concat(minHeight, "px"),
+    style: "min-height: ".concat(minHeight, "px;border-left: solid lightgray 1px;"),
     width: "20rem",
-    height: minHeight,
-    onmouseover: updateHoverTag
+    height: minHeight
   }, vulnDots));
 };
 
+var CommitBars = function CommitBars(_ref4) {
+  var commitData = _ref4.commitData,
+      timeCompressor = _ref4.timeCompressor,
+      yAxisScale = _ref4.yAxisScale,
+      yAxisPadding = _ref4.yAxisPadding,
+      minHeight = _ref4.minHeight;
+  var byMonth = {};
+
+  var _iterator = _createForOfIteratorHelper(commitData),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var eachCommit = _step.value;
+      var date = new DateTime(eachCommit.commitDate);
+      var monthKey = JSON.stringify([date.year, date.month]);
+
+      if (!(monthKey in byMonth)) {
+        byMonth[monthKey] = 0;
+      }
+
+      byMonth[monthKey] += eachCommit.linesChanged;
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  var scaledMonthPairs = Object.entries(byMonth).map(function (_ref5) {
+    var _ref6 = _slicedToArray(_ref5, 2),
+        monthKey = _ref6[0],
+        linesChanged = _ref6[1];
+
+    return {
+      y: timeCompressor(new DateTime(JSON.parse(monthKey)).unix / 1000),
+      width: Math.pow(Math.log(linesChanged), 2),
+      date: new DateTime(JSON.parse(monthKey)).date,
+      linesChanged: linesChanged
+    };
+  });
+  var adjustmentBecauseSomethingIsSlightlyOff = 30; // corrisponds with the 
+
+  return /*#__PURE__*/React.createElement(Positioner, null, /*#__PURE__*/React.createElement(Title, {
+    text: "Lines Changed"
+  }), /*#__PURE__*/React.createElement("svg", {
+    style: "min-height: ".concat(minHeight, "px; transform: scaleX(-1); border-right: solid lightgray 1px;"),
+    width: "20rem",
+    height: minHeight,
+    onmouseover: updateHoverTag
+  }, scaledMonthPairs.map(function (_ref7) {
+    var y = _ref7.y,
+        width = _ref7.width,
+        date = _ref7.date,
+        linesChanged = _ref7.linesChanged;
+    return /*#__PURE__*/React.createElement(Rectangle, {
+      x: 0,
+      y: y - 30,
+      width: width,
+      height: 25,
+      onHoverElement: /*#__PURE__*/React.createElement("span", null, "".concat(date, " (").concat(linesChanged, ")"))
+    });
+  })));
+};
+
 module.exports = /*#__PURE__*/function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref4) {
-    var orgName, repoName, summaryData, commitData, maxNumberOfVulns, vulnData, modifiedVulnData, vulnStats, _vulnStats3, min, max, range, average, median, sum, yAxisScale, yAxisPadding, timeCompressor;
+  var _ref9 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref8) {
+    var orgName, repoName, summaryData, commitData, maxNumberOfVulns, vulnData, modifiedVulnData, vulnStats, _vulnStats3, min, max, range, average, median, sum, yAxisScale, yAxisPadding, minHeight, timeCompressor;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            orgName = _ref4.orgName, repoName = _ref4.repoName, summaryData = _ref4.summaryData;
+            orgName = _ref8.orgName, repoName = _ref8.repoName, summaryData = _ref8.summaryData;
             _context.next = 3;
             return smartBackend.getFullCommitDataFor(repoName);
 
@@ -27542,6 +27653,7 @@ module.exports = /*#__PURE__*/function () {
             _vulnStats3 = _slicedToArray(vulnStats, 6), min = _vulnStats3[0], max = _vulnStats3[1], range = _vulnStats3[2], average = _vulnStats3[3], median = _vulnStats3[4], sum = _vulnStats3[5];
             yAxisScale = 0.000015;
             yAxisPadding = 100;
+            minHeight = (max - min) * yAxisScale + yAxisPadding + yAxisPadding;
 
             timeCompressor = function timeCompressor(eachTimeInUnixSeconds) {
               return (max - eachTimeInUnixSeconds) * yAxisScale + yAxisPadding;
@@ -27552,10 +27664,11 @@ module.exports = /*#__PURE__*/function () {
               horizontalAlignment: "center",
               height: "100%",
               width: "100%",
-              position: "absolute"
+              position: "absolute",
+              onmouseover: updateHoverTag
             }, /*#__PURE__*/React.createElement(Positioner, {
               row: true,
-              horizontalAlignment: "space-around",
+              horizontalAlignment: "right",
               maxHeight: "100%",
               overflowY: "auto",
               overflowX: "hidden",
@@ -27569,9 +27682,15 @@ module.exports = /*#__PURE__*/function () {
               yAxisScale: yAxisScale,
               yAxisPadding: yAxisPadding,
               timeCompressor: timeCompressor
+            }), /*#__PURE__*/React.createElement(CommitBars, {
+              commitData: commitData,
+              yAxisScale: yAxisScale,
+              yAxisPadding: yAxisPadding,
+              timeCompressor: timeCompressor,
+              minHeight: minHeight
             }))));
 
-          case 15:
+          case 16:
           case "end":
             return _context.stop();
         }
@@ -27580,10 +27699,10 @@ module.exports = /*#__PURE__*/function () {
   }));
 
   return function (_x) {
-    return _ref5.apply(this, arguments);
+    return _ref9.apply(this, arguments);
   };
 }();
-},{"../skeletons/Positioner":"../code/skeletons/Positioner.jsx","./Svg/Circle":"../code/components/Svg/Circle.jsx","../systems/smart_backend":"../code/systems/smart_backend.js","good-date":"../../node_modules/good-date/index.js","../systems/utilities":"../code/systems/utilities.js","../systems/theme":"../code/systems/theme.js","quik-router":"../../node_modules/quik-router/main/main.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/components/Title.jsx":[function(require,module,exports) {
+},{"../skeletons/Positioner":"../code/skeletons/Positioner.jsx","./Svg/Circle":"../code/components/Svg/Circle.jsx","./Svg/Rectangle":"../code/components/Svg/Rectangle.jsx","../systems/smart_backend":"../code/systems/smart_backend.js","good-date":"../../node_modules/good-date/index.js","../systems/utilities":"../code/systems/utilities.js","../systems/theme":"../code/systems/theme.js","quik-router":"../../node_modules/quik-router/main/main.js","@vue-reactivity/watch":"../../node_modules/@vue-reactivity/watch/dist/index.mjs"}],"../code/components/Title.jsx":[function(require,module,exports) {
 module.exports = function (_ref) {
   var main = _ref.main,
       secondary = _ref.secondary,
@@ -54652,8 +54771,8 @@ var LeftSideContainer = function LeftSideContainer(_ref5) {
   var children = _ref5.children;
   return /*#__PURE__*/React.createElement("div", {
     name: "left-side",
-    class: "centered",
-    style: "\n            width: 50%;\n            height: 100%;\n            position: relative;\n        "
+    class: "our-shadow-2 centered",
+    style: "\n            width: 50%;\n            height: 100%;\n            position: relative;\n            z-index: 2;\n        "
   }, children);
 };
 
@@ -54700,7 +54819,7 @@ module.exports = /*#__PURE__*/function () {
             summaryData = _context3.sent;
             return _context3.abrupt("return", /*#__PURE__*/React.createElement("main", {
               name: "ProductView",
-              style: "width: 100%; flex: 1 0 auto;"
+              style: "width: 100%; flex: 1 0 auto; overflow: hidden;"
             }, /*#__PURE__*/React.createElement("div", {
               style: {
                 height: "100%",
@@ -80281,7 +80400,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57833" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62871" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

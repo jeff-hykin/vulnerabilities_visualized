@@ -1,4 +1,6 @@
 {
     "Atom": "atom",
-    "Linux Kernel": "linux-stable"
+    "Linux Kernel": "linux-stable",
+    "Ffmpeg": "FFmpeg",
+    "Imagemagick": "ImageMagick"
 }
