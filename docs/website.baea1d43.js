@@ -27512,13 +27512,18 @@ module.exports = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            orgName = _ref4.orgName, repoName = _ref4.repoName, summaryData = _ref4.summaryData, commitData = _ref4.commitData;
+            orgName = _ref4.orgName, repoName = _ref4.repoName, summaryData = _ref4.summaryData;
+            _context.next = 3;
+            return smartBackend.getFullCommitDataFor(repoName);
+
+          case 3:
+            commitData = _context.sent;
             // FIXME: add timeline markers
             maxNumberOfVulns = Infinity;
-            _context.next = 4;
+            _context.next = 7;
             return smartBackend.getVulnDataFor(repoName);
 
-          case 4:
+          case 7:
             vulnData = _context.sent;
             modifiedVulnData = vulnData.map(function (each) {
               return _objectSpread(_objectSpread({}, each), {}, {
@@ -27566,7 +27571,7 @@ module.exports = /*#__PURE__*/function () {
               timeCompressor: timeCompressor
             }))));
 
-          case 12:
+          case 15:
           case "end":
             return _context.stop();
         }
@@ -54709,8 +54714,7 @@ module.exports = /*#__PURE__*/function () {
             }, /*#__PURE__*/React.createElement(LeftSideContainer, null, /*#__PURE__*/React.createElement(Timeline, {
               orgName: orgName,
               repoName: repoName,
-              summaryData: summaryData,
-              commitData: commitData
+              summaryData: summaryData
             })), /*#__PURE__*/React.createElement(RightSideContainer, null, /*#__PURE__*/React.createElement(ChartList, {
               orgName: orgName,
               repoName: repoName,

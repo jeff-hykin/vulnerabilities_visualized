@@ -153,7 +153,8 @@ const VulnerabilityDots = ({vulnStats, modifiedVulnData, timeCompressor, yAxisSc
     </Positioner>
 }
 
-module.exports = async ({ orgName, repoName, summaryData, commitData }) => {
+module.exports = async ({ orgName, repoName, summaryData }) => {
+    const commitData = await smartBackend.getFullCommitDataFor(repoName)
     // FIXME: add timeline markers
     const maxNumberOfVulns = Infinity
     const vulnData = await smartBackend.getVulnDataFor(repoName)
