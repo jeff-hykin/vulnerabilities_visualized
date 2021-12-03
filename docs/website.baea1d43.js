@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+})({"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -149,7 +149,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"../../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -184,50 +184,43 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../../node_modules/css-baseline/css/3.css":[function(require,module,exports) {
+},{"./bundle-url":"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../../node_modules/css-baseline/css/3.css":[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":"../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../global.scss":[function(require,module,exports) {
+},{"_css_loader":"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../global.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../static_files/tailwind.css":[function(require,module,exports) {
+},{"_css_loader":"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../static_files/tailwind.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../node_modules/@vue/shared/dist/shared.esm-bundler.js":[function(require,module,exports) {
+},{"_css_loader":"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../node_modules/@vue/shared/dist/shared.esm-bundler.js":[function(require,module,exports) {
 var global = arguments[3];
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.def = exports.capitalize = exports.camelize = exports.babelParserDefaultPlugins = exports.PatchFlagNames = exports.NOOP = exports.NO = exports.EMPTY_OBJ = exports.EMPTY_ARR = void 0;
 exports.escapeHtml = escapeHtml;
 exports.escapeHtmlComment = escapeHtmlComment;
-exports.extend = void 0;
 exports.generateCodeFrame = generateCodeFrame;
-exports.hyphenate = exports.hasOwn = exports.hasChanged = exports.getGlobalThis = void 0;
 exports.includeBooleanAttr = includeBooleanAttr;
-exports.isReservedProp = exports.isPromise = exports.isPlainObject = exports.isOn = exports.isObject = exports.isNoUnitNumericStyleProp = exports.isModelListener = exports.isMap = exports.isKnownSvgAttr = exports.isKnownHtmlAttr = exports.isIntegerKey = exports.isHTMLTag = exports.isGloballyWhitelisted = exports.isFunction = exports.isDate = exports.isBooleanAttr = exports.isArray = exports.invokeArrayFns = void 0;
 exports.isSSRSafeAttrName = isSSRSafeAttrName;
-exports.isVoidTag = exports.isSymbol = exports.isString = exports.isSpecialBooleanAttr = exports.isSet = exports.isSVGTag = void 0;
 exports.looseEqual = looseEqual;
 exports.looseIndexOf = looseIndexOf;
 exports.makeMap = makeMap;
 exports.normalizeClass = normalizeClass;
 exports.normalizeProps = normalizeProps;
 exports.normalizeStyle = normalizeStyle;
-exports.objectToString = void 0;
 exports.parseStringStyle = parseStringStyle;
-exports.slotFlagsText = exports.remove = exports.propsToAttrMap = void 0;
 exports.stringifyStyle = stringifyStyle;
-exports.toTypeString = exports.toRawType = exports.toNumber = exports.toHandlerKey = exports.toDisplayString = void 0;
+exports.toTypeString = exports.toRawType = exports.toNumber = exports.toHandlerKey = exports.toDisplayString = exports.slotFlagsText = exports.remove = exports.propsToAttrMap = exports.objectToString = exports.isVoidTag = exports.isSymbol = exports.isString = exports.isSpecialBooleanAttr = exports.isSet = exports.isSVGTag = exports.isReservedProp = exports.isPromise = exports.isPlainObject = exports.isOn = exports.isObject = exports.isNoUnitNumericStyleProp = exports.isModelListener = exports.isMap = exports.isKnownSvgAttr = exports.isKnownHtmlAttr = exports.isIntegerKey = exports.isHTMLTag = exports.isGloballyWhitelisted = exports.isFunction = exports.isDate = exports.isBooleanAttr = exports.isArray = exports.invokeArrayFns = exports.hyphenate = exports.hasOwn = exports.hasChanged = exports.getGlobalThis = exports.extend = exports.def = exports.capitalize = exports.camelize = exports.babelParserDefaultPlugins = exports.PatchFlagNames = exports.NOOP = exports.NO = exports.EMPTY_OBJ = exports.EMPTY_ARR = void 0;
 
 /**
  * Make a map and return a function for checking if a key
@@ -900,7 +893,6 @@ exports.getGlobalThis = getGlobalThis;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ReactiveEffect = exports.ITERATE_KEY = exports.EffectScope = void 0;
 exports.computed = computed;
 exports.customRef = customRef;
 exports.deferredComputed = deferredComputed;
@@ -931,6 +923,7 @@ exports.track = track;
 exports.trigger = trigger;
 exports.triggerRef = triggerRef;
 exports.unref = unref;
+exports.ReactiveEffect = exports.ITERATE_KEY = exports.EffectScope = void 0;
 
 var _shared = require("@vue/shared");
 
@@ -3074,14 +3067,14 @@ module.exports = function (_ref) {
     style: "width: 80rem; max-width: 100%; max-width: 80vw; height: 100%; min-height: fit-content; padding: 2rem; box-sizing: border-box;"
   }, children));
 };
-},{"./SquareGrid":"../code/skeletons/SquareGrid.jsx"}],"../../node_modules/util/support/isBufferBrowser.js":[function(require,module,exports) {
+},{"./SquareGrid":"../code/skeletons/SquareGrid.jsx"}],"../../node_modules/.pnpm/util@0.11.1/node_modules/util/support/isBufferBrowser.js":[function(require,module,exports) {
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],"../../node_modules/inherits/inherits_browser.js":[function(require,module,exports) {
+},{}],"../../node_modules/.pnpm/util@0.11.1/node_modules/inherits/inherits_browser.js":[function(require,module,exports) {
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -3106,7 +3099,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],"../../node_modules/process/browser.js":[function(require,module,exports) {
+},{}],"../../node_modules/.pnpm/process@0.11.10/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -3315,7 +3308,7 @@ process.chdir = function (dir) {
 process.umask = function () {
   return 0;
 };
-},{}],"../../node_modules/util/util.js":[function(require,module,exports) {
+},{}],"../../node_modules/.pnpm/util@0.11.1/node_modules/util/util.js":[function(require,module,exports) {
 var process = require("process");
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -4036,7 +4029,7 @@ function callbackify(original) {
 }
 
 exports.callbackify = callbackify;
-},{"./support/isBuffer":"../../node_modules/util/support/isBufferBrowser.js","inherits":"../../node_modules/inherits/inherits_browser.js","process":"../../node_modules/process/browser.js"}],"../../node_modules/good-date/index.js":[function(require,module,exports) {
+},{"./support/isBuffer":"../../node_modules/.pnpm/util@0.11.1/node_modules/util/support/isBufferBrowser.js","inherits":"../../node_modules/.pnpm/util@0.11.1/node_modules/inherits/inherits_browser.js","process":"../../node_modules/.pnpm/process@0.11.10/node_modules/process/browser.js"}],"../../node_modules/good-date/index.js":[function(require,module,exports) {
 const padZero = (amount) => {
     if (amount < 10) {
         return `0${amount-0}`
@@ -4375,7 +4368,7 @@ DateTime.now = () => {
 }
 
 module.exports = DateTime
-},{"util":"../../node_modules/util/util.js"}],"../../node_modules/good-js/source/object.js":[function(require,module,exports) {
+},{"util":"../../node_modules/.pnpm/util@0.11.1/node_modules/util/util.js"}],"../../node_modules/good-js/source/object.js":[function(require,module,exports) {
 module.exports = {
     /**
      * Safely get nested values
@@ -5228,19 +5221,20 @@ var getFullCommitDataFor = /*#__PURE__*/function () {
 
           case 7:
             commitData[repoName] = _context6.sent;
-            _context6.next = 14;
+            _context6.next = 15;
             break;
 
           case 10:
             _context6.prev = 10;
             _context6.t0 = _context6["catch"](4);
             console.log("Error getting commit data for: ".concat(repoName));
+            console.debug(_context6.t0);
             commitData[repoName] = null;
 
-          case 14:
+          case 15:
             return _context6.abrupt("return", commitData[repoName]);
 
-          case 15:
+          case 16:
           case "end":
             return _context6.stop();
         }
@@ -5418,7 +5412,7 @@ module.exports = {
     }
   }
 };
-},{}],"../../node_modules/base64-js/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/.pnpm/buffer@4.9.2/node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -5570,7 +5564,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],"../../node_modules/ieee754/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/.pnpm/buffer@4.9.2/node_modules/ieee754/index.js":[function(require,module,exports) {
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -5657,14 +5651,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],"../../node_modules/buffer/node_modules/isarray/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/.pnpm/buffer@4.9.2/node_modules/isarray/index.js":[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],"../../node_modules/buffer/index.js":[function(require,module,exports) {
+},{}],"../../node_modules/.pnpm/buffer@4.9.2/node_modules/buffer/index.js":[function(require,module,exports) {
 
 var global = arguments[3];
 /*!
@@ -7457,7 +7451,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":"../../node_modules/base64-js/index.js","ieee754":"../../node_modules/ieee754/index.js","isarray":"../../node_modules/buffer/node_modules/isarray/index.js","buffer":"../../node_modules/buffer/index.js"}],"../../node_modules/lodash-contrib/node_modules/lodash/lodash.js":[function(require,module,exports) {
+},{"base64-js":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/base64-js/index.js","ieee754":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/ieee754/index.js","isarray":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/isarray/index.js","buffer":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/buffer/index.js"}],"../../node_modules/lodash-contrib/node_modules/lodash/lodash.js":[function(require,module,exports) {
 var global = arguments[3];
 var Buffer = require("buffer").Buffer;
 var define;
@@ -23704,7 +23698,7 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"../../node_modules/buffer/index.js"}],"../../node_modules/lodash-contrib/common-js/_.array.builders.js":[function(require,module,exports) {
+},{"buffer":"../../node_modules/.pnpm/buffer@4.9.2/node_modules/buffer/index.js"}],"../../node_modules/lodash-contrib/common-js/_.array.builders.js":[function(require,module,exports) {
 module.exports = function(_) {
   // Create quick reference variables for speed access to core prototypes.
   var slice   = Array.prototype.slice,
@@ -27556,6 +27550,11 @@ var CommitBars = function CommitBars(_ref4) {
       yAxisScale = _ref4.yAxisScale,
       yAxisPadding = _ref4.yAxisPadding,
       minHeight = _ref4.minHeight;
+
+  if (!commitData) {
+    commitData = [];
+  }
+
   var byMonth = {};
 
   var _iterator = _createForOfIteratorHelper(commitData),
@@ -27595,7 +27594,9 @@ var CommitBars = function CommitBars(_ref4) {
 
   return /*#__PURE__*/React.createElement(Positioner, null, /*#__PURE__*/React.createElement(Title, {
     text: "Lines Changed"
-  }), /*#__PURE__*/React.createElement("svg", {
+  }), scaledMonthPairs.length == 0 ? /*#__PURE__*/React.createElement("span", {
+    style: "padding:2rem; width: 100%; text-align: center; color: gray;"
+  }, "[No Data]") : /*#__PURE__*/React.createElement("svg", {
     style: "min-height: ".concat(minHeight, "px; transform: scaleX(-1); border-right: solid lightgray 1px;"),
     width: "20rem",
     height: minHeight,
@@ -27720,42 +27721,33 @@ module.exports = function (_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.A = exports.$ = void 0;
 exports.B = toPadding;
 exports.C = each;
 exports.D = getMaximumSize;
 exports.E = _getParentNode;
 exports.F = readUsedSize;
 exports.G = throttled;
-exports.I = exports.H = void 0;
 exports.J = _isDomSupported;
-exports.K = void 0;
 exports.L = _factorize;
 exports.M = finiteOrDefault;
 exports.N = callback;
 exports.O = _addGrace;
-exports.P = void 0;
 exports.Q = toDegrees;
 exports.R = _measureText;
 exports.S = _int16Range;
-exports.T = void 0;
 exports.U = _alignPixel;
 exports.V = clipArea;
 exports.W = renderText;
 exports.X = unclipArea;
 exports.Y = toFont;
-exports.Z = void 0;
 exports._ = _arrayUnique;
 exports.a = resolve;
-exports.a0 = void 0;
 exports.a1 = merge;
 exports.a2 = _capitalize;
-exports.a4 = exports.a3 = void 0;
 exports.a5 = _attachContext;
 exports.a6 = _createResolver;
 exports.a7 = _descriptors;
 exports.a8 = mergeIf;
-exports.a9 = void 0;
 exports.aA = distanceBetweenPoints;
 exports.aB = _setMinAndMaxByKey;
 exports.aC = niceNum;
@@ -27776,12 +27768,10 @@ exports.aQ = splineCurveMonotone;
 exports.aR = getStyle;
 exports.aS = fontString;
 exports.aT = toLineHeight;
-exports.aY = exports.aX = exports.aW = exports.aV = exports.aU = void 0;
 exports.aZ = _angleDiff;
 exports.aa = debounce;
 exports.ab = retinaScale;
 exports.ac = clearCanvas;
-exports.ad = void 0;
 exports.ae = _elementsEqual;
 exports.af = getAngleFromPoint;
 exports.ag = _readValueToProps;
@@ -27801,32 +27791,25 @@ exports.at = _boundSegment;
 exports.au = _normalizeAngle;
 exports.av = getRtlAdapter;
 exports.aw = overrideTextDirection;
-exports.ax = void 0;
 exports.ay = restoreTextDirection;
 exports.az = noop;
 exports.b = isArray;
 exports.c = color;
-exports.e = exports.d = void 0;
 exports.f = resolveObjectKey;
-exports.g = void 0;
 exports.h = createContext;
 exports.i = isObject;
-exports.j = void 0;
-exports.j = void 0;
 exports.k = isNullOrUndef;
 exports.l = listenArrayEvents;
-exports.n = exports.m = void 0;
 exports.o = formatNumber;
 exports.p = _angleBetween;
 exports.q = isNumber;
-exports.s = exports.r = void 0;
 exports.t = toRadians;
 exports.u = unlistenArrayEvents;
 exports.v = valueOrDefault;
 exports.w = _limitValue;
-exports.x = void 0;
 exports.y = getRelativePosition;
 exports.z = _isPointInArea;
+exports.x = exports.s = exports.r = exports.n = exports.m = exports.j = exports.g = exports.e = exports.d = exports.ax = exports.ad = exports.aY = exports.aX = exports.aW = exports.aV = exports.aU = exports.a9 = exports.a4 = exports.a3 = exports.a0 = exports.Z = exports.T = exports.P = exports.K = exports.I = exports.H = exports.A = exports.$ = void 0;
 
 /*!
  * Chart.js v3.6.0
@@ -31046,16 +31029,14 @@ function styleChanged(style, prevStyle) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports._adapters = exports.Tooltip = exports.Title = exports.TimeSeriesScale = exports.TimeScale = exports.Ticks = exports.SubTitle = exports.ScatterController = exports.Scale = exports.RadialLinearScale = exports.RadarController = exports.PolarAreaController = exports.PointElement = exports.PieController = exports.LogarithmicScale = exports.LinearScale = exports.LineElement = exports.LineController = exports.Legend = exports.Interaction = exports.Filler = exports.Element = exports.DoughnutController = exports.DomPlatform = exports.Decimation = exports.DatasetController = exports.Chart = exports.CategoryScale = exports.BubbleController = exports.BasicPlatform = exports.BasePlatform = exports.BarElement = exports.BarController = exports.ArcElement = exports.Animations = exports.Animation = void 0;
 exports._detectPlatform = _detectPlatform;
-exports.controllers = exports.animator = void 0;
 Object.defineProperty(exports, "defaults", {
   enumerable: true,
   get: function () {
     return _helpersSegment.d;
   }
 });
-exports.scales = exports.registry = exports.registerables = exports.plugins = exports.layouts = exports.elements = void 0;
+exports.scales = exports.registry = exports.registerables = exports.plugins = exports.layouts = exports.elements = exports.controllers = exports.animator = exports._adapters = exports.Tooltip = exports.Title = exports.TimeSeriesScale = exports.TimeScale = exports.Ticks = exports.SubTitle = exports.ScatterController = exports.Scale = exports.RadialLinearScale = exports.RadarController = exports.PolarAreaController = exports.PointElement = exports.PieController = exports.LogarithmicScale = exports.LinearScale = exports.LineElement = exports.LineController = exports.Legend = exports.Interaction = exports.Filler = exports.Element = exports.DoughnutController = exports.DomPlatform = exports.Decimation = exports.DatasetController = exports.Chart = exports.CategoryScale = exports.BubbleController = exports.BasicPlatform = exports.BasePlatform = exports.BarElement = exports.BarController = exports.ArcElement = exports.Animations = exports.Animation = void 0;
 
 var _helpersSegment = require("./chunks/helpers.segment.js");
 
@@ -53354,10 +53335,8 @@ _chart._adapters._date.override({
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Color = void 0;
 exports.b2n = b2n;
 exports.b2p = b2p;
-exports.default = void 0;
 exports.hexParse = hexParse;
 exports.hexString = hexString;
 exports.hsl2rgb = hsl2rgb;
@@ -53374,6 +53353,7 @@ exports.rgbParse = rgbParse;
 exports.rgbString = rgbString;
 exports.rotate = rotate;
 exports.round = round;
+exports.Color = exports.default = void 0;
 
 /*!
  * @kurkle/color v0.1.9
@@ -54865,7 +54845,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _get() { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(arguments.length < 3 ? target : receiver); } return desc.value; }; } return _get.apply(this, arguments); }
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
@@ -57865,8 +57845,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }
 
   function defaultView(node) {
-    return node.ownerDocument && node.ownerDocument.defaultView // node is a Node
-    || node.document && node // node is a Window
+    return node.ownerDocument && node.ownerDocument.defaultView || node.document && node // node is a Window
     || node.defaultView; // node is a Document
   }
 
@@ -80372,7 +80351,7 @@ function _onRouteChange() {
 
 router.addEventListener("go", onRouteChange);
 onRouteChange(); // first time the page loads
-},{"css-baseline/css/3":"../../node_modules/css-baseline/css/3.css","./global.scss":"../global.scss","./static_files/tailwind":"../static_files/tailwind.css","quik-router":"../../node_modules/quik-router/main/main.js","./code/skeletons/Header":"../code/skeletons/Header.jsx","./code/pages/OrgWaterfall":"../code/pages/OrgWaterfall.jsx","./code/pages/RepoWaterfall":"../code/pages/RepoWaterfall.jsx","./code/pages/ProductView":"../code/pages/ProductView.jsx","./code/pages/DummyPage":"../code/pages/DummyPage.jsx","./code/pages/PageNotFound":"../code/pages/PageNotFound.jsx"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"css-baseline/css/3":"../../node_modules/css-baseline/css/3.css","./global.scss":"../global.scss","./static_files/tailwind":"../static_files/tailwind.css","quik-router":"../../node_modules/quik-router/main/main.js","./code/skeletons/Header":"../code/skeletons/Header.jsx","./code/pages/OrgWaterfall":"../code/pages/OrgWaterfall.jsx","./code/pages/RepoWaterfall":"../code/pages/RepoWaterfall.jsx","./code/pages/ProductView":"../code/pages/ProductView.jsx","./code/pages/DummyPage":"../code/pages/DummyPage.jsx","./code/pages/PageNotFound":"../code/pages/PageNotFound.jsx"}],"../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -80400,7 +80379,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62871" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61781" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -80576,5 +80555,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","../website.jsx"], null)
+},{}]},{},["../../node_modules/.pnpm/parcel-bundler@1.12.5/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","../website.jsx"], null)
 //# sourceMappingURL=/website.baea1d43.js.map

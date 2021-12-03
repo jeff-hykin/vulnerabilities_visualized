@@ -179,12 +179,15 @@ const CommitBars = ({commitData, timeCompressor, yAxisScale, yAxisPadding, minHe
     const adjustmentBecauseSomethingIsSlightlyOff = 30 // corrisponds with the 
     return <Positioner>
         <Title text="Lines Changed" />
-        <svg style={`min-height: ${minHeight}px; transform: scaleX(-1); border-right: solid lightgray 1px;`} width="20rem" height={minHeight} onmouseover={updateHoverTag}>
-            {scaledMonthPairs.map(
-                ({ y, width, date, linesChanged})=><Rectangle x={0} y={y-30} width={width} height={25} onHoverElement={<span>{`${date} (${linesChanged})`}</span>} />
-            )}
-        </svg>
-        {/* {scaledMonthPairs.length==0 ? <span style=>[No Data]</span> : ""} */}
+        { scaledMonthPairs.length==0 ?
+            <span style="padding:2rem; width: 100%; text-align: center; color: gray;">[No Data]</span>
+            : 
+            <svg style={`min-height: ${minHeight}px; transform: scaleX(-1); border-right: solid lightgray 1px;`} width="20rem" height={minHeight} onmouseover={updateHoverTag}>
+                {scaledMonthPairs.map(
+                    ({ y, width, date, linesChanged})=><Rectangle x={0} y={y-30} width={width} height={25} onHoverElement={<span>{`${date} (${linesChanged})`}</span>} />
+                )}
+            </svg>
+        }
     </Positioner>
 }
 
