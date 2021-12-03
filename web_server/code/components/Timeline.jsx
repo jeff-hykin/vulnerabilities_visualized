@@ -105,7 +105,7 @@ const VulnerabilityDots = ({vulnStats, modifiedVulnData, timeCompressor, yAxisSc
     const [min,max,range,average,median,sum] = vulnStats
     // create some timeline dots
     const xAxisScale = 10
-    const xAxisPadding = 100
+    const xAxisPadding = 80
     const sizeScale = 7
     // create a circle for each dot
     const vulnDots = modifiedVulnData.map(each=>
@@ -216,8 +216,8 @@ module.exports = async ({ orgName, repoName, summaryData }) => {
         return ((max - eachTimeInUnixSeconds)*yAxisScale) + yAxisPadding
     }
     
-    return <Positioner verticalAlignment="top" horizontalAlignment="center" height="100%" width="100%" position="absolute" onmouseover={updateHoverTag}>
-        <Positioner row horizontalAlignment="right" maxHeight="100%" overflowY="auto" overflowX="hidden" width="100%">
+    return <Positioner name="timeline" verticalAlignment="top" horizontalAlignment="center" height="100%" width="100%" position="absolute" onmouseover={updateHoverTag}>
+        <Positioner class="hide-scrollbar" row horizontalAlignment="right" maxHeight="100%" overflowY="auto" overflowX="hidden" width="100%">
             <YearMarkers
                 vulnStats={vulnStats}
                 timeCompressor={timeCompressor}

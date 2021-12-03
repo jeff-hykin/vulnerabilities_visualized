@@ -27133,7 +27133,7 @@ module.exports = /*#__PURE__*/function () {
             repoStreamElements = _context.sent;
             return _context.abrupt("return", /*#__PURE__*/React.createElement("main", {
               style: "height: 100%; overflow: scroll; justify-content: flex-start; position: relative;",
-              class: "column centered"
+              class: "column centered hide-scrollbar"
             }, /*#__PURE__*/React.createElement(Positioner, {
               positionSelf: "relativeToParent",
               top: "1.3rem",
@@ -27496,7 +27496,7 @@ var VulnerabilityDots = function VulnerabilityDots(_ref3) {
 
 
   var xAxisScale = 10;
-  var xAxisPadding = 100;
+  var xAxisPadding = 80;
   var sizeScale = 7; // create a circle for each dot
 
   var vulnDots = modifiedVulnData.map(function (each) {
@@ -27661,6 +27661,7 @@ module.exports = /*#__PURE__*/function () {
             };
 
             return _context.abrupt("return", /*#__PURE__*/React.createElement(Positioner, {
+              name: "timeline",
               verticalAlignment: "top",
               horizontalAlignment: "center",
               height: "100%",
@@ -27668,6 +27669,7 @@ module.exports = /*#__PURE__*/function () {
               position: "absolute",
               onmouseover: updateHoverTag
             }, /*#__PURE__*/React.createElement(Positioner, {
+              class: "hide-scrollbar",
               row: true,
               horizontalAlignment: "right",
               maxHeight: "100%",
@@ -54769,6 +54771,8 @@ var RightSideContainer = function RightSideContainer(_ref6) {
   }, /*#__PURE__*/React.createElement("div", {
     style: "position: absolute; width: 100%; height: 100%;"
   }, /*#__PURE__*/React.createElement(Positioner, {
+    name: "scroller",
+    class: "hide-scrollbar",
     verticalAlignment: "top",
     horizontalAlignment: "center",
     maxHeight: "100%",
@@ -54799,7 +54803,8 @@ module.exports = /*#__PURE__*/function () {
             summaryData = _context3.sent;
             return _context3.abrupt("return", /*#__PURE__*/React.createElement("main", {
               name: "ProductView",
-              style: "width: 100%; flex: 1 0 auto; overflow: hidden;"
+              style: "width: 100%; flex: 1 0 auto; overflow: hidden;",
+              class: "hide-scrollbar"
             }, /*#__PURE__*/React.createElement("div", {
               style: {
                 height: "100%",
@@ -80379,7 +80384,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61781" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49293" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
