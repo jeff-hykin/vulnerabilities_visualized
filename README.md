@@ -5,7 +5,7 @@ Then this is the site for you.
 
 # What's it look like?
 
-Currently (as of Dec 2021) hosted [here](http://134.209.57.254:3000), although the site may come down.
+Currently (as of Dec 2021) hosted [here (takes a good 10sec to load)](http://134.209.57.254:3000), although the site may come down eventually.
 
 ## Main view
 
