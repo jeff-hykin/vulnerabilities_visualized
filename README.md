@@ -3,9 +3,10 @@
 Ever want to explore software exploits (CVE), but didn't want your eyes to be murdered by [cvedetails.com](cvedetails.com)?<br>
 Then this is the site for you.
 
-# What's it look like?
+<!-- # What's it look like?
 
 Currently (as of Dec 2021) hosted [here (takes a good 10sec to load)](http://134.209.57.254:3000), although the site may come down eventually.
+-->
 
 ## Main view
 
