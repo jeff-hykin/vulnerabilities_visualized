@@ -2,13 +2,14 @@ https://github.com/linux-kernel-mirror/linux-stable
 https://github.com/atom/atom
 https://github.com/ImageMagick/ImageMagick
 https://github.com/FFmpeg/FFmpeg
+https://github.com/microsoft/vscode
+https://github.com/tensorflow/tensorflow
 
 ToDo:
 - tensorflow
-- vs code
+- openssh
 - gitlab
 - jenkins
 - fire fox
 - node.js
-- openssh
 - nextcloud

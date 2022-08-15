@@ -2,5 +2,7 @@
     "Atom": "atom",
     "Linux Kernel": "linux-stable",
     "Ffmpeg": "FFmpeg",
+    "Visual Studio Code": "vscode",
+    "Tensorflow": "tensorflow",
     "Imagemagick": "ImageMagick"
 }

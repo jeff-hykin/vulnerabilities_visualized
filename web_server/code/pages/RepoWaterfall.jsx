@@ -39,7 +39,7 @@ function stringSimilarity(str1, str2, gramSize = 2) {
 module.exports = async ({ children, ...properties }) => {
     const repoStreamElements = await RepoStream()
     return (
-        <main style="height: 100%; overflow: scroll; justify-content: flex-start; position: relative;" class="column centered">
+        <main style="height: 100%; overflow: scroll; justify-content: flex-start; position: relative;" class="column centered hide-scrollbar">
             <Positioner positionSelf="relativeToParent" top="1.3rem" right="1.3rem" width="26rem" zIndex="9999">
                 <input
                     class="our-shadow-3"

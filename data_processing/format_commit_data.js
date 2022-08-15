@@ -6,6 +6,7 @@ const { snakeCase } = require("snake-case")
 const process = require("process")
 
 const whichFile = argv[2]
+const uniqueIdentifier = argv[3]
 const midOutputFileName = path.join(path.dirname(whichFile), snakeCase(path.basename(whichFile).replace(/\.(broken|json)/g, ""))+".mid.json")
 const outputFileName = path.join(path.dirname(whichFile), snakeCase(path.basename(whichFile).replace(/\.(broken|json)/g, ""))+".json")
 let fileAsString = fs.readFileSync(whichFile).toString()
@@ -22,9 +23,11 @@ fileAsString = fileAsString.replace(/[^ -~\n ]+/g, "");
     // web_server/code/skeletons/Waterfall.jsx |  4 ++--
     // 4 files changed, 12 insertions(+), 12 deletions(-)
     // ^@^^@^Start^@^^@^
-const linesChangedRegex = /\},\^@\^\^@\^End\^@\^\^@\^([\w\W]*?)(\^@\^\^@\^Start\^@\^\^@\^|[ \n\t]*$)/g
+const linesChangedRegex = RegExp(`\\},${uniqueIdentifier}${uniqueIdentifier}End${uniqueIdentifier}${uniqueIdentifier}([\\w\\W]+?)(${uniqueIdentifier}${uniqueIdentifier}Start${uniqueIdentifier}${uniqueIdentifier}|[ \\n\\t]*$)`,"g")
 console.error("replaceing filechange count")
+let replaceNumber = 0
 fileAsString = fileAsString.replace(linesChangedRegex, (eachString)=>{
+    replaceNumber++
     const match = eachString.match(linesChangedRegex)
     const lines = eachString.split("\n")
     const nonEmptyLines = lines.filter(each=>each.replace(/[ \n\t]+/g, "").length>0)
@@ -32,10 +35,25 @@ fileAsString = fileAsString.replace(linesChangedRegex, (eachString)=>{
     // remove },^@^^@^End^@^^@^
     nonEmptyLines.shift()
     // remove ^@^^@^Start^@^^@^ (if its there)
-    const nextItemExists = nonEmptyLines.slice(-1)[0].match(/\^@\^\^@\^Start\^@\^\^@\^/)
+    try {
+        var nextItemExists = nonEmptyLines.slice(-1)[0].match(
+            RegExp(`${uniqueIdentifier}${uniqueIdentifier}Start${uniqueIdentifier}${uniqueIdentifier}`)
+        )
+    } catch (error) {
+        // console.error(`replaceNumber is:`,replaceNumber)
+        // console.error(`linesChangedRegex is:`,linesChangedRegex)
+        // console.error(`eachString is:`,eachString)
+        // console.error(`match is:`,match)
+        // console.error(`match[1] is:`,match[1])
+        // console.error(`match[2] is:`,match[2])
+        // console.error(`lines is:`,lines)
+        // console.error(`eachString is:`,eachString)
+        // console.error(`originalNonEmptyLines is:`,originalNonEmptyLines)
+        // console.error(`nonEmptyLines is:`,nonEmptyLines)
+    }
     let endingBracket = "}"
     if (nextItemExists) {
-        nonEmptyLines.pop()
+    nonEmptyLines.pop()
         endingBracket = "},"
     }
     const filesChangedString = nonEmptyLines.pop()
@@ -63,20 +81,26 @@ fileAsString = fileAsString.replace(linesChangedRegex, (eachString)=>{
     // filesChanged = 0
     // insertions = 0
     // deletions = 0
-    return `,    \n^@^filesChanged^@^: ${filesChanged},    \n^@^linesChanged^@^:${(insertions-0)+(deletions-0)},    \n^@^insertions^@^:${insertions},    \n^@^deletions^@^:${deletions}\n${endingBracket}`
+    return `,    \n${uniqueIdentifier}filesChanged${uniqueIdentifier}: ${filesChanged},    \n${uniqueIdentifier}linesChanged${uniqueIdentifier}:${(insertions-0)+(deletions-0)},    \n${uniqueIdentifier}insertions${uniqueIdentifier}:${insertions},    \n${uniqueIdentifier}deletions${uniqueIdentifier}:${deletions}\n${endingBracket}`
 })
 console.error("writing mid file", midOutputFileName)
 fs.writeFileSync(midOutputFileName, fileAsString)
 console.error("done replaceing filechange count")
 // replace the hanging / first ^@^^@^Start^@^^@^ with nothing
-fileAsString = fileAsString.replace(/\^@\^\^@\^Start\^@\^\^@\^/g, '')
+fileAsString = fileAsString.replace(
+    RegExp(`${uniqueIdentifier}${uniqueIdentifier}Start${uniqueIdentifier}${uniqueIdentifier}`,"g"),
+    ''
+)
 
 // escape all the slashes
 fileAsString = fileAsString.replace(/\\/g, '\\\\')
 // escape all the double quotes
 fileAsString = fileAsString.replace(/"/g, '\\"')
 // replace all the ^@^ with quotes
-fileAsString = fileAsString.replace(/\^@\^/g, '"')
+fileAsString = fileAsString.replace(
+    RegExp(`${uniqueIdentifier}`,"g"),
+    '"'
+)
 // put it inside an array
 fileAsString = `[${fileAsString}]`
 

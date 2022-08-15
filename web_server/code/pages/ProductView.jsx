@@ -118,7 +118,7 @@ const RightSideContainer = ({ children })=>{
         >
             {/* Wrappers needed because CSS is dumb (outer one needs to be relative, middle needs absolute, inner is for scrolling and alignment) */}
             <div style="position: absolute; width: 100%; height: 100%;" >
-                <Positioner verticalAlignment="top" horizontalAlignment="center" maxHeight="100%" width="100%" overflow="auto">
+                <Positioner name="scroller" class="hide-scrollbar" verticalAlignment="top" horizontalAlignment="center" maxHeight="100%" width="100%" overflow="auto">
                     {children}
                 </Positioner>
             </div>
@@ -133,7 +133,7 @@ const RightSideContainer = ({ children })=>{
 module.exports = async ({ ...properties }) => {
     const { orgName, repoName } = router.pageInfo
     const summaryData = await smartBackend.getRepoSummaryDataFor(orgName, repoName)
-    return <main name="ProductView" style={`width: 100%; flex: 1 0 auto; overflow: hidden;`} >
+    return <main name="ProductView" style={`width: 100%; flex: 1 0 auto; overflow: hidden;`} class="hide-scrollbar" >
             <div style={{ height: "100%", maxHeight: "100%", width: "100%", minWidth: "100%", maxWidth: "100%", position: 'relative', display: 'flex' }}>
                 <LeftSideContainer>
                     <Timeline orgName={orgName} repoName={repoName} summaryData={summaryData} />
