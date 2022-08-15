@@ -10,7 +10,7 @@ Currently (as of Dec 2021) hosted [here (takes a good 10sec to load)](http://134
 
 ## Main view
 
-This shows repositories, size = quantity of vulnerabilities.
+This shows repositories. <br>Size = quantity of vulnerabilities.
 <img width="1920" alt="main_view" src="https://user-images.githubusercontent.com/17692058/144728224-4791e8f7-7597-4d43-bcba-1d76d7907bb5.png">
 
 ## Repo View
