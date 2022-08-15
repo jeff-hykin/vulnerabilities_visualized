@@ -78211,7 +78211,7 @@ function quietlySetPageInfo(replacementInfo) {
 // whenever the pageInfo is updated, update the URL
 // 
 function updateUrl() {
-    const urlWithParameters = addParameters(window.location.origin)
+    const urlWithParameters = addParameters(window.location.href)
     // change the url in the top bar to include the new path and parameters
     window.history.replaceState(JSON.parse(JSON.stringify(pageInfo)), '', urlWithParameters)
 }
@@ -78238,7 +78238,7 @@ module.exports = {
         // first update the pageInfo 
         quietlySetPageInfo(object)
         // then generate the new url
-        const urlWithParameters = addParameters(window.location.origin)
+        const urlWithParameters = addParameters(window.location.href)
         // push the change onto history
         window.history.pushState(JSON.parse(JSON.stringify(pageInfo)), '', urlWithParameters)
         // run all the callbacks

@@ -114,7 +114,7 @@ async function onRouteChange() {
                     newMainElement.style.transition=originalTransitionProperty
                 },  duration*1.1 ))
             }, 100)) // needs to be non-zero so that the browser doesn't optimize it out (the opacity=0 needs to "sink in" before the opacity=1)
-        }, duration*1.1*mainExisted)) // the mainExisted is saves time on initial page load
+        },duration*1.1*mainExisted)) // the mainExisted is saves time on initial page load
     }
 }
 router.addEventListener("go", onRouteChange)
