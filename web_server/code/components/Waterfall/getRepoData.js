@@ -9,8 +9,10 @@ const magicNumberThatMakesTheUILookGood1 = 400  // importance of number of vulne
 const magicNumberThatMakesTheUILookGood2 = 7 // inverse importance of most recent date when sorting
 const minNumberOfVulns = 20
 
+const vulnData = require("../../../../data/vulnerabilities_org_tree.json")
+
 module.exports = async () => {
-    const orgTree = await smartBackend.getOrgTree()
+    const orgTree = vulnData
     
     // 
     // Flatten out into Repos (and add some data to them)

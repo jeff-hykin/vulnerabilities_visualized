@@ -6,8 +6,10 @@ const smartBackend = require("../../systems/smart_backend")
 const magicNumberThatMakesUiLookGood1 = 2.3
 const maxNumberOfOrgs = 300
 
+const vulnData = require("../../../../data/vulnerabilities_org_tree.json")
+
 module.exports = async () => {
-    const orgTree = await smartBackend.getOrgTree()
+    const orgTree = vulnData
 
     // 
     // convert structure method
